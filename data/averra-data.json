@@ -1,0 +1,1310 @@
+{
+ "asOf": "2026-10-12",
+ "fx": 95.71,
+ "tremosense": {
+  "scenarios": {
+   "A": {
+    "label": "Prototype / very low volume",
+    "lines": [
+     {
+      "item": "MCU + IMU (XIAO nRF52840 Sense → bare module in C)",
+      "cost": 1522
+     },
+     {
+      "item": "Servos ×2 (MG92B → direct-sourced micro servos in C)",
+      "cost": 1600
+     },
+     {
+      "item": "Power: XL6009 boost converter + 1250 mAh LiPo",
+      "cost": 570
+     },
+     {
+      "item": "Interconnect: 1500 µF capacitor, wiring, connectors (→ carrier PCB in B → integrated PCBA in C)",
+      "cost": 120
+     },
+     {
+      "item": "Enclosure, gimbal & food-safe spoon head",
+      "cost": 250
+     },
+     {
+      "item": "Assembly labour",
+      "cost": 500
+     },
+     {
+      "item": "Testing & quality control",
+      "cost": 150
+     },
+     {
+      "item": "Packaging + manual",
+      "cost": 150
+     }
+    ],
+    "cogs": 4862,
+    "electronics": 3812,
+    "price": 9999,
+    "exGst": 9523,
+    "channel": 1428,
+    "netRevenue": 8094,
+    "warranty": 762,
+    "fulfilment": 250,
+    "contribution": 2221,
+    "contributionMargin": 0.2744,
+    "grossMargin": 0.3994,
+    "breakEvenUnitsPerMonth": 254.1
+   },
+   "B": {
+    "label": "Small batch (100–500)",
+    "lines": [
+     {
+      "item": "MCU + IMU (XIAO nRF52840 Sense → bare module in C)",
+      "cost": 1330
+     },
+     {
+      "item": "Servos ×2 (MG92B → direct-sourced micro servos in C)",
+      "cost": 1400
+     },
+     {
+      "item": "Power: XL6009 boost converter + 1250 mAh LiPo",
+      "cost": 470
+     },
+     {
+      "item": "Interconnect: 1500 µF capacitor, wiring, connectors (→ carrier PCB in B → integrated PCBA in C)",
+      "cost": 280
+     },
+     {
+      "item": "Enclosure, gimbal & food-safe spoon head",
+      "cost": 600
+     },
+     {
+      "item": "Assembly labour",
+      "cost": 400
+     },
+     {
+      "item": "Testing & quality control",
+      "cost": 200
+     },
+     {
+      "item": "Packaging + manual",
+      "cost": 150
+     }
+    ],
+    "cogs": 4830,
+    "electronics": 3480,
+    "price": 9999,
+    "exGst": 9523,
+    "channel": 1428,
+    "netRevenue": 8094,
+    "warranty": 476,
+    "fulfilment": 250,
+    "contribution": 2538,
+    "contributionMargin": 0.3135,
+    "grossMargin": 0.4032,
+    "breakEvenUnitsPerMonth": 222.3
+   },
+   "C": {
+    "label": "Scaled, after verified reductions",
+    "lines": [
+     {
+      "item": "MCU + IMU (XIAO nRF52840 Sense → bare module in C)",
+      "cost": 520
+     },
+     {
+      "item": "Servos ×2 (MG92B → direct-sourced micro servos in C)",
+      "cost": 500
+     },
+     {
+      "item": "Power: XL6009 boost converter + 1250 mAh LiPo",
+      "cost": 380
+     },
+     {
+      "item": "Interconnect: 1500 µF capacitor, wiring, connectors (→ carrier PCB in B → integrated PCBA in C)",
+      "cost": 550
+     },
+     {
+      "item": "Enclosure, gimbal & food-safe spoon head",
+      "cost": 350
+     },
+     {
+      "item": "Assembly labour",
+      "cost": 200
+     },
+     {
+      "item": "Testing & quality control",
+      "cost": 120
+     },
+     {
+      "item": "Packaging + manual",
+      "cost": 100
+     }
+    ],
+    "cogs": 2720,
+    "electronics": 1950,
+    "price": 8999,
+    "exGst": 8570,
+    "channel": 1286,
+    "netRevenue": 7285,
+    "warranty": 429,
+    "fulfilment": 250,
+    "contribution": 3886,
+    "contributionMargin": 0.5335,
+    "grossMargin": 0.6266,
+    "breakEvenUnitsPerMonth": 145.2
+   }
+  },
+  "prototypePartsCost": 4062,
+  "volumeTargetElectronics": 2000,
+  "priceMatrix": [
+   {
+    "price": 4999,
+    "A": -1446,
+    "Am": -0.3573,
+    "B": -1272,
+    "Bm": -0.3142,
+    "C": 839,
+    "Cm": 0.2073,
+    "verdict": "Thin even at C"
+   },
+   {
+    "price": 5999,
+    "A": -713,
+    "Am": -0.1467,
+    "B": -510,
+    "Bm": -0.105,
+    "C": 1601,
+    "Cm": 0.3296,
+    "verdict": "Viable only after verified C cost"
+   },
+   {
+    "price": 6999,
+    "A": 21,
+    "Am": 0.0037,
+    "B": 252,
+    "Bm": 0.0445,
+    "C": 2363,
+    "Cm": 0.417,
+    "verdict": "Viable only after verified C cost"
+   },
+   {
+    "price": 7999,
+    "A": 754,
+    "Am": 0.1165,
+    "B": 1014,
+    "Bm": 0.1566,
+    "C": 3124,
+    "Cm": 0.4825,
+    "verdict": "Viable only after verified C cost"
+   },
+   {
+    "price": 8999,
+    "A": 1487,
+    "Am": 0.2042,
+    "B": 1776,
+    "Bm": 0.2438,
+    "C": 3886,
+    "Cm": 0.5335,
+    "verdict": "Viable only after verified C cost"
+   },
+   {
+    "price": 9999,
+    "A": 2221,
+    "Am": 0.2744,
+    "B": 2538,
+    "Bm": 0.3135,
+    "C": 4648,
+    "Cm": 0.5743,
+    "verdict": "Viable at small batch"
+   },
+   {
+    "price": 12999,
+    "A": 4421,
+    "Am": 0.4201,
+    "B": 4824,
+    "Bm": 0.4584,
+    "C": 6934,
+    "Cm": 0.6589,
+    "verdict": "Viable at small batch"
+   }
+  ],
+  "channels": [
+   {
+    "channel": "Direct online",
+    "net": 9523,
+    "contribution": 3966,
+    "margin": 0.4165,
+    "note": "No channel margin; pays its own CAC"
+   },
+   {
+    "channel": "Clinic partnership",
+    "net": 8094,
+    "contribution": 2538,
+    "margin": 0.3135,
+    "note": "15% margin to clinic"
+   },
+   {
+    "channel": "Occupational-therapy centres",
+    "net": 8094,
+    "contribution": 2538,
+    "margin": 0.3135,
+    "note": "Same terms as clinics"
+   },
+   {
+    "channel": "Institutional procurement",
+    "net": 8571,
+    "contribution": 3014,
+    "margin": 0.3517,
+    "note": "10% discount, 60-day terms"
+   },
+   {
+    "channel": "No-cost EMI (direct)",
+    "net": 9123,
+    "contribution": 3566,
+    "margin": 0.3909,
+    "note": "Subvention borne by AVERRA"
+   }
+  ],
+  "rental": {
+   "netPerMonth": 576,
+   "paybackMonths": 9.3
+  },
+  "launchPrice": 9999,
+  "targetPrice": 6999,
+  "postCostPrice": 8999
+ },
+ "unitEconomics": {
+  "tremosense": {
+   "price": 9999,
+   "exGst": 9523.0,
+   "channel": 1428.0,
+   "net": 8094.0,
+   "cogs": 4830.0,
+   "warranty": 476.0,
+   "fulfilment": 250,
+   "contribution": 2538.0,
+   "contributionMargin": 0.3135,
+   "grossMargin": 0.4032
+  },
+  "parkinsenseDevice": {
+   "price": 7999,
+   "exGst": 6779.0,
+   "channel": 678.0,
+   "net": 6101.0,
+   "cogs": 3530,
+   "warranty": 339.0,
+   "fulfilment": 250,
+   "contribution": 1982.0,
+   "contributionMargin": 0.3249,
+   "grossMargin": 0.4214
+  },
+  "parkinsenseSub": {
+   "price": 199,
+   "exGst": 169.0,
+   "channel": 0,
+   "net": 169.0,
+   "cogs": 40,
+   "warranty": 0,
+   "fulfilment": 0,
+   "contribution": 129.0,
+   "contributionMargin": 0.7628,
+   "grossMargin": 0.7628
+  },
+  "ruoKit": {
+   "price": 74999,
+   "exGst": 63558.0,
+   "channel": 0,
+   "net": 63558.0,
+   "cogs": 22650,
+   "warranty": 0,
+   "fulfilment": 250,
+   "contribution": 40658.0,
+   "contributionMargin": 0.6397,
+   "grossMargin": 0.6436
+  },
+  "tremosenseLtv": {
+   "cac": 1079,
+   "lifetimeMonths": 0,
+   "ltv": 3553,
+   "ltvCac": 3.29,
+   "paybackMonths": 0
+  },
+  "parkinsenseLtv": {
+   "cac": 1500,
+   "lifetimeMonths": 20,
+   "ltv": 3011,
+   "ltvCac": 2.01,
+   "paybackMonths": 0
+  }
+ },
+ "market": {
+  "parkinsense": {
+   "customers": 460261,
+   "revPerCustomer": 3069,
+   "tam": 1412585215,
+   "samCustomers": 57256,
+   "sam": 175725601,
+   "somCustomers": 1440,
+   "som": 4419498,
+   "somShare": 0.0251
+  },
+  "tremosense": {
+   "customers": 868418,
+   "revPerCustomer": 3174,
+   "tam": 2756607229,
+   "samCustomers": 108031,
+   "sam": 342921939,
+   "somCustomers": 2040,
+   "som": 6475543,
+   "somShare": 0.0189
+  },
+  "pd60": 460261,
+  "et": 1276575,
+  "totals": {
+   "tam": 4169192444,
+   "sam": 518647540,
+   "som": 10895041
+  }
+ },
+ "forecast": {
+  "months": [
+   "M1 Jul-27",
+   "M2 Aug-27",
+   "M3 Sep-27",
+   "M4 Oct-27",
+   "M5 Nov-27",
+   "M6 Dec-27",
+   "M7 Jan-28",
+   "M8 Feb-28",
+   "M9 Mar-28",
+   "M10 Apr-28",
+   "M11 May-28",
+   "M12 Jun-28",
+   "M13 Jul-28",
+   "M14 Aug-28",
+   "M15 Sep-28",
+   "M16 Oct-28",
+   "M17 Nov-28",
+   "M18 Dec-28",
+   "M19 Jan-29",
+   "M20 Feb-29",
+   "M21 Mar-29",
+   "M22 Apr-29",
+   "M23 May-29",
+   "M24 Jun-29",
+   "M25 Jul-29",
+   "M26 Aug-29",
+   "M27 Sep-29",
+   "M28 Oct-29",
+   "M29 Nov-29",
+   "M30 Dec-29",
+   "M31 Jan-30",
+   "M32 Feb-30",
+   "M33 Mar-30",
+   "M34 Apr-30",
+   "M35 May-30",
+   "M36 Jun-30"
+  ],
+  "costs": [
+   146300,
+   192500,
+   146676,
+   159500,
+   115500,
+   115500,
+   341000,
+   247500,
+   484000,
+   503415,
+   729341,
+   338415,
+   247500,
+   266915,
+   513170,
+   532585,
+   513170,
+   1302585,
+   572935,
+   587895,
+   602855,
+   661815,
+   632775,
+   647735,
+   1269411,
+   1340880,
+   1412466,
+   1484164,
+   1555967,
+   1671870,
+   1699869,
+   1771958,
+   1844134,
+   1960391,
+   1988725,
+   2061134
+  ],
+  "cashIn": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   58308,
+   0,
+   168833,
+   184207,
+   316198,
+   368414,
+   426723,
+   368414,
+   426723,
+   454691,
+   487723,
+   520755,
+   553787,
+   586819,
+   619851,
+   1251905,
+   1344576,
+   1437697,
+   1531243,
+   1625194,
+   1719530,
+   1814231,
+   1909279,
+   2004657,
+   2100348,
+   2196337,
+   2292608
+  ],
+  "net": [
+   -146300,
+   -192500,
+   -146676,
+   -159500,
+   -115500,
+   -115500,
+   -341000,
+   -247500,
+   -484000,
+   -445107,
+   -729341,
+   -169582,
+   -63293,
+   49283,
+   -144756,
+   -105863,
+   -144756,
+   -875863,
+   -118244,
+   -100172,
+   -82100,
+   -108028,
+   -45956,
+   -27884,
+   -17506,
+   3696,
+   25230,
+   47079,
+   69227,
+   47659,
+   114362,
+   137320,
+   160523,
+   139957,
+   207611,
+   231474
+  ],
+  "cumulative": [
+   -146300,
+   -338800,
+   -485476,
+   -644976,
+   -760476,
+   -875976,
+   -1216976,
+   -1464476,
+   -1948476,
+   -2393582,
+   -3122923,
+   -3292505,
+   -3355798,
+   -3306514,
+   -3451270,
+   -3557133,
+   -3701889,
+   -4577751,
+   -4695995,
+   -4796167,
+   -4878267,
+   -4986295,
+   -5032251,
+   -5060135,
+   -5077641,
+   -5073945,
+   -5048715,
+   -5001636,
+   -4932409,
+   -4884750,
+   -4770388,
+   -4633068,
+   -4472545,
+   -4332587,
+   -4124976,
+   -3893501
+  ],
+  "cashA": [
+   3946869,
+   3754369,
+   5607694,
+   5448194,
+   5332694,
+   5217194,
+   4876194,
+   4628694,
+   4144694,
+   3699587,
+   2970246,
+   2800664,
+   2737371,
+   2786655,
+   2641899,
+   2536036,
+   2391280,
+   1515418,
+   1397174,
+   1297002,
+   1214902,
+   1106874,
+   1060918,
+   1033034,
+   1015528,
+   1019224,
+   1044454,
+   1091533,
+   1160760,
+   1208419,
+   1322781,
+   1460102,
+   1620625,
+   1760582,
+   1968193,
+   2199668
+  ],
+  "cashB": [
+   5946869,
+   5754369,
+   5607694,
+   5448194,
+   5332694,
+   5217194,
+   4876194,
+   4628694,
+   4144694,
+   3699587,
+   2970246,
+   2800664,
+   2737371,
+   2786655,
+   2641899,
+   2536036,
+   2391280,
+   1515418,
+   1397174,
+   1297002,
+   1214902,
+   1106874,
+   1060918,
+   1033034,
+   1015528,
+   1019224,
+   1044454,
+   1091533,
+   1160760,
+   1208419,
+   1322781,
+   1460102,
+   1620625,
+   1760582,
+   1968193,
+   2199668
+  ],
+  "cashC": [
+   904871,
+   712371,
+   565695,
+   406195,
+   290695,
+   175195,
+   -165805,
+   -413305,
+   -897305,
+   -1342411,
+   -2071752,
+   -2241334,
+   -2304627,
+   -2255344,
+   -2400100,
+   -2505962,
+   -2650718,
+   -3526581,
+   -3644824,
+   -3744996,
+   -3827096,
+   -3935124,
+   -3981080,
+   -4008964,
+   -4026470,
+   -4022774,
+   -3997544,
+   -3950465,
+   -3881238,
+   -3833579,
+   -3719217,
+   -3581897,
+   -3421374,
+   -3281417,
+   -3073805,
+   -2842331
+  ],
+  "cashD": [
+   904871,
+   712371,
+   565695,
+   406195,
+   290695,
+   175195,
+   -165805,
+   -413305,
+   -897305,
+   -1342411,
+   -2071752,
+   -2241334,
+   -2304627,
+   -2255344,
+   -2400100,
+   -2505962,
+   -2650718,
+   -3526581,
+   -3644824,
+   -3744996,
+   -3827096,
+   -3935124,
+   -3981080,
+   -4008964,
+   -4026470,
+   -4022774,
+   -3997544,
+   -3950465,
+   -3881238,
+   -3833579,
+   -3719217,
+   -3581897,
+   -3421374,
+   -3281417,
+   -3073805,
+   -2842331
+  ],
+  "tsUnits": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   15,
+   25,
+   35,
+   50,
+   50,
+   50,
+   50,
+   60,
+   65,
+   70,
+   75,
+   80,
+   85,
+   130,
+   135,
+   140,
+   145,
+   150,
+   155,
+   160,
+   165,
+   170,
+   175,
+   180,
+   185
+  ],
+  "kits": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   0,
+   1,
+   0,
+   1,
+   0,
+   1,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "psUnits": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   60,
+   70,
+   80,
+   90,
+   100,
+   110,
+   120,
+   130,
+   140,
+   150,
+   160,
+   170
+  ],
+  "years": {
+   "costs": {
+    "y1": 3519646,
+    "p1": 875976,
+    "p2": 6019597,
+    "y2": 7081936,
+    "y3": 20060970
+   },
+   "cashIn": {
+    "y1": 227141,
+    "p1": 0,
+    "p2": 2317821,
+    "y2": 5314306,
+    "y3": 21227603
+   },
+   "net": {
+    "y1": -3292505,
+    "p1": -875976,
+    "p2": -3701776,
+    "y2": -1767630,
+    "y3": 1166633
+   },
+   "tsUnits": {
+    "y1": 15,
+    "p1": 0,
+    "p2": 275,
+    "y2": 695,
+    "y3": 1890
+   },
+   "psUnits": {
+    "y1": 0,
+    "p1": 0,
+    "p2": 0,
+    "y2": 0,
+    "y3": 1380
+   }
+  }
+ },
+ "headline": {
+  "costs12": 3519646.0,
+  "cashIn12": 227141.0,
+  "grossBurn12": 293304.0,
+  "netBurn12": 274375.0,
+  "phase1Costs": 875976.0,
+  "phase1Gap": 875976.0,
+  "fullGap": 5077641.0,
+  "peakGapMonth": "M25\nJul-29",
+  "fullRequirement": 6093169.0,
+  "phase1Requirement": 1051171.0,
+  "phase2Requirement": 5041998.0,
+  "breakEvenMonth": "M26\nAug-29",
+  "y2CashIn": 5314306.0,
+  "y2Net": -1767630.0,
+  "y3CashIn": 21227603.0,
+  "y3Profit": 1166633.0,
+  "y3Margin": 0.055,
+  "m36Profit": 231474.0,
+  "splitShared": 1683000,
+  "splitTremoSense": 1236378.0,
+  "splitParkinSense": 280300,
+  "fixedMonthlyY3": 564213.0,
+  "fixedMonthlyY1": 352055
+ },
+ "valuation": {
+  "personMonths": 34,
+  "rate": 125000,
+  "materials": 225000,
+  "preMoney": 4475000,
+  "floor": 4475000,
+  "berkus": 6000000,
+  "proposed": 7500000,
+  "berkusFactors": [
+   {
+    "factor": "Sound idea (product risk)",
+    "value": 1500000,
+    "evidence": "Sourced need; two products; no interviews yet"
+   },
+   {
+    "factor": "Prototype (technology risk)",
+    "value": 2000000,
+    "evidence": "Two working prototypes with measured bench results"
+   },
+   {
+    "factor": "Quality team (execution risk)",
+    "value": 1250000,
+    "evidence": "Strong technical record and papers; no commercial track record"
+   },
+   {
+    "factor": "Strategic relationships (market risk)",
+    "value": 1000000,
+    "evidence": "ICMR evaluation in progress (founder-reported); no clinic partners yet"
+   },
+   {
+    "factor": "Product rollout / sales (production risk)",
+    "value": 250000,
+    "evidence": "Costed BOM and pricing; no sales"
+   }
+  ],
+  "options": [
+   {
+    "pre": 4475000,
+    "investor": 0.1902,
+    "founders": 0.7598,
+    "basis": "Floor: cost-to-duplicate"
+   },
+   {
+    "pre": 6000000,
+    "investor": 0.1491,
+    "founders": 0.8009,
+    "basis": "Conservative ≈ Berkus cross-check"
+   },
+   {
+    "pre": 7500000,
+    "investor": 0.1229,
+    "founders": 0.8271,
+    "basis": "PROPOSED working target"
+   },
+   {
+    "pre": 10000000,
+    "investor": 0.0951,
+    "founders": 0.8549,
+    "basis": "Ambitious — only if substantiated"
+   }
+  ],
+  "workstreams": [
+   {
+    "name": "ParkinSense: firmware v1–v4, BLE protocol, enclosure, power profiling",
+    "pm": 4
+   },
+   {
+    "name": "ParkinSense: motion / PPG / step pipelines, runtime, dashboards, app work, bench tests, paper",
+    "pm": 14.5
+   },
+   {
+    "name": "TremoSense: EKF/LQR modelling, Simulink sweeps, Zephyr firmware, gimbal & power hardware, bench tests, paper",
+    "pm": 15.5
+   }
+  ],
+  "targets": [
+   {
+    "equity": 4093169,
+    "p15": 23194625,
+    "p20": 16372676,
+    "dilutionAtP0": 0.3531
+   },
+   {
+    "equity": 6093169,
+    "p15": 34527958,
+    "p20": 24372676,
+    "dilutionAtP0": 0.4483
+   },
+   {
+    "equity": 1051171,
+    "p15": 5956634,
+    "p20": 4204683,
+    "dilutionAtP0": 0.1229
+   },
+   {
+    "equity": 1051171,
+    "p15": 5956634,
+    "p20": 4204683,
+    "dilutionAtP0": 0.1229
+   }
+  ]
+ },
+ "funding": {
+  "A": {
+   "requirement": 6093169,
+   "grantStatus": "Awarded (assumed in this scenario only)",
+   "grant": 2000000,
+   "equity": 4093169,
+   "pre": 7500000,
+   "post": 11593169,
+   "investor": 0.3531,
+   "esop": 0.05,
+   "founders": 0.5969,
+   "runway": "To operating break-even + buffer",
+   "milestones": "User study, QMS, EMC, CDSCO filing, TremoSense sales from M12, scale to break-even, ParkinSense wellness launch M25",
+   "risk": "Grant may not arrive or may arrive late",
+   "zeroCash": "Never — reaches break-even M26 Aug-29"
+  },
+  "B": {
+   "requirement": 6093169,
+   "grantStatus": "Refused",
+   "grant": 0,
+   "equity": 6093169,
+   "pre": 7500000,
+   "post": 13593169,
+   "investor": 0.4483,
+   "esop": 0.05,
+   "founders": 0.5017,
+   "runway": "To operating break-even + buffer",
+   "milestones": "Same as A",
+   "risk": "Highest dilution at a cost-floor price",
+   "zeroCash": "Never — reaches break-even M26 Aug-29"
+  },
+  "C": {
+   "requirement": 1051171,
+   "grantStatus": "Not assumed",
+   "grant": 0,
+   "equity": 1051171,
+   "pre": 7500000,
+   "post": 8551171,
+   "investor": 0.1229,
+   "esop": 0.05,
+   "founders": 0.8271,
+   "runway": "M1–M6 + buffer (Milestone 1)",
+   "milestones": "TremoSense design freeze + user study result (kill/continue), provisional patent, CDSCO classification opinion",
+   "risk": "Must raise again in ~6 months",
+   "zeroCash": "M7 Jan-28"
+  },
+  "D": {
+   "requirement": 1051171,
+   "grantStatus": "Applied; counted only if awarded",
+   "grant": 0,
+   "equity": 1051171,
+   "pre": 7500000,
+   "post": 8551171,
+   "investor": 0.1229,
+   "esop": 0.05,
+   "founders": 0.8271,
+   "runway": "M1–M6 now; rest to break-even from tranche 2 / grant",
+   "milestones": "Tranche 1 = C; tranche 2 = rest of A",
+   "risk": "Two raises; tranche 2 terms depend on results",
+   "zeroCash": "M7 Jan-28",
+   "tranche2": {
+    "equity": 5041998,
+    "pre": 9427146,
+    "investor": 0.3485,
+    "foundersAfterBoth": 0.5389,
+    "investorsAfterBoth": 0.4286
+   }
+  },
+  "recommended": "C"
+ },
+ "useOfFunds": [
+  {
+   "category": "Team",
+   "phase1": 270000,
+   "phase2": 1380000
+  },
+  {
+   "category": "Validation (both products)",
+   "phase1": 158341,
+   "phase2": 425000
+  },
+  {
+   "category": "Regulatory & quality",
+   "phase1": 30000,
+   "phase2": 630000
+  },
+  {
+   "category": "Inventory & tooling",
+   "phase1": 0,
+   "phase2": 2237361
+  },
+  {
+   "category": "Prototyping, tools, IP",
+   "phase1": 253000,
+   "phase2": 341000
+  },
+  {
+   "category": "Go-to-market & admin",
+   "phase1": 85000,
+   "phase2": 459000
+  },
+  {
+   "category": "Contingency",
+   "phase1": 79634,
+   "phase2": 547236
+  }
+ ],
+ "competitors": [
+  {
+   "name": "WHOOP One (WHOOP 5.0)",
+   "segment": "Wellness wearable",
+   "price": 17990,
+   "currency": "INR",
+   "inr": 17990,
+   "recurring": "Membership is the price: ₹17,990 / 12 months (MRP ₹21,990)",
+   "what": "Screenless strap; recovery, sleep, strain, steps, VO2 max; 14+ day battery",
+   "source": "https://www.whoop.in/pages/whoop-devices",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "WHOOP Peak",
+   "segment": "Wellness wearable",
+   "price": 23990,
+   "currency": "INR",
+   "inr": 23990,
+   "recurring": "₹23,990 / 12 months (MRP ₹28,990)",
+   "what": "Adds healthspan, health monitor alerts, real-time stress",
+   "source": "https://www.whoop.in/pages/whoop-devices",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "Amazfit Bip 6",
+   "segment": "Fitness smartwatch",
+   "price": 8999,
+   "currency": "INR",
+   "inr": 8999,
+   "recurring": "None listed",
+   "what": "AMOLED, GPS, heart rate, sleep; accelerometer + gyroscope; up to 14 days",
+   "source": "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "Fitbit Charge 6",
+   "segment": "Fitness band",
+   "price": 12999,
+   "currency": "INR",
+   "inr": 12999,
+   "recurring": "Optional premium subscription (not priced here)",
+   "what": "Heart rate, SpO2, sleep, GPS; ~7 days (₹13,999 on Amazon)",
+   "source": "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "GyroGlove",
+   "segment": "Hand stabiliser (one hand)",
+   "price": 5899,
+   "currency": "USD",
+   "inr": 564593,
+   "recurring": "Or $246/month × 24",
+   "what": "Gyroscopic wrist stabiliser for the whole hand; 4 h continuous use; no clinical study cited on listing",
+   "source": "https://techguide.parkinsons.org.uk/catalogue/gyro-glove",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "Liftware (stabilising handle)",
+   "segment": "Active stabilising utensil",
+   "price": 195,
+   "currency": "USD",
+   "inr": 18663,
+   "recurring": "Attachments extra",
+   "what": "Sensor + motor cancellation at the utensil; maker cites a study with 70% less shaking. Price is a DATED Nov 2015 figure",
+   "source": "https://www.michaeljfox.org/news/stabilizing-spoon-announces-price-reduction-and-match-program-holidays",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "Weighted soup spoon (225 g)",
+   "segment": "Passive adaptive utensil",
+   "price": 55.98,
+   "currency": "USD",
+   "inr": 5358,
+   "recurring": "None",
+   "what": "Added mass damps tremor; no electronics. US retail; Indian prices not verified",
+   "source": "https://wellbefore.com/products/weighted-soup-spoon",
+   "checked": "12 Oct 2026"
+  }
+ ],
+ "sources": [
+  {
+   "label": "UNFPA India Ageing Report 2023 (149M aged 60+, 10.5%; 347M by 2050)",
+   "url": "https://www.thenationalnews.com/world/asia/2023/09/28/india-un-elderly-population/"
+  },
+  {
+   "label": "Khurana & Gourie-Devi, Cureus 2025;17(3):e80248 — Indian PD community studies",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11890171"
+  },
+  {
+   "label": "Chin et al., Mov Disord 2021 — ET in rural Gujarat",
+   "url": "https://www.mdsabstracts.org/abstract/prevalence-of-essential-tremors-in-rural-gujarat-india/"
+  },
+  {
+   "label": "BMJ 2025 — PD prevalence 25.2M by 2050",
+   "url": "https://bmjgroup.com/cases-of-parkinsons-disease-set-to-reach-25-million-worldwide-by-2050"
+  },
+  {
+   "label": "Michael J. Fox Foundation — Liftware $195 (Nov 2015)",
+   "url": "https://www.michaeljfox.org/news/stabilizing-spoon-announces-price-reduction-and-match-program-holidays"
+  },
+  {
+   "label": "Seeed Studio — XIAO nRF52840 Sense $15.90 / $13.90 (10+)",
+   "url": "https://www.seeedstudio.com/Seeed-XIAO-BLE-Sense-nRF52840-p-5253.html"
+  },
+  {
+   "label": "The Pi Hut — TowerPro MG92B £8",
+   "url": "https://thepihut.com/products/towerpro-servo-motor-mg92b-metal-gear"
+  },
+  {
+   "label": "Startup India Seed Fund Scheme — ₹20 L PoC grant (ClearTax)",
+   "url": "https://cleartax.in/s/startup-india-seed-fund-scheme"
+  },
+  {
+   "label": "BIRAC Biotechnology Ignition Grant — up to ₹50 L",
+   "url": "https://www.indiascienceandtechnology.gov.in/funding-opportunities/startups/biotechnology-ignition-grant-scheme-big"
+  },
+  {
+   "label": "CDSCO Class A notification (20 Sep 2022)",
+   "url": "https://operonstrategist.com/cdsco-notification-for-class-a-medical-devices/"
+  },
+  {
+   "label": "Medical-device licensing mandatory from 1 Oct 2023",
+   "url": "https://www.digitalhealthnews.com/cdsco-extends-deadline-for-class-c-d-medical-devices-cos-by-3-months"
+  },
+  {
+   "label": "Apple ResearchKit Movement Disorder API (6 Jun 2018)",
+   "url": "https://www.engadget.com/2018-06-06-apple-watch-monitor-parkinsons-symptoms.html"
+  },
+  {
+   "label": "Rune Labs FDA clearance (Jun 2022)",
+   "url": "https://9to5mac.com/2022/06/13/apple-watch-parkinsons/"
+  },
+  {
+   "label": "USD/INR 95.71 (12 Oct 2026)",
+   "url": "https://tradersunion.com/currencies/price/usd-inr/"
+  },
+  {
+   "label": "WHOOP India memberships (checked 12 Oct 2026)",
+   "url": "https://www.whoop.in/pages/whoop-devices"
+  },
+  {
+   "label": "Amazfit Bip 6 India price (checked 12 Oct 2026)",
+   "url": "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india"
+  },
+  {
+   "label": "Fitbit Charge 6 India price (checked 12 Oct 2026)",
+   "url": "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi"
+  },
+  {
+   "label": "GyroGlove listing, Parkinson's UK tech guide (16 Jun 2026)",
+   "url": "https://techguide.parkinsons.org.uk/catalogue/gyro-glove"
+  },
+  {
+   "label": "Liftware product range and cited study",
+   "url": "https://www.liftware.com/"
+  },
+  {
+   "label": "Weighted soup spoon (WellBefore)",
+   "url": "https://wellbefore.com/products/weighted-soup-spoon"
+  },
+  {
+   "label": "TremoSense repository",
+   "url": "https://github.com/rkt-1597/TremoSense-Project"
+  },
+  {
+   "label": "ParkinSense repository (develop)",
+   "url": "https://github.com/sudo-pranshu/ParkinSense"
+  }
+ ],
+ "assumptions": {
+  "M1": 149000000,
+  "M2": 0.105,
+  "M3": 0.003089,
+  "M4": 0.0008996,
+  "M5": 0.311,
+  "M6": 0.4,
+  "M7": 0.5,
+  "M8": 3,
+  "P1": 9999,
+  "P2": 6999,
+  "P13": 8999,
+  "P3": 7999,
+  "P4": 199,
+  "P5": 74999,
+  "P6": 0.05,
+  "P7": 0.18,
+  "P8": 0.15,
+  "P9": 0.1,
+  "P10": 0.1,
+  "P11": 799,
+  "P12": 0.04,
+  "C1": 0.05,
+  "C2": 250,
+  "C3": 3530,
+  "C4": 40,
+  "C5": 5000,
+  "C6": 700000,
+  "U1": 0.05,
+  "U2": 0.4,
+  "U3": 1500,
+  "U4": 0.4,
+  "F1": 0.1,
+  "F2": 0.2,
+  "F3": 2000000,
+  "F4": 0.05,
+  "F5": 125000,
+  "F6": 95.71,
+  "F7": 0.15,
+  "F8": 0.2,
+  "F9": 3,
+  "F10": 7500000,
+  "F11": 6000000,
+  "F12": 10000000,
+  "S1": 50
+ }
+}
