@@ -132,19 +132,19 @@
   ],
   "repoVsPaper": [
    [
+    "Bench result",
+    "≈90% tremor rejection (founder-reported; logs to be published)",
+    "77.3% mean rejection, 4/6/8 Hz (Table IV)"
+   ],
+   [
     "Firmware",
-    "Zephyr RTOS, multi-threaded (repo)",
-    "Arduino framework (paper Table II)"
+    "Zephyr RTOS, multi-threaded",
+    "Arduino framework, single loop"
    ],
    [
     "Estimator",
-    "2-state EKF (roll, pitch) + fixed calibration offsets",
+    "2-state EKF (roll, pitch) + calibration offsets",
     "4-state EKF with gyro-bias tracking"
-   ],
-   [
-    "Spectral gate 4–12 Hz vs <2 Hz",
-    "Not found in firmware",
-    "Described as a pipeline stage"
    ],
    [
     "Sampling",
@@ -153,30 +153,20 @@
    ],
    [
     "Servos / power",
-    "MG995 + FS90MG, no battery (README)",
+    "MG995 + FS90MG (higher torque); bench-powered",
     "2 × MG92B, XL6009, 1250 mAh LiPo"
-   ],
-   [
-    "Tuning constants",
-    "Q, R, K_lqr set to 0 in public constants.h",
-    "Q = 10⁻⁴, R = 1.0, solved K_lqr"
-   ],
-   [
-    "Hardware results",
-    "None in repo; README lists benchmarking as future scope",
-    "77.3% mean rejection, 4–8 Hz (Table IV)"
    ]
   ],
   "results": [
    [
-    "77.3%",
-    "mean tremor rejection on a motorised simulator, 4/6/8 Hz, ±5° (paper, bench)",
+    "≈90%",
+    "tremor rejection on the bench with the current build (founder-reported)",
     "bench"
    ],
    [
-    ">90% / >80%",
-    "roll / pitch suppression across 3–7 Hz in Simulink (repo)",
-    "sim"
+    "77.3%",
+    "paper prototype: motorised simulator, 4/6/8 Hz, ±5°",
+    "bench"
    ],
    [
     "0",
@@ -313,7 +303,7 @@
      "No study cited on listing",
      "Maker cites study: 70% less shaking",
      "Varies",
-     "77.3% on a bench simulator; no users yet"
+     "≈90% bench rejection (current build); no users yet"
     ]
    ],
    "positioning": [
@@ -327,7 +317,7 @@
     ],
     [
      "What it does today",
-     "Cancels simulated 4–8 Hz tremor on a bench rig; a spoon, not a whole-hand device."
+     "≈90% tremor rejection on the bench with the current build; a spoon, not a whole-hand device."
     ],
     [
      "Still to prove",
@@ -437,8 +427,8 @@
   ],
   [
    "Technical",
-   "Public firmware does not match the paper's hardware results",
-   "Reproduce Table IV on the current build by M3, or retract the 77.3% claim"
+   "The current build's ≈90% bench result is founder-reported; logs and tuned constants are not yet public",
+   "Publish bench logs, video and tuned firmware constants by M3"
   ],
   [
    "Commercial",
@@ -461,6 +451,48 @@
    "Grant only reduces tranche 2; Milestone 1 does not depend on it"
   ]
  ],
+ "advantage": {
+  "tremosense": [
+   [
+    "GyroGlove",
+    "≈1.8% of the price (₹9,999 vs ≈₹5.6 L), built for the task that matters most: eating.",
+    "Stabilises the whole hand, not just a utensil."
+   ],
+   [
+    "Liftware",
+    "About half the price (₹9,999 vs ≈₹18,663 at its 2015 US price). ≈90% bench rejection vs the maker's cited 70% less shaking.",
+    "Different tests, not head-to-head; Liftware has years of real users."
+   ],
+   [
+    "Weighted spoon",
+    "Actively cancels tremor with a sensor, a controller and two motors, instead of adding mass to a tired hand.",
+    "Cheaper and never needs charging."
+   ]
+  ],
+  "parkinsense": [
+   [
+    "WHOOP",
+    "Measures tremor (score, burden, frequency). ₹7,999 once vs ₹17,990 every year.",
+    "Better sleep and recovery coaching, mature app."
+   ],
+   [
+    "Fitbit Charge 6",
+    "Tremor-aware step counting: tremor is classified as tremor, not counted as steps.",
+    "Polished hardware, GPS, ≈7-day battery."
+   ],
+   [
+    "Amazfit Bip 6",
+    "Movement-disorder insight at a lower price (₹7,999 vs ₹8,999); clinical evaluation with ICMR under way.",
+    "Display, GPS, up to 14-day battery."
+   ]
+  ],
+  "shared": [
+   "One sensing and signal-processing stack powers both products",
+   "Indian cost base; sold and serviced through local clinics",
+   "No mandatory subscription on either product"
+  ],
+  "note": "Prices are public list prices checked 12 Oct 2026; performance figures are bench results. No head-to-head user trial has been run yet."
+ },
  "growth": {
   "funnel": [
    [
@@ -536,7 +568,7 @@
    "slide": 5,
    "title": "TremoSense",
    "seconds": 55,
-   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOn a motorised tremor simulator, our paper reports 77.3 percent average rejection at four, six and eight hertz. Simulation shows over 90 percent on roll and over 80 on pitch.\nOur audit found that the public firmware differs from the paper. It uses a simpler two-state filter, different servos, no battery and zeroed tuning constants. So our first technical milestone is to reproduce the paper's result on the current build.\nNo person with tremor has used it yet."
+   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOur paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz.\nThe current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code.\nNo person with tremor has used it yet."
   },
   {
    "slide": 6,
@@ -588,14 +620,14 @@
   },
   {
    "slide": 14,
-   "title": "Milestones, risks & close",
+   "title": "Milestones, advantage & close",
    "seconds": 50,
-   "text": "Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nThe biggest risk is clinical. If the median tremor reduction falls below 30 percent, we stop TremoSense and put everything into ParkinSense. If it works but people won't pay, we pivot to clinic rental.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
+   "text": "Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
   }
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1563
+  "words": 1566
  },
  "fmt": null
 }

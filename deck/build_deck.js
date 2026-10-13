@@ -180,13 +180,13 @@ function photos(s, ps, tsP) {
     txt(s, r[0], { x: 4.65, y: y + 0.08, w: 2.6, h: 0.55, fontSize: 26, bold: true, color: i === 2 ? C.amber : C.violet, objectName: "res_v" + i });
     txt(s, r[1], { x: 4.65, y: y + 0.65, w: 2.65, h: 0.65, fontSize: 9.5, color: C.light });
   });
-  txt(s, "AUDIT · REPO vs PAPER", { x: 7.6, y: 1.5, w: 5.2, h: 0.25, fontSize: 9.5, bold: true, color: C.amber, charSpacing: 2 });
-  const rows = [[{ text: "", options: {} }, { text: "Public repository", options: { bold: true, color: C.white } }, { text: "Paper", options: { bold: true, color: C.white } }]];
+  txt(s, "CURRENT BUILD vs PAPER PROTOTYPE", { x: 7.6, y: 1.5, w: 5.2, h: 0.25, fontSize: 9.5, bold: true, color: C.amber, charSpacing: 2 });
+  const rows = [[{ text: "", options: {} }, { text: "Current build", options: { bold: true, color: C.white } }, { text: "Paper prototype", options: { bold: true, color: C.white } }]];
   K.tremosense.repoVsPaper.forEach((r) => rows.push(r.map((c, j) => ({ text: c, options: { color: j === 0 ? C.muted : C.light, bold: j === 0 } }))));
   s.addTable(rows, { x: 7.6, y: 1.82, w: 5.2, colW: [1.25, 2.0, 1.95], fontFace: B, fontSize: 9, fill: { color: C.bg }, border: { type: "solid", pt: 0.5, color: C.line }, rowH: 0.5, valign: "middle", margin: 0.04, objectName: "audit_table" });
   card(s, 0.55, 6.15, 6.85, 0.52, "ts_next", "2A1620", C.red);
-  txt(s, "Next: reproduce Table IV on the current build (M3), then the user study (M6).", { x: 0.72, y: 6.22, w: 6.6, h: 0.4, fontSize: 11.5, color: C.white, valign: "middle", objectName: "ts_next_t" });
-  src(s, "Results: TremoSense paper Table IV (bench) and repository README (Simulink). Audit: tremosense-app/src (ekf.c, imu.c), include/constants.h.");
+  txt(s, "Next: publish the current build's bench logs (M3), then the user study with people (M6).", { x: 0.72, y: 6.22, w: 6.6, h: 0.4, fontSize: 11.5, color: C.white, valign: "middle", objectName: "ts_next_t" });
+  src(s, "Current build: founder-reported bench result, logs to be published; firmware in tremosense-app/src. Paper prototype: TremoSense paper Table IV.");
 }
 
 // ===================================================================== 6 COMPETITION
@@ -216,7 +216,7 @@ function photos(s, ps, tsP) {
   const cols = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
   cols.forEach((c, j) => txt(s, c.toUpperCase(), { x: 1.85 + j * 2.75, y: 1.5, w: 2.6, h: 0.25, fontSize: 9.5, bold: true, color: C.muted, charSpacing: 1 }));
   const rows = [
-    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "77.3% mean rejection — not reproduced in the public repo yet", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
+    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "≈90% rejection on the current build (founder-reported); 77.3% on the paper prototype", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
     ["ps", [1.0, 0.3], C.cyan, ["Bench: rest, 5 Hz fixture, walking, arm motion; BLE soak; PPK II power. Clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending (founder-reported)", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10); add ICMR results when published", "PERSEVERE — wellness launch; no clinical claim until results"]],
   ];
   rows.forEach(([k, _, col, cells], i) => {
@@ -414,7 +414,7 @@ function photos(s, ps, tsP) {
 // ===================================================================== 14 USE OF FUNDS + MILESTONES + RISKS + CLOSE
 {
   const c = F.C;
-  const s = base(14, "13 · USE OF FUNDS, MILESTONES & RISKS", "Six months to a clear yes or no; month " + H.breakEvenMonth.split("\n")[0].slice(1) + " to profit");
+  const s = base(14, "13 · USE OF FUNDS, MILESTONES & ADVANTAGE", "Six months to a clear yes or no; month " + H.breakEvenMonth.split("\n")[0].slice(1) + " to profit");
   const uf = D.useOfFunds.filter((u) => u.phase1 > 0);
   const tot = uf.reduce((a, u) => a + u.phase1, 0);
   txt(s, `Phase 1 (M1–M6) costs ${lakh(tot, 1)} → funded by the ${lakh(c.equity, 1)} round (incl. buffer)`, { x: 0.55, y: 1.45, w: 12.2, h: 0.3, fontSize: 12, bold: true, color: C.white, objectName: "!!fundbar_t" });
@@ -436,14 +436,15 @@ function photos(s, ps, tsP) {
     txt(s, m[0], { x: xx, y: 3.62, w: SP, h: 0.35, fontSize: 13, bold: true, color: last ? C.green : C.white, align: "center" });
     txt(s, [{ text: m[2].toUpperCase(), options: { bold: true, color: last ? C.green : ph1 ? C.cyan : C.violet, fontSize: 7, breakLine: true } }, { text: m[1], options: { color: C.white, fontSize: 9 } }], { x: xx + 0.03, y: 4.33, w: SP - 0.06, h: 0.75, objectName: "ms_t" + i });
   });
-  card(s, 0.55, 5.15, 7.6, 1.45, "kill", "2A1620", C.red);
-  txt(s, [{ text: "KILL / CONTINUE at M6 (TremoSense user study, n ≥ 10)", options: { bold: true, color: C.red, breakLine: true } },
-    { text: "Continue: ", options: { bold: true, color: C.green } }, { text: "median tremor reduction ≥50% and ≥60% would pay", options: { color: C.white, breakLine: true } },
-    { text: "Pivot: ", options: { bold: true, color: C.amber } }, { text: "benefit holds but price fails → clinic rental model", options: { color: C.white, breakLine: true } },
-    { text: "Stop: ", options: { bold: true, color: C.red } }, { text: "reduction <30% → stop TremoSense, focus on ParkinSense", options: { color: C.white } }], { x: 0.75, y: 5.22, w: 7.3, h: 1.35, fontSize: 11, objectName: "kill_t" });
+  card(s, 0.55, 5.15, 7.6, 1.45, "kill", "1A1840", C.violet);
+  const gg = D.competitors.find((c) => c.name === "GyroGlove");
+  txt(s, [{ text: "WHY PEOPLE WILL CHOOSE AVERRA", options: { bold: true, color: C.violet, breakLine: true } },
+    { text: "TremoSense: ", options: { bold: true, color: C.violet } }, { text: `${pct(ts.launchPrice / gg.inr, 1)} of a GyroGlove, about half Liftware's price; active, unlike a weighted spoon; ≈90% bench rejection`, options: { color: C.white, breakLine: true } },
+    { text: "ParkinSense: ", options: { bold: true, color: C.cyan } }, { text: `measures tremor, which WHOOP, Fitbit and Amazfit don't list; ${inr(D.assumptions.P3)} once, no mandatory subscription`, options: { color: C.white, breakLine: true } },
+    { text: "Both: ", options: { bold: true, color: C.green } }, { text: "one sensing stack, Indian cost base, local service through clinics", options: { color: C.white } }], { x: 0.75, y: 5.22, w: 7.3, h: 1.35, fontSize: 11.5, paraSpaceAfter: 4, valign: "top", objectName: "kill_t" });
   card(s, 8.35, 5.15, 4.45, 1.45, "close", "0E1F3A", C.blue);
   s.addImage({ path: BR + "averra-mark-white.png", x: 8.5, y: 5.3, w: 0.55, h: 0.55, objectName: "close_mark" });
-  txt(s, [{ text: K.brand.tagline, options: { bold: true, color: C.white, fontSize: 14, breakLine: true } }, { text: `Ask: ${lakh(c.equity, 1)} for ${pct(c.investor, 1)}. Other risks — technical, regulatory, IP, funding — with triggers in the companion guide.`, options: { color: C.light, fontSize: 9.5 } }],
+  txt(s, [{ text: K.brand.tagline, options: { bold: true, color: C.white, fontSize: 14, breakLine: true } }, { text: `Ask: ${lakh(c.equity, 1)} for ${pct(c.investor, 1)}. Kill / continue decided by the M6 user study; risks and triggers in the companion guide.`, options: { color: C.light, fontSize: 9.5 } }],
     { x: 9.15, y: 5.25, w: 3.55, h: 1.3, objectName: "close_t" });
 }
 

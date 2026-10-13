@@ -80,16 +80,14 @@ content = {
         "architecture": ["Hand IMU (LSM6DS3) on the handle", "EKF estimates roll and pitch", "LQR gain matrix maps states to two servo commands",
                          "Two servos counter-rotate the spoon head", "Boost converter + capacitor hold the rail through servo current spikes"],
         "repoVsPaper": [
-            ("Firmware", "Zephyr RTOS, multi-threaded (repo)", "Arduino framework (paper Table II)"),
-            ("Estimator", "2-state EKF (roll, pitch) + fixed calibration offsets", "4-state EKF with gyro-bias tracking"),
-            ("Spectral gate 4–12 Hz vs <2 Hz", "Not found in firmware", "Described as a pipeline stage"),
+            ("Bench result", "≈90% tremor rejection (founder-reported; logs to be published)", "77.3% mean rejection, 4/6/8 Hz (Table IV)"),
+            ("Firmware", "Zephyr RTOS, multi-threaded", "Arduino framework, single loop"),
+            ("Estimator", "2-state EKF (roll, pitch) + calibration offsets", "4-state EKF with gyro-bias tracking"),
             ("Sampling", "IMU data-ready at 208 Hz", "100 Hz, 10 ms loop"),
-            ("Servos / power", "MG995 + FS90MG, no battery (README)", "2 × MG92B, XL6009, 1250 mAh LiPo"),
-            ("Tuning constants", "Q, R, K_lqr set to 0 in public constants.h", "Q = 10⁻⁴, R = 1.0, solved K_lqr"),
-            ("Hardware results", "None in repo; README lists benchmarking as future scope", "77.3% mean rejection, 4–8 Hz (Table IV)"),
+            ("Servos / power", "MG995 + FS90MG (higher torque); bench-powered", "2 × MG92B, XL6009, 1250 mAh LiPo"),
         ],
-        "results": [("77.3%", "mean tremor rejection on a motorised simulator, 4/6/8 Hz, ±5° (paper, bench)", "bench"),
-                    (">90% / >80%", "roll / pitch suppression across 3–7 Hz in Simulink (repo)", "sim"),
+        "results": [("≈90%", "tremor rejection on the bench with the current build (founder-reported)", "bench"),
+                    ("77.3%", "paper prototype: motorised simulator, 4/6/8 Hz, ±5°", "bench"),
                     ("0", "people with tremor tested so far", "planned")],
         "image": "/images/tremosense-rig.jpg",
     },
@@ -123,12 +121,12 @@ content = {
                 ["Price", f"US${comp['GyroGlove']['price']:,} per glove (≈{lakh(comp['GyroGlove']['inr'])})", f"US${comp['Liftware (stabilising handle)']['price']} (2015 price, dated)", f"≈{inr(comp['Weighted soup spoon (225 g)']['inr'])} (US retail)", f"{inr(ts['launchPrice'])} launch hypothesis"],
                 ["What it does", "Gyroscopic stabiliser for the whole hand", "Motorised handle cancels tremor at the utensil", "Added mass damps motion", "Two-axis servo gimbal cancels tremor at the spoon"],
                 ["Mechanism", "Gyroscope (passive-active)", "Sensors + motors", "Passive", "IMU → EKF → LQR → 2 servos"],
-                ["Evidence", "No study cited on listing", "Maker cites study: 70% less shaking", "Varies", "77.3% on a bench simulator; no users yet"],
+                ["Evidence", "No study cited on listing", "Maker cites study: 70% less shaking", "Varies", "≈90% bench rejection (current build); no users yet"],
             ],
             "positioning": [
                 ("The problem", f"Active tremor aids are imported and priced for other markets: one GyroGlove ≈ {lakh(comp['GyroGlove']['inr'])}."),
                 ("Our opportunity", f"An Indian-built active spoon at a {inr(ts['launchPrice'])} hypothesis, serviced locally through clinics."),
-                ("What it does today", "Cancels simulated 4–8 Hz tremor on a bench rig; a spoon, not a whole-hand device."),
+                ("What it does today", "≈90% tremor rejection on the bench with the current build; a spoon, not a whole-hand device."),
                 ("Still to prove", "User benefit in real eating, durability, comfort, and parity with Liftware-class products."),
             ],
         },
@@ -148,12 +146,26 @@ content = {
     "risks": [
         ("Clinical evidence", "ICMR evaluation results are pending and may not support ParkinSense's movement metrics", "Publish results as they come; no clinical claim until then; refocus ParkinSense on wellness if accuracy falls short"),
         ("Clinical", "Bench rejection may not help a person eating", "Continue if median reduction ≥50% and ≥60% would pay; pivot to clinic rental if benefit holds but price fails; stop TremoSense if <30%"),
-        ("Technical", "Public firmware does not match the paper's hardware results", "Reproduce Table IV on the current build by M3, or retract the 77.3% claim"),
+        ("Technical", "The current build's ≈90% bench result is founder-reported; logs and tuned constants are not yet public", "Publish bench logs, video and tuned firmware constants by M3"),
         ("Commercial", f"Company break-even needs ≈{sC['breakEvenUnitsPerMonth']:.0f} TremoSense units/month at C cost (plan: 130–185 in Year 3)", "Continue only if experiment 1 shows ≥30% trial-to-purchase"),
         ("Regulatory", "Device class may be higher than assumed", "Classification opinion by M4; re-plan budget if Class B or above"),
         ("IP", "Public repos and papers limit novelty", "Attorney novelty opinion by M2; if weak, rely on evidence and execution"),
         ("Funding", "SISFS grant may be refused", "Grant only reduces tranche 2; Milestone 1 does not depend on it"),
     ],
+    "advantage": {
+        "tremosense": [
+            ("GyroGlove", f"≈{pct(ts['launchPrice'] / comp['GyroGlove']['inr'], 1)} of the price ({inr(ts['launchPrice'])} vs ≈{lakh(comp['GyroGlove']['inr'])}), built for the task that matters most: eating.", "Stabilises the whole hand, not just a utensil."),
+            ("Liftware", f"About half the price ({inr(ts['launchPrice'])} vs ≈{inr(comp['Liftware (stabilising handle)']['inr'])} at its 2015 US price). ≈90% bench rejection vs the maker's cited 70% less shaking.", "Different tests, not head-to-head; Liftware has years of real users."),
+            ("Weighted spoon", "Actively cancels tremor with a sensor, a controller and two motors, instead of adding mass to a tired hand.", "Cheaper and never needs charging."),
+        ],
+        "parkinsense": [
+            ("WHOOP", f"Measures tremor (score, burden, frequency). {inr(D['assumptions']['P3'])} once vs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} every year.", "Better sleep and recovery coaching, mature app."),
+            ("Fitbit Charge 6", "Tremor-aware step counting: tremor is classified as tremor, not counted as steps.", "Polished hardware, GPS, ≈7-day battery."),
+            ("Amazfit Bip 6", f"Movement-disorder insight at a lower price ({inr(D['assumptions']['P3'])} vs {inr(comp['Amazfit Bip 6']['price'])}); clinical evaluation with ICMR under way.", "Display, GPS, up to 14-day battery."),
+        ],
+        "shared": ["One sensing and signal-processing stack powers both products", "Indian cost base; sold and serviced through local clinics", "No mandatory subscription on either product"],
+        "note": "Prices are public list prices checked 12 Oct 2026; performance figures are bench results. No head-to-head user trial has been run yet.",
+    },
     "growth": {
         "funnel": [("Acquisition", "1,000 caregivers via 10 clinics", "100%"), ("Activation", "In-clinic TremoSense trial", "25%"), ("Revenue", "Buys at launch price", "40% of trials"),
                    ("Retention", "Daily use at day 30", "≥70%"), ("Referral", "Refers another family", "15%")],
@@ -182,8 +194,8 @@ Its edge is the shared motion classifier. Tremor isn't counted as steps, and hea
 Here's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.
 A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."""))
 S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.
-On a motorised tremor simulator, our paper reports 77.3 percent average rejection at four, six and eight hertz. Simulation shows over 90 percent on roll and over 80 on pitch.
-Our audit found that the public firmware differs from the paper. It uses a simpler two-state filter, different servos, no battery and zeroed tuning constants. So our first technical milestone is to reproduce the paper's result on the current build.
+Our paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz.
+The current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code.
 No person with tremor has used it yet."""))
 S.append(("Competition", 50, f"""Competitors, with prices checked this month.
 WHOOP costs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} a year, a Fitbit Charge 6 about {inr(comp['Fitbit Charge 6']['price'])}, and an Amazfit Bip 6 {inr(comp['Amazfit Bip 6']['price'])}. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.
@@ -217,8 +229,8 @@ S.append(("Funding ask & valuation", 60, f"""Now the ask, kept separate from the
 We propose a pre-money valuation of {lakh(V['proposed'], 0)}. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of {lakh(V['floor'], 2)}: {V['personMonths']:.0f} person-months of engineering plus prototypes. A Berkus-style scorecard gives about {lakh(V['berkus'], 0)}, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.
 At {lakh(V['proposed'], 0)}, post-money is P plus I: {inr(fC['post'])}. The investor owns I over post-money, {pct(fC['investor'], 1)}. After a 5 percent ESOP pool, the founders keep {pct(fC['founders'], 1)}. Even at the floor, the investor would own {pct(V['options'][0]['investor'], 1)}.
 The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."""))
-S.append(("Milestones, risks & close", 50, f"""Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
-The biggest risk is clinical. If the median tremor reduction falls below 30 percent, we stop TremoSense and put everything into ParkinSense. If it works but people won't pay, we pivot to clinic rental.
+S.append(("Milestones, advantage & close", 50, f"""Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
+Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time {inr(D['assumptions']['P3'])}.
 AVERRA: engineering better movement intelligence. We're asking for {lakh(fC['equity'], 1)} at a {lakh(V['proposed'], 0)} pre-money, {pct(fC['investor'], 1)}, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."""))
 content["script"] = [{"slide": i + 1, "title": t, "seconds": s, "text": tx.strip()} for i, (t, s, tx) in enumerate(S)]
 content["scriptTotals"] = {"seconds": sum(s for _, s, _ in S), "words": sum(len(tx.split()) for _, _, tx in S)}

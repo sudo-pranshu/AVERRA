@@ -75,14 +75,15 @@ The ICMR evaluation lives in **one field**: `clinicalEvaluation` in `scripts/bui
 - 36-month plan with sustained operating break-even in M26 (August 2029) and a Year-3 operating profit of ₹11.7 L.
 - Ask cut to ₹10.51 L for Milestone 1 at a proposed ₹75 L pre-money (12.3% to the investor). Shown beside the ₹44.75 L cost floor, the ₹60 L Berkus-style cross-check and a ₹1 Cr ambitious case. The ₹20 L SISFS grant is kept separate and never shown as secured.
 - Competitor analysis (WHOOP, Amazfit Bip 6, Fitbit Charge 6, GyroGlove, Liftware, weighted utensils), with prices checked on 12 Oct 2026.
-- Repository-vs-paper audit for both products.
+- Repository-vs-paper audit for both products; TremoSense headline updated to the current build's ≈90% bench result.
+- Closing page now shows competitive advantage (TremoSense vs GyroGlove, Liftware, weighted spoon; ParkinSense vs WHOOP, Fitbit, Amazfit). Risks stay in the companion guide.
 - New full-screen presentation website; deck rebuilt at 14 slides (about 11–12 minutes).
 - The institute reference was removed from every deliverable.
 
 ## Evidence status and limitations
 
 - **ParkinSense:** streaming, steps, tremor scoring and motion context are bench-tested; HR/HRV/SpO₂ are research-grade; all analysis runs on a host, not on the wrist; the mobile app is in development. ICMR evaluation in progress, results pending.
-- **TremoSense:** 77.3% mean rejection at 4–8 Hz is a paper result on a motorised simulator. The public firmware differs from the paper (2-state EKF, 208 Hz, different servos, no battery, zeroed tuning constants, no hardware logs). No user testing yet.
+- **TremoSense:** the current build (Zephyr, 208 Hz, higher-torque servos) reaches ≈90% tremor rejection on the bench (founder-reported; logs to be published), up from 77.3% for the paper prototype. The public `constants.h` still shows the tuning constants as 0, so publish the tuned values with the logs. No user testing yet.
 - **Valuation:** ₹75 L is a working negotiation target, not an independently verified valuation. Person-months are estimates and Berkus scores are judgement.
 - **Financials:** cash-basis forecast built on assumptions (CAC, conversion, clinic growth, Scenario C cost) that no customer has validated. Competitor prices are benchmarks only.
 - **Regulatory and IP:** CDSCO class and HSN/GST rates are assumptions to confirm; the patent is in preparation (not filed).

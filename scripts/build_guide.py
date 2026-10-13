@@ -36,6 +36,8 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even {be}; Year-3 operating profit {lakh(H['y3Profit'])} |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | {lakh(F['C']['equity'], 2)} for Milestone 1 at {lakh(V['proposed'], 0)} proposed pre-money ({pct(F['C']['investor'], 1)}) |
 | Pitch | 15 slides, 10:20 | 14 slides, about {K['scriptTotals']['seconds']//60}:{K['scriptTotals']['seconds']%60:02d} ({K['scriptTotals']['words']} words) |
+| TremoSense result | 77.3% (paper) | ≈90% bench rejection on the current build (founder-reported); 77.3% kept as the paper-prototype figure |
+| Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
 
 The institute reference has been removed from every deliverable."""
@@ -52,9 +54,9 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 |---|---|---|
 {feat}
 
-**TremoSense: public repository vs paper**
+**TremoSense: current build (public repository) vs paper prototype**
 
-| Item | Public repository | Paper |
+| Item | Current build | Paper prototype |
 |---|---|---|
 {audit}
 
@@ -65,7 +67,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 - The ParkinSense paper says analysis is "on-device"; in the code it runs in the host runtime, and the firmware only streams.
 - The TremoSense paper cites `github.com/rkt-1597/Tremosense`; the live repository is `TremoSense-Project`.
 
-**Evidence needed before commercialisation:** TremoSense hardware results reproduced on the current build; a self-feeding user study (n ≥ 10); ParkinSense accuracy against reference instruments; the ICMR evaluation results; EMC/electrical-safety pre-compliance; the CDSCO classification opinion."""
+**Evidence needed before commercialisation:** bench logs and video for the current TremoSense build's ≈90% result; a self-feeding user study (n ≥ 10); ParkinSense accuracy against reference instruments; the ICMR evaluation results; EMC/electrical-safety pre-compliance; the CDSCO classification opinion."""
 
 rows = []
 t = 0
@@ -219,7 +221,7 @@ S["caveats"] = f"""## Technical, regulatory and patent caveats
 |---|---|---|
 {risk_rows}
 
-**Technical:** the 77.3% result is a motorised-simulator bench result from the paper. The public firmware differs from the paper's build. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
+**Technical:** the current build's ≈90% tremor rejection is a founder-reported bench result; logs are not yet published. The paper prototype's 77.3% is a motorised-simulator result. The public `constants.h` still shows Q, R and K_lqr as 0, so publish the tuned constants before anyone checks the repository. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
 
 **Clinical:** {K['clinicalEvaluation']['label']} — {K['clinicalEvaluation']['detail']} ParkinSense does not diagnose, predict or clinically detect Parkinson's disease. Early identification is a research path, not a claim; healthy young users are a wellness audience, not a screening population.
 
@@ -236,7 +238,7 @@ S["viva"] = f"""## Viva questions and answers
 5. **Why would someone choose ParkinSense over WHOOP or Amazfit?** Not for sleep or battery today; they are better there. The difference is movement-specific insight (tremor burden, motion context) at {inr(A['P3'])} with no mandatory subscription. We have to prove people value it: that's experiment 3.
 6. **Why TremoSense over GyroGlove or a weighted spoon?** GyroGlove stabilises the whole hand at about {lakh(D['competitors'][4]['inr'])}. A weighted spoon is cheap but passive. TremoSense actively cancels tremor at the spoon for {inr(ts['launchPrice'])}. We don't claim parity until the user study.
 7. **What does ICMR testing show?** Results aren't available yet. We will add them when they're published and make no clinical claim before then.
-8. **Your repository disagrees with your paper.** Yes. The audit is on the TremoSense slide, and reproducing the paper's result on the current build is the M3 milestone.
+8. **Your repository differs from your paper.** Yes: the repository is the newer build. It moves to Zephyr at 208 Hz with higher-torque servos and reaches about 90% bench rejection against 77.3% for the paper prototype. Publishing those logs is the M3 milestone.
 9. **What makes the technology defensible?** Today, the integrated signal chain and the evidence we generate. Possibly a patent later, but the public disclosures limit novelty.
 10. **What would prove the products are better?** For TremoSense, a controlled self-feeding study against a weighted spoon. For ParkinSense, accuracy against reference instruments and the ICMR results.
 11. **LTV:CAC?** TremoSense {ue['tremosenseLtv']['ltvCac']:.1f}×, ParkinSense {ue['parkinsenseLtv']['ltvCac']:.1f}×. Both are estimates without customers; experiment 1 measures real CAC.
@@ -246,7 +248,7 @@ S["checklist"] = """## Missing-evidence checklist
 
 - [ ] Verbatim, consented customer-interview quotes for the three placeholders.
 - [ ] ICMR evaluation: study reference, ethics approval and results. Update `data/content.json → clinicalEvaluation` when they return.
-- [ ] TremoSense hardware test logs or video for the 4/6/8 Hz result, and the repository README brought in line with the paper.
+- [ ] Bench logs and video for the current TremoSense build's ≈90% result (state the test conditions: frequencies, amplitude, axis), plus the tuned Q/R/K_lqr in the public `constants.h` and an updated README.
 - [ ] A photo of the paper's MG92B build to replace the bench-rig frame.
 - [ ] Supplier quotes for Scenario B and C components, PCB assembly and tooling.
 - [ ] Logged hours to replace estimated person-months in the cost-to-duplicate valuation.

@@ -13,7 +13,9 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1563 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1566 words) |
+| TremoSense result | 77.3% (paper) | ≈90% bench rejection on the current build (founder-reported); 77.3% kept as the paper-prototype figure |
+| Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
 
 The institute reference has been removed from every deliverable.
@@ -41,17 +43,15 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 | Bradykinesia / dyskinesia, longitudinal movement trends | Future research | Needs labelled data and validation |
 | Early identification of Parkinson's-related movement change | Future research | A research ambition — not a diagnostic capability |
 
-**TremoSense: public repository vs paper**
+**TremoSense: current build (public repository) vs paper prototype**
 
-| Item | Public repository | Paper |
+| Item | Current build | Paper prototype |
 |---|---|---|
-| Firmware | Zephyr RTOS, multi-threaded (repo) | Arduino framework (paper Table II) |
-| Estimator | 2-state EKF (roll, pitch) + fixed calibration offsets | 4-state EKF with gyro-bias tracking |
-| Spectral gate 4–12 Hz vs <2 Hz | Not found in firmware | Described as a pipeline stage |
+| Bench result | ≈90% tremor rejection (founder-reported; logs to be published) | 77.3% mean rejection, 4/6/8 Hz (Table IV) |
+| Firmware | Zephyr RTOS, multi-threaded | Arduino framework, single loop |
+| Estimator | 2-state EKF (roll, pitch) + calibration offsets | 4-state EKF with gyro-bias tracking |
 | Sampling | IMU data-ready at 208 Hz | 100 Hz, 10 ms loop |
-| Servos / power | MG995 + FS90MG, no battery (README) | 2 × MG92B, XL6009, 1250 mAh LiPo |
-| Tuning constants | Q, R, K_lqr set to 0 in public constants.h | Q = 10⁻⁴, R = 1.0, solved K_lqr |
-| Hardware results | None in repo; README lists benchmarking as future scope | 77.3% mean rejection, 4–8 Hz (Table IV) |
+| Servos / power | MG995 + FS90MG (higher torque); bench-powered | 2 × MG92B, XL6009, 1250 mAh LiPo |
 
 **Other inconsistencies**
 - ParkinSense README says 248-byte packets; the paper and the firmware struct imply 208 bytes.
@@ -60,11 +60,11 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 - The ParkinSense paper says analysis is "on-device"; in the code it runs in the host runtime, and the firmware only streams.
 - The TremoSense paper cites `github.com/rkt-1597/Tremosense`; the live repository is `TremoSense-Project`.
 
-**Evidence needed before commercialisation:** TremoSense hardware results reproduced on the current build; a self-feeding user study (n ≥ 10); ParkinSense accuracy against reference instruments; the ICMR evaluation results; EMC/electrical-safety pre-compliance; the CDSCO classification opinion.
+**Evidence needed before commercialisation:** bench logs and video for the current TremoSense build's ≈90% result; a self-feeding user study (n ≥ 10); ParkinSense accuracy against reference instruments; the ICMR evaluation results; EMC/electrical-safety pre-compliance; the CDSCO classification opinion.
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1563 words, about 131 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1566 words, about 131 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -81,7 +81,7 @@ The script runs about 11 min 55 s (1563 words, about 131 words a minute includin
 | 11 | Financial forecast | 8:25–9:20 | 55 s |
 | 12 | Team & growth | 9:20–10:05 | 45 s |
 | 13 | Funding ask & valuation | 10:05–11:05 | 60 s |
-| 14 | Milestones, risks & close | 11:05–11:55 | 50 s |
+| 14 | Milestones, advantage & close | 11:05–11:55 | 50 s |
 
 **1. Title** (40 s)
 
@@ -101,7 +101,7 @@ ParkinSense today is a wrist wearable with an IMU and an optical sensor. It stre
 
 **5. TremoSense** (55 s)
 
-TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. On a motorised tremor simulator, our paper reports 77.3 percent average rejection at four, six and eight hertz. Simulation shows over 90 percent on roll and over 80 on pitch. Our audit found that the public firmware differs from the paper. It uses a simpler two-state filter, different servos, no battery and zeroed tuning constants. So our first technical milestone is to reproduce the paper's result on the current build. No person with tremor has used it yet.
+TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. Our paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz. The current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code. No person with tremor has used it yet.
 
 **6. Competition** (50 s)
 
@@ -135,9 +135,9 @@ The team comes from the evidence. I built ParkinSense and co-authored TremoSense
 
 Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reaching profitability needs ₹60.9 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result.
 
-**14. Milestones, risks & close** (50 s)
+**14. Milestones, advantage & close** (50 s)
 
-Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. The biggest risk is clinical. If the median tremor reduction falls below 30 percent, we stop TremoSense and put everything into ParkinSense. If it works but people won't pay, we pivot to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
+Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
 
 ## Financial workings
 
@@ -291,7 +291,7 @@ Prices checked 12 Oct 2026. They are benchmarks only and never feed AVERRA's rev
 **TremoSense positioning**
 - **The problem:** Active tremor aids are imported and priced for other markets: one GyroGlove ≈ ₹5.6 L.
 - **Our opportunity:** An Indian-built active spoon at a ₹9,999 hypothesis, serviced locally through clinics.
-- **What it does today:** Cancels simulated 4–8 Hz tremor on a bench rig; a spoon, not a whole-hand device.
+- **What it does today:** ≈90% tremor rejection on the bench with the current build; a spoon, not a whole-hand device.
 - **Still to prove:** User benefit in real eating, durability, comfort, and parity with Liftware-class products.
 
 Caveats: the WHOOP price is a 12-month membership that includes the strap. The Liftware price is a dated 2015 figure. Weighted-utensil prices are US retail; Indian prices were not verified. No claim is made that AVERRA products are more accurate or effective than any competitor; that needs comparative testing.
@@ -304,13 +304,13 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 |---|---|---|
 | Clinical evidence | ICMR evaluation results are pending and may not support ParkinSense's movement metrics | Publish results as they come; no clinical claim until then; refocus ParkinSense on wellness if accuracy falls short |
 | Clinical | Bench rejection may not help a person eating | Continue if median reduction ≥50% and ≥60% would pay; pivot to clinic rental if benefit holds but price fails; stop TremoSense if <30% |
-| Technical | Public firmware does not match the paper's hardware results | Reproduce Table IV on the current build by M3, or retract the 77.3% claim |
+| Technical | The current build's ≈90% bench result is founder-reported; logs and tuned constants are not yet public | Publish bench logs, video and tuned firmware constants by M3 |
 | Commercial | Company break-even needs ≈145 TremoSense units/month at C cost (plan: 130–185 in Year 3) | Continue only if experiment 1 shows ≥30% trial-to-purchase |
 | Regulatory | Device class may be higher than assumed | Classification opinion by M4; re-plan budget if Class B or above |
 | IP | Public repos and papers limit novelty | Attorney novelty opinion by M2; if weak, rely on evidence and execution |
 | Funding | SISFS grant may be refused | Grant only reduces tranche 2; Milestone 1 does not depend on it |
 
-**Technical:** the 77.3% result is a motorised-simulator bench result from the paper. The public firmware differs from the paper's build. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
+**Technical:** the current build's ≈90% tremor rejection is a founder-reported bench result; logs are not yet published. The paper prototype's 77.3% is a motorised-simulator result. The public `constants.h` still shows Q, R and K_lqr as 0, so publish the tuned constants before anyone checks the repository. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
 
 **Clinical:** Clinical evaluation in progress with ICMR — Founder-reported; protocol, site and results not yet available. Update data/content.json → clinicalEvaluation when results return. ParkinSense does not diagnose, predict or clinically detect Parkinson's disease. Early identification is a research path, not a claim; healthy young users are a wellness audience, not a screening population.
 
@@ -327,7 +327,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 5. **Why would someone choose ParkinSense over WHOOP or Amazfit?** Not for sleep or battery today; they are better there. The difference is movement-specific insight (tremor burden, motion context) at ₹7,999 with no mandatory subscription. We have to prove people value it: that's experiment 3.
 6. **Why TremoSense over GyroGlove or a weighted spoon?** GyroGlove stabilises the whole hand at about ₹5.6 L. A weighted spoon is cheap but passive. TremoSense actively cancels tremor at the spoon for ₹9,999. We don't claim parity until the user study.
 7. **What does ICMR testing show?** Results aren't available yet. We will add them when they're published and make no clinical claim before then.
-8. **Your repository disagrees with your paper.** Yes. The audit is on the TremoSense slide, and reproducing the paper's result on the current build is the M3 milestone.
+8. **Your repository differs from your paper.** Yes: the repository is the newer build. It moves to Zephyr at 208 Hz with higher-torque servos and reaches about 90% bench rejection against 77.3% for the paper prototype. Publishing those logs is the M3 milestone.
 9. **What makes the technology defensible?** Today, the integrated signal chain and the evidence we generate. Possibly a patent later, but the public disclosures limit novelty.
 10. **What would prove the products are better?** For TremoSense, a controlled self-feeding study against a weighted spoon. For ParkinSense, accuracy against reference instruments and the ICMR results.
 11. **LTV:CAC?** TremoSense 3.3×, ParkinSense 2.0×. Both are estimates without customers; experiment 1 measures real CAC.
@@ -337,7 +337,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 
 - [ ] Verbatim, consented customer-interview quotes for the three placeholders.
 - [ ] ICMR evaluation: study reference, ethics approval and results. Update `data/content.json → clinicalEvaluation` when they return.
-- [ ] TremoSense hardware test logs or video for the 4/6/8 Hz result, and the repository README brought in line with the paper.
+- [ ] Bench logs and video for the current TremoSense build's ≈90% result (state the test conditions: frequencies, amplitude, axis), plus the tuned Q/R/K_lqr in the public `constants.h` and an updated README.
 - [ ] A photo of the paper's MG92B build to replace the bench-rig frame.
 - [ ] Supplier quotes for Scenario B and C components, PCB assembly and tooling.
 - [ ] Logged hours to replace estimated person-months in the cost-to-duplicate valuation.

@@ -240,8 +240,8 @@ function TremoSense() {
     <Frame label="TremoSense" title="Active stabilisation at the spoon" lead={K.tremosense.pitch}>
       <div className="grid gap-6 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)_minmax(0,1.2fr)]">
         <div className="space-y-4">
-          <Photo src="/images/tremosense-rig.jpg" alt="TremoSense bench rig (frame from the repository video)" className="aspect-[3/4] w-full" />
-          <p className="t-small text-slate">Bench rig from the public repository (FS90MG-class servo). The paper's MG92B build is not pictured.</p>
+          <Photo src="/images/tremosense-rig.jpg" alt="TremoSense current-build bench rig (frame from the repository video)" className="aspect-[3/4] w-full" />
+          <p className="t-small text-slate">Current-build bench rig (frame from the repository video).</p>
         </div>
         <div>
           <h2 className="t-h2 mb-3">How it works</h2>
@@ -257,17 +257,17 @@ function TremoSense() {
             ))}
           </div>
           <button onClick={() => setAudit((v) => !v)} aria-expanded={audit} className="t-small mt-5 rounded-full border border-amber/70 px-4 py-1.5 text-amber hover:bg-amber/10">
-            {audit ? "Hide" : "Show"} the repository vs paper audit
+            {audit ? "Hide" : "Show"} current build vs paper prototype
           </button>
           <AnimatePresence>
             {audit && (
               <motion.table initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="t-small mt-4 w-full border-collapse overflow-hidden rounded-xl">
-                <thead><tr className="text-left text-white"><th className="p-2"> </th><th className="p-2">Public repository</th><th className="p-2">Paper</th></tr></thead>
+                <thead><tr className="text-left text-white"><th className="p-2"> </th><th className="p-2">Current build</th><th className="p-2">Paper prototype</th></tr></thead>
                 <tbody>{K.tremosense.repoVsPaper.map(([k, a, b]) => <tr key={k} className="border-t hairline align-top"><td className="p-2 text-slate">{k}</td><td className="p-2 text-mist">{a}</td><td className="p-2 text-mist">{b}</td></tr>)}</tbody>
               </motion.table>
             )}
           </AnimatePresence>
-          <p className="t-small mt-5 text-coral">Next: reproduce the 77.3% bench result on the current build (M3), then the user study (M6).</p>
+          <p className="t-small mt-5 text-coral">Next: publish bench logs (M3), then test with people (M6).</p>
         </div>
       </div>
     </Frame>
@@ -284,7 +284,7 @@ function Architecture() {
         <AnimatePresence mode="wait">
           <motion.div key={tab} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }}>
             {tab === "ps" ? <Flow steps={K.parkinsense.architecture} color="#06B6D4" highlight={[3]} /> : <Flow steps={K.tremosense.architecture} color="#8B5CF6" highlight={[1, 2]} />}
-            <p className="t-small mt-4 text-slate">{tab === "ps" ? "Analysis runs in the host runtime today; on-wrist processing is not yet implemented." : "The public firmware uses a 2-state EKF; the paper describes a 4-state bias-tracking EKF."}</p>
+            <p className="t-small mt-4 text-slate">{tab === "ps" ? "Analysis runs in the host runtime today; on-wrist processing is not yet implemented." : "The current build runs a lighter 2-state EKF at 208 Hz on Zephyr; the paper prototype used a 4-state bias-tracking EKF at 100 Hz."}</p>
           </motion.div>
         </AnimatePresence>
         <SignalToSpectrum />
@@ -378,7 +378,7 @@ function Market() {
 /* ------------------------------------------------------------------ 10 MVP */
 function MVP() {
   const rows = [
-    { name: "TremoSense", color: "#8B5CF6", cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "77.3% mean rejection; not yet reproduced in the public repository", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
+    { name: "TremoSense", color: "#8B5CF6", cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5°", "≈90% rejection on the current build (founder-reported); 77.3% on the paper prototype", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
     { name: "ParkinSense", color: "#06B6D4", cells: ["Bench conditions, BLE soak, power profiling; clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10)", "Persevere: wellness launch; no clinical claim until results"] },
   ];
   const head = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
@@ -668,25 +668,31 @@ function Milestones() {
   );
 }
 
-/* ------------------------------------------------------------------ 17 risks & close */
-function Close() {
+/* ------------------------------------------------------------------ 17 advantage & close */
+function Advantage() {
+  const [tab, setTab] = useState<"tremosense" | "parkinsense">("tremosense");
+  const color = tab === "tremosense" ? "#8B5CF6" : "#06B6D4";
+  const rows = K.advantage[tab];
   return (
-    <Frame label="Risks and closing vision" title="The one risk that decides everything: does it help real hands?" wide>
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-        <div className="rounded-2xl border border-coral/60 bg-coral/5 p-5">
-          <p className="t-small text-coral">Kill or continue at M6 · TremoSense user study, n ≥ 10</p>
-          <dl className="t-body mt-3 space-y-2">
-            <div><dt className="inline font-semibold text-mint">Continue: </dt><dd className="inline text-white">median tremor reduction ≥50% and ≥60% would pay</dd></div>
-            <div><dt className="inline font-semibold text-amber">Pivot: </dt><dd className="inline text-white">benefit holds but the price fails → clinic rental model</dd></div>
-            <div><dt className="inline font-semibold text-coral">Stop: </dt><dd className="inline text-white">reduction below 30% → stop TremoSense, focus on ParkinSense</dd></div>
-          </dl>
-        </div>
-        <ul className="space-y-2">
-          {K.risks.filter(([k]) => k !== "Clinical").map(([k, r, t]) => <li key={k} className="panel p-3"><p className="t-small"><span className="text-violet">{k}</span> <span className="text-white">· {r}</span></p><p className="t-small text-slate">{t}</p></li>)}
-        </ul>
-      </div>
-      <div className="mt-12 flex flex-col items-start gap-6 md:flex-row md:items-center">
-        <img src="/brand/averra-mark-white.svg" alt="" className="h-16 w-16" />
+    <Frame label="Competitive advantage" title="Why people will choose AVERRA" wide>
+      <Tabs label="product" value={tab} onChange={setTab} options={[{ id: "tremosense", label: "TremoSense vs tremor aids", color: "#8B5CF6" }, { id: "parkinsense", label: "ParkinSense vs wearables", color: "#06B6D4" }]} />
+      <AnimatePresence mode="wait">
+        <motion.ul key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-6 grid gap-4 lg:grid-cols-3">
+          {rows.map(([name, ours, theirs]) => (
+            <li key={name} className="panel flex flex-col p-5">
+              <p className="t-small text-slate">vs {name}</p>
+              <p className="t-body mt-2 flex-1 text-white">{ours}</p>
+              <p className="t-small mt-4 border-t hairline pt-3 text-slate"><span style={{ color }}>Where they lead: </span>{theirs}</p>
+            </li>
+          ))}
+        </motion.ul>
+      </AnimatePresence>
+      <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-2">
+        {K.advantage.shared.map((t) => <li key={t} className="t-small text-mist"><span className="mr-2 inline-block h-2 w-2 rounded-full bg-cyan align-middle" />{t}</li>)}
+      </ul>
+      <Src>{K.advantage.note}</Src>
+      <div className="mt-10 flex flex-col items-start gap-6 md:flex-row md:items-center">
+        <img src="/brand/averra-mark-white.svg" alt="" className="h-14 w-14" />
         <div>
           <p className="t-h1">{K.brand.tagline}</p>
           <p className="t-body mt-2 text-mist">Ask: {lakh(F.C.equity)} at a {lakh(D.valuation.proposed, 0)} pre-money ({pct(F.C.investor, 1)}), to reach a clear answer on a product that is profitable on every unit. Break-even in {beLabel.split(" · ")[1]}.</p>
@@ -713,5 +719,5 @@ export const SLIDES: { id: string; title: string; notes: number[]; extraNote?: s
   { id: "team", title: "Team and growth", notes: [12], Component: TeamGrowth },
   { id: "funding", title: "Funding ask and valuation", notes: [13], Component: Funding },
   { id: "milestones", title: "Milestones and use of funds", notes: [14], Component: Milestones },
-  { id: "close", title: "Risks and closing", notes: [], extraNote: "Closing lines are the end of deck slide 14's script.", Component: Close },
+  { id: "advantage", title: "Competitive advantage", notes: [], extraNote: "The advantage and closing lines are the end of deck slide 14's script.", Component: Advantage },
 ];
