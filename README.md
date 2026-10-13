@@ -87,7 +87,7 @@ The ICMR evaluation lives in **one field**: `clinicalEvaluation` in `scripts/bui
 - **Valuation:** ₹75 L is a working negotiation target, not an independently verified valuation. Person-months are estimates and Berkus scores are judgement.
 - **Financials:** cash-basis forecast built on assumptions (CAC, conversion, clinic growth, Scenario C cost) that no customer has validated. Competitor prices are benchmarks only.
 - **Regulatory and IP:** CDSCO class and HSN/GST rates are assumptions to confirm; the patent is in preparation (not filed).
-- **Placeholders:** customer-interview quotes are deliberately left blank until real, consented quotes exist.
+- **Customer evidence:** the Problem slide quotes published research (Hadley et al. 2021; Kellner et al. 2017; Kurupath et al. 2020), not our own interviews, which are still to be run.
 
 The full missing-evidence checklist is in `docs/COMPANION_GUIDE.md`.
 

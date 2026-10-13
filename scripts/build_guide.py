@@ -246,7 +246,7 @@ S["viva"] = f"""## Viva questions and answers
 
 S["checklist"] = """## Missing-evidence checklist
 
-- [ ] Verbatim, consented customer-interview quotes for the three placeholders.
+- [ ] Our own customer-discovery interviews (verbatim, consented) to sit beside the published research quotes on the Problem slide.
 - [ ] ICMR evaluation: study reference, ethics approval and results. Update `data/content.json → clinicalEvaluation` when they return.
 - [ ] Bench logs and video for the current TremoSense build's ≈90% result (state the test conditions: frequencies, amplitude, axis), plus the tuned Q/R/K_lqr in the public `constants.h` and an updated README.
 - [ ] A photo of the paper's MG92B build to replace the bench-rig frame.
@@ -259,7 +259,7 @@ S["checklist"] = """## Missing-evidence checklist
 - [ ] Rehearsal in PowerPoint 365 for Morph timing; aim for 11–12 minutes.
 - [ ] ParkinSense repository fixes: missing Android/hardware/research folders and LICENSE; runnable tests; packet-size wording."""
 
-S["sources"] = "## Sources\n\n" + "\n".join(f"- [{s['label']}]({s['url']})" for s in D["sources"])
+S["sources"] = "## Sources\n\n" + "\n".join([f"- [{s['label']}]({s['url']})" for s in D["sources"]] + [f"- [{q[2]}]({q[3]})" for q in K["problem"]["quotes"]])
 
 out = ROOT / "docs"; out.mkdir(exist_ok=True)
 order = ["summary", "evidence", "script", "financials", "pricing", "funding", "competitors", "caveats", "viva", "checklist", "sources"]

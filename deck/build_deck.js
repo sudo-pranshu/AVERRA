@@ -87,14 +87,14 @@ function photos(s, ps, tsP) {
     txt(s, st[0], { x: x + 0.2, y: 1.68, w: 2.1, h: 0.6, fontSize: 28, bold: true, color: i === 2 ? C.white : C.cyan, objectName: "stat_v" + i });
     txt(s, st[1], { x: x + 0.2, y: 2.3, w: 2.1, h: 0.65, fontSize: 11.5, color: C.light, objectName: "stat_l" + i });
   });
-  txt(s, "CUSTOMER DISCOVERY · PLACEHOLDERS", { x: 0.55, y: 3.25, w: 6, h: 0.25, fontSize: 10, bold: true, color: C.amber, charSpacing: 2 });
+  txt(s, "WHAT THE RESEARCH SAYS", { x: 0.55, y: 3.25, w: 6, h: 0.25, fontSize: 10, bold: true, color: C.amber, charSpacing: 2 });
   K.problem.quotes.forEach((q, i) => {
     const y = 3.6 + i * 0.95;
-    card(s, 0.55, y, 7.75, 0.82, "quote" + i, C.card2, C.amber);
-    txt(s, "“" + q[1] + "”", { x: 0.8, y: y + 0.1, w: 5.6, h: 0.6, fontSize: 13, italic: true, color: C.white });
-    txt(s, "— " + q[0], { x: 6.45, y: y + 0.12, w: 1.75, h: 0.55, fontSize: 10, color: C.muted, align: "right" });
+    card(s, 0.55, y, 7.75, 0.82, "quote" + i, C.card2);
+    txt(s, [{ text: q[0] + "  ", options: { bold: true, color: C.cyan, italic: false } }, { text: "“" + q[1] + "”", options: { italic: true, color: C.white } }], { x: 0.72, y: y + 0.05, w: 7.45, h: 0.52, fontSize: 10.5, valign: "top" });
+    txt(s, q[2], { x: 0.72, y: y + 0.55, w: 7.45, h: 0.24, fontSize: 8, color: C.muted });
   });
-  txt(s, "No interviews supplied. Replace with verbatim quotes, role, date and consent.", { x: 0.55, y: 6.45, w: 7.7, h: 0.28, fontSize: 9.5, color: C.amber });
+  txt(s, K.problem.quotesNote, { x: 0.55, y: 6.45, w: 7.7, h: 0.28, fontSize: 9.5, color: C.amber });
   // why-now vertical timeline
   txt(s, "WHY NOW", { x: 8.75, y: 1.55, w: 3, h: 0.25, fontSize: 10, bold: true, color: C.cyan, charSpacing: 3 });
   s.addShape(pres.shapes.LINE, { x: 8.86, y: 2.0, w: 0, h: 4.4, line: { color: C.line, width: 1.5 }, objectName: "wn_line" });

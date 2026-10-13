@@ -13,7 +13,7 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1566 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1604 words) |
 | TremoSense result | 77.3% (paper) | ≈90% bench rejection on the current build (founder-reported); 77.3% kept as the paper-prototype figure |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
@@ -64,7 +64,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1566 words, about 131 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1604 words, about 135 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Good morning. I'm Pranshu Kumar, and with my co-founder Pawan Shinde I'm buildin
 
 **2. Problem & why now** (55 s)
 
-Start with the people. About 4.6 lakh Indians over sixty live with Parkinson's, and roughly 12.8 lakh more have essential tremor, though that second figure comes from a single study. Two things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill. The customer-discovery quotes on the right are deliberately left as placeholders. We will only present verbatim quotes from real interviews. Why now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050.
+Start with the people. About 4.6 lakh Indians over sixty live with Parkinson's, and roughly 12.8 lakh more have essential tremor, though that second figure comes from a single study. Two things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill. Published research backs this up. A 2021 study calls a single clinic visit "only a snapshot" of symptoms. The statement people with essential tremor agreed with most was: "I am embarrassed by my tremor when I try to eat or drink in public." And in a study from southern India, 73 of 100 Parkinson's caregivers reported severe burden. Why now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050.
 
 **3. One company, two products** (45 s)
 
@@ -335,7 +335,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 
 ## Missing-evidence checklist
 
-- [ ] Verbatim, consented customer-interview quotes for the three placeholders.
+- [ ] Our own customer-discovery interviews (verbatim, consented) to sit beside the published research quotes on the Problem slide.
 - [ ] ICMR evaluation: study reference, ethics approval and results. Update `data/content.json → clinicalEvaluation` when they return.
 - [ ] Bench logs and video for the current TremoSense build's ≈90% result (state the test conditions: frequencies, amplitude, axis), plus the tuned Q/R/K_lqr in the public `constants.h` and an updated README.
 - [ ] A photo of the paper's MG92B build to replace the bench-rig frame.
@@ -372,3 +372,6 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 - [Weighted soup spoon (WellBefore)](https://wellbefore.com/products/weighted-soup-spoon)
 - [TremoSense repository](https://github.com/rkt-1597/TremoSense-Project)
 - [ParkinSense repository (develop)](https://github.com/sudo-pranshu/ParkinSense)
+- [Hadley, Riley & Heldman, Digital Biomarkers 2021](https://karger.com/dib/article/5/3/206/823097/Real-World-Evidence-for-a-Smartwatch-Based)
+- [Most-endorsed item among people with essential tremor; 63.2% found their tremor embarrassing. Kellner et al., J Neurol Sci 2017](https://pmc.ncbi.nlm.nih.gov/articles/PMC5739080)
+- [Parkinson's caregivers, Southern India. Kurupath, Arathil & Bansal, JCDR 2020](https://jcdr.net/ReadXMLFile.aspx?id=14384)

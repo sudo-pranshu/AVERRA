@@ -108,13 +108,14 @@ function Problem() {
         ))}
         <Item className="panel p-6"><p className="t-h1">{st[2][0]}</p><p className="t-small mt-2 text-mist">{st[2][1]}</p></Item>
       </Stagger>
-      <h2 className="t-h2 mt-10">What we heard</h2>
-      <p className="t-small mt-1 text-amber">No interviews were supplied; these slots stay empty until verbatim, consented quotes exist.</p>
+      <h2 className="t-h2 mt-10">What the research says</h2>
+      <p className="t-small mt-1 text-slate">{K.problem.quotesNote}</p>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
-        {K.problem.quotes.map(([who, q]) => (
-          <blockquote key={who} className="rounded-2xl border border-dashed border-amber/60 p-5">
-            <p className="t-body italic text-white">“{q}”</p>
-            <footer className="t-small mt-3 text-slate">— {who}</footer>
+        {K.problem.quotes.map(([who, q, src, url]) => (
+          <blockquote key={who} className="panel flex flex-col p-5">
+            <p className="t-small text-cyan">{who}</p>
+            <p className="t-body mt-2 flex-1 italic text-white">“{q}”</p>
+            <footer className="t-small mt-3 text-slate"><a href={url} target="_blank" rel="noreferrer" className="underline decoration-slate/50 underline-offset-2 hover:text-mist">{src}</a></footer>
           </blockquote>
         ))}
       </div>

@@ -344,18 +344,25 @@
   ],
   "quotes": [
    [
-    "Neurologist",
-    "[Insert verbatim quote: how movement is tracked between visits]"
+    "Clinicians",
+    "Obtaining only a snapshot of symptoms during a single clinical office visit does not provide enough time resolution to determine how to optimize symptomatic benefit.",
+    "Hadley, Riley & Heldman, Digital Biomarkers 2021",
+    "https://karger.com/dib/article/5/3/206/823097/Real-World-Evidence-for-a-Smartwatch-Based"
    ],
    [
-    "Person living with tremor",
-    "[Insert verbatim quote: eating and daily tasks]"
+    "People with tremor",
+    "I am embarrassed by my tremor when I try to eat or drink in public.",
+    "Most-endorsed item among people with essential tremor; 63.2% found their tremor embarrassing. Kellner et al., J Neurol Sci 2017",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5739080"
    ],
    [
-    "Caregiver",
-    "[Insert verbatim quote: what they use today and would pay]"
+    "Caregivers (India)",
+    "Out of 100 caregivers, 73 reported to have \"severe\" caregiver burden.",
+    "Parkinson's caregivers, Southern India. Kurupath, Arathil & Bansal, JCDR 2020",
+    "https://jcdr.net/ReadXMLFile.aspx?id=14384"
    ]
-  ]
+  ],
+  "quotesNote": "Published sources, not AVERRA's own interviews. Our customer-discovery interviews are still to be run."
  },
  "milestones": [
   [
@@ -550,7 +557,7 @@
    "slide": 2,
    "title": "Problem & why now",
    "seconds": 55,
-   "text": "Start with the people. About 4.6 lakh Indians over sixty live with Parkinson's, and roughly 12.8 lakh more have essential tremor, though that second figure comes from a single study.\nTwo things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill.\nThe customer-discovery quotes on the right are deliberately left as placeholders. We will only present verbatim quotes from real interviews.\nWhy now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050."
+   "text": "Start with the people. About 4.6 lakh Indians over sixty live with Parkinson's, and roughly 12.8 lakh more have essential tremor, though that second figure comes from a single study.\nTwo things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill.\nPublished research backs this up. A 2021 study calls a single clinic visit \"only a snapshot\" of symptoms. The statement people with essential tremor agreed with most was: \"I am embarrassed by my tremor when I try to eat or drink in public.\" And in a study from southern India, 73 of 100 Parkinson's caregivers reported severe burden.\nWhy now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050."
   },
   {
    "slide": 3,
@@ -627,7 +634,7 @@
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1566
+  "words": 1604
  },
  "fmt": null
 }

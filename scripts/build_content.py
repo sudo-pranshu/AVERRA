@@ -136,9 +136,13 @@ content = {
         "stats": [(f"≈{mk['pd60']/1e5:.1f} lakh", "Indians aged 60+ living with Parkinson's (derived)"),
                   (f"≈{mk['et']/1e5:.1f} lakh", "with essential tremor (single-study estimate)"),
                   ("4–12 Hz", "tremor band that turns a spoon into a spill")],
-        "quotes": [("Neurologist", "[Insert verbatim quote: how movement is tracked between visits]"),
-                   ("Person living with tremor", "[Insert verbatim quote: eating and daily tasks]"),
-                   ("Caregiver", "[Insert verbatim quote: what they use today and would pay]")],
+        "quotes": [("Clinicians", "Obtaining only a snapshot of symptoms during a single clinical office visit does not provide enough time resolution to determine how to optimize symptomatic benefit.",
+                    "Hadley, Riley & Heldman, Digital Biomarkers 2021", "https://karger.com/dib/article/5/3/206/823097/Real-World-Evidence-for-a-Smartwatch-Based"),
+                   ("People with tremor", "I am embarrassed by my tremor when I try to eat or drink in public.",
+                    "Most-endorsed item among people with essential tremor; 63.2% found their tremor embarrassing. Kellner et al., J Neurol Sci 2017", "https://pmc.ncbi.nlm.nih.gov/articles/PMC5739080"),
+                   ("Caregivers (India)", "Out of 100 caregivers, 73 reported to have \"severe\" caregiver burden.",
+                    "Parkinson's caregivers, Southern India. Kurupath, Arathil & Bansal, JCDR 2020", "https://jcdr.net/ReadXMLFile.aspx?id=14384")],
+        "quotesNote": "Published sources, not AVERRA's own interviews. Our customer-discovery interviews are still to be run.",
     },
     "milestones": [("M2", "Provisional patent filed", "IP"), ("M3", "12 study units built", "TremoSense"), ("M4", "CDSCO classification opinion; ethics approval", "Regulatory"),
                    ("M6", "User study n ≥ 10 → kill / continue", "Milestone 1"), ("M7", "Tranche 2 closes; engineer hired", "Phase 2"),
@@ -183,7 +187,7 @@ We start with two products. ParkinSense measures and helps people understand the
 Over the next eleven minutes I'll show you what we've built, what we've actually tested, what it costs, and exactly what we're asking for."""))
 S.append(("Problem & why now", 55, f"""Start with the people. About {mk['pd60']/1e5:.1f} lakh Indians over sixty live with Parkinson's, and roughly {mk['et']/1e5:.1f} lakh more have essential tremor, though that second figure comes from a single study.
 Two things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill.
-The customer-discovery quotes on the right are deliberately left as placeholders. We will only present verbatim quotes from real interviews.
+Published research backs this up. A 2021 study calls a single clinic visit "only a snapshot" of symptoms. The statement people with essential tremor agreed with most was: "I am embarrassed by my tremor when I try to eat or drink in public." And in a study from southern India, 73 of 100 Parkinson's caregivers reported severe burden.
 Why now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050."""))
 S.append(("One company, two products", 45, f"""So here is AVERRA: one company with two complementary products.
 ParkinSense is a wellness wearable. Activity and vitals come first, and movement intelligence is its edge.
