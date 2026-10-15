@@ -271,7 +271,7 @@ function Portfolio() {
     <motion.button initial={{ opacity: 0, x: from }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease, delay: 0.2 }}
       onClick={() => setFocus(focus === id ? null : id)} aria-pressed={focus === id}
       className="panel lift group flex flex-col p-6 text-left" style={{ borderColor: focus === id ? color : undefined }}>
-      <Photo src={img} alt={`${name} prototype`} className="h-56 w-full" />
+      <Photo src={img} alt={id === "ts" ? "TremoSense concept render" : `${name} prototype`} className={`h-56 w-full ${id === "ts" ? "!object-contain bg-[#1a1f42]" : ""}`} />
       <p className="t-h2 mt-5">{name}</p><p className="t-small" style={{ color }}>{role}</p>
       <dl className="t-small mt-4 space-y-2 text-mist">
         {rows.map(([k, v]) => <div key={k}><dt className="inline text-white">{k}: </dt><dd className="inline">{v}</dd></div>)}
