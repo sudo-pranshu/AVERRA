@@ -52,7 +52,7 @@ function base(n, kicker, title) {
   const sc = SCRIPT[n - 1];
   let start = SCRIPT.slice(0, n - 1).reduce((a, x) => a + x.seconds, 0);
   const mmss = (t) => Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0");
-  s.addNotes(`[${mmss(start)}–${mmss(start + sc.seconds)} | ${sc.seconds} s] ${sc.title}\n${sc.text}`);
+  s.addNotes(`${sc.speaker.toUpperCase()} · [${mmss(start)}–${mmss(start + sc.seconds)} | ${sc.seconds} s] ${sc.title}\n${sc.text}`);
   return s;
 }
 // product photos that Morph across slides 3–7
@@ -112,13 +112,13 @@ function photos(s, ps, tsP) {
   card(s, 0.55, 1.55, 4.6, 4.95, "ps_card", C.card, C.cyan);
   photos(s, [0.85, 1.8, 1.55], null);
   txt(s, [{ text: "ParkinSense", options: { bold: true, color: C.white, fontSize: 20, breakLine: true } }, { text: "MEASURE & UNDERSTAND", options: { bold: true, color: C.cyan, fontSize: 10.5, charSpacing: 2 } }], { x: 2.55, y: 1.85, w: 2.5, h: 0.8, objectName: "!!ps_label" });
-  txt(s, [{ text: "Who: ", options: { bold: true, color: C.white } }, { text: "wellness-minded adults and households living with movement disorders", options: { breakLine: true } },
+  txt(s, [{ text: "Who: ", options: { bold: true, color: C.white } }, { text: "anyone wanting activity, vitals and movement insight, from fitness users to people with movement disorders", options: { breakLine: true } },
     { text: "Buys it: ", options: { bold: true, color: C.white } }, { text: "the user, online", options: { breakLine: true } },
-    { text: "Value: ", options: { bold: true, color: C.white } }, { text: "activity and vitals plus movement-specific insight", options: {} }], { x: 0.85, y: 3.65, w: 4.1, h: 2.6, fontSize: 13, paraSpaceAfter: 6, objectName: "ps_body" });
+    { text: "Value: ", options: { bold: true, color: C.white } }, { text: "activity and vitals, with tremor detection as its standout feature", options: {} }], { x: 0.85, y: 3.65, w: 4.1, h: 2.6, fontSize: 13, paraSpaceAfter: 6, objectName: "ps_body" });
   card(s, 8.18, 1.55, 4.6, 4.95, "ts_card", C.card, C.violet);
   photos(s, null, [8.48, 1.8, 1.25]);
   txt(s, [{ text: "TremoSense", options: { bold: true, color: C.white, fontSize: 20, breakLine: true } }, { text: "ASSIST", options: { bold: true, color: C.violet, fontSize: 10.5, charSpacing: 2 } }], { x: 9.95, y: 1.85, w: 2.7, h: 0.8, objectName: "!!ts_label" });
-  txt(s, [{ text: "Who: ", options: { bold: true, color: C.white } }, { text: "older adults whose tremor disrupts eating", options: { breakLine: true } },
+  txt(s, [{ text: "Who: ", options: { bold: true, color: C.white } }, { text: "people whose tremor disrupts eating, and their families", options: { breakLine: true } },
     { text: "Buys it: ", options: { bold: true, color: C.white } }, { text: "family, via clinic or OT referral", options: { breakLine: true } },
     { text: "Value: ", options: { bold: true, color: C.white } }, { text: "eat more independently, at an Indian price", options: {} }], { x: 8.48, y: 3.65, w: 4.1, h: 2.6, fontSize: 13, paraSpaceAfter: 6, objectName: "ts_body" });
   // shared core
@@ -133,7 +133,7 @@ function photos(s, ps, tsP) {
 
 // ===================================================================== 4 PARKINSENSE
 {
-  const s = base(4, "03 · PARKINSENSE", "A wellness wearable with movement intelligence");
+  const s = base(4, "03 · PARKINSENSE", "A wearable for everyone, with tremor detection built in");
   photos(s, [0.55, 1.5, 1.6], null);
   txt(s, [{ text: "ParkinSense", options: { bold: true, color: C.white, fontSize: 17, breakLine: true } }, { text: "MEASURE", options: { bold: true, color: C.cyan, fontSize: 10, charSpacing: 2 } }], { x: 2.3, y: 1.55, w: 1.9, h: 0.7, objectName: "!!ps_label" });
   K.parkinsense.architecture.forEach((t, i) => {
@@ -261,10 +261,10 @@ function photos(s, ps, tsP) {
   const boxes = [["Key partners", "Neurology clinics · OT centres · university labs · test lab · contract assembler", 0.55, 1.5, 2.35, 2.5],
     ["Key activities", "User studies · CDSCO + ISO 13485 · firmware & DSP · small-batch assembly", 3.0, 1.5, 2.35, 1.2],
     ["Key resources", "Sensing + control IP · bench evidence · two papers · prototypes", 3.0, 2.8, 2.35, 1.2],
-    ["Value propositions", "ParkinSense: movement insight on a wellness wearable\nTremoSense: active tremor assistance at an Indian price", 5.45, 1.5, 2.45, 2.5],
+    ["Value propositions", "ParkinSense: a wearable for everyone with built-in tremor detection\nTremoSense: active tremor assistance at an Indian price", 5.45, 1.5, 2.45, 2.5],
     ["Relationships", "Clinic-assisted trial · caregiver onboarding", 8.0, 1.5, 2.35, 1.2],
     ["Channels", "Clinic / OT referral · direct online · institutional procurement", 8.0, 2.8, 2.35, 1.2],
-    ["Customer segments", "Households with PD / ET · wellness-minded adults · research labs", 10.45, 1.5, 2.35, 2.5],
+    ["Customer segments", "Everyday wearable users · households with PD / ET · research labs", 10.45, 1.5, 2.35, 2.5],
     ["Cost structure", "Phase 1: team, study units, user study, IP · Phase 2: QMS, EMC, inventory, outreach", 0.55, 4.1, 6.0, 1.15]];
   boxes.forEach((b, i) => {
     card(s, b[2], b[3], b[4], b[5], "bmc" + i, C.card, i === 3 ? C.cyan : C.line);
@@ -352,7 +352,7 @@ function photos(s, ps, tsP) {
   s.addShape(pres.shapes.LINE, { x: 3.27, y: 4.05, w: 0, h: 0.35, line: { color: C.line, width: 1.25 }, objectName: "org_l" });
   card(s, 1.9, 4.4, 2.75, 0.75, "hire", C.card);
   txt(s, [{ text: "Hardware & test engineer", options: { bold: true, color: C.white, breakLine: true } }, { text: "Hire at M7 (Phase 2)", options: { color: C.muted, fontSize: 10 } }], { x: 2.05, y: 4.47, w: 2.5, h: 0.62, fontSize: 12 });
-  txt(s, "Contract: regulatory consultant, industrial designer. Advisors: none agreed. Collaborators (not founders): Prithvi Tambewagh; ParkinSense co-authors; VJTI supervisors.", { x: 0.55, y: 5.3, w: 5.95, h: 0.75, fontSize: 9.5, color: C.light, objectName: "collab" });
+  txt(s, "Contract support as needed: regulatory consultant, industrial designer.", { x: 0.55, y: 5.3, w: 5.95, h: 0.75, fontSize: 9.5, color: C.light, objectName: "collab" });
   txt(s, "Equity split: founders' agreement (not set) · ESOP 5% · inventor assignments before filing", { x: 0.55, y: 6.1, w: 5.95, h: 0.5, fontSize: 10, color: C.amber, objectName: "eq_note" });
   K.growth.funnel.forEach((a, i) => {
     const y = 1.5 + i * 0.66, w = 3.6 - i * 0.42, x = 6.75 + (3.6 - w) / 2;

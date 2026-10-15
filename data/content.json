@@ -2,14 +2,14 @@
  "clinicalEvaluation": {
   "status": "in_progress",
   "label": "Clinical evaluation in progress with ICMR",
-  "detail": "Founder-reported; protocol, site and results not yet available. Update data/content.json → clinicalEvaluation when results return.",
+  "detail": "Founder-reported; protocol, site and results not yet available.",
   "results": null
  },
  "brand": {
   "name": "AVERRA",
   "tagline": "Engineering better movement intelligence.",
   "descriptor": "Biomedical deep-tech for accessible wearable and assistive technology",
-  "positioning": "For older adults, people living with movement disorders and the clinicians and families who support them in urban India, AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight (ParkinSense) and practical assistance (TremoSense), at prices built for Indian households.",
+  "positioning": "AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight for anyone who wants to understand how they move (ParkinSense), and practical assistance for people living with tremor (TremoSense), at prices built for India.",
   "founders": [
    "Pranshu Kumar",
    "Pawan Shinde"
@@ -27,7 +27,7 @@
  },
  "parkinsense": {
   "role": "MEASURE AND UNDERSTAND MOVEMENT",
-  "pitch": "A wellness wearable with differentiated movement intelligence — activity and vitals today, movement-specific insight as its edge.",
+  "pitch": "A general fitness and wellness wearable for anyone, with tremor detection as its standout feature.",
   "hardware": "Seeed XIAO nRF52840 Sense · LSM6DS3 6-axis IMU (104 Hz) · MAX30102 PPG · 700 mAh Li-ion · BLE 5.0 · 3D-printed wrist housing",
   "architecture": [
    "Wearable streams IMU + PPG over BLE (firmware does no analysis)",
@@ -256,7 +256,7 @@
     ],
     [
      "We are building",
-     "Movement-specific insight (tremor burden, motion context) on a wellness wearable."
+     "A general wearable for anyone whose standout feature is tremor detection: score, frequency, burden and motion context."
     ],
     [
      "Accessible value",
@@ -551,90 +551,104 @@
    "slide": 1,
    "title": "Title",
    "seconds": 40,
-   "text": "Good morning. I'm Pranshu Kumar, and with my co-founder Pawan Shinde I'm building AVERRA. Our line is: engineering better movement intelligence.\nAVERRA is a biomedical technology company. We turn precise movement sensing into products people can use every day, at prices built for India.\nWe start with two products. ParkinSense measures and helps people understand their movement. TremoSense assists people who already live with tremor.\nOver the next eleven minutes I'll show you what we've built, what we've actually tested, what it costs, and exactly what we're asking for."
+   "speaker": "Pranshu",
+   "text": "Good morning. I'm Pranshu Kumar, and this is my co-founder Pawan Shinde. Together we're building AVERRA. Our line is: engineering better movement intelligence.\nAVERRA is a biomedical technology company. We turn precise movement sensing into products people can use every day, at prices built for India.\nWe start with two products. ParkinSense measures and helps people understand their movement. TremoSense assists people who already live with tremor.\nI'll take you through the problem and what we've built and tested. Pawan will then take you through the business, the numbers and exactly what we're asking for."
   },
   {
    "slide": 2,
    "title": "Problem & why now",
    "seconds": 55,
+   "speaker": "Pranshu",
    "text": "Start with the people. About 4.6 lakh Indians over sixty live with Parkinson's, and roughly 12.8 lakh more have essential tremor, though that second figure comes from a single study.\nTwo things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill.\nPublished research backs this up. A 2021 study calls a single clinic visit \"only a snapshot\" of symptoms. The statement people with essential tremor agreed with most was: \"I am embarrassed by my tremor when I try to eat or drink in public.\" And in a study from southern India, 73 of 100 Parkinson's caregivers reported severe burden.\nWhy now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050."
   },
   {
    "slide": 3,
    "title": "One company, two products",
    "seconds": 45,
-   "text": "So here is AVERRA: one company with two complementary products.\nParkinSense is a wellness wearable. Activity and vitals come first, and movement intelligence is its edge.\nTremoSense is assistive. It physically stabilises a spoon for someone whose tremor gets in the way of eating.\nThey serve different people and different buying decisions. What they share is real: the same Nordic microcontroller family, the same six-axis IMU, the same signal-processing skills, and the same team. We are not claiming shared revenue or cost savings beyond that."
+   "speaker": "Pranshu",
+   "text": "So here is AVERRA: one company with two complementary products.\nParkinSense is a general wellness wearable for anyone, young or old. It tracks activity and vitals, and its standout feature is tremor detection.\nTremoSense is assistive. It physically stabilises a spoon for someone whose tremor gets in the way of eating.\nThey serve different people and different buying decisions. What they share is real: the same Nordic microcontroller family, the same six-axis IMU, the same signal-processing skills, and the same team. We are not claiming shared revenue or cost savings beyond that."
   },
   {
    "slide": 4,
    "title": "ParkinSense",
    "seconds": 60,
-   "text": "ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps.\nIts edge is the shared motion classifier. Tremor isn't counted as steps, and heart rate is trusted less while you move.\nHere's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.\nA clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."
+   "speaker": "Pranshu",
+   "text": "ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps.\nIts standout feature is tremor detection: a tremor score, frequency and burden. A shared motion classifier means tremor isn't counted as steps, and heart rate is trusted less while you move.\nHere's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.\nA clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."
   },
   {
    "slide": 5,
    "title": "TremoSense",
    "seconds": 55,
+   "speaker": "Pranshu",
    "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOur paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz.\nThe current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code.\nNo person with tremor has used it yet."
   },
   {
    "slide": 6,
    "title": "Competition",
    "seconds": 50,
+   "speaker": "Pranshu",
    "text": "Competitors, with prices checked this month.\nWHOOP costs ₹17,990 a year, a Fitbit Charge 6 about ₹12,999, and an Amazfit Bip 6 ₹8,999. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.\nFor tremor assistance, one GyroGlove costs 5,899 US dollars, about 5.6 lakh rupees, for one hand. Liftware sold for 195 dollars in 2015, and a weighted spoon is cheap but passive.\nTremoSense is a spoon, not a glove, and we don't claim it matches either product. The opportunity is an Indian-built active aid priced under 2 percent of one GyroGlove, while being honest that it does far less."
   },
   {
    "slide": 7,
    "title": "MVP & validation",
    "seconds": 60,
-   "text": "What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.\nSo we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.\nFor ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.\nOur decision is to persevere, and to validate on people before we make any medical claim."
+   "speaker": "Pranshu",
+   "text": "What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.\nSo we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.\nFor ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.\nOur decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."
   },
   {
    "slide": 8,
    "title": "Market",
    "seconds": 45,
-   "text": "We sized the market bottom-up.\nTremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year.\nParkinSense's beachhead is households living with Parkinson's: ₹141.3 Cr. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.\nFiltering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L."
+   "speaker": "Pawan",
+   "text": "Thank you, Pranshu. We sized the market bottom-up.\nTremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year.\nParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.\nFiltering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L."
   },
   {
    "slide": 9,
    "title": "Business model",
    "seconds": 35,
+   "speaker": "Pawan",
    "text": "The business model in brief. Clinicians and occupational therapists bring us patients. Families buy the device.\nRevenue comes in three steps. First, research kits for labs, which need no medical claim. Then TremoSense as a one-time sale, with a rental option for those who can't pay upfront. Then ParkinSense, as a device with an optional subscription.\nWe assume no reimbursement. All revenue is out-of-pocket or institutional."
   },
   {
    "slide": 10,
    "title": "Pricing & unit economics",
    "seconds": 60,
+   "speaker": "Pawan",
    "text": "Pricing. Today's prototype parts cost about ₹4,062. Two thousand rupees is a volume target for the electronics, not today's cost.\nWe modelled three cost levels. At a small batch of a hundred, the unit costs ₹4,830. At ₹9,999, after GST, a clinic margin, warranty and shipping, we keep ₹2,538. That's a 31% contribution margin and 40% gross margin, so every unit is profitable from the first sale.\nOnce supplier quotes and tooling bring cost down to ₹2,720, we cut the price to ₹8,999 and still keep ₹3,886, or 53%. ₹6,999 would still be viable at that cost; we hold it back until the company is profitable.\nCAC is about ₹1,079, and LTV to CAC is 3.3. ParkinSense at ₹7,999 reaches 2.0, positive after acquisition cost, though thinner."
   },
   {
    "slide": 11,
    "title": "Financial forecast",
    "seconds": 55,
+   "speaker": "Pawan",
    "text": "The plan starts in July 2027 and runs three years.\nPhase one, the first six months, is about proof: the TremoSense user study, the patent filing and a regulatory opinion. It costs ₹8.8 L.\nPhase two launches TremoSense, with first sales in month twelve. In year three we scale the clinic network and launch ParkinSense as a wellness product.\nYear-one costs are ₹35.2 L, a gross burn of about ₹2.93 L a month. Year two still loses 17.7 lakh rupees as volume builds.\nWe reach sustained operating break-even in month 26, August 2029. Year three makes an operating profit of ₹11.7 L on ₹2.1 Cr of cash in, and we exit at about ₹2.3 L profit a month.\nGetting there needs ₹60.9 L in total. Phase one alone needs ₹10.5 L, and that number shapes our ask."
   },
   {
    "slide": 12,
    "title": "Team & growth",
    "seconds": 45,
-   "text": "The team comes from the evidence. I built ParkinSense and co-authored TremoSense, and I lead the company, the wearables and signal processing. Pawan co-built TremoSense and leads control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
+   "speaker": "Pawan",
+   "text": "The team comes from the evidence. Pranshu built ParkinSense and co-authored TremoSense, and he leads the company, the wearables and signal processing. I co-built TremoSense and lead control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
   },
   {
    "slide": 13,
    "title": "Funding ask & valuation",
    "seconds": 60,
+   "speaker": "Pawan",
    "text": "Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reaching profitability needs ₹60.9 L. Today we raise only for milestone one: ₹10,51,171.\nWe propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.\nAt ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%.\nThe Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."
   },
   {
    "slide": 14,
    "title": "Milestones, advantage & close",
    "seconds": 50,
+   "speaker": "Pawan",
    "text": "Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
   }
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1604
+  "words": 1643
  },
  "fmt": null
 }

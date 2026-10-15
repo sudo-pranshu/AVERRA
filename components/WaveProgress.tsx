@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 /** The AVERRA signal as a progress bar: the tremor damps toward a steady line as the presentation advances. */
-export function WaveProgress({ index, total, onSelect, titles }: { index: number; total: number; onSelect: (i: number) => void; titles: string[] }) {
-  const W = 1000, H = 40, mid = H / 2;
+export function WaveProgress({ index, total, onSelect, titles, accent }: { index: number; total: number; onSelect: (i: number) => void; titles: string[]; accent: string }) {
+  const W = 1000, H = 30, mid = H / 2;
   const p = total > 1 ? index / (total - 1) : 1;
-  const amp = 13 * Math.pow(1 - p, 1.15) + 0.4;
+  const amp = 10 * Math.pow(1 - p, 1.15) + 0.4;
   const pts: string[] = [];
   for (let i = 0; i <= 200; i++) {
     const x = (i / 200) * W;
@@ -16,20 +16,22 @@ export function WaveProgress({ index, total, onSelect, titles }: { index: number
   const d = "M" + pts.join(" L");
   const px = 8 + p * (W - 16);
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-navy from-55% to-transparent px-5 pb-4 pt-8 md:px-14">
-      <div className="relative">
-        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="h-8 w-full" aria-hidden="true">
-          <path d={`M0,${mid} L${W},${mid}`} stroke="#2B3A5C" strokeWidth="1.5" fill="none" vectorEffect="non-scaling-stroke" />
-          <motion.path animate={{ d }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} stroke="#3B82F6" strokeOpacity={0.45} strokeWidth="1.6" fill="none" vectorEffect="non-scaling-stroke" />
+    <div className="relative z-20 h-12 shrink-0 px-5 md:px-8">
+      <div className="relative h-full">
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-x-0 top-1/2 h-7 w-full -translate-y-1/2" aria-hidden="true">
+          <path d={`M0,${mid} L${W},${mid}`} stroke="#2B3A5C" strokeWidth="1.2" fill="none" vectorEffect="non-scaling-stroke" />
+          <motion.path animate={{ d }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} stroke="#3B82F6" strokeOpacity={0.4} strokeWidth="1.4" fill="none" vectorEffect="non-scaling-stroke" />
           <defs>
             <clipPath id="wave-done"><motion.rect x="0" y="0" height={H} animate={{ width: px }} transition={{ duration: 0.6 }} /></clipPath>
           </defs>
-          <motion.path animate={{ d }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} clipPath="url(#wave-done)" stroke="#06B6D4" strokeWidth="2.2" fill="none" vectorEffect="non-scaling-stroke" />
+          <motion.path animate={{ d, stroke: accent }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} clipPath="url(#wave-done)" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke" />
         </svg>
-        <motion.span className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan shadow-[0_0_0_4px_rgba(6,182,212,0.18)]" animate={{ left: `${(px / W) * 100}%` }} transition={{ duration: 0.6 }} />
-        <div className="pointer-events-auto absolute inset-0 flex" role="tablist" aria-label="Jump to slide">
+        <motion.span className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full" animate={{ left: `${(px / W) * 100}%`, backgroundColor: accent, boxShadow: `0 0 0 5px ${accent}33, 0 0 18px ${accent}` }} transition={{ duration: 0.6 }} />
+        <div className="absolute inset-0 flex" role="tablist" aria-label="Jump to slide">
           {titles.map((t, i) => (
-            <button key={t} role="tab" aria-selected={i === index} aria-label={`Go to slide ${i + 1}: ${t}`} title={`${i + 1}. ${t}`} onClick={() => onSelect(i)} className="h-full flex-1 focus-visible:outline-offset-0" />
+            <button key={t} role="tab" aria-selected={i === index} aria-label={`Go to slide ${i + 1}: ${t}`} title={`${i + 1}. ${t}`} onClick={() => onSelect(i)} className="group relative h-full flex-1 focus-visible:outline-offset-0">
+              <span className="pointer-events-none absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 whitespace-nowrap rounded-md bg-navy-3 px-2 py-1 text-xs text-mist group-hover:block">{i + 1}. {t}</span>
+            </button>
           ))}
         </div>
       </div>

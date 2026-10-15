@@ -15,11 +15,11 @@ export const pct = (x: number, d = 0) => `${(x * 100).toFixed(d)}%`;
 
 export type StatusKey = "progress" | "impl" | "bench" | "partial" | "planned" | "depends" | "sim" | "research";
 export const STATUS: Record<StatusKey, { label: string; color: string }> = {
-  progress: { label: "In progress (results pending)", color: "#F59E0B" },
+  progress: { label: "In progress", color: "#F59E0B" },
   impl: { label: "Implemented", color: "#3B82F6" },
   bench: { label: "Bench-tested", color: "#06B6D4" },
   partial: { label: "In development", color: "#F59E0B" },
-  depends: { label: "Needs hardware, firmware or validation", color: "#F59E0B" },
+  depends: { label: "Needs validation", color: "#F59E0B" },
   planned: { label: "Planned", color: "#94A3B8" },
   sim: { label: "Simulation only", color: "#8B5CF6" },
   research: { label: "Future research", color: "#8B5CF6" },

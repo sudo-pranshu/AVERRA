@@ -35,20 +35,19 @@ STATUS = {"progress": "In progress", "impl": "Implemented", "bench": "Bench-test
 
 import datetime as _dt
 BE_LONG = _dt.datetime.strptime(H["breakEvenMonth"].split()[1], "%b-%y").strftime("%B %Y")
-ICMR = {"status": "in_progress", "label": "Clinical evaluation in progress with ICMR", "detail": "Founder-reported; protocol, site and results not yet available. Update data/content.json → clinicalEvaluation when results return.", "results": None}
+ICMR = {"status": "in_progress", "label": "Clinical evaluation in progress with ICMR", "detail": "Founder-reported; protocol, site and results not yet available.", "results": None}
 
 content = {
     "clinicalEvaluation": ICMR,
     "brand": {"name": "AVERRA", "tagline": "Engineering better movement intelligence.",
               "descriptor": "Biomedical deep-tech for accessible wearable and assistive technology",
-              "positioning": ("For older adults, people living with movement disorders and the clinicians and families who support them in urban India, "
-                              "AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight (ParkinSense) "
-                              "and practical assistance (TremoSense), at prices built for Indian households."),
+              "positioning": ("AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight for anyone who wants to understand how they move (ParkinSense), "
+                              "and practical assistance for people living with tremor (TremoSense), at prices built for India."),
               "founders": ["Pranshu Kumar", "Pawan Shinde"]},
     "statusLegend": STATUS,
     "parkinsense": {
         "role": "MEASURE AND UNDERSTAND MOVEMENT",
-        "pitch": "A wellness wearable with differentiated movement intelligence — activity and vitals today, movement-specific insight as its edge.",
+        "pitch": "A general fitness and wellness wearable for anyone, with tremor detection as its standout feature.",
         "hardware": "Seeed XIAO nRF52840 Sense · LSM6DS3 6-axis IMU (104 Hz) · MAX30102 PPG · 700 mAh Li-ion · BLE 5.0 · 3D-printed wrist housing",
         "architecture": ["Wearable streams IMU + PPG over BLE (firmware does no analysis)", "Host runtime (Python today; mobile app in development) decodes packets",
                          "Three pipelines: motion · PPG · steps", "Shared motion-context classifier gates steps and discounts HR confidence",
@@ -110,7 +109,7 @@ content = {
             ],
             "positioning": [
                 ("They do well", "Polished hardware, multi-day battery, sleep and recovery, large app ecosystems."),
-                ("We are building", "Movement-specific insight (tremor burden, motion context) on a wellness wearable."),
+                ("We are building", "A general wearable for anyone whose standout feature is tremor detection: score, frequency, burden and motion context."),
                 ("Accessible value", f"A price hypothesis of {inr(D['assumptions']['P3'])} — below WHOOP, Fitbit Charge 6 and the Amazfit Bip 6 ({inr(comp['Amazfit Bip 6']['price'])}), with no mandatory subscription."),
                 ("Still to prove", "Accuracy against reference devices (ICMR evaluation results pending), battery life, sleep features, and that people value movement insight."),
             ],
@@ -181,20 +180,20 @@ content = {
 
 # ------------------------------------------------------------------ the ~11-minute script (14 slides)
 S = []
-S.append(("Title", 40, f"""Good morning. I'm Pranshu Kumar, and with my co-founder Pawan Shinde I'm building AVERRA. Our line is: engineering better movement intelligence.
+S.append(("Title", 40, f"""Good morning. I'm Pranshu Kumar, and this is my co-founder Pawan Shinde. Together we're building AVERRA. Our line is: engineering better movement intelligence.
 AVERRA is a biomedical technology company. We turn precise movement sensing into products people can use every day, at prices built for India.
 We start with two products. ParkinSense measures and helps people understand their movement. TremoSense assists people who already live with tremor.
-Over the next eleven minutes I'll show you what we've built, what we've actually tested, what it costs, and exactly what we're asking for."""))
+I'll take you through the problem and what we've built and tested. Pawan will then take you through the business, the numbers and exactly what we're asking for."""))
 S.append(("Problem & why now", 55, f"""Start with the people. About {mk['pd60']/1e5:.1f} lakh Indians over sixty live with Parkinson's, and roughly {mk['et']/1e5:.1f} lakh more have essential tremor, though that second figure comes from a single study.
 Two things fail them. Their movement is measured for a few minutes in a clinic, then not at all. And at home, a tremor of four to twelve hertz turns a spoon into a spill.
 Published research backs this up. A 2021 study calls a single clinic visit "only a snapshot" of symptoms. The statement people with essential tremor agreed with most was: "I am embarrassed by my tremor when I try to eat or drink in public." And in a study from southern India, 73 of 100 Parkinson's caregivers reported severe burden.
 Why now? Apple opened a movement API in 2018, and a Parkinson's monitoring app was FDA-cleared in 2022. India made device licensing mandatory in 2023. And our over-sixty population is set to more than double by 2050."""))
 S.append(("One company, two products", 45, f"""So here is AVERRA: one company with two complementary products.
-ParkinSense is a wellness wearable. Activity and vitals come first, and movement intelligence is its edge.
+ParkinSense is a general wellness wearable for anyone, young or old. It tracks activity and vitals, and its standout feature is tremor detection.
 TremoSense is assistive. It physically stabilises a spoon for someone whose tremor gets in the way of eating.
 They serve different people and different buying decisions. What they share is real: the same Nordic microcontroller family, the same six-axis IMU, the same signal-processing skills, and the same team. We are not claiming shared revenue or cost savings beyond that."""))
 S.append(("ParkinSense", 60, f"""ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps.
-Its edge is the shared motion classifier. Tremor isn't counted as steps, and heart rate is trusted less while you move.
+Its standout feature is tremor detection: a tremor score, frequency and burden. A shared motion classifier means tremor isn't counted as steps, and heart rate is trusted less while you move.
 Here's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.
 A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."""))
 S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.
@@ -208,10 +207,10 @@ TremoSense is a spoon, not a glove, and we don't claim it matches either product
 S.append(("MVP & validation", 60, f"""What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.
 So we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.
 For ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.
-Our decision is to persevere, and to validate on people before we make any medical claim."""))
-S.append(("Market", 45, f"""We sized the market bottom-up.
+Our decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."""))
+S.append(("Market", 45, f"""Thank you, Pranshu. We sized the market bottom-up.
 TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about {mk['tremosense']['customers']/1e5:.1f} lakh people. At the launch price spread over a three-year life, that's {crore(mk['tremosense']['tam'])} a year.
-ParkinSense's beachhead is households living with Parkinson's: {crore(mk['parkinsense']['tam'])}. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.
+ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: {crore(mk['parkinsense']['tam'])}. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.
 Filtering to urban patients under neurologist care gives a SAM of {crore(D['market']['totals']['sam'])}. Our year-three SOM, built from 30 clinics plus online, is about {lakh(D['market']['totals']['som'], 0)}."""))
 S.append(("Business model", 35, f"""The business model in brief. Clinicians and occupational therapists bring us patients. Families buy the device.
 Revenue comes in three steps. First, research kits for labs, which need no medical claim. Then TremoSense as a one-time sale, with a rental option for those who can't pay upfront. Then ParkinSense, as a device with an optional subscription.
@@ -226,7 +225,7 @@ Phase two launches TremoSense, with first sales in month twelve. In year three w
 Year-one costs are {lakh(H['costs12'])}, a gross burn of about {lakh(H['grossBurn12'], 2)} a month. Year two still loses {sp_lakh(-H['y2Net'])} rupees as volume builds.
 We reach sustained operating break-even in month {H['breakEvenMonth'].split()[0][1:]}, {BE_LONG}. Year three makes an operating profit of {lakh(H['y3Profit'])} on {crore(H['y3CashIn'])} of cash in, and we exit at about {lakh(H['m36Profit'])} profit a month.
 Getting there needs {lakh(H['fullRequirement'])} in total. Phase one alone needs {lakh(H['phase1Requirement'])}, and that number shapes our ask."""))
-S.append(("Team & growth", 45, f"""The team comes from the evidence. I built ParkinSense and co-authored TremoSense, and I lead the company, the wearables and signal processing. Pawan co-built TremoSense and leads control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.
+S.append(("Team & growth", 45, f"""The team comes from the evidence. Pranshu built ParkinSense and co-authored TremoSense, and he leads the company, the wearables and signal processing. I co-built TremoSense and lead control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.
 Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.
 Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."""))
 S.append(("Funding ask & valuation", 60, f"""Now the ask, kept separate from the full plan. Year one costs {lakh(H['costs12'])} and reaching profitability needs {lakh(H['fullRequirement'])}. Today we raise only for milestone one: {inr(fC['equity'])}.
@@ -236,7 +235,7 @@ The Startup India grant is applied for, not awarded, and the next round is price
 S.append(("Milestones, advantage & close", 50, f"""Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
 Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time {inr(D['assumptions']['P3'])}.
 AVERRA: engineering better movement intelligence. We're asking for {lakh(fC['equity'], 1)} at a {lakh(V['proposed'], 0)} pre-money, {pct(fC['investor'], 1)}, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."""))
-content["script"] = [{"slide": i + 1, "title": t, "seconds": s, "text": tx.strip()} for i, (t, s, tx) in enumerate(S)]
+content["script"] = [{"slide": i + 1, "title": t, "seconds": s, "speaker": "Pranshu" if i < 7 else "Pawan", "text": tx.strip()} for i, (t, s, tx) in enumerate(S)]
 content["scriptTotals"] = {"seconds": sum(s for _, s, _ in S), "words": sum(len(tx.split()) for _, _, tx in S)}
 content["fmt"] = None
 (ROOT / "data" / "content.json").write_text(json.dumps(content, indent=1, ensure_ascii=False))

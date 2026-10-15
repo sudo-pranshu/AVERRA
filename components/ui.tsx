@@ -3,33 +3,45 @@
 import { animate, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-export function Frame({ label, title, lead, children, wide }: { label?: string; title: string; lead?: React.ReactNode; children?: React.ReactNode; wide?: boolean }) {
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+/** Slide frame: label, a title that rises out of a mask, an optional lead, then the body. */
+export function Frame({ label, title, lead, children, aside }: { label?: string; title: string; lead?: React.ReactNode; children?: React.ReactNode; wide?: boolean; aside?: React.ReactNode }) {
   return (
-    <div className={`mx-auto flex min-h-full w-full flex-col ${wide ? "max-w-[1500px]" : "max-w-[1360px]"}`}>
-      {label && <p className="t-small mb-3 text-cyan">{label}</p>}
-      <h1 className="t-h1 measure">{title}</h1>
-      {lead && <p className="t-body measure mt-3 text-mist">{lead}</p>}
-      <div className="mt-8 flex-1 md:mt-10">{children}</div>
+    <div className="flex h-full w-full flex-col">
+      <div className="flex items-end justify-between gap-8">
+        <div className="min-w-0">
+          {label && (
+            <motion.p className="t-small mb-2 flex items-center gap-2 text-cyan" initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease }}>
+              <span className="inline-block h-px w-6 bg-cyan" />{label}
+            </motion.p>
+          )}
+          <div className="overflow-hidden pb-1">
+            <motion.h1 className="t-h1 max-w-[36ch]" initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 0.7, ease, delay: 0.05 }}>{title}</motion.h1>
+          </div>
+          {lead && <motion.p className="t-body measure mt-2 text-mist" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.25 }}>{lead}</motion.p>}
+        </div>
+        {aside}
+      </div>
+      <div className="mt-6 min-h-0 flex-1">{children}</div>
     </div>
   );
 }
 
-export const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } };
-export const rise: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } } };
+export const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } } };
+export const rise: Variants = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } } };
 
-export function Stagger({ children, className }: { children: React.ReactNode; className?: string }) {
-  return (
-    <motion.div variants={stagger} initial="hidden" animate="show" className={className}>
-      {children}
-    </motion.div>
-  );
+export function Stagger({ children, className, as = "div" }: { children: React.ReactNode; className?: string; as?: "div" | "ul" | "ol" }) {
+  const M = as === "ul" ? motion.ul : as === "ol" ? motion.ol : motion.div;
+  return <M variants={stagger} initial="hidden" animate="show" className={className}>{children}</M>;
 }
-export function Item({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <motion.div variants={rise} className={className}>{children}</motion.div>;
+export function Item({ children, className, as = "div", style }: { children: React.ReactNode; className?: string; as?: "div" | "li"; style?: React.CSSProperties }) {
+  const M = as === "li" ? motion.li : motion.div;
+  return <M variants={rise} className={className} style={style}>{children}</M>;
 }
 
 /** Animated number; respects reduced motion. */
-export function CountUp({ to, format, className }: { to: number; format: (n: number) => string; className?: string }) {
+export function CountUp({ to, format, className, delay = 0 }: { to: number; format: (n: number) => string; className?: string; delay?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
@@ -37,22 +49,23 @@ export function CountUp({ to, format, className }: { to: number; format: (n: num
   useEffect(() => {
     if (!inView) return;
     if (reduce) { setV(to); return; }
-    const c = animate(0, to, { duration: 1.1, ease: [0.22, 1, 0.36, 1], onUpdate: setV });
+    const c = animate(0, to, { duration: 1.2, ease, delay, onUpdate: setV });
     return () => c.stop();
-  }, [inView, to, reduce]);
+  }, [inView, to, reduce, delay]);
   return <span ref={ref} className={`t-num ${className ?? ""}`}>{format(v)}</span>;
 }
 
+/** Segmented control. No shared-layout animation, so it stays correct inside the scaled stage. */
 export function Tabs<T extends string>({ value, options, onChange, label }: { value: T; options: { id: T; label: string; color?: string }[]; onChange: (v: T) => void; label: string }) {
   return (
-    <div role="tablist" aria-label={label} className="inline-flex rounded-full border hairline bg-navy-2 p-1">
+    <div role="tablist" aria-label={label} className="inline-flex rounded-full border hairline bg-navy-2/80 p-1">
       {options.map((o) => {
         const on = o.id === value;
         return (
           <button key={o.id} role="tab" aria-selected={on} onClick={() => onChange(o.id)}
-            className={`relative rounded-full px-4 py-1.5 text-sm transition-colors ${on ? "text-navy" : "text-mist hover:text-white"}`}>
-            {on && <motion.span layoutId={`tab-${label}`} className="absolute inset-0 rounded-full" style={{ background: o.color ?? "#06B6D4" }} transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
-            <span className="relative font-medium">{o.label}</span>
+            className={`t-small whitespace-nowrap rounded-full px-4 py-1.5 font-medium transition-all duration-300 ${on ? "text-navy shadow-[0_0_20px_-4px_var(--c)]" : "text-mist hover:text-white"}`}
+            style={{ background: on ? o.color ?? "#06B6D4" : "transparent", ["--c" as string]: o.color ?? "#06B6D4" }}>
+            {o.label}
           </button>
         );
       })}
@@ -61,9 +74,9 @@ export function Tabs<T extends string>({ value, options, onChange, label }: { va
 }
 
 export function Pill({ color, children }: { color: string; children: React.ReactNode }) {
-  return <span className="inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-[0.72rem] font-medium" style={{ borderColor: color, color }}>{children}</span>;
+  return <span className="t-micro inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-medium" style={{ borderColor: `${color}99`, color, background: `${color}14` }}><span className="h-1.5 w-1.5 rounded-full" style={{ background: color }} />{children}</span>;
 }
 
 export function Src({ children }: { children: React.ReactNode }) {
-  return <p className="t-small mt-6 max-w-5xl text-slate">{children}</p>;
+  return <p className="t-micro mt-4 max-w-5xl text-slate">{children}</p>;
 }
