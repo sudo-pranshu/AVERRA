@@ -313,7 +313,7 @@ cost_lines = [
     ("Reference instruments (ECG strap, pulse oximeter, pedometer)", "ParkinSense", sched([((7, 7), 110000)])),
     ("ParkinSense bench accuracy study", "ParkinSense", sched([((8, 10), 25000)])),
     ("ParkinSense RUO kit devices (5 × COGS per kit sold)", "ParkinSense", [f"={col(m)}{KITS}*5*{R['C3']}" for m in range(1, N + 1)]),
-    ("Hardware & test engineer", "Shared", sched([((7, 36), 55000)])),
+    ("Hardware & test engineering (done by the founders, no hire)", "Shared", sched([((7, 36), 0)])),
     ("ISO 13485 QMS set-up + surveillance audits", "Shared", sched([((7, 10), 50000), ((22, 22), 40000), ((34, 34), 40000)])),
     ("Electrical safety / EMC pre-compliance", "TremoSense", sched([((9, 10), 175000)])),
     ("TremoSense pilot batch (100 × Scenario B cost)", "TremoSense", [f"=100*{tsC}!C12" if m == 11 else 0 for m in range(1, N + 1)]),

@@ -72,7 +72,7 @@ The ICMR evaluation lives in **one field**: `clinicalEvaluation` in `scripts/bui
 - New name, tagline, navy/blue/cyan palette and a minimalist mark: a tremor waveform that damps to a steady line.
 - ParkinSense repositioned as a wellness wearable with movement intelligence; ICMR evaluation shown as founder-reported and in progress.
 - TremoSense cost scenarios A/B/C, a price matrix, channels and rental. Launch at ₹9,999; ₹8,999 from M19 after verified cost reduction. ₹4,062 prototype parts vs a ₹2,000 volume target for the electronics.
-- 36-month plan with sustained operating break-even in M26 (August 2029) and a Year-3 operating profit of ₹11.7 L.
+- 36-month plan with sustained operating break-even in M23 (May 2029) and a Year-3 operating profit of ₹18.9 L.
 - Ask cut to ₹10.51 L for Milestone 1 at a proposed ₹75 L pre-money (12.3% to the investor). Shown beside the ₹44.75 L cost floor, the ₹60 L Berkus-style cross-check and a ₹1 Cr ambitious case. The ₹20 L SISFS grant is kept separate and never shown as secured.
 - Competitor analysis (WHOOP, Amazfit Bip 6, Fitbit Charge 6, GyroGlove, Liftware, weighted utensils), with prices checked on 12 Oct 2026.
 - Repository-vs-paper audit for both products; TremoSense headline updated to the current build's ≈90% bench result.

@@ -271,7 +271,7 @@ function Portfolio() {
     <motion.button initial={{ opacity: 0, x: from }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease, delay: 0.2 }}
       onClick={() => setFocus(focus === id ? null : id)} aria-pressed={focus === id}
       className="panel lift group flex flex-col p-6 text-left" style={{ borderColor: focus === id ? color : undefined }}>
-      <Photo src={img} alt={id === "ts" ? "TremoSense concept render" : `${name} prototype`} className={`h-56 w-full ${id === "ts" ? "!object-contain bg-[#1a1f42]" : ""}`} />
+      <Photo src={img} alt={id === "ts" ? "TremoSense concept render" : `${name} prototype`} className={`h-56 w-full`} />
       <p className="t-h2 mt-5">{name}</p><p className="t-small" style={{ color }}>{role}</p>
       <dl className="t-small mt-4 space-y-2 text-mist">
         {rows.map(([k, v]) => <div key={k}><dt className="inline text-white">{k}: </dt><dd className="inline">{v}</dd></div>)}
@@ -291,57 +291,65 @@ function Portfolio() {
           ))}
           <p className="t-micro mt-2 text-center text-slate">No shared revenue or cost savings claimed.</p>
         </div>
-        {card("ts", "TremoSense", "Assist people who live with tremor", VIOLET, "/images/tremosense-concept.jpg", [["Who", "people whose tremor disrupts eating, and their families"], ["Buys it", "families, via clinic or OT referral"], ["Value", "eat more independently, at an Indian price"]], 40)}
+        {card("ts", "TremoSense", "Assist people who live with tremor", VIOLET, "/images/tremosense-concept-wide.jpg", [["Who", "people whose tremor disrupts eating, and their families"], ["Buys it", "families, via clinic or OT referral"], ["Value", "eat more independently, at an Indian price"]], 40)}
       </div>
     </Frame>
   );
 }
 
 /* ------------------------------------------------------------------ 5 ParkinSense */
+const PS_HOW = [["Wear it", "A light wrist band with motion and optical heart sensors."], ["It streams", "Readings go over Bluetooth to a phone or computer, 104 times a second."], ["It makes sense of it", "Software separates normal movement from tremor and shows the results on a live dashboard."]];
+const PS_DOES = ["Steps, distance and active minutes", "Heart rate, HRV and blood oxygen (SpO₂)", "Tremor detection: a tremor score, its frequency and how much of the day it lasts", "Knows when you are resting or moving, so tremor is never counted as steps", "Live dashboard with history and replay"];
+const PS_PROGRESS: [string, string, string, string[]][] = [
+  ["Built and bench-tested", MINT, "100%", ["Bluetooth streaming", "Step counting", "Tremor detection", "Rest vs movement", "Low-power sleep (≈7 mA)"]],
+  ["Working, needs validation", CYAN, "70%", ["Heart rate, HRV, SpO₂", "Dashboard"]],
+  ["In progress", AMBER, "40%", ["Mobile app", "Clinical evaluation with ICMR (results pending)"]],
+  ["Next", "#94A3B8", "10%", ["Sleep and recovery", "Battery monitoring", "Cloud sync", "Processing on the band itself"]],
+];
 function ParkinSense() {
-  const [filter, setFilter] = useState<"all" | StatusKey>("all");
   const [zoom, setZoom] = useState(false);
-  const feats = K.parkinsense.features as [string, StatusKey, string][];
-  const keys = Array.from(new Set(feats.map((f) => f[1])));
-  const shown = feats.filter((f) => filter === "all" || f[1] === filter);
   return (
-    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in">
-      <div className="grid h-full gap-6 @5xl:grid-cols-[250px_1fr]">
+    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor.">
+      <div className="grid gap-5 @5xl:grid-cols-[260px_1fr_1fr]">
         <div className="space-y-3">
-          <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="aspect-[5/4] w-full" />
+          <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="aspect-[4/3] w-full" />
           <button onClick={() => setZoom(true)} className="group relative block w-full overflow-hidden rounded-xl border hairline text-left" aria-label="Enlarge the ParkinSense dashboard screenshot">
             <img src="/images/parkinsense-dashboard-app.jpg" alt="ParkinSense dashboard showing tremor detected at 4.88 Hz" className="w-full transition-transform duration-500 group-hover:scale-105" />
             <span className="t-micro absolute bottom-1 right-1.5 rounded-full bg-navy/80 px-2 py-0.5 text-mist">Live dashboard ⤢</span>
           </button>
-          <div className="rounded-2xl border border-amber/50 bg-amber/5 p-3">
-            <p className="t-small flex items-center gap-2 text-amber"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-amber" /></span>{K.clinicalEvaluation.label}</p>
-            <p className="t-micro mt-1 text-mist">{K.clinicalEvaluation.detail}</p>
-          </div>
-          <div className="rounded-2xl border border-violet/40 bg-violet/10 p-3">
-            <p className="t-micro text-mist"><span className="text-violet">Research path, not a claim: </span>{K.parkinsense.researchPath.join(" → ")}. ParkinSense does not diagnose Parkinson's.</p>
-          </div>
+          <p className="t-micro text-slate">The working dashboard: tremor detected at 4.88 Hz while resting.</p>
         </div>
-        <div className="flex min-h-0 flex-col">
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter features by status">
-            {(["all", ...keys] as ("all" | StatusKey)[]).map((k) => (
-              <button key={k} onClick={() => setFilter(k)} aria-pressed={filter === k}
-                className={`t-micro rounded-full border px-3 py-1 transition-colors ${filter === k ? "border-white bg-white text-navy" : "hairline text-mist hover:text-white"}`}>
-                {k === "all" ? "All features" : STATUS[k].label}
-              </button>
-            ))}
-          </div>
-          <ul className="mt-3 grid grid-cols-1 gap-2 @3xl:grid-cols-2 @5xl:grid-cols-3">
-            <AnimatePresence initial={false} mode="popLayout">
-              {shown.map(([name, st, note], i) => (
-                <motion.li key={name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0, transition: { delay: i * 0.03 } }} exit={{ opacity: 0 }}
-                  className="rounded-xl border hairline bg-navy-2/80 px-3 py-2">
-                  <Pill color={STATUS[st].color}>{STATUS[st].label}</Pill>
-                  <p className="t-small mt-1 text-white">{name}</p>
-                  <p className="t-micro mt-0.5 text-slate">{note}</p>
+        <div className="space-y-4">
+          <div>
+            <p className="t-small mb-2 font-medium text-cyan">How it works</p>
+            <ol className="space-y-2">
+              {PS_HOW.map(([k, v], i) => (
+                <motion.li key={k} className="panel flex gap-3 p-3" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.12, ease }}>
+                  <span className="t-num grid h-7 w-7 shrink-0 place-items-center rounded-full bg-cyan text-sm font-semibold text-navy">{i + 1}</span>
+                  <span><span className="t-small block font-medium text-white">{k}</span><span className="t-micro text-mist">{v}</span></span>
                 </motion.li>
               ))}
-            </AnimatePresence>
-          </ul>
+            </ol>
+          </div>
+          <div>
+            <p className="t-small mb-2 font-medium text-cyan">What it does</p>
+            <ul className="space-y-1.5">
+              {PS_DOES.map((d, i) => <motion.li key={d} className={`t-small flex gap-2 ${i === 2 ? "font-medium text-white" : "text-mist"}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.08 }}><span className={i === 2 ? "text-violet" : "text-cyan"}>{i === 2 ? "★" : "•"}</span>{d}</motion.li>)}
+            </ul>
+          </div>
+        </div>
+        <div>
+          <p className="t-small mb-2 font-medium text-cyan">How far along it is</p>
+          <div className="space-y-2.5">
+            {PS_PROGRESS.map(([k, c, w, items], i) => (
+              <div key={k} className="panel p-3">
+                <div className="flex items-center justify-between"><p className="t-small font-medium" style={{ color: c }}>{k}</p></div>
+                <div className="mt-1.5 h-1.5 rounded-full bg-navy-3"><motion.div className="h-full rounded-full" style={{ background: c }} initial={{ width: 0 }} animate={{ width: w }} transition={{ delay: 0.4 + i * 0.15, duration: 0.8, ease }} /></div>
+                <p className="t-micro mt-1.5 text-mist">{items.join(" · ")}</p>
+              </div>
+            ))}
+          </div>
+          <p className="t-micro mt-3 text-slate">Wellness product: it does not diagnose Parkinson's. Clinical claims wait for the ICMR results.</p>
         </div>
       </div>
       <AnimatePresence>
@@ -532,10 +540,28 @@ function MVP() {
           </div>
         ))}
       </div>
-      <motion.div className="mt-8 flex items-center gap-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-        {["Bench", "Pre-registered user study (M6)", "Clinical evidence (ICMR results)", "Claims"].map((s, i) => (
-          <div key={s} className="flex items-center gap-4"><span className={`t-small rounded-full border px-3 py-1 ${i === 0 ? "border-mint/60 text-mint" : "hairline text-mist"}`}>{s}</span>{i < 3 && <span className="text-slate">→</span>}</div>
-        ))}
+      <motion.div className="panel mt-6 p-5" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, ease }}>
+        <div className="flex items-baseline justify-between">
+          <p className="t-h2">Kill or persevere: the thresholds, set before the study</p>
+          <p className="t-micro text-slate">Decided at M6 by the TremoSense self-feeding study (n ≥ 10)</p>
+        </div>
+        <div className="mt-4 grid gap-6 @5xl:grid-cols-2">
+          {[["Median tremor reduction while eating", [[0, 30, "#F87171", "Kill TremoSense · focus on ParkinSense"], [30, 50, AMBER, "Redesign and re-test once"], [50, 100, MINT, "Persevere"]], 90, "Bench today ≈90% (simulator)"],
+            ["Users who would pay ₹9,999", [[0, 60, AMBER, "Pivot to clinic rental (₹799/mo)"], [60, 100, MINT, "Persevere with the sale"]], null, "Not yet measured"]].map(([label, zones, mark, now], gi) => (
+            <div key={label as string}>
+              <p className="t-small text-white">{label as string}</p>
+              <div className="relative mt-2 flex h-8 overflow-hidden rounded-lg">
+                {(zones as [number, number, string, string][]).map(([x0, x1, c, t], zi) => (
+                  <motion.div key={t} className="t-micro flex items-center justify-center px-1 text-center font-medium text-navy" style={{ width: `${x1 - x0}%`, background: c, originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1.4 + gi * 0.3 + zi * 0.12, duration: 0.5, ease }}>{t}</motion.div>
+                ))}
+                {mark !== null && <motion.span className="absolute top-0 h-full w-0.5 bg-white" style={{ left: `${mark}%` }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }} />}
+              </div>
+              <div className="t-micro mt-1 flex justify-between text-slate"><span>0%</span><span>{(zones as [number, number, string, string][]).slice(0, -1).map((z) => `${z[1]}%`).join(" · ")}</span><span>100%</span></div>
+              <p className="t-micro mt-1 text-mist">Today: {now as string}</p>
+            </div>
+          ))}
+        </div>
+        <p className="t-micro mt-3 text-mist"><span className="text-cyan">ParkinSense pass mark: </span>dominant-frequency error within 5% of a reference device and zero false steps during tremor (M10). If it fails, it launches as a wellness band without tremor scores until fixed.</p>
       </motion.div>
     </Frame>
   );
@@ -596,61 +622,90 @@ function BusinessModel() {
 
 /* ------------------------------------------------------------------ 12 pricing */
 function Pricing() {
+  const [prod, setProd] = useState<"ts" | "ps">("ts");
   const [scen, setScen] = useState<"A" | "B" | "C">("B");
-  const [price, setPrice] = useState<number>(ts.launchPrice);
-  const row = ts.priceMatrix.find((r) => r.price === price)!;
-  const contrib = row[scen], margin = row[`${scen}m` as "Am" | "Bm" | "Cm"];
-  const s = sc[scen];
-  const maxCost = Math.max(...(["A", "B", "C"] as const).map((k) => sc[k].cogs));
-  const tl = UE.tremosenseLtv, pl = UE.parkinsenseLtv;
+  const [tsPrice, setTsPrice] = useState<number>(ts.launchPrice);
+  const [psPrice, setPsPrice] = useState<number>(UE.parkinsenseDevice.price);
+  const isTs = prod === "ts";
+  const price = isTs ? tsPrice : psPrice;
+  const setPrice = isTs ? setTsPrice : setPsPrice;
+  const A = D.assumptions as Record<string, number>;
+  const PD = UE.parkinsenseDevice, PL = UE.parkinsenseLtv;
+  const gst = isTs ? A.P6 : A.P7, chan = isTs ? A.P8 : PD.channel / PD.exGst, ful = 250, rep = A.U2;
+  const cac = isTs ? UE.tremosenseLtv.cac : PL.cac;
+  const subLife = PL.ltv - PD.contribution; // subscription contribution per customer (attach × months × margin), from the model
+  const warr = isTs && scen === "A" ? 0.08 : A.U1;
+  const psPrices = [5999, 6999, 7999, 8999, 9999];
+  const calc = (p: number, k: "A" | "B" | "C") => {
+    const ex = p / (1 + gst), ch = ex * chan, net = ex - ch, cogs = isTs ? sc[k].cogs : PD.cogs, gp = net - cogs, w = ex * (isTs && k === "A" ? 0.08 : A.U1);
+    const con = gp - w - ful, ltv = isTs ? con * (1 + rep) : con + subLife;
+    return { ex, gstAmt: p - ex, ch, net, cogs, gp, w, con, ltv, gm: gp / net, cm: con / net, ltvCac: ltv / cac, pay: con > 0 ? cac / con : Infinity };
+  };
+  const rowsP = isTs ? ts.priceMatrix.map((r) => r.price) : psPrices;
+  const u = calc(price, scen);
+  const steps: [string, number, string, "in" | "out" | "sum"][] = [
+    ["Customer pays (incl. GST)", price, "", "in"],
+    [`GST ${pct(gst)}`, -u.gstAmt, "to government", "out"],
+    [isTs ? `Clinic margin ${pct(chan)}` : `Online channel and payment fees ${pct(chan)}`, -u.ch, "of ex-GST price", "out"],
+    ["Net revenue to AVERRA", u.net, "", "sum"],
+    [isTs ? `Unit cost (COGS, scenario ${scen})` : "Unit cost (COGS)", -u.cogs, isTs ? sc[scen].lines.slice(0, 3).map((l) => `${l.item.split(" (")[0].split(":")[0]} ${inr(l.cost)}`).join(" · ") + " …" : "nRF52840 board, PPG sensor, battery, housing, strap, assembly", "out"],
+    ["Gross profit", u.gp, `gross margin ${pct(u.gm)}`, "sum"],
+    [`Warranty reserve ${pct(warr)}`, -u.w, "of ex-GST price", "out"],
+    ["Fulfilment and shipping", -ful, "per unit", "out"],
+    ["Contribution per unit", u.con, `contribution margin ${pct(u.cm)}`, "sum"],
+  ];
+  const max = price;
   return (
-    <Frame label="Pricing and unit economics" title="Profitable from the first unit, with a path to lower prices" lead={`Prototype parts cost ${inr(ts.prototypePartsCost)} today. ₹2,000 is a volume-production target for the electronics, not today's cost.`}>
-      <div className="grid gap-6 @5xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+    <Frame label="Pricing and unit economics" title="What one sale earns, at every price"
+      aside={<div className="flex flex-col items-end gap-2"><Tabs label="product" value={prod} onChange={setProd} options={[{ id: "ts", label: "TremoSense", color: VIOLET }, { id: "ps", label: "ParkinSense", color: CYAN }]} />
+        {isTs ? <Tabs label="cost scenario" value={scen} onChange={setScen} options={[{ id: "A", label: `A · prototype ${inr(sc.A.cogs)}` }, { id: "B", label: `B · small batch ${inr(sc.B.cogs)}` }, { id: "C", label: `C · scaled ${inr(sc.C.cogs)}` }]} /> : <p className="t-micro text-slate">18% GST · sold online · COGS {inr(PD.cogs)}</p>}</div>}>
+      <div className="grid gap-5 @5xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <div className="panel p-5">
-          <Tabs label="cost scenario" value={scen} onChange={setScen} options={[{ id: "A", label: "A · prototype" }, { id: "B", label: "B · small batch" }, { id: "C", label: "C · scaled" }]} />
-          <div className="mt-4 space-y-1.5">
-            {s.lines.map((l, i) => (
-              <div key={l.item} className="grid grid-cols-[1fr_auto] items-center gap-3">
-                <div><p className="t-micro text-mist">{l.item.split(" (")[0]}</p>
-                  <div className="mt-1 h-1.5 rounded-full bg-navy-3"><motion.div className="h-full rounded-full bg-gradient-to-r from-blue to-cyan" initial={{ width: 0 }} animate={{ width: `${(l.cost / 1700) * 100}%` }} transition={{ duration: 0.6, ease, delay: i * 0.04 }} /></div></div>
-                <span className="t-small t-num text-white">{inr(l.cost)}</span>
-              </div>
+          <p className="t-micro text-slate">One {isTs ? "TremoSense" : "ParkinSense"} at <span className="t-num text-white">{inr(price)}</span>{isTs ? `, cost scenario ${scen}` : ""}</p>
+          <ol className="mt-2 space-y-1">
+            {steps.map(([k, v, note, t], i) => (
+              <motion.li key={k} className={`grid grid-cols-[1fr_88px] items-center gap-3 ${t === "sum" ? "rounded-lg bg-white/5 px-2 py-1" : "px-2"}`} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 + i * 0.05 }}>
+                <div className="min-w-0">
+                  <p className={`t-small ${t === "sum" ? "font-semibold text-white" : "text-mist"}`}>{t === "out" ? "− " : t === "sum" ? "= " : ""}{k} {note && <span className="t-micro text-slate">· {note}</span>}</p>
+                  <div className="mt-0.5 h-1.5 rounded-full bg-navy-3"><motion.div className="h-full rounded-full" style={{ background: t === "out" ? "#F87171" : t === "sum" ? (v < 0 ? "#F87171" : CYAN) : BLUE }} animate={{ width: `${Math.min(100, (Math.abs(v) / max) * 100)}%` }} transition={{ duration: 0.5, ease }} /></div>
+                </div>
+                <span className={`t-small t-num text-right ${t === "sum" ? (v < 0 ? "text-coral" : "text-cyan") : t === "out" ? "text-coral/90" : "text-white"}`}>{inr(v)}</span>
+              </motion.li>
+            ))}
+          </ol>
+          <div className="mt-3 grid grid-cols-4 gap-2 border-t hairline pt-3">
+            {[["CAC", inr(cac), "outreach ÷ customers"], ["LTV", inr(u.ltv), isTs ? `${inr(u.con)} × ${(1 + rep).toFixed(1)} purchases` : `${inr(u.con)} + ${inr(subLife)} subscription`], ["LTV : CAC", `${u.ltvCac.toFixed(1)}×`, u.ltvCac >= 3 ? "healthy (≥3×)" : u.ltvCac >= 1 ? "positive, below 3×" : "loses money"], ["Payback", u.pay <= 1 ? "first sale" : u.pay === Infinity ? "never" : `${u.pay.toFixed(1)} sales`, `${inr(cac)} ÷ ${inr(u.con)}`]].map(([k, v, n]) => (
+              <div key={k}><p className="t-micro text-slate">{k}</p><p className="t-h2 t-num text-white">{v}</p><p className="t-micro text-slate">{n}</p></div>
             ))}
           </div>
-          <div className="mt-4 flex items-end justify-between border-t hairline pt-3">
-            <div><p className="t-micro text-slate">Unit cost (COGS)</p><p className="t-h2 t-num"><CountUp key={scen} to={s.cogs} format={inr} /></p></div>
-            <div className="text-right"><p className="t-micro text-slate">Electronics incl. PCB</p><p className="t-h2 t-num text-mist">{inr(s.electronics)}</p></div>
-          </div>
-          <div className="mt-2 h-2 rounded-full bg-navy-3"><motion.div className="h-full rounded-full bg-cyan" animate={{ width: `${(s.cogs / maxCost) * 100}%` }} transition={{ duration: 0.6 }} /></div>
         </div>
-        <div className="space-y-4">
-          <div className="panel p-5">
-            <label className="t-micro text-slate" htmlFor="price">Retail price including GST</label>
-            <div className="mt-2 flex flex-wrap gap-1.5" id="price" role="group" aria-label="Retail price">
-              {ts.priceMatrix.map((r) => (
-                <button key={r.price} onClick={() => setPrice(r.price)} aria-pressed={price === r.price}
-                  className={`t-micro t-num rounded-full border px-2.5 py-1 transition-colors ${price === r.price ? "border-cyan bg-cyan text-navy" : "hairline text-mist hover:text-white"}`}>
-                  {inr(r.price)}{r.price === ts.launchPrice ? " · launch" : r.price === ts.postCostPrice ? " · M19" : ""}
-                </button>
-              ))}
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <div><p className="t-micro text-slate">Contribution per unit</p><p className={`t-h1 t-num ${contrib < 0 ? "text-coral" : "text-cyan"}`}><CountUp key={`${scen}${price}`} to={contrib} format={inr} /></p></div>
-              <div><p className="t-micro text-slate">Contribution margin</p><p className={`t-h1 t-num ${margin < 0.2 ? "text-amber" : "text-white"}`}>{pct(margin)}</p></div>
-            </div>
-            <p className="t-micro mt-2 text-mist">{row.verdict}. After 5% GST, 15% clinic margin, warranty and ₹250 fulfilment.</p>
-          </div>
-          <div className="panel px-4 py-2">
+        <div className="space-y-3">
+          <div className="panel overflow-hidden">
             <table className="t-small w-full border-collapse">
-              <thead><tr className="text-left"><th className="p-1.5"></th><th className="p-1.5 text-violet">TremoSense</th><th className="p-1.5 text-cyan">ParkinSense</th></tr></thead>
+              <thead><tr className="bg-navy-3/80 text-left text-white"><th className="px-3 py-2">Price</th><th className="px-2 py-2">Net revenue</th><th className="px-2 py-2">Gross margin</th><th className="px-2 py-2">Contribution</th><th className="px-2 py-2">LTV:CAC</th><th className="px-2 py-2">Verdict</th></tr></thead>
               <tbody>
-                {[["Gross margin", pct(UE.tremosense.grossMargin), pct(UE.parkinsenseDevice.grossMargin)], ["Contribution margin", pct(UE.tremosense.contributionMargin), pct(UE.parkinsenseDevice.contributionMargin)],
-                  ["CAC", inr(tl.cac), inr(pl.cac)], ["LTV", inr(tl.ltv), inr(pl.ltv)], ["LTV : CAC", `${tl.ltvCac.toFixed(1)}×`, `${pl.ltvCac.toFixed(1)}×`], ["Payback", "first sale", pl.paybackMonths > 0 ? `${pl.paybackMonths} months` : "first sale"]].map((r) => (
-                  <tr key={r[0]} className="border-t hairline"><td className="p-1.5 text-slate">{r[0]}</td><td className="t-num p-1.5 text-white">{r[1]}</td><td className="t-num p-1.5 text-white">{r[2]}</td></tr>))}
+                {rowsP.map((rp) => {
+                  const r = { price: rp };
+                  const x = calc(r.price, scen), on = r.price === price;
+                  return (
+                    <tr key={r.price} onClick={() => setPrice(r.price)} className={`cursor-pointer border-t hairline transition-colors ${on ? "bg-cyan/15" : "hover:bg-white/5"}`}>
+                      <td className="t-num px-3 py-1.5 text-white">{inr(r.price)}{isTs && r.price === ts.launchPrice ? <span className="t-micro ml-1 text-cyan">launch</span> : isTs && r.price === ts.postCostPrice ? <span className="t-micro ml-1 text-violet">M19</span> : !isTs && r.price === PD.price ? <span className="t-micro ml-1 text-cyan">plan</span> : null}</td>
+                      <td className="t-num px-2 py-1.5 text-mist">{inr(x.net)}</td>
+                      <td className="t-num px-2 py-1.5 text-mist">{pct(x.gm)}</td>
+                      <td className={`t-num px-2 py-1.5 font-medium ${x.con < 0 ? "text-coral" : "text-cyan"}`}>{inr(x.con)} <span className="t-micro text-slate">{pct(x.cm)}</span></td>
+                      <td className={`t-num px-2 py-1.5 ${x.ltvCac >= 3 ? "text-mint" : x.ltvCac >= 1 ? "text-amber" : "text-coral"}`}>{x.ltvCac.toFixed(1)}×</td>
+                      <td className="t-micro px-2 py-1.5 text-slate">{x.con < 0 ? "Loses money" : x.ltvCac >= 3 ? "Healthy" : "Thin"}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
-          <p className="t-micro text-slate">Formulas: contribution = net price − COGS − warranty − fulfilment · CAC = outreach spend ÷ customers · LTV = contribution × expected purchases (+ subscription) · payback = CAC ÷ contribution per sale · LTV:CAC above 3× is healthy. Estimates; no customers yet.</p>
+          <div className="panel p-4">
+            <p className="t-small font-medium" style={{ color: isTs ? VIOLET : CYAN }}>{isTs ? "Why ₹9,999 now and ₹8,999 later" : "Why ₹7,999"}</p>
+            <p className="t-micro mt-1 text-mist">{isTs ? `At small-batch cost (${inr(sc.B.cogs)}), ₹9,999 is the lowest price with LTV:CAC above 3×. Once tooling and supplier quotes bring cost to ${inr(sc.C.cogs)} (scenario C), ₹8,999 earns more per unit than ₹9,999 does today.` : `Below WHOOP, Fitbit Charge 6 and the Amazfit Bip 6, with no mandatory subscription. At ₹7,999 each device earns ${inr(PD.contribution)}, and the optional ${inr(D.assumptions.P4 as number)}/month plan (40% take-up assumed) lifts LTV to ${inr(PL.ltv)}.`}</p>
+          </div>
+          <p className="t-micro text-slate">Click a price to see its breakdown. Sources: XIAO nRF52840 Sense list price (Seeed), MG92B retail price; other costs are estimates awaiting supplier quotes. CAC = planned outreach ÷ planned customers; LTV assumes 40% repurchase at end of life. No customers yet.</p>
         </div>
       </div>
     </Frame>
@@ -659,9 +714,9 @@ function Pricing() {
 
 /* ------------------------------------------------------------------ 13 financials */
 function Financials() {
-  const fc = D.forecast;
+  const fc = D.forecast as typeof D.forecast & { costLines: { label: string; y1: number; y2: number; y3: number }[]; revLines: { label: string; units: { y1: number; y2: number; y3: number } | null; y1: number; y2: number; y3: number }[] };
   const [view, setView] = useState<"net" | "cum">("net");
-  const W = 900, Hc = 330, pad = 28;
+  const W = 900, Hc = 250, pad = 28;
   const n = fc.costs.length;
   const maxV = Math.max(...fc.costs, ...fc.cashIn);
   const series = view === "net" ? fc.net : fc.cumulative;
@@ -671,68 +726,134 @@ function Financials() {
   const yLine = (v: number) => Hc - 20 - ((v - sMin) / (sMax - sMin || 1)) * (Hc - 60);
   const pts = series.map((v, i) => [pad + i * bw + bw / 2, yLine(v)] as const);
   const path = "M" + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" L");
-  const area = `${path} L${pts[pts.length - 1][0].toFixed(1)},${yLine(0).toFixed(1)} L${pts[0][0].toFixed(1)},${yLine(0).toFixed(1)} Z`;
   const beIdx = fc.months.findIndex((_, i) => fc.net.slice(i).every((v) => v >= 0) && i >= 12);
   const Y = fc.years;
+  const p1Burn = H.phase1Costs / 6;
+  const runway = F.C.equity / p1Burn;
+  const L = (v: number) => (v === 0 ? "–" : lakh(v));
   return (
-    <Frame label="Financial outlook" title={`Operating break-even in ${beMonthName}, then profitable`} lead="36 months from July 2027. Phase 1 proves the product; TremoSense sales start in month 12; ParkinSense launches in month 25.">
-      <div className="grid gap-6 @5xl:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
-        <div className="panel p-5">
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-            <Tabs label="forecast line" value={view} onChange={setView} options={[{ id: "net", label: "Monthly operating profit" }, { id: "cum", label: "Cumulative cash" }]} />
-            <p className="t-micro text-slate"><span className="mr-2 inline-block h-2 w-3 rounded-sm bg-violet" />Costs <span className="ml-3 mr-2 inline-block h-2 w-3 rounded-sm bg-cyan" />Cash in <span className="ml-3 mr-2 inline-block h-0.5 w-4 bg-white align-middle" />{view === "net" ? "Profit" : "Cumulative"}</p>
+    <Frame label="Financial outlook" title={`Operating break-even in ${beMonthName}, then profitable`}
+      lead="36 months from July 2027. Every line below comes from the financial model; costs are grouped from 26 line items.">
+      <div className="grid gap-5 @5xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <div className="space-y-3">
+          <div className="panel p-4">
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <Tabs label="forecast line" value={view} onChange={setView} options={[{ id: "net", label: "Monthly profit" }, { id: "cum", label: "Cumulative cash" }]} />
+              <p className="t-micro text-slate"><span className="mr-1.5 inline-block h-2 w-3 rounded-sm bg-violet" />Costs <span className="ml-2 mr-1.5 inline-block h-2 w-3 rounded-sm bg-cyan" />Cash in</p>
+            </div>
+            <svg viewBox={`0 0 ${W} ${Hc}`} className="w-full" role="img" aria-label="Monthly costs, cash in and operating profit over 36 months">
+              {fc.costs.map((c, i) => (
+                <g key={i}>
+                  <motion.rect x={pad + i * bw + 1} width={bw / 2 - 1} y={Hc - 20 - yBar(c)} height={yBar(c)} rx={1.5} fill={VIOLET} fillOpacity={0.7} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} style={{ originY: 1, transformBox: "fill-box" }} transition={{ delay: i * 0.02, duration: 0.5 }} />
+                  <motion.rect x={pad + i * bw + bw / 2} width={bw / 2 - 1} y={Hc - 20 - yBar(fc.cashIn[i])} height={yBar(fc.cashIn[i])} rx={1.5} fill={CYAN} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} style={{ originY: 1, transformBox: "fill-box" }} transition={{ delay: 0.3 + i * 0.02, duration: 0.5 }} />
+                </g>
+              ))}
+              <line x1={pad} x2={W} y1={yLine(0)} y2={yLine(0)} stroke="#94A3B8" strokeDasharray="4 4" strokeWidth="1" />
+              <motion.path key={view} d={path} fill="none" stroke="#fff" strokeWidth="2.4" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, ease, delay: 0.6 }} />
+              {beIdx >= 0 && (
+                <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>
+                  <line x1={pad + beIdx * bw} x2={pad + beIdx * bw} y1={10} y2={Hc - 20} stroke={MINT} strokeWidth="1.5" />
+                  <text x={pad + beIdx * bw - 8} y={22} fill={MINT} fontSize="14" fontWeight="600" textAnchor="end">Break-even {fc.months[beIdx]}</text>
+                </motion.g>
+              )}
+              {[0, 12, 24, 35].map((i) => <text key={i} x={pad + i * bw} y={Hc - 4} fill="#94A3B8" fontSize="12">{fc.months[i]}</text>)}
+            </svg>
           </div>
-          <svg viewBox={`0 0 ${W} ${Hc}`} className="w-full" role="img" aria-label="Monthly costs, cash in and operating profit over 36 months">
-            <defs><linearGradient id="areaG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#fff" stopOpacity="0.22" /><stop offset="1" stopColor="#fff" stopOpacity="0" /></linearGradient></defs>
-            {[0, 1, 2, 3].map((g) => <line key={g} x1={pad} x2={W} y1={20 + g * ((Hc - 40) / 3)} y2={20 + g * ((Hc - 40) / 3)} stroke="#2B3A5C" strokeOpacity="0.5" />)}
-            {fc.costs.map((c, i) => (
-              <g key={i}>
-                <motion.rect x={pad + i * bw + 1} width={bw / 2 - 1} y={Hc - 20 - yBar(c)} height={yBar(c)} rx={1.5} fill={VIOLET} fillOpacity={0.7} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} style={{ originY: 1, transformBox: "fill-box" }} transition={{ delay: i * 0.02, duration: 0.5 }} />
-                <motion.rect x={pad + i * bw + bw / 2} width={bw / 2 - 1} y={Hc - 20 - yBar(fc.cashIn[i])} height={yBar(fc.cashIn[i])} rx={1.5} fill={CYAN} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} style={{ originY: 1, transformBox: "fill-box" }} transition={{ delay: 0.3 + i * 0.02, duration: 0.5 }} />
-              </g>
-            ))}
-            <line x1={pad} x2={W} y1={yLine(0)} y2={yLine(0)} stroke="#94A3B8" strokeDasharray="4 4" strokeWidth="1" />
-            <motion.path key={`a${view}`} d={area} fill="url(#areaG)" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.8 }} />
-            <motion.path key={view} d={path} fill="none" stroke="#fff" strokeWidth="2.6" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, ease, delay: 0.6 }} />
-            {beIdx >= 0 && (
-              <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>
-                <line x1={pad + beIdx * bw} x2={pad + beIdx * bw} y1={10} y2={Hc - 20} stroke={MINT} strokeWidth="1.5" />
-                <circle cx={pts[beIdx][0]} cy={pts[beIdx][1]} r="5" fill={MINT}><animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" /></circle>
-                <text x={pad + beIdx * bw + 8} y={24} fill={MINT} fontSize="14" fontWeight="600">Break-even {fc.months[beIdx]}</text>
-              </motion.g>
-            )}
-            {[0, 12, 24, 35].map((i) => <text key={i} x={pad + i * bw} y={Hc - 4} fill="#94A3B8" fontSize="12">{fc.months[i]}</text>)}
-          </svg>
-          <p className="t-micro mt-2 text-slate">Cash basis: inventory is expensed when bought. The dashed line is zero for the white line.</p>
+          <div className="panel p-4">
+            <p className="t-small font-medium text-white">Burn, runway and zero-cash date</p>
+            <ul className="t-small t-num mt-2 space-y-1 text-mist">
+              <li>Year-1 gross burn = {lakh(H.costs12)} ÷ 12 = <span className="text-white">{lakh(H.grossBurn12, 2)}/month</span>; net burn after {lakh(H.cashIn12)} cash in = <span className="text-white">{lakh(H.netBurn12, 2)}/month</span></li>
+              <li>Phase-1 burn (M1–M6) = {lakh(H.phase1Costs, 2)} ÷ 6 = <span className="text-white">{lakh(p1Burn, 2)}/month</span></li>
+              <li>Runway on this round = {lakh(F.C.equity, 2)} ÷ {lakh(p1Burn, 2)} = <span className="text-white">{runway.toFixed(1)} months</span></li>
+              <li>Zero-cash date without tranche 2: <span className="font-semibold text-coral">January 2028</span>. Tranche 2 ({lakh(H.phase2Requirement)}) is raised on the M6 result.</li>
+              <li>Total needed to reach profit: peak gap {lakh(H.fullGap)} × 1.2 buffer = <span className="text-violet">{lakh(H.fullRequirement)}</span></li>
+            </ul>
+          </div>
         </div>
-        <Stagger className="grid grid-cols-2 gap-3 self-start">
-          {[["Year 1 costs", lakh(H.costs12), "text-white"], ["Year 1 gross burn", `${lakh(H.grossBurn12, 2)}/mo`, "text-white"], ["Year 2 result", lakh(Y.net.y2), "text-amber"], ["Break-even", beLabel, "text-mint"],
-            ["Year 3 cash in", crore(Y.cashIn.y3, 2), "text-cyan"], ["Year 3 operating profit", `${lakh(H.y3Profit)} · ${pct(H.y3Margin, 1)}`, "text-mint"], ["Zero-cash date (this round only)", "January 2028", "text-coral"], ["Needed to reach profit", lakh(H.fullRequirement), "text-violet"]].map(([k, v, c]) => (
-            <Item key={k} className="panel lift p-3.5"><p className="t-micro text-slate">{k}</p><p className={`t-h2 t-num mt-1 ${c}`}>{v}</p></Item>
-          ))}
-          <p className="t-micro col-span-2 text-slate">Volumes: TremoSense {Y.tsUnits.y2} units in Year 2 and {Y.tsUnits.y3} in Year 3 (SOM capacity {MK.tremosense.somCustomers}/year); ParkinSense {Y.psUnits.y3} in Year 3.</p>
-        </Stagger>
+        <div className="panel overflow-hidden">
+          <table className="t-micro t-num w-full border-collapse">
+            <thead><tr className="bg-navy-3/80 text-left text-white"><th className="px-3 py-2">₹, cash basis</th><th className="px-2 py-2 text-right">Year 1</th><th className="px-2 py-2 text-right">Year 2</th><th className="px-3 py-2 text-right">Year 3</th></tr></thead>
+            <tbody>
+              <tr><td colSpan={4} className="px-3 pt-2 font-semibold text-cyan">Cash in (units sold × price after GST and channel)</td></tr>
+              {fc.revLines.map((r) => (
+                <tr key={r.label} className="text-mist"><td className="px-3 py-1">{r.label}{r.units ? <span className="text-slate"> · {r.units.y1} / {r.units.y2} / {r.units.y3} units</span> : null}</td><td className="px-2 py-1 text-right">{L(r.y1)}</td><td className="px-2 py-1 text-right">{L(r.y2)}</td><td className="px-3 py-1 text-right">{L(r.y3)}</td></tr>
+              ))}
+              <tr className="border-t hairline font-semibold text-white"><td className="px-3 py-1.5">Total cash in</td><td className="px-2 py-1.5 text-right">{lakh(Y.cashIn.y1)}</td><td className="px-2 py-1.5 text-right">{lakh(Y.cashIn.y2)}</td><td className="px-3 py-1.5 text-right text-cyan">{lakh(Y.cashIn.y3)}</td></tr>
+              <tr><td colSpan={4} className="px-3 pt-2 font-semibold text-violet">Costs</td></tr>
+              {fc.costLines.map((r) => (
+                <tr key={r.label} className="text-mist"><td className="px-3 py-1">{r.label}</td><td className="px-2 py-1 text-right">{L(r.y1)}</td><td className="px-2 py-1 text-right">{L(r.y2)}</td><td className="px-3 py-1 text-right">{L(r.y3)}</td></tr>
+              ))}
+              <tr className="border-t hairline font-semibold text-white"><td className="px-3 py-1.5">Total costs</td><td className="px-2 py-1.5 text-right">{lakh(Y.costs.y1)}</td><td className="px-2 py-1.5 text-right">{lakh(Y.costs.y2)}</td><td className="px-3 py-1.5 text-right">{lakh(Y.costs.y3)}</td></tr>
+              <tr className="border-t hairline text-[1.1em] font-semibold"><td className="px-3 py-2 text-white">Operating profit</td>{(["y1", "y2", "y3"] as const).map((k, i) => <td key={k} className={`py-2 text-right ${i === 2 ? "px-3" : "px-2"} ${Y.net[k] < 0 ? "text-amber" : "text-mint"}`}>{lakh(Y.net[k])}</td>)}</tr>
+            </tbody>
+          </table>
+          <p className="t-micro px-3 pb-3 text-slate">Year 3 margin {pct(H.y3Margin, 1)}; month-36 profit {lakh(H.m36Profit)}. Inventory is expensed when bought.</p>
+        </div>
       </div>
     </Frame>
   );
 }
 
 /* ------------------------------------------------------------------ 14 team & growth */
+/** Team as a mind map: AVERRA in the centre, founders on either side with their skills, future hires below. */
+function TeamMap() {
+  const W = 640, Hh = 430, cx = 320, cy = 175;
+  const founders = [
+    { x: 125, y: 95, ini: "PK", name: "Pranshu Kumar", c: CYAN, leaves: [["Wearable electronics", 30, 205], ["Sensors & firmware", 125, 245], ["Built ParkinSense", 222, 205]] },
+    { x: 515, y: 95, ini: "PS", name: "Pawan Shinde", c: VIOLET, leaves: [["Control & gimbal", 418, 205], ["Power electronics", 515, 245], ["Co-built TremoSense", 612, 205]] },
+  ];
+  const hires = [["Clinic sales lead", "M19", 150], ["Customer support", "M19", 320], ["App & firmware engineer", "M25", 490]] as const;
+  const line = (x1: number, y1: number, x2: number, y2: number) => `M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`;
+  return (
+    <svg viewBox={`0 0 ${W} ${Hh}`} className="w-full overflow-visible" role="img" aria-label="Team mind map">
+      <defs><filter id="tglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" /></filter></defs>
+      {founders.map((f, i) => (
+        <g key={f.ini}>
+          <motion.path d={`M${cx},${cy} Q${(cx + f.x) / 2},${cy} ${f.x},${f.y + 32}`} fill="none" stroke={f.c} strokeWidth="2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.7, delay: 0.3 + i * 0.15 }} />
+          {f.leaves.map(([t, lx, ly], j) => (
+            <g key={t as string}>
+              <motion.path d={line(f.x, f.y + 34, lx as number, (ly as number) - 13)} fill="none" stroke={f.c} strokeOpacity="0.45" strokeWidth="1.4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.9 + j * 0.1 }} />
+              <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} style={{ transformOrigin: `${lx}px ${ly}px` }} transition={{ delay: 1.1 + j * 0.1 }}>
+                <rect x={(lx as number) - 56} y={(ly as number) - 13} width="112" height="26" rx="13" fill={`${f.c}22`} stroke={f.c} strokeOpacity="0.6" />
+                <text x={lx as number} y={(ly as number) + 4} textAnchor="middle" fontSize="11" fill="#E2E8F0">{t}</text>
+              </motion.g>
+            </g>
+          ))}
+          <motion.g initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 + i * 0.15 }}>
+            <circle cx={f.x} cy={f.y} r="30" fill={f.c} opacity="0.35" filter="url(#tglow)" />
+            <circle cx={f.x} cy={f.y} r="26" fill={f.c} />
+            <text x={f.x} y={f.y + 5} textAnchor="middle" fontSize="15" fontWeight="700" fill="#0B1222">{f.ini}</text>
+            <text x={f.x} y={f.y - 54} textAnchor="middle" fontSize="17" fontWeight="600" fill="#fff">{f.name}</text>
+            <text x={f.x} y={f.y - 37} textAnchor="middle" fontSize="11" fill={f.c}>Co-founder · hardware & test</text>
+          </motion.g>
+        </g>
+      ))}
+      {hires.map(([t, m, hx], i) => (
+        <g key={t}>
+          <motion.path d={line(cx, cy + 34, hx, 335)} fill="none" stroke="#94A3B8" strokeOpacity="0.5" strokeDasharray="4 5" strokeWidth="1.4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6, delay: 1.4 + i * 0.12 }} />
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.7 + i * 0.12 }}>
+            <rect x={hx - 75} y={335} width="150" height="44" rx="12" fill="rgba(19,29,51,.9)" stroke="#94A3B8" strokeOpacity="0.5" strokeDasharray="4 4" />
+            <text x={hx} y={354} textAnchor="middle" fontSize="12" fill="#fff">{t}</text>
+            <text x={hx} y={370} textAnchor="middle" fontSize="10.5" fill="#94A3B8">Hire at {m}</text>
+          </motion.g>
+        </g>
+      ))}
+      <text x={cx} y={410} textAnchor="middle" fontSize="11" fill="#94A3B8">Future hires fill the commercial gap; the founders stay the hardware and test engineers</text>
+      <motion.g initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ transformOrigin: `${cx}px ${cy}px` }} transition={{ type: "spring", stiffness: 220, damping: 16, delay: 0.1 }}>
+        <circle cx={cx} cy={cy} r="44" fill="#0B1222" stroke="#06B6D4" strokeWidth="2" />
+        <circle cx={cx} cy={cy} r="54" fill="none" stroke="#06B6D4" strokeOpacity="0.25" />
+        <image href="/brand/averra-mark-white.svg" x={cx - 22} y={cy - 22} width="44" height="44" />
+      </motion.g>
+    </svg>
+  );
+}
+
 function TeamGrowth() {
   return (
     <Frame label="Team and growth" title="A builder team, growing through clinics">
       <div className="grid gap-8 @5xl:grid-cols-2">
         <div>
-          <div className="grid gap-4 @2xl:grid-cols-2">
-            {[["PK", "Pranshu Kumar", "Co-founder · hardware engineer", "Wearable electronics, sensors and embedded firmware. Built ParkinSense; co-built TremoSense.", CYAN], ["PS", "Pawan Shinde", "Co-founder · hardware engineer", "Control, gimbal and power electronics. Co-built TremoSense (EKF + LQR platform).", VIOLET]].map(([ini, n, r, e, c], i) => (
-              <motion.div key={n} className="panel lift p-5" style={{ borderColor: `${c}88` }} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.15, ease }}>
-                <span className="t-small grid h-11 w-11 place-items-center rounded-full font-semibold text-navy" style={{ background: c, boxShadow: `0 0 24px ${c}66` }}>{ini}</span>
-                <p className="t-h2 mt-3">{n}</p><p className="t-small" style={{ color: c }}>{r}</p><p className="t-small mt-3 text-mist">{e}</p>
-              </motion.div>
-            ))}
-          </div>
-          <div className="mx-auto h-6 w-px bg-line" />
-          <div className="panel mx-auto max-w-sm border-dashed p-4 text-center"><p className="t-small text-white">Hardware and test engineer</p><p className="t-micro text-slate">Hire at M7 · support and sales hires from M19</p></div>
+          <TeamMap />
           <p className="t-micro mt-4 text-mist">Contract support as needed: regulatory consultant, industrial designer.</p>
           <p className="t-micro mt-1 text-amber">Equity split is set in a founders' agreement (not yet signed). ESOP 5%. Inventor assignments before any filing.</p>
         </div>

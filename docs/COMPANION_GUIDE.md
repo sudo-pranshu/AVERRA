@@ -11,9 +11,9 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | Company | Kampa Labs | AVERRA — *Engineering better movement intelligence.* |
 | ParkinSense | Clinical PD monitor | Wellness wearable with movement intelligence; clinical evaluation with ICMR in progress (founder-reported, results pending) |
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
-| Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L |
+| Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M23 (May 2029); Year-3 operating profit ₹18.9 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1702 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1716 words) |
 | TremoSense result | Paper figure | ≈90% bench rejection on the current build (founder-reported) |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
@@ -63,7 +63,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1702 words, about 143 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1716 words, about 144 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -96,7 +96,7 @@ So here is AVERRA: one company with two complementary products. ParkinSense is a
 
 **4. ParkinSense** (60 s)
 
-ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps. Its standout feature is tremor detection: a tremor score, frequency and burden. A shared motion classifier means tremor isn't counted as steps, and heart rate is trusted less while you move. Here's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist. A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim.
+ParkinSense works like a fitness band. You wear it on the wrist, it senses your movement and heart, and it sends that to a phone or computer, where our software shows the results on a live dashboard. It tracks steps, activity, heart rate, HRV and blood oxygen. What makes it different is tremor detection: it measures a tremor score, its frequency and how much of the day it lasts, and it knows when you're resting, so tremor is never counted as steps. Where are we? Streaming, step counting, tremor detection and low-power sleep are built and bench-tested. Heart rate and the dashboard work but still need validation. The mobile app is in development, and a clinical evaluation with ICMR is in progress, with results pending. It is a wellness product. It does not diagnose Parkinson's, and we make no clinical claim until the ICMR results are in.
 
 **5. TremoSense** (55 s)
 
@@ -124,19 +124,19 @@ Pricing. Today's prototype parts cost about ₹4,062. Two thousand rupees is a v
 
 **11. Financial forecast** (55 s)
 
-The plan starts in July 2027 and runs three years. Phase one, the first six months, is about proof: the TremoSense user study, the patent filing and a regulatory opinion. It costs ₹8.8 L. Phase two launches TremoSense, with first sales in month twelve. In year three we scale the clinic network and launch ParkinSense as a wellness product. Year-one costs are ₹35.2 L, a gross burn of about ₹2.93 L a month. Year two still loses 17.7 lakh rupees as volume builds. We reach sustained operating break-even in month 26, August 2029. Year three makes an operating profit of ₹11.7 L on ₹2.1 Cr of cash in, and we exit at about ₹2.3 L profit a month. Getting there needs ₹60.9 L in total. Phase one alone needs ₹10.5 L, and that number shapes our ask.
+The plan starts in July 2027 and runs three years. Phase one, the first six months, is about proof: the TremoSense user study, the patent filing and a regulatory opinion. It costs ₹8.8 L. Phase two launches TremoSense, with first sales in month twelve. In year three we scale the clinic network and launch ParkinSense as a wellness product. Year-one costs are ₹31.6 L, a gross burn of about ₹2.63 L a month. Year two still loses 10.4 lakh rupees as volume builds. We reach sustained operating break-even in month 23, May 2029. Year three makes an operating profit of ₹18.9 L on ₹2.1 Cr of cash in, and we exit at about ₹2.9 L profit a month. Getting there needs ₹48.2 L in total. Phase one alone needs ₹10.5 L, and that number shapes our ask.
 
 **12. Team & growth** (45 s)
 
-We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement. Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data. Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta.
+We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. We stay the hardware and test engineers ourselves. Our gap is commercial, so from month 19 we hire a clinic sales lead and customer support, and in month 25 an app and firmware engineer for ParkinSense. The equity split will be set in a founders' agreement. Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data. Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta.
 
 **13. Funding ask & valuation** (60 s)
 
-Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reaching profitability needs ₹60.9 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result.
+Now the ask, kept separate from the full plan. Year one costs ₹31.6 L and reaching profitability needs ₹48.2 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result.
 
 **14. Milestones, risk & close** (50 s)
 
-Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
+Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 23. Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
 
 ## Financial workings
 
@@ -166,15 +166,15 @@ All figures are live formulas in the workbook; blue cells are inputs and yellow 
 
 | Period | Cash in | Cash costs | Operating cash flow |
 |---|---|---|---|
-| Year 1 (Jul 2027–Jun 2028) | ₹2.3 L | ₹35.2 L | -₹32.9 L |
-| Year 2 | ₹53.1 L | ₹70.8 L | -₹17.7 L |
-| Year 3 | ₹212.3 L | ₹200.6 L | ₹11.7 L |
+| Year 1 (Jul 2027–Jun 2028) | ₹2.3 L | ₹31.6 L | -₹29.3 L |
+| Year 2 | ₹53.1 L | ₹63.6 L | -₹10.4 L |
+| Year 3 | ₹212.3 L | ₹193.3 L | ₹18.9 L |
 
-- Year-1 gross burn ₹2.93 L/month; Phase 1 (M1–M6) costs ₹8.8 L.
+- Year-1 gross burn ₹2.63 L/month; Phase 1 (M1–M6) costs ₹8.8 L.
 - Volumes: TremoSense 695 units in Year 2 and 1890 in Year 3 (≤ SOM); ParkinSense 1380 in Year 3, launched M25.
 - Levers to profitability, all shown in the model: verified Scenario C cost and tooling at M18; ₹8,999 price from M19; clinic-network growth to SOM capacity.
-- Peak cumulative gap ₹50.8 L at M25 Jul-29; requirement to profitability = gap × 1.2 = ₹60.9 L.
-- Sustained break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L (5.5%); month-36 profit ₹2.3 L.
+- Peak cumulative gap ₹40.2 L at M22 Apr-29; requirement to profitability = gap × 1.2 = ₹48.2 L.
+- Sustained break-even M23 (May 2029); Year-3 operating profit ₹18.9 L (8.9%); month-36 profit ₹2.9 L.
 - Cash basis: inventory is expensed when bought; no depreciation, tax or working-capital timing beyond that.
 
 ## TremoSense pricing
@@ -194,11 +194,11 @@ All figures are live formulas in the workbook; blue cells are inputs and yellow 
 
 | Scenario | COGS | Electronics incl. PCB | Price | Net revenue | Contribution | Gross / contribution margin | Break-even units/month* |
 |---|---|---|---|---|---|---|---|
-| A · Prototype / very low volume | ₹4,862 | ₹3,812 | ₹9,999 | ₹8,094 | ₹2,221 | 40% / 27% | 254 |
-| B · Small batch (100–500) | ₹4,830 | ₹3,480 | ₹9,999 | ₹8,094 | ₹2,538 | 40% / 31% | 222 |
-| C · Scaled, after verified reductions | ₹2,720 | ₹1,950 | ₹8,999 | ₹7,285 | ₹3,886 | 63% / 53% | 145 |
+| A · Prototype / very low volume | ₹4,862 | ₹3,812 | ₹9,999 | ₹8,094 | ₹2,221 | 40% / 27% | 227 |
+| B · Small batch (100–500) | ₹4,830 | ₹3,480 | ₹9,999 | ₹8,094 | ₹2,538 | 40% / 31% | 198 |
+| C · Scaled, after verified reductions | ₹2,720 | ₹1,950 | ₹8,999 | ₹7,285 | ₹3,886 | 63% / 53% | 130 |
 
-\*Against Year-3 average fixed costs of ₹5.6 L/month.
+\*Against Year-3 average fixed costs of ₹5.0 L/month.
 
 Documented: the XIAO nRF52840 Sense list price (Seeed) and MG92B UK retail price. Every other line is an estimate that needs a supplier quotation.
 
@@ -228,7 +228,7 @@ Rental via OT clinics at ₹799/month nets ₹576 and recovers the device in abo
 
 ## Funding and valuation
 
-**Ask:** ₹10,51,171 of equity for Milestone 1 (M1–M6) at a proposed ₹75 L pre-money. Post-money = P + I = ₹85,51,171. Investor = I ÷ post-money = 12.29%. Founders = 100% − investor − 5% ESOP = 82.71%. This is separate from Year-1 costs (₹35.2 L) and the total needed to reach profitability (₹60.9 L).
+**Ask:** ₹10,51,171 of equity for Milestone 1 (M1–M6) at a proposed ₹75 L pre-money. Post-money = P + I = ₹85,51,171. Investor = I ÷ post-money = 12.29%. Founders = 100% − investor − 5% ESOP = 82.71%. This is separate from Year-1 costs (₹31.6 L) and the total needed to reach profitability (₹48.2 L).
 
 **Valuation methods.** ₹75 L is a working negotiation target, not an established value.
 
@@ -259,12 +259,12 @@ Rental via OT clinics at ₹799/month nets ₹576 and recovers the device in abo
 
 | Scenario | Grant | Requirement | Grant counted | Equity | Pre | Post | Investor | ESOP | Founders | Covers |
 |---|---|---|---|---|---|---|---|---|---|---|
-| A | Awarded (assumed in this scenario only) | ₹60.9 L | ₹20 L | ₹40.9 L | ₹75.0 L | ₹115.9 L | 35.3% | 5% | 59.7% | To operating break-even + buffer |
-| B | Refused | ₹60.9 L | ₹0 L | ₹60.9 L | ₹75.0 L | ₹135.9 L | 44.8% | 5% | 50.2% | To operating break-even + buffer |
+| A | Awarded (assumed in this scenario only) | ₹48.2 L | ₹20 L | ₹28.2 L | ₹75.0 L | ₹103.2 L | 27.3% | 5% | 67.7% | To operating break-even + buffer |
+| B | Refused | ₹48.2 L | ₹0 L | ₹48.2 L | ₹75.0 L | ₹123.2 L | 39.1% | 5% | 55.9% | To operating break-even + buffer |
 | C | Not assumed | ₹10.5 L | ₹0 L | ₹10.5 L | ₹75.0 L | ₹85.5 L | 12.3% | 5% | 82.7% | M1–M6 + buffer (Milestone 1) |
 | D | Applied; counted only if awarded | ₹10.5 L | ₹0 L | ₹10.5 L | ₹75.0 L | ₹85.5 L | 12.3% | 5% | 82.7% | M1–M6 now; rest to break-even from tranche 2 / grant |
 
-Scenario D tranche 2: ₹50.4 L after the user study. Priced at a cost floor of ₹94.3 L (tranche-1 post-money + Phase-1 spend), it would leave founders 53.9% — a worst case. In practice it is priced on the user-study result. A SISFS grant, if awarded, reduces tranche 2.
+Scenario D tranche 2: ₹37.7 L after the user study. Priced at a cost floor of ₹94.3 L (tranche-1 post-money + Phase-1 spend), it would leave founders 59.1% — a worst case. In practice it is priced on the user-study result. A SISFS grant, if awarded, reduces tranche 2.
 
 **Limitations:** person-months are estimated from the repositories (replace with logged hours); the Berkus scores are judgement; no public Indian pre-seed comparables were found for this stage.
 
@@ -305,7 +305,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 | Clinical evidence | ICMR evaluation results are pending and may not support ParkinSense's movement metrics | Publish results as they come; no clinical claim until then; refocus ParkinSense on wellness if accuracy falls short |
 | Clinical | Bench rejection may not help a person eating | Continue if median reduction ≥50% and ≥60% would pay; pivot to clinic rental if benefit holds but price fails; stop TremoSense if <30% |
 | Technical | The current build's ≈90% bench result is founder-reported; logs and tuned constants are not yet public | Publish bench logs, video and tuned firmware constants by M3 |
-| Commercial | Company break-even needs ≈145 TremoSense units/month at C cost (plan: 130–185 in Year 3) | Continue only if experiment 1 shows ≥30% trial-to-purchase |
+| Commercial | Company break-even needs ≈130 TremoSense units/month at C cost (plan: 130–185 in Year 3) | Continue only if experiment 1 shows ≥30% trial-to-purchase |
 | Regulatory | Device class may be higher than assumed | Classification opinion by M4; re-plan budget if Class B or above |
 | IP | Public repos and papers limit novelty | Attorney novelty opinion by M2; if weak, rely on evidence and execution |
 | Funding | SISFS grant may be refused | Grant only reduces tranche 2; Milestone 1 does not depend on it |
@@ -321,8 +321,8 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 ## Viva questions and answers
 
 1. **Why ₹75 L and not the ₹44.75 L floor?** The floor values only the engineering hours. The Berkus-style cross-check credits two working prototypes and gives about ₹60 L. ₹75 L is our negotiation target; at the floor, the investor would own 19.0%, and we would accept a price in that range rather than delay Milestone 1.
-2. **Isn't a higher valuation just a way to cut dilution?** We didn't use valuation alone: we cut the round to Milestone 1. That keeps dilution near 19% even at the floor. Raising everything up front would cost 35%–45%.
-3. **How is AVERRA profitable?** Every TremoSense unit is profitable from the first sale (₹2,538). Company break-even arrives at M26 (Aug 2029), once volume reaches about 145 units a month at verified Scenario C cost. Year 3 makes ₹11.7 L. The main sensitivities are the cost reduction and clinic volume.
+2. **Isn't a higher valuation just a way to cut dilution?** We didn't use valuation alone: we cut the round to Milestone 1. That keeps dilution near 19% even at the floor. Raising everything up front would cost 27%–39%.
+3. **How is AVERRA profitable?** Every TremoSense unit is profitable from the first sale (₹2,538). Company break-even arrives at M23 (May 2029), once volume reaches about 130 units a month at verified Scenario C cost. Year 3 makes ₹18.9 L. The main sensitivities are the cost reduction and clinic volume.
 4. **Is ₹2,000 the cost?** No. Prototype parts are ₹4,062. ₹2,000 is a volume target for the electronics (Scenario C ₹1,950), needing supplier quotes and ₹7.0 L of tooling.
 5. **Why would someone choose ParkinSense over WHOOP or Amazfit?** Not for sleep or battery today; they are better there. The difference is movement-specific insight (tremor burden, motion context) at ₹7,999 with no mandatory subscription. We have to prove people value it: that's experiment 3.
 6. **Why TremoSense over GyroGlove or a weighted spoon?** GyroGlove stabilises the whole hand at about ₹5.6 L. A weighted spoon is cheap but passive. TremoSense actively cancels tremor at the spoon for ₹9,999. We don't claim parity until the user study.

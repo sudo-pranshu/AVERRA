@@ -145,7 +145,7 @@ content = {
         "quotesNote": "Published sources, not AVERRA's own interviews. Our customer-discovery interviews are still to be run.",
     },
     "milestones": [("M2", "Provisional patent filed", "IP"), ("M3", "12 study units built", "TremoSense"), ("M4", "CDSCO classification opinion; ethics approval", "Regulatory"),
-                   ("M6", "User study n ≥ 10 → kill / continue", "Milestone 1"), ("M7", "Tranche 2 closes; engineer hired", "Phase 2"),
+                   ("M6", "User study n ≥ 10 → kill / continue", "Milestone 1"), ("M7", "Tranche 2 closes", "Phase 2"),
                    ("M9–10", "EMC pre-compliance; CDSCO filing", "Regulatory"), ("M11", "100-unit pilot batch", "TremoSense"), ("M12", "First TremoSense sales", "Commercial"), ("M19", "Verified lower cost; price to ₹8,999", "Scale"), ("M25", "ParkinSense wellness launch", "ParkinSense"), (D["headline"]["breakEvenMonth"].split()[0], "Sustained operating break-even", "Profitability")],
     "risks": [
         ("Clinical evidence", "ICMR evaluation results are pending and may not support ParkinSense's movement metrics", "Publish results as they come; no clinical claim until then; refocus ParkinSense on wellness if accuracy falls short"),
@@ -164,7 +164,7 @@ content = {
         "Go-to-market & admin": "Clinic outreach for the trial-to-purchase test; company admin",
         "Contingency": "Buffer for slips and price changes",
     },
-    "fundsGrowth": "A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in M26.",
+    "fundsGrowth": f"A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in {D['headline']['breakEvenMonth'].split()[0]}.",
     "advantage": {
         "tremosense": [
             ("GyroGlove", f"≈{pct(ts['launchPrice'] / comp['GyroGlove']['inr'], 1)} of the price ({inr(ts['launchPrice'])} vs ≈{lakh(comp['GyroGlove']['inr'])}), built for the task that matters most: eating.", "Stabilises the whole hand, not just a utensil."),
@@ -202,10 +202,10 @@ S.append(("One company, two products", 45, f"""So here is AVERRA: one company wi
 ParkinSense is a general wellness wearable for anyone, young or old. It tracks activity and vitals, and its standout feature is tremor detection.
 TremoSense is assistive. It physically stabilises a spoon for someone whose tremor gets in the way of eating.
 They serve different people and different buying decisions. What they share is real: the same Nordic microcontroller family, the same six-axis IMU, the same signal-processing skills, and the same team. We are not claiming shared revenue or cost savings beyond that."""))
-S.append(("ParkinSense", 60, f"""ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps.
-Its standout feature is tremor detection: a tremor score, frequency and burden. A shared motion classifier means tremor isn't counted as steps, and heart rate is trusted less while you move.
-Here's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.
-A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."""))
+S.append(("ParkinSense", 60, f"""ParkinSense works like a fitness band. You wear it on the wrist, it senses your movement and heart, and it sends that to a phone or computer, where our software shows the results on a live dashboard.
+It tracks steps, activity, heart rate, HRV and blood oxygen. What makes it different is tremor detection: it measures a tremor score, its frequency and how much of the day it lasts, and it knows when you're resting, so tremor is never counted as steps.
+Where are we? Streaming, step counting, tremor detection and low-power sleep are built and bench-tested. Heart rate and the dashboard work but still need validation. The mobile app is in development, and a clinical evaluation with ICMR is in progress, with results pending.
+It is a wellness product. It does not diagnose Parkinson's, and we make no clinical claim until the ICMR results are in."""))
 S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.
 On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.
 Two people with tremor have tried it so far. That is encouraging, but it is not yet a study."""))
@@ -234,7 +234,7 @@ Phase two launches TremoSense, with first sales in month twelve. In year three w
 Year-one costs are {lakh(H['costs12'])}, a gross burn of about {lakh(H['grossBurn12'], 2)} a month. Year two still loses {sp_lakh(-H['y2Net'])} rupees as volume builds.
 We reach sustained operating break-even in month {H['breakEvenMonth'].split()[0][1:]}, {BE_LONG}. Year three makes an operating profit of {lakh(H['y3Profit'])} on {crore(H['y3CashIn'])} of cash in, and we exit at about {lakh(H['m36Profit'])} profit a month.
 Getting there needs {lakh(H['fullRequirement'])} in total. Phase one alone needs {lakh(H['phase1Requirement'])}, and that number shapes our ask."""))
-S.append(("Team & growth", 45, f"""We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement.
+S.append(("Team & growth", 45, f"""We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. We stay the hardware and test engineers ourselves. Our gap is commercial, so from month 19 we hire a clinic sales lead and customer support, and in month 25 an app and firmware engineer for ParkinSense. The equity split will be set in a founders' agreement.
 Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.
 Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."""))
 S.append(("Funding ask & valuation", 60, f"""Now the ask, kept separate from the full plan. Year one costs {lakh(H['costs12'])} and reaching profitability needs {lakh(H['fullRequirement'])}. Today we raise only for milestone one: {inr(fC['equity'])}.

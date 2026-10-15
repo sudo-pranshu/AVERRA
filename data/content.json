@@ -384,7 +384,7 @@
   ],
   [
    "M7",
-   "Tranche 2 closes; engineer hired",
+   "Tranche 2 closes",
    "Phase 2"
   ],
   [
@@ -413,7 +413,7 @@
    "ParkinSense"
   ],
   [
-   "M26",
+   "M23",
    "Sustained operating break-even",
    "Profitability"
   ]
@@ -436,7 +436,7 @@
   ],
   [
    "Commercial",
-   "Company break-even needs ≈145 TremoSense units/month at C cost (plan: 130–185 in Year 3)",
+   "Company break-even needs ≈130 TremoSense units/month at C cost (plan: 130–185 in Year 3)",
    "Continue only if experiment 1 shows ≥30% trial-to-purchase"
   ],
   [
@@ -463,7 +463,7 @@
   "Go-to-market & admin": "Clinic outreach for the trial-to-purchase test; company admin",
   "Contingency": "Buffer for slips and price changes"
  },
- "fundsGrowth": "A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in M26.",
+ "fundsGrowth": "A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in M23.",
  "advantage": {
   "tremosense": [
    [
@@ -579,7 +579,7 @@
    "title": "ParkinSense",
    "seconds": 60,
    "speaker": "Pranshu",
-   "text": "ParkinSense today is a wrist wearable with an IMU and an optical sensor. It streams over BLE at 104 hertz into three pipelines: motion, heart and steps.\nIts standout feature is tremor detection: a tremor score, frequency and burden. A shared motion classifier means tremor isn't counted as steps, and heart rate is trusted less while you move.\nHere's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.\nA clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."
+   "text": "ParkinSense works like a fitness band. You wear it on the wrist, it senses your movement and heart, and it sends that to a phone or computer, where our software shows the results on a live dashboard.\nIt tracks steps, activity, heart rate, HRV and blood oxygen. What makes it different is tremor detection: it measures a tremor score, its frequency and how much of the day it lasts, and it knows when you're resting, so tremor is never counted as steps.\nWhere are we? Streaming, step counting, tremor detection and low-power sleep are built and bench-tested. Heart rate and the dashboard work but still need validation. The mobile app is in development, and a clinical evaluation with ICMR is in progress, with results pending.\nIt is a wellness product. It does not diagnose Parkinson's, and we make no clinical claim until the ICMR results are in."
   },
   {
    "slide": 5,
@@ -628,33 +628,33 @@
    "title": "Financial forecast",
    "seconds": 55,
    "speaker": "Pawan",
-   "text": "The plan starts in July 2027 and runs three years.\nPhase one, the first six months, is about proof: the TremoSense user study, the patent filing and a regulatory opinion. It costs ₹8.8 L.\nPhase two launches TremoSense, with first sales in month twelve. In year three we scale the clinic network and launch ParkinSense as a wellness product.\nYear-one costs are ₹35.2 L, a gross burn of about ₹2.93 L a month. Year two still loses 17.7 lakh rupees as volume builds.\nWe reach sustained operating break-even in month 26, August 2029. Year three makes an operating profit of ₹11.7 L on ₹2.1 Cr of cash in, and we exit at about ₹2.3 L profit a month.\nGetting there needs ₹60.9 L in total. Phase one alone needs ₹10.5 L, and that number shapes our ask."
+   "text": "The plan starts in July 2027 and runs three years.\nPhase one, the first six months, is about proof: the TremoSense user study, the patent filing and a regulatory opinion. It costs ₹8.8 L.\nPhase two launches TremoSense, with first sales in month twelve. In year three we scale the clinic network and launch ParkinSense as a wellness product.\nYear-one costs are ₹31.6 L, a gross burn of about ₹2.63 L a month. Year two still loses 10.4 lakh rupees as volume builds.\nWe reach sustained operating break-even in month 23, May 2029. Year three makes an operating profit of ₹18.9 L on ₹2.1 Cr of cash in, and we exit at about ₹2.9 L profit a month.\nGetting there needs ₹48.2 L in total. Phase one alone needs ₹10.5 L, and that number shapes our ask."
   },
   {
    "slide": 12,
    "title": "Team & growth",
    "seconds": 45,
    "speaker": "Pawan",
-   "text": "We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
+   "text": "We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. We stay the hardware and test engineers ourselves. Our gap is commercial, so from month 19 we hire a clinic sales lead and customer support, and in month 25 an app and firmware engineer for ParkinSense. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
   },
   {
    "slide": 13,
    "title": "Funding ask & valuation",
    "seconds": 60,
    "speaker": "Pawan",
-   "text": "Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reaching profitability needs ₹60.9 L. Today we raise only for milestone one: ₹10,51,171.\nWe propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.\nAt ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%.\nThe Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."
+   "text": "Now the ask, kept separate from the full plan. Year one costs ₹31.6 L and reaching profitability needs ₹48.2 L. Today we raise only for milestone one: ₹10,51,171.\nWe propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.\nAt ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%.\nThe Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."
   },
   {
    "slide": 14,
    "title": "Milestones, risk & close",
    "seconds": 50,
    "speaker": "Pawan",
-   "text": "Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
+   "text": "Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 23.\nWhy could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
   }
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1702
+  "words": 1716
  },
  "fmt": null
 }

@@ -344,15 +344,15 @@ function photos(s, ps, tsP) {
 // ===================================================================== 12 TEAM + GROWTH
 {
   const s = base(12, "11 · TEAM & GROWTH", "A builder team, growing through clinics");
-  [[0.55, "Pranshu Kumar", "Co-founder · hardware engineer", "Wearable electronics & firmware", "Built ParkinSense · co-built TremoSense", C.cyan],
-   [3.6, "Pawan Shinde", "Co-founder · hardware engineer", "Control, gimbal & power", "Co-built TremoSense (EKF + LQR platform)", C.violet]].forEach((f, i) => {
+  [[0.55, "Pranshu Kumar", "Co-founder · hardware & test", "Wearable electronics & firmware", "Built ParkinSense · co-built TremoSense", C.cyan],
+   [3.6, "Pawan Shinde", "Co-founder · hardware & test", "Control, gimbal & power", "Co-built TremoSense (EKF + LQR platform)", C.violet]].forEach((f, i) => {
     card(s, f[0], 1.5, 2.9, 2.55, "founder" + i, C.card2, f[5]);
     txt(s, [{ text: f[1], options: { bold: true, color: C.white, fontSize: 16, breakLine: true } }, { text: f[2], options: { bold: true, color: f[5], fontSize: 11, breakLine: true } }, { text: f[3], options: { color: C.light, fontSize: 11 } }], { x: f[0] + 0.18, y: 1.62, w: 2.6, h: 1.1 });
     txt(s, f[4], { x: f[0] + 0.18, y: 2.85, w: 2.6, h: 1.1, fontSize: 9.5, color: C.muted });
   });
   s.addShape(pres.shapes.LINE, { x: 3.27, y: 4.05, w: 0, h: 0.35, line: { color: C.line, width: 1.25 }, objectName: "org_l" });
   card(s, 1.9, 4.4, 2.75, 0.75, "hire", C.card);
-  txt(s, [{ text: "Hardware & test engineer", options: { bold: true, color: C.white, breakLine: true } }, { text: "Hire at M7 (Phase 2)", options: { color: C.muted, fontSize: 10 } }], { x: 2.05, y: 4.47, w: 2.5, h: 0.62, fontSize: 12 });
+  txt(s, [{ text: "Next hires", options: { bold: true, color: C.white, breakLine: true } }, { text: "Sales lead + support (M19) · app engineer (M25)", options: { color: C.muted, fontSize: 10 } }], { x: 2.05, y: 4.47, w: 2.5, h: 0.62, fontSize: 12 });
   txt(s, "Contract support as needed: regulatory consultant, industrial designer.", { x: 0.55, y: 5.3, w: 5.95, h: 0.75, fontSize: 9.5, color: C.light, objectName: "collab" });
   txt(s, "Equity split: founders' agreement (not set) · ESOP 5% · inventor assignments before filing", { x: 0.55, y: 6.1, w: 5.95, h: 0.5, fontSize: 10, color: C.amber, objectName: "eq_note" });
   K.growth.funnel.forEach((a, i) => {

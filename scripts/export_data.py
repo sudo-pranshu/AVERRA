@@ -99,6 +99,22 @@ for key, c in (("parkinsense", "B"), ("tremosense", "C")):
     d["market"][key] = {"customers": round(MK[f"{c}7"].value), "revPerCustomer": round(MK[f"{c}8"].value), "tam": round(MK[f"{c}9"].value),
                         "samCustomers": round(MK[f"{c}10"].value), "sam": round(MK[f"{c}11"].value), "somCustomers": round(MK[f"{c}15"].value),
                         "som": round(MK[f"{c}16"].value), "somShare": round(MK[f"{c}17"].value, 4)}
+GROUPS = [("People (founders, support, sales, app engineer)", [4, 16, 23, 24, 25]),
+          ("Product units: inventory, pilot batch, study units", [10, 15, 19, 20, 27]),
+          ("Customer acquisition and clinic outreach", [21, 28]),
+          ("Validation and research studies", [11, 13, 14, 22]),
+          ("Regulatory, quality and EMC", [12, 17, 18]),
+          ("Prototyping, design, tooling and patent", [5, 6, 9, 26]),
+          ("Software, cloud, legal and admin", [7, 8, 29]),
+          ("Contingency (10%)", [31])]
+def ysum(rows):
+    out = {k: 0 for k in ("y1", "p1", "p2", "y2", "y3")}
+    for r in rows:
+        for k, v in yr(r).items(): out[k] += v
+    return out
+d["forecast"]["costLines"] = [dict(label=l, **ysum(rs)) for l, rs in GROUPS]
+d["forecast"]["revLines"] = [dict(label="TremoSense", units=yr(34), **yr(36)), dict(label="ParkinSense research kits", units=yr(37), **yr(38)),
+                             dict(label="ParkinSense devices", units=yr(39), **yr(40)), dict(label="ParkinSense subscriptions", units=None, **yr(42))]
 d["market"]["general"] = {"customers": round(MK["E7"].value), "revPerCustomer": round(MK["E8"].value), "tam": round(MK["E9"].value), "samCustomers": round(MK["E10"].value), "sam": round(MK["E11"].value), "somCustomers": round(MK["E15"].value), "som": round(MK["E16"].value)}
 d["market"]["pd60"] = round(MK["B5"].value); d["market"]["et"] = round(MK["C6"].value)
 d["market"]["totals"] = {"tam": round(MK["B19"].value), "sam": round(MK["B20"].value), "som": round(MK["B21"].value)}
