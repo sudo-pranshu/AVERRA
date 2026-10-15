@@ -58,7 +58,7 @@ function base(n, kicker, title) {
 // product photos that Morph across slides 3–7
 function photos(s, ps, tsP) {
   if (ps) s.addImage({ path: IMG + "parkinsense-wrist.jpg", x: ps[0], y: ps[1], w: ps[2], h: ps[2] * 1.093, objectName: "!!ps_photo" });
-  if (tsP) s.addImage({ path: IMG + "tremosense-rig.jpg", x: tsP[0], y: tsP[1], w: tsP[2], h: tsP[2] * 1.333, objectName: "!!ts_photo" });
+  if (tsP) s.addImage({ path: IMG + "tremosense-concept.jpg", x: tsP[0], y: tsP[1], w: tsP[2], h: tsP[2] * 1.333, objectName: "!!ts_photo" });
 }
 
 // ===================================================================== 1 TITLE
@@ -75,7 +75,7 @@ function photos(s, ps, tsP) {
   txt(s, [{ text: "ParkinSense", options: { bold: true, color: C.white, breakLine: true } }, { text: "Measure and understand movement", options: { color: C.cyan, fontSize: 11 } }], { x: 8.2, y: 3.5, w: 2.4, h: 0.6, fontSize: 15, objectName: "!!ps_label" });
   txt(s, [{ text: "TremoSense", options: { bold: true, color: C.white, breakLine: true } }, { text: "Assist people with tremor", options: { color: C.violet, fontSize: 11 } }], { x: 10.75, y: 3.5, w: 2.2, h: 0.6, fontSize: 15, objectName: "!!ts_label" });
   txt(s, [{ text: "Pranshu Kumar · Pawan Shinde", options: { bold: true, color: C.white, breakLine: true } }, { text: "Co-founders · B.Tech EXTC, VJTI Mumbai · SEC-ENT-301", options: { color: C.muted } }], { x: 8.2, y: 4.6, w: 4.6, h: 0.7, fontSize: 12.5, objectName: "founders" });
-  txt(s, "Photos: real prototypes from the project repositories.", { x: 8.2, y: 5.85, w: 4.6, h: 0.3, fontSize: 9, color: C.muted });
+  txt(s, "ParkinSense: real prototype photo. TremoSense: concept render.", { x: 8.2, y: 5.85, w: 4.6, h: 0.3, fontSize: 9, color: C.muted });
 }
 
 // ===================================================================== 2 PROBLEM + WHY NOW
@@ -128,7 +128,7 @@ function photos(s, ps, tsP) {
     s.addText(t, { x: 5.4, y: 3.25 + i * 0.5, w: 2.55, h: 0.4, fontFace: B, fontSize: 11.5, color: C.white, align: "center", valign: "middle", margin: 0, shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.06, fill: { color: C.card2 }, line: { color: C.blue, width: 0.75 }, isTextBox: true, objectName: "core" + i });
   });
   txt(s, "No shared revenue or cost savings claimed.", { x: 5.35, y: 5.8, w: 2.65, h: 0.5, fontSize: 10, color: C.muted, align: "center", objectName: "core_note" });
-  src(s, "Hardware from the ParkinSense and TremoSense repositories.");
+  src(s, "ParkinSense: real prototype photo. TremoSense: concept render of the current build.");
 }
 
 // ===================================================================== 4 PARKINSENSE
@@ -167,7 +167,7 @@ function photos(s, ps, tsP) {
 
 // ===================================================================== 5 TREMOSENSE
 {
-  const s = base(5, "04 · TREMOSENSE", "TremoSense: bench-proven, not yet tested on people");
+  const s = base(5, "04 · TREMOSENSE", "TremoSense: ≈90% on the bench, first two users");
   photos(s, null, [0.55, 1.5, 1.4]);
   txt(s, [{ text: "TremoSense", options: { bold: true, color: C.white, fontSize: 17, breakLine: true } }, { text: "ASSIST", options: { bold: true, color: C.violet, fontSize: 10, charSpacing: 2 } }], { x: 2.1, y: 1.55, w: 2.1, h: 0.7, objectName: "!!ts_label" });
   K.tremosense.architecture.forEach((t, i) => {
@@ -216,7 +216,7 @@ function photos(s, ps, tsP) {
   const cols = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
   cols.forEach((c, j) => txt(s, c.toUpperCase(), { x: 1.85 + j * 2.75, y: 1.5, w: 2.6, h: 0.25, fontSize: 9.5, bold: true, color: C.muted, charSpacing: 1 }));
   const rows = [
-    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "≈90% tremor rejection on the current build (founder-reported)", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
+    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5°; 2 people with tremor tried it", "≈90% tremor rejection on the current build (founder-reported)", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
     ["ps", [1.0, 0.3], C.cyan, ["Bench: rest, 5 Hz fixture, walking, arm motion; BLE soak; PPK II power. Clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending (founder-reported)", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10); add ICMR results when published", "PERSEVERE — wellness launch; no clinical claim until results"]],
   ];
   rows.forEach(([k, _, col, cells], i) => {
@@ -284,7 +284,7 @@ function photos(s, ps, tsP) {
     txt(s, [{ text: r[1], options: { bold: true, color: C.white, breakLine: true } }, { text: r[2], options: { color: C.light, fontSize: 10 } }], { x: 7.4, y: y - 0.02, w: 5.3, h: 0.55, fontSize: 12, objectName: "rev_t" + i });
   });
   txt(s, "No reimbursement assumed — out-of-pocket or institutional only.", { x: 0.55, y: 5.4, w: 6.0, h: 0.3, fontSize: 11, color: C.amber, objectName: "reimb" });
-  src(s, "Prices are hypotheses to test with customers. Model › Unit Economics.");
+  src(s, "CAC = outreach ÷ customers · LTV = contribution × purchases · payback = CAC ÷ contribution per sale. Prices are hypotheses. Model › Unit Economics.");
 }
 
 // ===================================================================== 10 PRICING & UNIT ECONOMICS
@@ -332,7 +332,7 @@ function photos(s, ps, tsP) {
   const Y = fc.years;
   [["Year 1: costs · burn", `${lakh(H.costs12)} · ${lakh(H.grossBurn12, 2)}/mo`, C.white], ["Year 2: cash in · result", `${lakh(Y.cashIn.y2)} · ${lakh(Y.net.y2)}`, C.white],
    ["Sustained break-even", H.breakEvenMonth.replace("\n", " · "), C.green], ["Year 3: cash in", crore(Y.cashIn.y3, 2), C.cyan], ["Year 3: operating profit", `${lakh(H.y3Profit)} (${pct(H.y3Margin, 1)})`, C.green],
-   ["Needed to reach profit", lakh(H.fullRequirement), C.violet]].forEach((k, i) => {
+   ["Zero-cash date (this round)", "January 2028", C.red]].forEach((k, i) => {
     const y = 1.45 + i * 0.84;
     card(s, 8.95, y, 3.85, 0.74, "kpi" + i);
     txt(s, k[0], { x: 9.12, y: y + 0.1, w: 1.6, h: 0.55, fontSize: 10.5, color: C.muted, valign: "middle" });
@@ -415,7 +415,7 @@ function photos(s, ps, tsP) {
 // ===================================================================== 14 USE OF FUNDS + MILESTONES + RISKS + CLOSE
 {
   const c = F.C;
-  const s = base(14, "13 · USE OF FUNDS, MILESTONES & ADVANTAGE", "Six months to a clear yes or no; month " + H.breakEvenMonth.split("\n")[0].slice(1) + " to profit");
+  const s = base(14, "13 · USE OF FUNDS, MILESTONES & WHY THIS COULD FAIL", "Six months to a clear yes or no; month " + H.breakEvenMonth.split("\n")[0].slice(1) + " to profit");
   const uf = D.useOfFunds.filter((u) => u.phase1 > 0);
   const tot = uf.reduce((a, u) => a + u.phase1, 0);
   txt(s, `Phase 1 (M1–M6) costs ${lakh(tot, 1)} → funded by the ${lakh(c.equity, 1)} round (incl. buffer)`, { x: 0.55, y: 1.45, w: 12.2, h: 0.3, fontSize: 12, bold: true, color: C.white, objectName: "!!fundbar_t" });
@@ -437,12 +437,11 @@ function photos(s, ps, tsP) {
     txt(s, m[0], { x: xx, y: 3.62, w: SP, h: 0.35, fontSize: 13, bold: true, color: last ? C.green : C.white, align: "center" });
     txt(s, [{ text: m[2].toUpperCase(), options: { bold: true, color: last ? C.green : ph1 ? C.cyan : C.violet, fontSize: 7, breakLine: true } }, { text: m[1], options: { color: C.white, fontSize: 9 } }], { x: xx + 0.03, y: 4.33, w: SP - 0.06, h: 0.75, objectName: "ms_t" + i });
   });
-  card(s, 0.55, 5.15, 7.6, 1.45, "kill", "1A1840", C.violet);
+  card(s, 0.55, 5.15, 7.6, 1.45, "kill", "2A1620", C.red);
   const gg = D.competitors.find((c) => c.name === "GyroGlove");
-  txt(s, [{ text: "WHY PEOPLE WILL CHOOSE AVERRA", options: { bold: true, color: C.violet, breakLine: true } },
-    { text: "TremoSense: ", options: { bold: true, color: C.violet } }, { text: `${pct(ts.launchPrice / gg.inr, 1)} of a GyroGlove, about half Liftware's price; active, unlike a weighted spoon; ≈90% bench rejection`, options: { color: C.white, breakLine: true } },
-    { text: "ParkinSense: ", options: { bold: true, color: C.cyan } }, { text: `measures tremor, which WHOOP, Fitbit and Amazfit don't list; ${inr(D.assumptions.P3)} once, no mandatory subscription`, options: { color: C.white, breakLine: true } },
-    { text: "Both: ", options: { bold: true, color: C.green } }, { text: "one sensing stack, Indian cost base, local service through clinics", options: { color: C.white } }], { x: 0.75, y: 5.22, w: 7.3, h: 1.35, fontSize: 11.5, paraSpaceAfter: 4, valign: "top", objectName: "kill_t" });
+  txt(s, [{ text: "WHY THIS COULD FAIL", options: { bold: true, color: C.red, breakLine: true } },
+    { text: K.brand.failRisk, options: { color: C.white, breakLine: true } },
+    { text: "Kill / continue: ", options: { bold: true, color: C.amber } }, { text: K.brand.failKill, options: { color: C.light } }], { x: 0.75, y: 5.22, w: 7.3, h: 1.35, fontSize: 11.5, paraSpaceAfter: 4, valign: "top", objectName: "kill_t" });
   card(s, 8.35, 5.15, 4.45, 1.45, "close", "0E1F3A", C.blue);
   s.addImage({ path: BR + "averra-mark-white.png", x: 8.5, y: 5.3, w: 0.55, h: 0.55, objectName: "close_mark" });
   txt(s, [{ text: K.brand.tagline, options: { bold: true, color: C.white, fontSize: 14, breakLine: true } }, { text: `Ask: ${lakh(c.equity, 1)} for ${pct(c.investor, 1)}. Kill / continue decided by the M6 user study; risks and triggers in the companion guide.`, options: { color: C.light, fontSize: 9.5 } }],

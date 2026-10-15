@@ -42,8 +42,9 @@ content = {
     "clinicalEvaluation": ICMR,
     "brand": {"name": "AVERRA", "tagline": "Engineering better movement intelligence.",
               "descriptor": "Biomedical deep-tech for accessible wearable and assistive technology",
-              "positioning": ("AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight for anyone who wants to understand how they move (ParkinSense), "
-                              "and practical assistance for people living with tremor (TremoSense), at prices built for India."),
+              "positioning": ("For people who want to understand how they move, and for people whose tremor makes eating hard, AVERRA is a biomedical wearables company "
+                              "that turns precise movement sensing into everyday insight (ParkinSense) and active assistance (TremoSense), at prices built for India."),
+              "failRisk": "Bench rejection may not turn into easier eating. Real food, real spoons and tired hands are harder than a motorised simulator.", "failKill": "Kill TremoSense if the M6 study (n ≥ 10) shows median tremor reduction below 30%. Pivot to clinic rental if it works but under 60% would pay.",
               "founders": ["Pranshu Kumar", "Pawan Shinde"]},
     "statusLegend": STATUS,
     "parkinsense": {
@@ -87,7 +88,7 @@ content = {
         ],
         "results": [("≈90%", "tremor rejection on the bench with the current build (founder-reported)", "bench"),
                     ("4–8 Hz", "tremor frequencies tested on a motorised simulator, ±5°", "bench"),
-                    ("0", "people with tremor tested so far", "planned")],
+                    ("2", "people with tremor have tried it (informal, founder-reported)", "planned")],
         "image": "/images/tremosense-rig.jpg",
     },
     "whyNow": [
@@ -120,7 +121,7 @@ content = {
                 ["Price", f"US${comp['GyroGlove']['price']:,} per glove (≈{lakh(comp['GyroGlove']['inr'])})", f"US${comp['Liftware (stabilising handle)']['price']} (2015 price, dated)", f"≈{inr(comp['Weighted soup spoon (225 g)']['inr'])} (US retail)", f"{inr(ts['launchPrice'])} launch hypothesis"],
                 ["What it does", "Gyroscopic stabiliser for the whole hand", "Motorised handle cancels tremor at the utensil", "Added mass damps motion", "Two-axis servo gimbal cancels tremor at the spoon"],
                 ["Mechanism", "Gyroscope (passive-active)", "Sensors + motors", "Passive", "IMU → EKF → LQR → 2 servos"],
-                ["Evidence", "No study cited on listing", "Maker cites study: 70% less shaking", "Varies", "≈90% bench rejection (current build); no users yet"],
+                ["Evidence", "No study cited on listing", "Maker cites study: 70% less shaking", "Varies", "≈90% bench rejection (current build); 2 informal user trials"],
             ],
             "positioning": [
                 ("The problem", f"Active tremor aids are imported and priced for other markets: one GyroGlove ≈ {lakh(comp['GyroGlove']['inr'])}."),
@@ -207,12 +208,12 @@ Here's the status, honestly. Streaming, steps, tremor scoring and motion context
 A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."""))
 S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.
 On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.
-No person with tremor has used it yet."""))
+Two people with tremor have tried it so far. That is encouraging, but it is not yet a study."""))
 S.append(("Competition", 50, f"""Competitors, with prices checked this month.
 WHOOP costs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} a year, a Fitbit Charge 6 about {inr(comp['Fitbit Charge 6']['price'])}, and an Amazfit Bip 6 {inr(comp['Amazfit Bip 6']['price'])}. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.
 For tremor assistance, one GyroGlove costs {comp['GyroGlove']['price']:,} US dollars, about {sp_lakh(comp['GyroGlove']['inr'])} rupees, for one hand. Liftware sold for 195 dollars in 2015, and a weighted spoon is cheap but passive.
 TremoSense is a spoon, not a glove, and we don't claim it matches either product. The opportunity is an Indian-built active aid priced under 2 percent of one GyroGlove, while being honest that it does far less."""))
-S.append(("MVP & validation", 60, f"""What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.
+S.append(("MVP & validation", 60, f"""What has the MVP proven? Both products work on the bench. Two people with tremor have tried TremoSense informally, with no pre-set metric. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.
 So we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.
 For ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.
 Our decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."""))
@@ -240,8 +241,8 @@ S.append(("Funding ask & valuation", 60, f"""Now the ask, kept separate from the
 We propose a pre-money valuation of {lakh(V['proposed'], 0)}. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of {lakh(V['floor'], 2)}: {V['personMonths']:.0f} person-months of engineering plus prototypes. A Berkus-style scorecard gives about {lakh(V['berkus'], 0)}, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.
 At {lakh(V['proposed'], 0)}, post-money is P plus I: {inr(fC['post'])}. The investor owns I over post-money, {pct(fC['investor'], 1)}. After a 5 percent ESOP pool, the founders keep {pct(fC['founders'], 1)}. Even at the floor, the investor would own {pct(V['options'][0]['investor'], 1)}.
 The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."""))
-S.append(("Milestones, advantage & close", 50, f"""Here's what the money buys. About {lakh(uf['Team'], 1)} keeps both of us full-time for six months, {lakh(uf['Prototyping, tools, IP'], 1)} covers prototypes, tools and the patent, and {lakh(uf['Validation (both products)'], 1)} builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
-Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time {inr(D['assumptions']['P3'])}.
+S.append(("Milestones, risk & close", 50, f"""Here's what the money buys. About {lakh(uf['Team'], 1)} keeps both of us full-time for six months, {lakh(uf['Prototyping, tools, IP'], 1)} covers prototypes, tools and the patent, and {lakh(uf['Validation (both products)'], 1)} builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
+Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental.
 AVERRA: engineering better movement intelligence. We're asking for {lakh(fC['equity'], 1)} at a {lakh(V['proposed'], 0)} pre-money, {pct(fC['investor'], 1)}, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."""))
 content["script"] = [{"slide": i + 1, "title": t, "seconds": s, "speaker": "Pranshu" if i < 7 else "Pawan", "text": tx.strip()} for i, (t, s, tx) in enumerate(S)]
 content["scriptTotals"] = {"seconds": sum(s for _, s, _ in S), "words": sum(len(tx.split()) for _, _, tx in S)}

@@ -13,7 +13,7 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1689 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1702 words) |
 | TremoSense result | Paper figure | ≈90% bench rejection on the current build (founder-reported) |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
@@ -63,7 +63,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1689 words, about 142 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1702 words, about 143 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -80,7 +80,7 @@ The script runs about 11 min 55 s (1689 words, about 142 words a minute includin
 | 11 | Financial forecast | 8:25–9:20 | 55 s |
 | 12 | Team & growth | 9:20–10:05 | 45 s |
 | 13 | Funding ask & valuation | 10:05–11:05 | 60 s |
-| 14 | Milestones, advantage & close | 11:05–11:55 | 50 s |
+| 14 | Milestones, risk & close | 11:05–11:55 | 50 s |
 
 **1. Title** (40 s)
 
@@ -100,7 +100,7 @@ ParkinSense today is a wrist wearable with an IMU and an optical sensor. It stre
 
 **5. TremoSense** (55 s)
 
-TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code. No person with tremor has used it yet.
+TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code. Two people with tremor have tried it so far. That is encouraging, but it is not yet a study.
 
 **6. Competition** (50 s)
 
@@ -108,7 +108,7 @@ Competitors, with prices checked this month. WHOOP costs ₹17,990 a year, a Fit
 
 **7. MVP & validation** (60 s)
 
-What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that. So we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay. For ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available. Our decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan.
+What has the MVP proven? Both products work on the bench. Two people with tremor have tried TremoSense informally, with no pre-set metric. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that. So we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay. For ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available. Our decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan.
 
 **8. Market** (45 s)
 
@@ -134,9 +134,9 @@ We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSens
 
 Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reaching profitability needs ₹60.9 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result.
 
-**14. Milestones, advantage & close** (50 s)
+**14. Milestones, risk & close** (50 s)
 
-Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
+Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
 
 ## Financial workings
 

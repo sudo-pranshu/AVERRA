@@ -229,9 +229,17 @@ function Problem() {
 }
 
 /* ------------------------------------------------------------------ 3 why now */
+const WHY_MEANS = [
+  "Wrist movement data became something mainstream platforms collect.",
+  "A regulator has cleared wrist-based Parkinson's monitoring, so a path exists.",
+  "We can now plan and cost the Indian approval route.",
+  "Our core users more than double by 2050.",
+  "Demand for tremor monitoring and aids keeps rising.",
+];
+
 function WhyNow() {
   return (
-    <Frame label="Why now" title="Five dated shifts" lead="Wrist sensing is regulator-accepted, India has a clear device pathway, and the population most affected is growing fast.">
+    <Frame label="Why now" title="Five shifts that make AVERRA possible today" lead="Each shift is dated and sourced. The line under each says what it means for us.">
       <div className="relative mt-10">
         <motion.div className="absolute left-0 right-0 top-[11px] hidden h-[2px] @3xl:block" style={{ background: "linear-gradient(90deg,#06B6D4,#8B5CF6)", originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1.4, ease }} />
         <ol className="grid gap-6 @3xl:grid-cols-5">
@@ -240,14 +248,16 @@ function WhyNow() {
               <motion.span className={`block h-[24px] w-[24px] rounded-full border-4 border-navy ${i % 2 ? "bg-violet" : "bg-cyan"}`} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3 + i * 0.2, type: "spring", stiffness: 400, damping: 15 }} />
               <p className="t-h2 mt-5">{date}</p>
               <p className="t-body mt-2 text-mist">{text}</p>
+              <p className="t-small mt-2 border-l-2 pl-2.5 text-white" style={{ borderColor: i % 2 ? VIOLET : CYAN }}>{WHY_MEANS[i]}</p>
               <a href={url} target="_blank" rel="noreferrer" className="t-micro mt-2 inline-block text-slate underline hover:text-white">Source</a>
             </motion.li>
           ))}
         </ol>
       </div>
-      <motion.div className="panel mt-14 flex items-center gap-6 p-6" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }}>
-        <p className="t-h1 t-num shrink-0 text-cyan">$15.90</p>
-        <p className="t-body text-mist">The microcontroller with an on-board 6-axis IMU used in both products lists at $15.90. Hardware is no longer the barrier; validation is.</p>
+      <motion.div className="mt-10 grid gap-4 @3xl:grid-cols-3" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }}>
+        <div className="panel p-5"><p className="t-h1 t-num text-cyan">$15.90</p><p className="t-small mt-1 text-mist">The microcontroller with an on-board 6-axis IMU used in both products. Hardware is no longer the barrier; validation is.</p></div>
+        <div className="panel p-5"><p className="t-small font-medium text-violet">Why not three years ago?</p><p className="t-small mt-1 text-mist">Before October 2023, India had no mandatory, defined licensing route for devices like ours, so a product could not be planned and costed end to end.</p></div>
+        <div className="panel p-5"><p className="t-small font-medium text-amber">Why the window will not stay open</p><p className="t-small mt-1 text-mist">Global wearable brands already sense movement. If they add tremor features or imported aids get cheaper, the low-cost Indian gap closes.</p></div>
       </motion.div>
     </Frame>
   );
@@ -281,7 +291,7 @@ function Portfolio() {
           ))}
           <p className="t-micro mt-2 text-center text-slate">No shared revenue or cost savings claimed.</p>
         </div>
-        {card("ts", "TremoSense", "Assist people who live with tremor", VIOLET, "/images/tremosense-rig.jpg", [["Who", "people whose tremor disrupts eating, and their families"], ["Buys it", "families, via clinic or OT referral"], ["Value", "eat more independently, at an Indian price"]], 40)}
+        {card("ts", "TremoSense", "Assist people who live with tremor", VIOLET, "/images/tremosense-concept.jpg", [["Who", "people whose tremor disrupts eating, and their families"], ["Buys it", "families, via clinic or OT referral"], ["Value", "eat more independently, at an Indian price"]], 40)}
       </div>
     </Frame>
   );
@@ -499,7 +509,7 @@ function Market() {
 /* ------------------------------------------------------------------ 10 MVP */
 function MVP() {
   const rows = [
-    { name: "TremoSense", color: VIOLET, cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5°", "≈90% tremor rejection on the current build (founder-reported)", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
+    { name: "TremoSense", color: VIOLET, cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5°; 2 people with tremor tried it informally", "≈90% tremor rejection on the current build (founder-reported); positive informal feedback, no metric", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
     { name: "ParkinSense", color: CYAN, cells: ["Bench conditions, BLE soak, power profiling; clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10)", "Persevere: wellness launch; no clinical claim until results"] },
   ];
   const head = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
@@ -533,28 +543,53 @@ function MVP() {
 
 /* ------------------------------------------------------------------ 11 business model */
 function BusinessModel() {
-  const boxes: [string, string, string?][] = [
-    ["Key partners", "Neurology clinics, OT centres, university labs, a test lab, a contract assembler"], ["Key activities", "User studies, CDSCO and ISO 13485, firmware and signal processing, small-batch assembly"],
-    ["Key resources", "Sensing and control know-how, bench evidence, two papers, prototypes"], ["Value propositions", "ParkinSense: a wearable for everyone with built-in tremor detection. TremoSense: active tremor assistance at an Indian price", CYAN],
-    ["Relationships", "Clinic-assisted trials, caregiver onboarding"], ["Channels", "Clinic and OT referral, direct online, institutional procurement"],
-    ["Customer segments", "Everyday wearable users, households living with PD or ET, research labs"], ["Cost structure", "Phase 1: team, study units, user study, IP. Then QMS, EMC, inventory, outreach"],
+  const fc = D.forecast as typeof D.forecast & { revTs: number[]; revKits: number[]; revPs: number[]; revSub: number[] };
+  const y3 = (a: number[]) => a.slice(24, 36).reduce((x, v) => x + v, 0);
+  const streams = [
+    { k: "TremoSense sale or rental", price: inr(ts.launchPrice), sub: `${inr(ts.postCostPrice)} from M19 · rental ${inr(D.assumptions.P11 as number)}/mo`, when: "From M12", v: y3(fc.revTs), c: VIOLET },
+    { k: "ParkinSense device", price: inr(D.assumptions.P3 as number), sub: "one-time, sold online and via clinics", when: "From M25", v: y3(fc.revPs), c: CYAN },
+    { k: "Research-use kits for labs", price: inr(UE.ruoKit.price), sub: "per kit, no medical claim", when: "From M10", v: y3(fc.revKits), c: BLUE },
+    { k: "ParkinSense subscription", price: `${inr(D.assumptions.P4 as number)}/mo`, sub: "optional insights plan", when: "From M25", v: y3(fc.revSub), c: MINT },
   ];
-  const streams = [["Research-use kits for labs", `${inr(UE.ruoKit.price)} per kit, from M10, no medical claim`, CYAN], ["TremoSense sale or rental", `${inr(ts.launchPrice)} launch, ${inr(ts.postCostPrice)} from M19 · rental ${inr(D.assumptions.P11 as number)}/month`, VIOLET], ["ParkinSense device and optional subscription", `${inr(D.assumptions.P3 as number)} + ${inr(D.assumptions.P4 as number)}/month, from M25`, BLUE]];
+  const tot = streams.reduce((x, r) => x + r.v, 0);
+  const B = ({ k, v, c, className = "" }: { k: string; v: string; c?: string; className?: string }) => (
+    <Item className={`panel lift flex flex-col p-3.5 ${className}`} style={c ? { borderColor: `${c}88`, background: `linear-gradient(180deg, ${c}26, rgba(19,29,51,.75))` } : undefined}>
+      <p className="t-micro font-medium uppercase tracking-wide" style={{ color: c ?? "#94A3B8" }}>{k}</p>
+      <p className="t-small mt-1 text-white">{v}</p>
+    </Item>
+  );
   return (
     <Frame label="Business model" title="Clinics bring patients, families buy, labs fund early data">
-      <Stagger className="grid gap-3 @3xl:grid-cols-4">
-        {boxes.map(([k, v, c]) => <Item key={k} className="panel lift p-4" style={c ? { borderColor: `${c}88`, background: `linear-gradient(180deg, ${c}22, rgba(19,29,51,.7))` } : undefined}><p className="t-small font-medium" style={{ color: c ?? "#94A3B8" }}>{k}</p><p className="t-small mt-1 text-white">{v}</p></Item>)}
+      <Stagger className="grid grid-cols-1 gap-2.5 @5xl:grid-cols-5">
+        <B k="Key partners" v="Neurology clinics, OT centres, university labs, a test lab, a contract assembler" className="@5xl:row-span-2" />
+        <B k="Key activities" v="User studies, CDSCO and ISO 13485, firmware, small-batch assembly" />
+        <B k="Value propositions" v="ParkinSense: a wearable for everyone with built-in tremor detection. TremoSense: active tremor assistance at an Indian price" c={CYAN} className="@5xl:row-span-2" />
+        <B k="Relationships" v="Clinic-assisted trials, caregiver onboarding" />
+        <B k="Customer segments" v="Everyday wearable users, households living with PD or ET, research labs" className="@5xl:row-span-2" />
+        <B k="Key resources" v="Sensing and control know-how, bench evidence, two papers, prototypes" />
+        <B k="Channels" v="Clinic and OT referral, direct online, institutional procurement" />
+        <B k="Cost structure" v="Phase 1: team, study units, user study, IP. Then quality system, EMC testing, inventory and tooling, clinic outreach. Revenue streams below." className="@5xl:col-span-5" />
       </Stagger>
-      <h2 className="t-h2 mt-8">Revenue streams, in launch order</h2>
-      <ol className="relative mt-4 grid gap-3 @3xl:grid-cols-3">
-        {streams.map(([k, v, c], i) => (
-          <motion.li key={k} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 + i * 0.25 }} className="panel flex gap-3 p-4" style={{ borderColor: `${c}AA` }}>
-            <span className="t-num grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm font-semibold text-navy" style={{ background: c, boxShadow: `0 0 18px ${c}88` }}>{i + 1}</span>
-            <span><span className="t-small block font-medium text-white">{k}</span><span className="t-small text-mist">{v}</span></span>
-          </motion.li>
+      <div className="mt-5 flex items-baseline justify-between">
+        <h2 className="t-h2">Revenue streams and Year-3 revenue</h2>
+        <p className="t-small text-slate">Year 3 cash in <span className="t-num text-white">{crore(tot, 2)}</span> · no reimbursement assumed</p>
+      </div>
+      <div className="mt-3 flex h-3 w-full gap-1 overflow-hidden rounded-full">
+        {streams.map((r, i) => <motion.div key={r.k} initial={{ width: 0 }} animate={{ width: `${(r.v / tot) * 100}%` }} transition={{ delay: 0.6 + i * 0.12, duration: 0.7, ease }} style={{ background: r.c }} />)}
+      </div>
+      <div className="mt-3 grid gap-3 @3xl:grid-cols-4">
+        {streams.map((r, i) => (
+          <motion.div key={r.k} className="panel lift p-4" style={{ borderColor: `${r.c}77` }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 + i * 0.12, ease }}>
+            <div className="flex items-center justify-between"><p className="t-small font-medium" style={{ color: r.c }}>{r.k}</p><span className="t-micro rounded-full border hairline px-2 py-0.5 text-slate">{r.when}</span></div>
+            <p className="t-h2 t-num mt-1 text-white">{r.price}</p>
+            <p className="t-micro text-slate">{r.sub}</p>
+            <div className="mt-3 border-t hairline pt-2">
+              <p className="t-micro text-slate">Year 3</p>
+              <p className="t-small t-num text-white"><CountUp to={r.v} delay={0.8} format={(n) => lakh(n)} /> <span className="text-slate">· {pct(r.v / tot)}</span></p>
+            </div>
+          </motion.div>
         ))}
-      </ol>
-      <p className="t-small mt-4 text-amber">No reimbursement assumed: all revenue is out-of-pocket or institutional.</p>
+      </div>
     </Frame>
   );
 }
@@ -615,7 +650,7 @@ function Pricing() {
               </tbody>
             </table>
           </div>
-          <p className="t-micro text-slate">Estimates; no customers yet. Gross margin excludes warranty and fulfilment; contribution margin includes them.</p>
+          <p className="t-micro text-slate">Formulas: contribution = net price − COGS − warranty − fulfilment · CAC = outreach spend ÷ customers · LTV = contribution × expected purchases (+ subscription) · payback = CAC ÷ contribution per sale · LTV:CAC above 3× is healthy. Estimates; no customers yet.</p>
         </div>
       </div>
     </Frame>
@@ -672,7 +707,7 @@ function Financials() {
         </div>
         <Stagger className="grid grid-cols-2 gap-3 self-start">
           {[["Year 1 costs", lakh(H.costs12), "text-white"], ["Year 1 gross burn", `${lakh(H.grossBurn12, 2)}/mo`, "text-white"], ["Year 2 result", lakh(Y.net.y2), "text-amber"], ["Break-even", beLabel, "text-mint"],
-            ["Year 3 cash in", crore(Y.cashIn.y3, 2), "text-cyan"], ["Year 3 operating profit", `${lakh(H.y3Profit)} · ${pct(H.y3Margin, 1)}`, "text-mint"], ["Month-36 profit", `${lakh(H.m36Profit)}/mo`, "text-mint"], ["Needed to reach profit", lakh(H.fullRequirement), "text-violet"]].map(([k, v, c]) => (
+            ["Year 3 cash in", crore(Y.cashIn.y3, 2), "text-cyan"], ["Year 3 operating profit", `${lakh(H.y3Profit)} · ${pct(H.y3Margin, 1)}`, "text-mint"], ["Zero-cash date (this round only)", "January 2028", "text-coral"], ["Needed to reach profit", lakh(H.fullRequirement), "text-violet"]].map(([k, v, c]) => (
             <Item key={k} className="panel lift p-3.5"><p className="t-micro text-slate">{k}</p><p className={`t-h2 t-num mt-1 ${c}`}>{v}</p></Item>
           ))}
           <p className="t-micro col-span-2 text-slate">Volumes: TremoSense {Y.tsUnits.y2} units in Year 2 and {Y.tsUnits.y3} in Year 3 (SOM capacity {MK.tremosense.somCustomers}/year); ParkinSense {Y.psUnits.y3} in Year 3.</p>
@@ -807,7 +842,7 @@ function Milestones() {
   const pal = [BLUE, CYAN, VIOLET, "#60A5FA", "#64748B", "#94A3B8"];
   const NM = K.milestones.length;
   return (
-    <Frame label="Use of funds and milestones" title={`How the ${lakh(F.C.equity)} grows the business`} lead={`Phase 1 (M1–M6) costs ${lakh(tot)}; the round adds a 20% buffer. ${K.fundsGrowth}`}>
+    <Frame label="Use of funds and milestones" title={`How the ${lakh(F.C.equity)} grows the business`} lead={`Phase 1 (M1–M6) costs ${lakh(tot)}; the round adds a 20% buffer.`}>
       <div className="flex h-12 w-full gap-1 overflow-hidden rounded-xl">
         {uf.map((u, i) => (
           <motion.div key={u.category} initial={{ width: 0 }} animate={{ width: `${(u.phase1 / tot) * 100}%` }} transition={{ delay: 0.2 + i * 0.12, duration: 0.6, ease }} style={{ background: pal[i] }} className="first:rounded-l-xl last:rounded-r-xl" title={`${u.category}: ${lakh(u.phase1)}`} />
@@ -841,8 +876,8 @@ function Milestones() {
       </div>
       <p className="t-small mt-6 text-mist"><span className="text-mint">Then: </span>{K.fundsGrowth}</p>
       <motion.div className="mt-3 grid gap-3 @3xl:grid-cols-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
-        {[["Continue", "median tremor reduction ≥50% and ≥60% would pay", MINT], ["Pivot", "benefit holds but the price fails → clinic rental", AMBER], ["Stop TremoSense", "reduction below 30% → focus on ParkinSense", "#F87171"]].map(([k, v, c]) => (
-          <div key={k} className="rounded-xl border px-4 py-2.5" style={{ borderColor: `${c}66`, background: `${c}10` }}><p className="t-small"><span className="font-semibold" style={{ color: c }}>M6 · {k}: </span><span className="text-mist">{v}</span></p></div>
+        {[["Why this could fail", K.brand.failRisk, "#F87171"], ["Continue", "median tremor reduction ≥50% and ≥60% would pay", MINT], ["Kill or pivot", "below 30% → stop TremoSense; works but under 60% would pay → clinic rental", AMBER]].map(([k, v, c]) => (
+          <div key={k} className="rounded-xl border px-4 py-2.5" style={{ borderColor: `${c}66`, background: `${c}10` }}><p className="t-small"><span className="font-semibold" style={{ color: c }}>{k}: </span><span className="text-mist">{v}</span></p></div>
         ))}
       </motion.div>
     </Frame>

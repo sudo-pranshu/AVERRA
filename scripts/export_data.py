@@ -62,7 +62,7 @@ d = {
     "unitEconomics": {},
     "market": {},
     "forecast": {"months": months, "costs": row(32), "cashIn": row(43), "net": row(45), "cumulative": row(46),
-                 "cashA": row(48), "cashB": row(49), "cashC": row(50), "cashD": row(51), "tsUnits": row(34), "kits": row(37), "psUnits": row(39),
+                 "cashA": row(48), "cashB": row(49), "cashC": row(50), "cashD": row(51), "tsUnits": row(34), "kits": row(37), "psUnits": row(39), "revTs": row(36), "revKits": row(38), "revPs": row(40), "revSub": row(42),
                  "years": {"costs": yr(32), "cashIn": yr(43), "net": yr(45), "tsUnits": yr(34), "psUnits": yr(39)}},
     "headline": {k: (FC[f"D{r}"].value if isinstance(FC[f"D{r}"].value, str) else round(FC[f"D{r}"].value, 4 if k == "y3Margin" else 0)) for k, r in (
                  ("costs12", 60), ("cashIn12", 61), ("grossBurn12", 62), ("netBurn12", 63), ("phase1Costs", 64), ("phase1Gap", 65),

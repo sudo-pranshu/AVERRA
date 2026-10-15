@@ -9,7 +9,9 @@
   "name": "AVERRA",
   "tagline": "Engineering better movement intelligence.",
   "descriptor": "Biomedical deep-tech for accessible wearable and assistive technology",
-  "positioning": "AVERRA is a biomedical technology company that turns precise movement sensing into everyday insight for anyone who wants to understand how they move (ParkinSense), and practical assistance for people living with tremor (TremoSense), at prices built for India.",
+  "positioning": "For people who want to understand how they move, and for people whose tremor makes eating hard, AVERRA is a biomedical wearables company that turns precise movement sensing into everyday insight (ParkinSense) and active assistance (TremoSense), at prices built for India.",
+  "failRisk": "Bench rejection may not turn into easier eating. Real food, real spoons and tired hands are harder than a motorised simulator.",
+  "failKill": "Kill TremoSense if the M6 study (n ≥ 10) shows median tremor reduction below 30%. Pivot to clinic rental if it works but under 60% would pay.",
   "founders": [
    "Pranshu Kumar",
    "Pawan Shinde"
@@ -164,8 +166,8 @@
     "bench"
    ],
    [
-    "0",
-    "people with tremor tested so far",
+    "2",
+    "people with tremor have tried it (informal, founder-reported)",
     "planned"
    ]
   ],
@@ -298,7 +300,7 @@
      "No study cited on listing",
      "Maker cites study: 70% less shaking",
      "Varies",
-     "≈90% bench rejection (current build); no users yet"
+     "≈90% bench rejection (current build); 2 informal user trials"
     ]
    ],
    "positioning": [
@@ -584,7 +586,7 @@
    "title": "TremoSense",
    "seconds": 55,
    "speaker": "Pranshu",
-   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOn a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.\nNo person with tremor has used it yet."
+   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOn a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.\nTwo people with tremor have tried it so far. That is encouraging, but it is not yet a study."
   },
   {
    "slide": 6,
@@ -598,7 +600,7 @@
    "title": "MVP & validation",
    "seconds": 60,
    "speaker": "Pranshu",
-   "text": "What has the MVP proven? Both products work on the bench. TremoSense hasn't been tested with users. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.\nSo we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.\nFor ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.\nOur decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."
+   "text": "What has the MVP proven? Both products work on the bench. Two people with tremor have tried TremoSense informally, with no pre-set metric. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.\nSo we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.\nFor ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.\nOur decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."
   },
   {
    "slide": 8,
@@ -644,15 +646,15 @@
   },
   {
    "slide": 14,
-   "title": "Milestones, advantage & close",
+   "title": "Milestones, risk & close",
    "seconds": 50,
    "speaker": "Pawan",
-   "text": "Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
+   "text": "Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
   }
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1689
+  "words": 1702
  },
  "fmt": null
 }
