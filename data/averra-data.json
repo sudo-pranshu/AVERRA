@@ -355,6 +355,15 @@
    "som": 6475543,
    "somShare": 0.0189
   },
+  "general": {
+   "customers": 35000000,
+   "revPerCustomer": 3069,
+   "tam": 107418361582,
+   "samCustomers": 980000,
+   "sam": 3007714124,
+   "somCustomers": 2450,
+   "som": 7519285
+  },
   "pd60": 460261,
   "et": 1276575,
   "totals": {

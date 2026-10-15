@@ -99,6 +99,7 @@ for key, c in (("parkinsense", "B"), ("tremosense", "C")):
     d["market"][key] = {"customers": round(MK[f"{c}7"].value), "revPerCustomer": round(MK[f"{c}8"].value), "tam": round(MK[f"{c}9"].value),
                         "samCustomers": round(MK[f"{c}10"].value), "sam": round(MK[f"{c}11"].value), "somCustomers": round(MK[f"{c}15"].value),
                         "som": round(MK[f"{c}16"].value), "somShare": round(MK[f"{c}17"].value, 4)}
+d["market"]["general"] = {"customers": round(MK["E7"].value), "revPerCustomer": round(MK["E8"].value), "tam": round(MK["E9"].value), "samCustomers": round(MK["E10"].value), "sam": round(MK["E11"].value), "somCustomers": round(MK["E15"].value), "som": round(MK["E16"].value)}
 d["market"]["pd60"] = round(MK["B5"].value); d["market"]["et"] = round(MK["C6"].value)
 d["market"]["totals"] = {"tam": round(MK["B19"].value), "sam": round(MK["B20"].value), "som": round(MK["B21"].value)}
 FS = wb["Funding Scenarios"]

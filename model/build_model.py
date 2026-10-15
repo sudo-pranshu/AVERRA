@@ -261,6 +261,16 @@ for i, row in enumerate(mk):
 for rr, lab, f in ((19, "Company TAM (₹/year)", "=B9+C9"), (20, "Company SAM (₹/year)", "=B11+C11"), (21, "Company SOM (₹/year)", "=B16+C16")):
     MK[f"A{rr}"] = lab; MK[f"A{rr}"].font = BOLD; put(MK, f"B{rr}", f, INR, font=BOLD)
 MK["A22"] = "Revenues add across products; customer counts are never summed (a PD household may buy both)."
+# --- ParkinSense as a general wearable: separate upside column, NOT in company totals or the forecast
+MK["A24"] = "ParkinSense as a general wearable — inputs (upside view, not in plan totals)"; MK["A24"].font = BOLD
+for rr, lab, v, fmt, note in ((25, "India smartwatch buyers per year (IDC, 2024)", 35000000, NUM, "IDC India: 35.0M smartwatches shipped in 2024 (total wearables 119.0M)"),
+                              (26, "Advanced / premium smartwatch share (IDC, 2024)", 0.028, PCT, "IDC: advanced smartwatches 2.8% of units; proxy for buyers at ParkinSense's price point"),
+                              (27, "SOM share of SAM customers (Year 3)", 0.0025, PCT, "ASSUMPTION: 0.25% of premium buyers via online channel")):
+    MK[f"A{rr}"] = lab; put(MK, f"B{rr}", v, fmt, font=BLUE); MK[f"D{rr}"] = note
+MK["E3"] = "ParkinSense — general wearable (upside)"; MK["E3"].font = BOLD; MK.column_dimensions["E"].width = 30
+for rr, f, fmt in ((7, "=B25", NUM), (8, "=B8", INR), (9, "=E7*E8", INR), (10, "=E7*B26", NUM), (11, "=E10*E8", INR), (15, "=E10*B27", NUM), (16, "=E15*E8", INR), (17, "=IF(E11=0,0,E16/E11)", PCT)):
+    put(MK, f"E{rr}", f, fmt, font=BLACK)
+MK["E18"] = "Not added to company totals or the forecast"
 
 # ============================================================ Forecast (36 months: prove → launch → scale to profitability)
 FC = wb.create_sheet("Forecast")

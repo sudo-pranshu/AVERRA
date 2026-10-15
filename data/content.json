@@ -132,11 +132,6 @@
   ],
   "repoVsPaper": [
    [
-    "Bench result",
-    "≈90% tremor rejection (founder-reported; logs to be published)",
-    "77.3% mean rejection, 4/6/8 Hz (Table IV)"
-   ],
-   [
     "Firmware",
     "Zephyr RTOS, multi-threaded",
     "Arduino framework, single loop"
@@ -164,8 +159,8 @@
     "bench"
    ],
    [
-    "77.3%",
-    "paper prototype: motorised simulator, 4/6/8 Hz, ±5°",
+    "4–8 Hz",
+    "tremor frequencies tested on a motorised simulator, ±5°",
     "bench"
    ],
    [
@@ -458,6 +453,15 @@
    "Grant only reduces tranche 2; Milestone 1 does not depend on it"
   ]
  ],
+ "fundsBuy": {
+  "Team": "Both founders full-time for six months",
+  "Validation (both products)": "12 TremoSense study units and the user study (n ≥ 10); ParkinSense reference testing",
+  "Regulatory & quality": "CDSCO classification opinion and ethics approval",
+  "Prototyping, tools, IP": "Provisional patent, test equipment and prototype iterations",
+  "Go-to-market & admin": "Clinic outreach for the trial-to-purchase test; company admin",
+  "Contingency": "Buffer for slips and price changes"
+ },
+ "fundsGrowth": "A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in M26.",
  "advantage": {
   "tremosense": [
    [
@@ -580,7 +584,7 @@
    "title": "TremoSense",
    "seconds": 55,
    "speaker": "Pranshu",
-   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOur paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz.\nThe current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code.\nNo person with tremor has used it yet."
+   "text": "TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.\nOn a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.\nNo person with tremor has used it yet."
   },
   {
    "slide": 6,
@@ -601,7 +605,7 @@
    "title": "Market",
    "seconds": 45,
    "speaker": "Pawan",
-   "text": "Thank you, Pranshu. We sized the market bottom-up.\nTremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year.\nParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.\nFiltering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L."
+   "text": "Thank you, Pranshu. We sized the market bottom-up.\nTremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year.\nParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. As a general wearable the upside is far larger: India bought 35 million smartwatches in 2024, a separate TAM of ₹10742 Cr. We show it as upside only; it is not in our plan.\nFiltering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L."
   },
   {
    "slide": 9,
@@ -629,7 +633,7 @@
    "title": "Team & growth",
    "seconds": 45,
    "speaker": "Pawan",
-   "text": "The team comes from the evidence. Pranshu built ParkinSense and co-authored TremoSense, and he leads the company, the wearables and signal processing. I co-built TremoSense and lead control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
+   "text": "We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement.\nGrowth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.\nThree experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."
   },
   {
    "slide": 13,
@@ -643,12 +647,12 @@
    "title": "Milestones, advantage & close",
    "seconds": 50,
    "speaker": "Pawan",
-   "text": "Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
+   "text": "Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26.\nWhy will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999.\nAVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."
   }
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1643
+  "words": 1689
  },
  "fmt": null
 }

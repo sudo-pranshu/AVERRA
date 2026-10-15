@@ -83,7 +83,7 @@ The ICMR evaluation lives in **one field**: `clinicalEvaluation` in `scripts/bui
 ## Evidence status and limitations
 
 - **ParkinSense:** streaming, steps, tremor scoring and motion context are bench-tested; HR/HRV/SpO₂ are research-grade; all analysis runs on a host, not on the wrist; the mobile app is in development. ICMR evaluation in progress, results pending.
-- **TremoSense:** the current build (Zephyr, 208 Hz, higher-torque servos) reaches ≈90% tremor rejection on the bench (founder-reported; logs to be published), up from 77.3% for the paper prototype. The public `constants.h` still shows the tuning constants as 0, so publish the tuned values with the logs. No user testing yet.
+- **TremoSense:** the current build (Zephyr, 208 Hz, higher-torque servos) reaches ≈90% tremor rejection on the bench (founder-reported; logs to be published). The public `constants.h` still shows the tuning constants as 0, so publish the tuned values with the logs. No user testing yet.
 - **Valuation:** ₹75 L is a working negotiation target, not an independently verified valuation. Person-months are estimates and Berkus scores are judgement.
 - **Financials:** cash-basis forecast built on assumptions (CAC, conversion, clinic growth, Scenario C cost) that no customer has validated. Competitor prices are benchmarks only.
 - **Regulatory and IP:** CDSCO class and HSN/GST rates are assumptions to confirm; the patent is in preparation (not filed).

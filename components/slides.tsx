@@ -465,8 +465,8 @@ function Market() {
   const T = MK.totals;
   const layers = [["TAM", T.tam, "Patients × annual revenue per customer", BLUE, 100], ["SAM", T.sam, "Urban and under neurologist follow-up", CYAN, 76], ["SOM · Year 3", T.som, "30 clinics in Mumbai and Pune, plus online", VIOLET, 52]] as const;
   return (
-    <Frame label="Market opportunity" title="Bottom-up, product by product" lead="Customer counts come from sourced prevalence; prices are hypotheses. The general wellness-wearable market is not sized here.">
-      <div className="grid items-center gap-10 @5xl:grid-cols-[1.1fr_1fr]">
+    <Frame label="Market opportunity" title="Bottom-up, product by product" lead="Customer counts come from sourced prevalence and IDC shipments; prices are hypotheses. The general-wearable column is upside, not in the plan totals.">
+      <div className="grid items-center gap-8 @5xl:grid-cols-[0.85fr_1.15fr]">
         <div className="flex flex-col items-center gap-3">
           {layers.map(([k, v, l, c, w], i) => (
             <motion.div key={k} initial={{ opacity: 0, scaleX: 0.5 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.2 + i * 0.35, duration: 0.7, ease }}
@@ -479,19 +479,19 @@ function Market() {
         </div>
         <div className="panel p-5">
           <table className="t-small w-full border-collapse">
-            <thead><tr className="text-left"><th className="p-2"></th><th className="p-2 text-cyan">ParkinSense (PD households)</th><th className="p-2 text-violet">TremoSense</th></tr></thead>
+            <thead><tr className="text-left align-bottom"><th className="p-2"></th><th className="p-2 text-cyan">ParkinSense (PD households)</th><th className="p-2 text-violet">TremoSense</th><th className="p-2 text-mint">ParkinSense as a general wearable <span className="t-micro block font-normal text-slate">upside, not in plan totals</span></th></tr></thead>
             <tbody>
-              {[["TAM customers", MK.parkinsense.customers.toLocaleString("en-IN"), MK.tremosense.customers.toLocaleString("en-IN")],
-                ["₹ per customer per year", inr(MK.parkinsense.revPerCustomer), inr(MK.tremosense.revPerCustomer)],
-                ["TAM", crore(MK.parkinsense.tam), crore(MK.tremosense.tam)], ["SAM", crore(MK.parkinsense.sam), crore(MK.tremosense.sam)],
-                ["SOM customers per year", MK.parkinsense.somCustomers.toLocaleString("en-IN"), MK.tremosense.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(MK.parkinsense.som), lakh(MK.tremosense.som)]].map((r) => (
-                <tr key={r[0]} className="border-t hairline"><td className="p-2 text-slate">{r[0]}</td><td className="t-num p-2 text-white">{r[1]}</td><td className="t-num p-2 text-white">{r[2]}</td></tr>
+              {[["TAM customers", MK.parkinsense.customers.toLocaleString("en-IN"), MK.tremosense.customers.toLocaleString("en-IN"), `${(MK.general.customers / 1e6).toFixed(1)}M buyers/yr`],
+                ["₹ per customer per year", inr(MK.parkinsense.revPerCustomer), inr(MK.tremosense.revPerCustomer), inr(MK.general.revPerCustomer)],
+                ["TAM", crore(MK.parkinsense.tam), crore(MK.tremosense.tam), crore(MK.general.tam, 0)], ["SAM", crore(MK.parkinsense.sam), crore(MK.tremosense.sam), crore(MK.general.sam)],
+                ["SOM customers per year", MK.parkinsense.somCustomers.toLocaleString("en-IN"), MK.tremosense.somCustomers.toLocaleString("en-IN"), MK.general.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(MK.parkinsense.som), lakh(MK.tremosense.som), lakh(MK.general.som)]].map((r) => (
+                <tr key={r[0]} className="border-t hairline"><td className="p-2 text-slate">{r[0]}</td><td className="t-num p-2 text-white">{r[1]}</td><td className="t-num p-2 text-white">{r[2]}</td><td className="t-num p-2 text-mint" style={{ background: "rgba(52,211,153,.07)" }}>{r[3]}</td></tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <Src>Sources: UNFPA India Ageing Report 2023; Khurana &amp; Gourie-Devi, Cureus 2025; Chin et al., Mov Disord 2021; Census 2011. Estimates: 40% under follow-up, 50% with eating-disruptive tremor.</Src>
+      <Src>Sources: UNFPA India Ageing Report 2023; Khurana &amp; Gourie-Devi, Cureus 2025; Chin et al., Mov Disord 2021; Census 2011; IDC India wearables 2024 (35.0M smartwatches, 2.8% advanced). Estimates: 40% under follow-up, 50% with eating-disruptive tremor, 0.25% SOM share for the general-wearable column.</Src>
     </Frame>
   );
 }
@@ -499,7 +499,7 @@ function Market() {
 /* ------------------------------------------------------------------ 10 MVP */
 function MVP() {
   const rows = [
-    { name: "TremoSense", color: VIOLET, cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5°", "≈90% rejection on the current build (founder-reported); 77.3% on the paper prototype", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
+    { name: "TremoSense", color: VIOLET, cells: ["Motorised tremor simulator, 4/6/8 Hz, ±5°", "≈90% tremor rejection on the current build (founder-reported)", "Self-feeding task, n ≥ 10: median reduction ≥50% and ≥60% would pay (M6)", "Persevere: validate on people before any claim"] },
     { name: "ParkinSense", color: CYAN, cells: ["Bench conditions, BLE soak, power profiling; clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10)", "Persevere: wellness launch; no clinical claim until results"] },
   ];
   const head = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
@@ -689,7 +689,7 @@ function TeamGrowth() {
       <div className="grid gap-8 @5xl:grid-cols-2">
         <div>
           <div className="grid gap-4 @2xl:grid-cols-2">
-            {[["PK", "Pranshu Kumar", "Co-founder, CEO", "Wearables, signal processing and firmware. ParkinSense lead author; TremoSense co-author; EXTC GPA 9.17; minor in AI/ML.", CYAN], ["PS", "Pawan Shinde", "Co-founder, CTO", "Control, gimbal and power electronics. TremoSense co-author (EKF + LQR platform).", VIOLET]].map(([ini, n, r, e, c], i) => (
+            {[["PK", "Pranshu Kumar", "Co-founder · hardware engineer", "Wearable electronics, sensors and embedded firmware. Built ParkinSense; co-built TremoSense.", CYAN], ["PS", "Pawan Shinde", "Co-founder · hardware engineer", "Control, gimbal and power electronics. Co-built TremoSense (EKF + LQR platform).", VIOLET]].map(([ini, n, r, e, c], i) => (
               <motion.div key={n} className="panel lift p-5" style={{ borderColor: `${c}88` }} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.15, ease }}>
                 <span className="t-small grid h-11 w-11 place-items-center rounded-full font-semibold text-navy" style={{ background: c, boxShadow: `0 0 24px ${c}66` }}>{ini}</span>
                 <p className="t-h2 mt-3">{n}</p><p className="t-small" style={{ color: c }}>{r}</p><p className="t-small mt-3 text-mist">{e}</p>
@@ -783,6 +783,19 @@ function Funding() {
           </div>
         </div>
       </div>
+      <div className="mt-5">
+        <p className="t-small mb-2 text-white">Where the {lakh(I)} goes <span className="t-micro text-slate">· Phase 1, M1–M6 · details on the next slide</span></p>
+        <div className="flex h-9 w-full gap-1 overflow-hidden rounded-xl">
+          {D.useOfFunds.filter((u) => u.phase1 > 0).concat([{ category: "Buffer (20%)", phase1: I - D.useOfFunds.reduce((x, u) => x + u.phase1, 0), phase2: 0 }]).map((u, k, arr) => {
+            const pal = [BLUE, CYAN, VIOLET, "#60A5FA", "#64748B", "#94A3B8", "#334155"];
+            return (
+              <motion.div key={u.category} className="t-micro flex items-center overflow-hidden whitespace-nowrap px-2 text-navy" initial={{ width: 0 }} animate={{ width: `${(u.phase1 / I) * 100}%` }} transition={{ delay: 0.5 + k * 0.08, duration: 0.6, ease }} style={{ background: pal[k], color: k >= 4 ? "#fff" : "#0b1222" }} title={`${u.category}: ${lakh(u.phase1)}`}>
+                {u.phase1 / I > 0.07 ? `${u.category.split(" (")[0]} ${lakh(u.phase1)}` : ""}
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
     </Frame>
   );
 }
@@ -794,16 +807,21 @@ function Milestones() {
   const pal = [BLUE, CYAN, VIOLET, "#60A5FA", "#64748B", "#94A3B8"];
   const NM = K.milestones.length;
   return (
-    <Frame label="Milestones and use of funds" title="Six months to a clear yes or no" lead={`Phase 1 costs ${lakh(tot)}; the ${lakh(F.C.equity)} round adds a 20% buffer.`}>
+    <Frame label="Use of funds and milestones" title={`How the ${lakh(F.C.equity)} grows the business`} lead={`Phase 1 (M1–M6) costs ${lakh(tot)}; the round adds a 20% buffer. ${K.fundsGrowth}`}>
       <div className="flex h-12 w-full gap-1 overflow-hidden rounded-xl">
         {uf.map((u, i) => (
           <motion.div key={u.category} initial={{ width: 0 }} animate={{ width: `${(u.phase1 / tot) * 100}%` }} transition={{ delay: 0.2 + i * 0.12, duration: 0.6, ease }} style={{ background: pal[i] }} className="first:rounded-l-xl last:rounded-r-xl" title={`${u.category}: ${lakh(u.phase1)}`} />
         ))}
       </div>
-      <ul className="t-small mt-3 flex flex-wrap gap-x-6 gap-y-1">
-        {uf.map((u, i) => <li key={u.category} className="text-mist"><span className="mr-2 inline-block h-2.5 w-2.5 rounded-sm align-middle" style={{ background: pal[i] }} />{u.category} <span className="t-num text-white">{lakh(u.phase1)} · {pct(u.phase1 / tot)}</span></li>)}
-      </ul>
-      <div className="relative mt-14">
+      <Stagger as="ul" className="mt-3 grid gap-2 @3xl:grid-cols-3">
+        {uf.map((u, i) => (
+          <Item as="li" key={u.category} className="rounded-xl border hairline bg-navy-2/70 px-3 py-2">
+            <p className="t-small"><span className="mr-2 inline-block h-2.5 w-2.5 rounded-sm align-middle" style={{ background: pal[i] }} /><span className="text-white">{u.category}</span> <span className="t-num text-mist">{lakh(u.phase1)} · {pct(u.phase1 / tot)}</span></p>
+            <p className="t-micro mt-0.5 text-slate">{(K.fundsBuy as Record<string, string>)[u.category]}</p>
+          </Item>
+        ))}
+      </Stagger>
+      <div className="relative mt-8">
         <div className="absolute left-0 right-0 top-[5px] hidden h-[2px] bg-line @5xl:block" />
         <motion.div className="absolute left-0 right-0 top-[5px] hidden h-[2px] @5xl:block" style={{ background: `linear-gradient(90deg, ${CYAN}, ${VIOLET} 60%, ${MINT})`, originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 2, ease, delay: 0.5 }} />
         <ol className="relative grid gap-4 @2xl:grid-cols-3 @3xl:grid-cols-6 @5xl:grid-cols-11">
@@ -821,7 +839,8 @@ function Milestones() {
           })}
         </ol>
       </div>
-      <motion.div className="mt-10 grid gap-3 @3xl:grid-cols-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
+      <p className="t-small mt-6 text-mist"><span className="text-mint">Then: </span>{K.fundsGrowth}</p>
+      <motion.div className="mt-3 grid gap-3 @3xl:grid-cols-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
         {[["Continue", "median tremor reduction ≥50% and ≥60% would pay", MINT], ["Pivot", "benefit holds but the price fails → clinic rental", AMBER], ["Stop TremoSense", "reduction below 30% → focus on ParkinSense", "#F87171"]].map(([k, v, c]) => (
           <div key={k} className="rounded-xl border px-4 py-2.5" style={{ borderColor: `${c}66`, background: `${c}10` }}><p className="t-small"><span className="font-semibold" style={{ color: c }}>M6 · {k}: </span><span className="text-mist">{v}</span></p></div>
         ))}

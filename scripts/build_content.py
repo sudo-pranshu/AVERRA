@@ -29,6 +29,7 @@ ue = D["unitEconomics"]; tsl, psl = ue["tremosenseLtv"], ue["parkinsenseLtv"]; p
 mk = D["market"]; H = D["headline"]; F = D["funding"]; V = D["valuation"]
 fC, fA, fB, fD = F["C"], F["A"], F["B"], F["D"]
 comp = {c["name"]: c for c in D["competitors"]}
+uf = {u["category"]: u["phase1"] for u in D["useOfFunds"]}
 pm = {r["price"]: r for r in ts["priceMatrix"]}
 
 STATUS = {"progress": "In progress", "impl": "Implemented", "bench": "Bench-tested", "partial": "Partial / in development", "planned": "Planned", "depends": "Needs hardware, firmware or validation", "sim": "Simulation only", "research": "Future research"}
@@ -79,14 +80,13 @@ content = {
         "architecture": ["Hand IMU (LSM6DS3) on the handle", "EKF estimates roll and pitch", "LQR gain matrix maps states to two servo commands",
                          "Two servos counter-rotate the spoon head", "Boost converter + capacitor hold the rail through servo current spikes"],
         "repoVsPaper": [
-            ("Bench result", "≈90% tremor rejection (founder-reported; logs to be published)", "77.3% mean rejection, 4/6/8 Hz (Table IV)"),
             ("Firmware", "Zephyr RTOS, multi-threaded", "Arduino framework, single loop"),
             ("Estimator", "2-state EKF (roll, pitch) + calibration offsets", "4-state EKF with gyro-bias tracking"),
             ("Sampling", "IMU data-ready at 208 Hz", "100 Hz, 10 ms loop"),
             ("Servos / power", "MG995 + FS90MG (higher torque); bench-powered", "2 × MG92B, XL6009, 1250 mAh LiPo"),
         ],
         "results": [("≈90%", "tremor rejection on the bench with the current build (founder-reported)", "bench"),
-                    ("77.3%", "paper prototype: motorised simulator, 4/6/8 Hz, ±5°", "bench"),
+                    ("4–8 Hz", "tremor frequencies tested on a motorised simulator, ±5°", "bench"),
                     ("0", "people with tremor tested so far", "planned")],
         "image": "/images/tremosense-rig.jpg",
     },
@@ -155,6 +155,15 @@ content = {
         ("IP", "Public repos and papers limit novelty", "Attorney novelty opinion by M2; if weak, rely on evidence and execution"),
         ("Funding", "SISFS grant may be refused", "Grant only reduces tranche 2; Milestone 1 does not depend on it"),
     ],
+    "fundsBuy": {
+        "Team": "Both founders full-time for six months",
+        "Validation (both products)": "12 TremoSense study units and the user study (n ≥ 10); ParkinSense reference testing",
+        "Regulatory & quality": "CDSCO classification opinion and ethics approval",
+        "Prototyping, tools, IP": "Provisional patent, test equipment and prototype iterations",
+        "Go-to-market & admin": "Clinic outreach for the trial-to-purchase test; company admin",
+        "Contingency": "Buffer for slips and price changes",
+    },
+    "fundsGrowth": "A positive M6 result unlocks tranche 2: a 100-unit pilot batch, EMC and CDSCO filing, first sales in M12 and a clinic network that reaches break-even in M26.",
     "advantage": {
         "tremosense": [
             ("GyroGlove", f"≈{pct(ts['launchPrice'] / comp['GyroGlove']['inr'], 1)} of the price ({inr(ts['launchPrice'])} vs ≈{lakh(comp['GyroGlove']['inr'])}), built for the task that matters most: eating.", "Stabilises the whole hand, not just a utensil."),
@@ -197,8 +206,7 @@ Its standout feature is tremor detection: a tremor score, frequency and burden. 
 Here's the status, honestly. Streaming, steps, tremor scoring and motion context are bench-tested. Heart rate, HRV and SpO2 are implemented but research-grade. The mobile app is in development, and all analysis currently runs on a host, not on the wrist.
 A clinical evaluation is in progress with ICMR. The results aren't back yet, so we make no clinical claim today. Longer term, ParkinSense could support research into early movement change in Parkinson's. That path runs through reference assessments, prospective validation and regulatory review. It is not a diagnostic claim."""))
 S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head.
-Our paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz.
-The current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code.
+On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.
 No person with tremor has used it yet."""))
 S.append(("Competition", 50, f"""Competitors, with prices checked this month.
 WHOOP costs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} a year, a Fitbit Charge 6 about {inr(comp['Fitbit Charge 6']['price'])}, and an Amazfit Bip 6 {inr(comp['Amazfit Bip 6']['price'])}. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.
@@ -210,7 +218,7 @@ For ParkinSense, the test is dominant-frequency error within 5 percent of a refe
 Our decision is to persevere, and to validate on people before we make any medical claim. With that, over to Pawan."""))
 S.append(("Market", 45, f"""Thank you, Pranshu. We sized the market bottom-up.
 TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about {mk['tremosense']['customers']/1e5:.1f} lakh people. At the launch price spread over a three-year life, that's {crore(mk['tremosense']['tam'])} a year.
-ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: {crore(mk['parkinsense']['tam'])}. We have not sized the general wellness market, because we couldn't find a sourced Indian figure.
+ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: {crore(mk['parkinsense']['tam'])}. As a general wearable the upside is far larger: India bought 35 million smartwatches in 2024, a separate TAM of {crore(D['market']['general']['tam'], 0)}. We show it as upside only; it is not in our plan.
 Filtering to urban patients under neurologist care gives a SAM of {crore(D['market']['totals']['sam'])}. Our year-three SOM, built from 30 clinics plus online, is about {lakh(D['market']['totals']['som'], 0)}."""))
 S.append(("Business model", 35, f"""The business model in brief. Clinicians and occupational therapists bring us patients. Families buy the device.
 Revenue comes in three steps. First, research kits for labs, which need no medical claim. Then TremoSense as a one-time sale, with a rental option for those who can't pay upfront. Then ParkinSense, as a device with an optional subscription.
@@ -225,14 +233,14 @@ Phase two launches TremoSense, with first sales in month twelve. In year three w
 Year-one costs are {lakh(H['costs12'])}, a gross burn of about {lakh(H['grossBurn12'], 2)} a month. Year two still loses {sp_lakh(-H['y2Net'])} rupees as volume builds.
 We reach sustained operating break-even in month {H['breakEvenMonth'].split()[0][1:]}, {BE_LONG}. Year three makes an operating profit of {lakh(H['y3Profit'])} on {crore(H['y3CashIn'])} of cash in, and we exit at about {lakh(H['m36Profit'])} profit a month.
 Getting there needs {lakh(H['fullRequirement'])} in total. Phase one alone needs {lakh(H['phase1Requirement'])}, and that number shapes our ask."""))
-S.append(("Team & growth", 45, f"""The team comes from the evidence. Pranshu built ParkinSense and co-authored TremoSense, and he leads the company, the wearables and signal processing. I co-built TremoSense and lead control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement.
+S.append(("Team & growth", 45, f"""We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement.
 Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data.
 Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta."""))
 S.append(("Funding ask & valuation", 60, f"""Now the ask, kept separate from the full plan. Year one costs {lakh(H['costs12'])} and reaching profitability needs {lakh(H['fullRequirement'])}. Today we raise only for milestone one: {inr(fC['equity'])}.
 We propose a pre-money valuation of {lakh(V['proposed'], 0)}. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of {lakh(V['floor'], 2)}: {V['personMonths']:.0f} person-months of engineering plus prototypes. A Berkus-style scorecard gives about {lakh(V['berkus'], 0)}, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way.
 At {lakh(V['proposed'], 0)}, post-money is P plus I: {inr(fC['post'])}. The investor owns I over post-money, {pct(fC['investor'], 1)}. After a 5 percent ESOP pool, the founders keep {pct(fC['founders'], 1)}. Even at the floor, the investor would own {pct(V['options'][0]['investor'], 1)}.
 The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result."""))
-S.append(("Milestones, advantage & close", 50, f"""Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
+S.append(("Milestones, advantage & close", 50, f"""Here's what the money buys. About {lakh(uf['Team'], 1)} keeps both of us full-time for six months, {lakh(uf['Prototyping, tools, IP'], 1)} covers prototypes, tools and the patent, and {lakh(uf['Validation (both products)'], 1)} builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month {H['breakEvenMonth'].split()[0][1:]}.
 Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time {inr(D['assumptions']['P3'])}.
 AVERRA: engineering better movement intelligence. We're asking for {lakh(fC['equity'], 1)} at a {lakh(V['proposed'], 0)} pre-money, {pct(fC['investor'], 1)}, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you."""))
 content["script"] = [{"slide": i + 1, "title": t, "seconds": s, "speaker": "Pranshu" if i < 7 else "Pawan", "text": tx.strip()} for i, (t, s, tx) in enumerate(S)]

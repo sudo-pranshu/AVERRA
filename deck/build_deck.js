@@ -216,7 +216,7 @@ function photos(s, ps, tsP) {
   const cols = ["Experiment run", "Result so far", "Pre-registered next metric", "Decision"];
   cols.forEach((c, j) => txt(s, c.toUpperCase(), { x: 1.85 + j * 2.75, y: 1.5, w: 2.6, h: 0.25, fontSize: 9.5, bold: true, color: C.muted, charSpacing: 1 }));
   const rows = [
-    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "≈90% rejection on the current build (founder-reported); 77.3% on the paper prototype", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
+    ["ts", [1.0, 0.3], C.violet, ["Motorised tremor simulator, 4/6/8 Hz, ±5° (paper)", "≈90% tremor rejection on the current build (founder-reported)", "Self-feeding task, n ≥ 10: median tremor reduction ≥50% and ≥60% would pay (M6)", "PERSEVERE — validate on people before any claim"]],
     ["ps", [1.0, 0.3], C.cyan, ["Bench: rest, 5 Hz fixture, walking, arm motion; BLE soak; PPK II power. Clinical evaluation with ICMR in progress", "8/8 bench conditions correct; ≈7 mA. ICMR results pending (founder-reported)", "Dominant-frequency error ≤5% vs reference; 0 false steps in tremor (M10); add ICMR results when published", "PERSEVERE — wellness launch; no clinical claim until results"]],
   ];
   rows.forEach(([k, _, col, cells], i) => {
@@ -243,15 +243,16 @@ function photos(s, ps, tsP) {
     txt(s, f[2], { x: x + 0.2, y: y + 0.95, w: w - 0.3, h: 0.3, fontSize: 10, color: C.light });
   });
   const P = MK.parkinsense, Tt = MK.tremosense;
-  const rows = [["", "ParkinSense (PD households)", "TremoSense"],
-    ["TAM customers", P.customers.toLocaleString("en-IN"), Tt.customers.toLocaleString("en-IN")],
-    ["₹ / customer / year", inr(P.revPerCustomer), inr(Tt.revPerCustomer)],
-    ["TAM", crore(P.tam), crore(Tt.tam)], ["SAM", crore(P.sam), crore(Tt.sam)],
-    ["SOM customers / yr", P.somCustomers.toLocaleString("en-IN"), Tt.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(P.som), lakh(Tt.som)]];
-  s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? (j === 1 ? C.cyan : j === 2 ? C.violet : C.white) : j === 0 ? C.muted : C.white, fill: { color: i === 0 ? C.card2 : C.bg } } }))),
-    { x: 7.5, y: 1.55, w: 5.3, colW: [1.7, 1.9, 1.7], fontFace: B, fontSize: 11, border: { type: "solid", pt: 0.5, color: C.line }, rowH: 0.48, valign: "middle", margin: 0.05, objectName: "mk_table" });
-  txt(s, [{ text: "Not sized: ", options: { bold: true, color: C.amber } }, { text: "the general Indian wellness-wearable market — no sourced figure found. Estimates (purple in the model): 40% under follow-up, 50% eating-disruptive tremor, all prices.", options: { color: C.light } }],
-    { x: 7.5, y: 5.05, w: 5.3, h: 1.0, fontSize: 10.5, objectName: "mk_note" });
+  const G = MK.general;
+  const rows = [["", "ParkinSense (PD households)", "TremoSense", "ParkinSense general wearable (upside)"],
+    ["TAM customers", P.customers.toLocaleString("en-IN"), Tt.customers.toLocaleString("en-IN"), (G.customers / 1e6).toFixed(1) + "M / yr"],
+    ["₹ / customer / year", inr(P.revPerCustomer), inr(Tt.revPerCustomer), inr(G.revPerCustomer)],
+    ["TAM", crore(P.tam), crore(Tt.tam), crore(G.tam, 0)], ["SAM", crore(P.sam), crore(Tt.sam), crore(G.sam)],
+    ["SOM customers / yr", P.somCustomers.toLocaleString("en-IN"), Tt.somCustomers.toLocaleString("en-IN"), G.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(P.som), lakh(Tt.som), lakh(G.som)]];
+  s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? (j === 1 ? C.cyan : j === 2 ? C.violet : j === 3 ? C.green : C.white) : j === 0 ? C.muted : C.white, fill: { color: i === 0 ? C.card2 : C.bg } } }))),
+    { x: 6.9, y: 1.55, w: 5.9, colW: [1.45, 1.55, 1.3, 1.6], fontFace: B, fontSize: 10, border: { type: "solid", pt: 0.5, color: C.line }, rowH: 0.48, valign: "middle", margin: 0.05, objectName: "mk_table" });
+  txt(s, [{ text: "Upside column: ", options: { bold: true, color: C.green } }, { text: "ParkinSense as a general wearable, from IDC 2024 (35.0M smartwatches, 2.8% advanced). Not in plan totals or the forecast. Estimates: 40% under follow-up, 50% eating-disruptive tremor, 0.25% SOM share, all prices.", options: { color: C.light } }],
+    { x: 6.9, y: 5.05, w: 5.9, h: 1.0, fontSize: 10, objectName: "mk_note" });
   src(s, "UNFPA 2023 (149M aged 60+); PD 308.9/lakh aged 60+ (Je et al., via Cureus 2025); ET 89.96/lakh (Chin et al. 2021); Census 2011 (31.1% urban). Workings: model › Market.");
 }
 
@@ -343,8 +344,8 @@ function photos(s, ps, tsP) {
 // ===================================================================== 12 TEAM + GROWTH
 {
   const s = base(12, "11 · TEAM & GROWTH", "A builder team, growing through clinics");
-  [[0.55, "Pranshu Kumar", "Co-founder · CEO", "Wearables, DSP & firmware", "ParkinSense lead author · TremoSense co-author · EXTC GPA 9.17 · minor in AI/ML", C.cyan],
-   [3.6, "Pawan Shinde", "Co-founder · CTO", "Control, gimbal & power", "TremoSense co-author (EKF + LQR platform) · EXTC, VJTI", C.violet]].forEach((f, i) => {
+  [[0.55, "Pranshu Kumar", "Co-founder · hardware engineer", "Wearable electronics & firmware", "Built ParkinSense · co-built TremoSense", C.cyan],
+   [3.6, "Pawan Shinde", "Co-founder · hardware engineer", "Control, gimbal & power", "Co-built TremoSense (EKF + LQR platform)", C.violet]].forEach((f, i) => {
     card(s, f[0], 1.5, 2.9, 2.55, "founder" + i, C.card2, f[5]);
     txt(s, [{ text: f[1], options: { bold: true, color: C.white, fontSize: 16, breakLine: true } }, { text: f[2], options: { bold: true, color: f[5], fontSize: 11, breakLine: true } }, { text: f[3], options: { color: C.light, fontSize: 11 } }], { x: f[0] + 0.18, y: 1.62, w: 2.6, h: 1.1 });
     txt(s, f[4], { x: f[0] + 0.18, y: 2.85, w: 2.6, h: 1.1, fontSize: 9.5, color: C.muted });

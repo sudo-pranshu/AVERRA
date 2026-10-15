@@ -13,8 +13,8 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M26 (Aug 2029); Year-3 operating profit ₹11.7 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1643 words) |
-| TremoSense result | 77.3% (paper) | ≈90% bench rejection on the current build (founder-reported); 77.3% kept as the paper-prototype figure |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1689 words) |
+| TremoSense result | Paper figure | ≈90% bench rejection on the current build (founder-reported) |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
 
@@ -47,7 +47,6 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 | Item | Current build | Paper prototype |
 |---|---|---|
-| Bench result | ≈90% tremor rejection (founder-reported; logs to be published) | 77.3% mean rejection, 4/6/8 Hz (Table IV) |
 | Firmware | Zephyr RTOS, multi-threaded | Arduino framework, single loop |
 | Estimator | 2-state EKF (roll, pitch) + calibration offsets | 4-state EKF with gyro-bias tracking |
 | Sampling | IMU data-ready at 208 Hz | 100 Hz, 10 ms loop |
@@ -64,7 +63,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1643 words, about 138 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1689 words, about 142 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -101,7 +100,7 @@ ParkinSense today is a wrist wearable with an IMU and an optical sensor. It stre
 
 **5. TremoSense** (55 s)
 
-TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. Our paper prototype achieved 77.3 percent average rejection on a motorised tremor simulator at four, six and eight hertz. The current build is better. It moves to a real-time operating system, samples at 208 hertz and uses higher-torque servos, and on the bench it rejects about 90 percent of tremor. We'll publish those logs alongside the code. No person with tremor has used it yet.
+TremoSense is for people who already have tremor. An IMU in the handle feeds a Kalman filter that estimates roll and pitch. An LQR controller then drives two servos to counter-rotate the spoon head. On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code. No person with tremor has used it yet.
 
 **6. Competition** (50 s)
 
@@ -113,7 +112,7 @@ What has the MVP proven? Both products work on the bench. TremoSense hasn't been
 
 **8. Market** (45 s)
 
-Thank you, Pranshu. We sized the market bottom-up. TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year. ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. We have not sized the general wellness market, because we couldn't find a sourced Indian figure. Filtering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L.
+Thank you, Pranshu. We sized the market bottom-up. TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year. ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. As a general wearable the upside is far larger: India bought 35 million smartwatches in 2024, a separate TAM of ₹10742 Cr. We show it as upside only; it is not in our plan. Filtering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L.
 
 **9. Business model** (35 s)
 
@@ -129,7 +128,7 @@ The plan starts in July 2027 and runs three years. Phase one, the first six mont
 
 **12. Team & growth** (45 s)
 
-The team comes from the evidence. Pranshu built ParkinSense and co-authored TremoSense, and he leads the company, the wearables and signal processing. I co-built TremoSense and lead control and hardware. In phase two we hire one test engineer. The equity split will be set in a founders' agreement. Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data. Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta.
+We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSense; he leads the company and the wearable hardware. I co-built TremoSense and lead control and power electronics. Our gap is commercial, so after the M6 study we hire a test engineer, and from month 19 support and sales staff. The equity split will be set in a founders' agreement. Growth runs through clinics. From a thousand caregivers reached, we target a quarter trying the device and 40 percent of those buying. These are targets, not data. Three experiments come first: an in-clinic trial-to-purchase test, support-group referrals, and a ParkinSense wellness beta.
 
 **13. Funding ask & valuation** (60 s)
 
@@ -137,7 +136,7 @@ Now the ask, kept separate from the full plan. Year one costs ₹35.2 L and reac
 
 **14. Milestones, advantage & close** (50 s)
 
-Here's what the money buys. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
+Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 26. Why will people choose us? TremoSense costs under 2 percent of a GyroGlove and about half the price of Liftware, and it actively cancels tremor where a weighted spoon only adds weight. ParkinSense measures tremor, which none of WHOOP, Fitbit or Amazfit lists as a feature, for a one-time ₹7,999. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
 
 ## Financial workings
 
@@ -146,7 +145,8 @@ All figures are live formulas in the workbook; blue cells are inputs and yellow 
 **Market (bottom-up, India)**
 - People with PD aged 60+: 149M × 308.9 per lakh = 460,261. People with ET: 1,276,575 (single rural study).
 - TremoSense TAM customers = (PD + ET) × 50% eating-disruptive = 868,418 × ₹3,174/yr = ₹275.7 Cr.
-- ParkinSense beachhead (PD households) = 460,261 × ₹3,069/yr = ₹141.3 Cr. The general wellness market is not sized (no sourced Indian figure).
+- ParkinSense beachhead (PD households) = 460,261 × ₹3,069/yr = ₹141.3 Cr.
+- ParkinSense as a general wearable (upside, not in plan totals): 35.0M smartwatch buyers/yr (IDC 2024) × ₹3,069 = ₹10742 Cr TAM; SAM = 2.8% advanced/premium share = ₹300.8 Cr; SOM = 0.25% of SAM customers (assumption) = ₹75.2 L.
 - SAM = TAM customers × 31.1% urban × 40% under follow-up → ₹51.9 Cr. Year-3 SOM from channel capacity → ₹109.0 L (TremoSense 2,040/yr; ParkinSense 1,440/yr).
 
 **Unit economics**
@@ -310,7 +310,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 | IP | Public repos and papers limit novelty | Attorney novelty opinion by M2; if weak, rely on evidence and execution |
 | Funding | SISFS grant may be refused | Grant only reduces tranche 2; Milestone 1 does not depend on it |
 
-**Technical:** the current build's ≈90% tremor rejection is a founder-reported bench result; logs are not yet published. The paper prototype's 77.3% is a motorised-simulator result. The public `constants.h` still shows Q, R and K_lqr as 0, so publish the tuned constants before anyone checks the repository. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
+**Technical:** the current build's ≈90% tremor rejection is a founder-reported bench result; logs are not yet published. The public `constants.h` still shows Q, R and K_lqr as 0, so publish the tuned constants before anyone checks the repository. ParkinSense analysis runs on a host, not on the wrist. HR, HRV and SpO₂ are research-grade.
 
 **Clinical:** Clinical evaluation in progress with ICMR — Founder-reported; protocol, site and results not yet available. ParkinSense does not diagnose, predict or clinically detect Parkinson's disease. Early identification is a research path, not a claim; healthy young users are a wellness audience, not a screening population.
 
@@ -327,7 +327,7 @@ Caveats: the WHOOP price is a 12-month membership that includes the strap. The L
 5. **Why would someone choose ParkinSense over WHOOP or Amazfit?** Not for sleep or battery today; they are better there. The difference is movement-specific insight (tremor burden, motion context) at ₹7,999 with no mandatory subscription. We have to prove people value it: that's experiment 3.
 6. **Why TremoSense over GyroGlove or a weighted spoon?** GyroGlove stabilises the whole hand at about ₹5.6 L. A weighted spoon is cheap but passive. TremoSense actively cancels tremor at the spoon for ₹9,999. We don't claim parity until the user study.
 7. **What does ICMR testing show?** Results aren't available yet. We will add them when they're published and make no clinical claim before then.
-8. **Your repository differs from your paper.** Yes: the repository is the newer build. It moves to Zephyr at 208 Hz with higher-torque servos and reaches about 90% bench rejection against 77.3% for the paper prototype. Publishing those logs is the M3 milestone.
+8. **Your repository differs from your paper.** Yes: the repository is the newer build. It moves to Zephyr at 208 Hz with higher-torque servos and reaches about 90% bench rejection on the motorised simulator. Publishing those logs is the M3 milestone.
 9. **What makes the technology defensible?** Today, the integrated signal chain and the evidence we generate. Possibly a patent later, but the public disclosures limit novelty.
 10. **What would prove the products are better?** For TremoSense, a controlled self-feeding study against a weighted spoon. For ParkinSense, accuracy against reference instruments and the ICMR results.
 11. **LTV:CAC?** TremoSense 3.3×, ParkinSense 2.0×. Both are estimates without customers; experiment 1 measures real CAC.
