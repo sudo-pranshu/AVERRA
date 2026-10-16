@@ -138,7 +138,9 @@ function SpoonDemo() {
     m.k += ((s ? 0 : 1) - m.k) * Math.min(1, dt * 6);
     // residual ≈10% of the tremor, low-passed so it reads as a gentle drift, not jitter
     m.r += (a * 0.1 - m.r) * Math.min(1, dt * 2.5);
-    const bowl = m.k * a + (1 - m.k) * m.r;
+    // a very slight residual shake at higher tremor frequencies (servo lag), none at 4 Hz
+    const jit = (f >= 8 ? 0.7 : f >= 6 ? 0.4 : 0) * Math.sin(2 * Math.PI * f * t * 0.5 + 0.6);
+    const bowl = m.k * a + (1 - m.k) * (m.r + jit);
     hand.current?.setAttribute("transform", `rotate(${a.toFixed(2)} 150 168)`);
     head.current?.setAttribute("transform", `rotate(${(bowl - a).toFixed(2)} 150 168)`);
     m.raw.push(a); m.out.push(bowl);
