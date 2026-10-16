@@ -41,11 +41,10 @@ body {
 /* Glass panels with a hairline top highlight; the accent glow appears on hover. */
 .panel {
   position: relative;
-  background: linear-gradient(180deg, rgba(30, 44, 78, 0.72), rgba(19, 29, 51, 0.72));
+  background: linear-gradient(180deg, rgba(30, 44, 78, 0.9), rgba(19, 29, 51, 0.9));
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 40px -24px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 .panel.lift:hover {

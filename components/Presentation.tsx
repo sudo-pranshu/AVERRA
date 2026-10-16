@@ -23,14 +23,16 @@ function useHashIndex(max: number) {
 
 /** Scale factor for the stage; null = phone / portrait layout (natural scrolling). */
 function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
-  const [s, setS] = useState<number | null>(1);
+  const [s, setS] = useState<{ k: number; x: number; y: number; ready?: boolean } | null>({ k: 1, x: 0, y: 0, ready: false });
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const fit = () => {
       const { width: w, height: h } = el.getBoundingClientRect();
       const staged = window.innerWidth >= 860 && window.innerWidth / window.innerHeight >= 1.15;
-      setS(staged ? Math.min(w / CW, h / CH) : null);
+      if (!staged) return setS(null);
+      const k = Math.min(w / CW, h / CH);
+      setS({ k, x: Math.round((w - CW * k) / 2), y: Math.round((h - CH * k) / 2), ready: true });
     };
     fit();
     const ro = new ResizeObserver(fit);
@@ -123,16 +125,16 @@ export default function Presentation() {
         {/* stage */}
         <div ref={area} className="relative z-10 min-h-0 flex-1">
           <div
-            className={staged ? "absolute left-1/2 top-1/2 @container" : "absolute inset-0 overflow-y-auto @container"}
-            style={staged ? { width: CW, height: CH, transform: `translate(-50%, -50%) scale(${scale})` } : undefined}
+            className={staged ? "absolute left-0 top-0 @container" : "absolute inset-0 overflow-y-auto @container"}
+            style={staged ? { width: CW, height: CH, transformOrigin: "0 0", transform: `translate(${scale.x}px, ${scale.y}px) scale(${scale.k})`, visibility: scale.ready ? "visible" : "hidden" } : undefined}
           >
             <AnimatePresence mode="wait" custom={dir} initial={false}>
               <motion.section
                 key={slide.id}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir * 36, filter: "blur(6px)" }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir * -24, filter: "blur(4px)", transition: { duration: 0.25 } }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir * 28 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir * -16, transition: { duration: 0.18, ease: "easeIn" } }}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
                 className={staged ? "h-full w-full px-14 py-6" : "min-h-full w-full px-5 pb-24 pt-4"}
                 aria-label={`Slide ${index + 1}: ${slide.title}`}
                 data-slide={slide.id}
@@ -189,16 +191,20 @@ export default function Presentation() {
   );
 }
 
-/** Two soft light fields that drift to a new position and take the slide's accent colour. */
+/** Two soft light fields that drift to a new position and take the slide's accent colour.
+ *  Radial gradients moved with transforms only: no blur filter and no layout work, so it stays smooth. */
 function Ambient({ accent, index }: { accent: string; index: number }) {
   const a = (index * 37) % 100, b = (index * 61 + 40) % 100;
+  const ease = [0.22, 1, 0.36, 1] as const;
   return (
-    <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
       <div className="dots absolute inset-0" />
-      <motion.div className="absolute h-[70vmax] w-[70vmax] rounded-full opacity-[0.16] blur-[110px]"
-        animate={{ left: `${-25 + a * 0.5}%`, top: `${-35 + (a % 30)}%`, backgroundColor: accent }} transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }} />
-      <motion.div className="absolute h-[60vmax] w-[60vmax] rounded-full bg-blue opacity-[0.10] blur-[120px]"
-        animate={{ left: `${30 + b * 0.4}%`, top: `${25 + (b % 35)}%` }} transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }} />
+      <motion.div className="absolute left-0 top-0 h-[90vmax] w-[90vmax] rounded-full opacity-[0.22]"
+        style={{ background: "radial-gradient(closest-side, currentColor, transparent)", transition: "color 1.2s ease" , color: accent }}
+        animate={{ x: `${-45 + a * 0.5}vw`, y: `${-50 + (a % 30)}vh` }} transition={{ duration: 1.6, ease }} />
+      <motion.div className="absolute left-0 top-0 h-[80vmax] w-[80vmax] rounded-full opacity-[0.14]"
+        style={{ background: "radial-gradient(closest-side, #2563EB, transparent)" }}
+        animate={{ x: `${15 + b * 0.4}vw`, y: `${10 + (b % 35)}vh` }} transition={{ duration: 1.8, ease }} />
     </div>
   );
 }

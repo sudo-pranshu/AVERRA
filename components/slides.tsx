@@ -42,6 +42,7 @@ function LiveSignal() {
   const W = 1320, Hh = 200, mid = Hh / 2, fx = W * 0.5;
   const raw = useRef<SVGPathElement>(null);
   const calm = useRef<SVGPathElement>(null);
+  const glowP = useRef<SVGPathElement>(null);
   useTicker((t) => {
     const voluntary = (x: number) => 22 * Math.sin(2 * Math.PI * (x / W * 0.9 - t * 0.12));
     const tremor = (x: number) => 52 * Math.sin(2 * Math.PI * (x / W * 16 - t * 1.6)) * (0.75 + 0.25 * Math.sin(2 * Math.PI * (x / W * 2.3 - t * 0.3)));
@@ -54,15 +55,16 @@ function LiveSignal() {
     }
     raw.current?.setAttribute("d", a);
     calm.current?.setAttribute("d", b);
+    glowP.current?.setAttribute("d", b);
   });
   return (
     <motion.svg viewBox={`0 0 ${W} ${Hh}`} className="w-full overflow-visible" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
       <defs>
         <linearGradient id="rawg" x1="0" x2="1"><stop offset="0" stopColor="#8B5CF6" stopOpacity="0" /><stop offset="0.35" stopColor="#8B5CF6" stopOpacity="0.9" /><stop offset="1" stopColor="#A78BFA" /></linearGradient>
-        <filter id="glow" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="5" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-      </defs>
+              </defs>
       <path ref={raw} fill="none" stroke="url(#rawg)" strokeWidth="2.6" strokeLinejoin="round" />
-      <path ref={calm} fill="none" stroke="#67E8F9" strokeWidth="3.2" strokeLinejoin="round" filter="url(#glow)" />
+      <path ref={glowP} fill="none" stroke="#67E8F9" strokeOpacity="0.18" strokeWidth="12" strokeLinejoin="round" strokeLinecap="round" />
+      <path ref={calm} fill="none" stroke="#67E8F9" strokeWidth="3.2" strokeLinejoin="round" />
       <line x1={fx} x2={fx} y1="8" y2={Hh - 8} stroke="#fff" strokeOpacity="0.5" strokeDasharray="3 6" />
       <circle cx={fx} cy={mid} r="7" fill="#06B6D4"><animate attributeName="r" values="6;10;6" dur="2.4s" repeatCount="indefinite" /></circle>
       <text x={fx - 14} y="18" fill="#C4B5FD" fontSize="14" textAnchor="end">tremor in</text>
@@ -81,7 +83,7 @@ function Flow({ steps, color, highlight = [] }: { steps: string[]; color: string
       <motion.span className="absolute bottom-4 left-[22px] top-4 w-px" style={{ background: `${color}55`, originY: 0 }} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.9, ease, delay: 0.2 }} />
       {steps.map((s, i) => (
         <motion.li key={s} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.12, duration: 0.45, ease }}
-          className="t-small relative flex items-center gap-3 rounded-xl border px-3 py-2.5 backdrop-blur"
+          className="t-small relative flex items-center gap-3 rounded-xl border px-3 py-2.5"
           style={{ borderColor: highlight.includes(i) ? color : "rgba(148,163,184,.16)", background: highlight.includes(i) ? `${color}1F` : "rgba(19,29,51,.8)" }}>
           <span className="t-num grid h-6 w-6 shrink-0 place-items-center rounded-full text-[0.7rem] font-semibold text-navy" style={{ background: color }}>{i + 1}</span>
           <span className="text-white">{s}</span>
@@ -125,26 +127,35 @@ function SpoonDemo() {
   const head = useRef<SVGGElement>(null);
   const traceRaw = useRef<SVGPathElement>(null);
   const trace = useRef<SVGPathElement>(null);
-  const sim = useRef({ k: 0, r: 0, last: 0, raw: Array(150).fill(0) as number[], out: Array(150).fill(0) as number[] });
+  const sim = useRef({ k: 0, r: 0, last: 0, acc: 0, a: 0, b: 0, raw: Array(150).fill(0) as number[], out: Array(150).fill(0) as number[] });
   const state = useRef({ on, hz });
   state.current = { on, hz };
   useTicker((t) => {
     const { on: s, hz: f } = state.current;
     const m = sim.current;
-    const dt = Math.min(0.05, Math.max(0.001, t - m.last)); m.last = t;
-    // handle angle: tremor (shown at half speed) plus a slow voluntary drift
-    const a = 7 * Math.sin(2 * Math.PI * f * t * 0.5) + 1.5 * Math.sin(2 * Math.PI * 0.25 * t);
-    // ease the controller in/out so switching never snaps
-    m.k += ((s ? 0 : 1) - m.k) * Math.min(1, dt * 6);
-    // residual ≈10% of the tremor, low-passed so it reads as a gentle drift, not jitter
-    m.r += (a * 0.1 - m.r) * Math.min(1, dt * 2.5);
-    // a very slight residual shake at higher tremor frequencies (servo lag), none at 4 Hz
-    const jit = (f >= 8 ? 0.7 : f >= 6 ? 0.4 : 0) * Math.sin(2 * Math.PI * f * t * 0.5 + 0.6);
-    const bowl = m.k * a + (1 - m.k) * (m.r + jit);
+    const dt = Math.min(0.1, Math.max(0, t - m.last)); m.last = t;
+    // fixed 60 Hz simulation steps: same speed and smoothness on 60, 120 and 144 Hz screens
+    const STEP = 1 / 60;
+    m.acc += dt;
+    let a = m.a, bowl = m.b;
+    while (m.acc >= STEP) {
+      m.acc -= STEP;
+      const ts = t - m.acc;
+      // handle angle: tremor (shown at half speed) plus a slow voluntary drift
+      a = 7 * Math.sin(2 * Math.PI * f * ts * 0.5) + 1.5 * Math.sin(2 * Math.PI * 0.25 * ts);
+      // ease the controller in/out so switching never snaps
+      m.k += ((s ? 0 : 1) - m.k) * STEP * 6;
+      // residual ≈10% of the tremor, low-passed so it reads as a gentle drift, not jitter
+      m.r += (a * 0.1 - m.r) * STEP * 2.5;
+      // a very slight residual shake at higher tremor frequencies (servo lag), none at 4 Hz
+      const jit = (f >= 8 ? 0.7 : f >= 6 ? 0.4 : 0) * Math.sin(2 * Math.PI * f * ts * 0.5 + 0.6);
+      bowl = m.k * a + (1 - m.k) * (m.r + jit);
+      m.raw.push(a); m.out.push(bowl);
+      if (m.raw.length > 150) { m.raw.shift(); m.out.shift(); }
+    }
+    m.a = a; m.b = bowl;
     hand.current?.setAttribute("transform", `rotate(${a.toFixed(2)} 150 168)`);
     head.current?.setAttribute("transform", `rotate(${(bowl - a).toFixed(2)} 150 168)`);
-    m.raw.push(a); m.out.push(bowl);
-    if (m.raw.length > 150) { m.raw.shift(); m.out.shift(); }
     const path = (arr: number[]) => "M" + arr.map((v, i) => `${(i * 2).toFixed(1)},${(30 - v * 2.4).toFixed(1)}`).join(" L");
     traceRaw.current?.setAttribute("d", path(m.raw));
     trace.current?.setAttribute("d", path(m.out));
@@ -198,16 +209,22 @@ function WristDemo() {
   const line = useRef<SVGPathElement>(null);
   const heart = useRef<SVGPathElement>(null);
   const [steps, setSteps] = useState(0);
-  const sim = useRef({ buf: Array(130).fill(0) as number[], last: 0, stepAcc: 0, hb: 0 });
+  const sim = useRef({ buf: Array(130).fill(0) as number[], last: 0, stepAcc: 0, hb: 0, acc: 0 });
   const st = useRef(mode);
   st.current = mode;
   const hr = mode === "walk" ? 98 : mode === "tremor" ? 76 : 68;
   useTicker((t) => {
     const m = sim.current, md = st.current;
-    const dt = Math.min(0.05, Math.max(0.001, t - m.last)); m.last = t;
-    const noise = (Math.sin(t * 37.1) + Math.sin(t * 53.7)) * 0.6;
-    const v = md === "rest" ? noise * 0.8 : md === "tremor" ? 14 * Math.sin(2 * Math.PI * 4.9 * t * 0.5) + noise : 18 * Math.max(0, Math.sin(2 * Math.PI * 0.9 * t)) ** 3 - 4 + noise;
-    m.buf.push(v); if (m.buf.length > 130) m.buf.shift();
+    const dt = Math.min(0.1, Math.max(0, t - m.last)); m.last = t;
+    const STEP = 1 / 60;
+    m.acc += dt;
+    while (m.acc >= STEP) {
+      m.acc -= STEP;
+      const ts = t - m.acc;
+      const noise = (Math.sin(ts * 37.1) + Math.sin(ts * 53.7)) * 0.6;
+      const v = md === "rest" ? noise * 0.8 : md === "tremor" ? 14 * Math.sin(2 * Math.PI * 4.9 * ts * 0.5) + noise : 18 * Math.max(0, Math.sin(2 * Math.PI * 0.9 * ts)) ** 3 - 4 + noise;
+      m.buf.push(v); if (m.buf.length > 130) m.buf.shift();
+    }
     line.current?.setAttribute("d", "M" + m.buf.map((y, i) => `${(i * 2).toFixed(1)},${(35 - y).toFixed(1)}`).join(" L"));
     if (md === "walk") { m.stepAcc += dt * 1.8; if (m.stepAcc >= 1) { m.stepAcc -= 1; setSteps((x) => x + 1); } }
     const bpm = md === "walk" ? 98 : md === "tremor" ? 76 : 68;
@@ -636,7 +653,7 @@ function MVP() {
             <motion.p className="t-h2 self-center" style={{ color: r.color }} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + ri * 0.4 }}>{r.name}</motion.p>
             {r.cells.map((c, j) => (
               <motion.div key={j} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + ri * 0.4 + j * 0.12, ease }}
-                className={`rounded-2xl border p-4 backdrop-blur ${j === 3 ? "border-mint/50 bg-mint/10" : j === 2 ? "border-amber/50 bg-amber/5" : "hairline bg-navy-2/80"}`}>
+                className={`rounded-2xl border p-4 ${j === 3 ? "border-mint/50 bg-mint/10" : j === 2 ? "border-amber/50 bg-amber/5" : "hairline bg-navy-2/80"}`}>
                 <p className="t-micro text-slate @3xl:hidden">{head[j]}</p>
                 <p className={`t-small ${j === 3 ? "text-mint" : "text-white"}`}>{c}</p>
               </motion.div>
@@ -910,7 +927,7 @@ function TeamMap() {
   const line = (x1: number, y1: number, x2: number, y2: number) => `M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`;
   return (
     <svg viewBox={`0 0 ${W} ${Hh}`} className="w-full overflow-visible" role="img" aria-label="Team mind map">
-      <defs><filter id="tglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" /></filter></defs>
+      <defs>{founders.map((f) => <radialGradient key={f.ini} id={`tg-${f.ini}`}><stop offset="0.55" stopColor={f.c} stopOpacity="0.55" /><stop offset="1" stopColor={f.c} stopOpacity="0" /></radialGradient>)}</defs>
       {founders.map((f, i) => (
         <g key={f.ini}>
           <motion.path d={`M${cx},${cy} Q${(cx + f.x) / 2},${cy} ${f.x},${f.y + 32}`} fill="none" stroke={f.c} strokeWidth="2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.7, delay: 0.3 + i * 0.15 }} />
@@ -924,7 +941,7 @@ function TeamMap() {
             </g>
           ))}
           <motion.g initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 + i * 0.15 }}>
-            <circle cx={f.x} cy={f.y} r="30" fill={f.c} opacity="0.35" filter="url(#tglow)" />
+            <circle cx={f.x} cy={f.y} r="46" fill={`url(#tg-${f.ini})`} />
             <circle cx={f.x} cy={f.y} r="26" fill={f.c} />
             <text x={f.x} y={f.y + 5} textAnchor="middle" fontSize="15" fontWeight="700" fill="#0B1222">{f.ini}</text>
             <text x={f.x} y={f.y - 54} textAnchor="middle" fontSize="17" fontWeight="600" fill="#fff">{f.name}</text>
