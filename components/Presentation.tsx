@@ -194,8 +194,8 @@ export default function Presentation() {
                 </div>
               </div>
               <iframe title="AVERRA financial model" className="min-h-0 w-full flex-1 rounded-xl border hairline bg-white"
-                src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent((typeof window !== "undefined" ? window.location.origin : "https://averraproject.vercel.app") + "/AVERRA_Financial_Model.xlsx")}`} />
-              <p className="mt-2 text-xs text-slate">Shown with Microsoft's Office web viewer. If it doesn't load, use Download.</p>
+                src="/model.html" />
+              <p className="mt-2 text-xs text-slate">Values as calculated in the workbook. Download the .xlsx to see the live formulas.</p>
             </motion.div>
           )}
         </AnimatePresence>
