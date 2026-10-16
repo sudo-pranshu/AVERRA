@@ -235,8 +235,8 @@ function photos(s, ps, tsP) {
 {
   const T = MK.totals;
   const s = base(8, "07 · MARKET (BOTTOM-UP, INDIA)", `${crore(T.tam, 1)} TAM → ${crore(T.sam, 1)} SAM → ${lakh(T.som, 1)} Year-3 SOM`);
-  [["TAM", crore(T.tam, 1), "Patients × annual revenue per customer", 6.6, C.blue], ["SAM", crore(T.sam, 1), "Urban × under neurologist follow-up", 4.9, C.cyan], ["SOM · Yr 3", lakh(T.som, 1), "30 clinics (Mumbai + Pune) + online", 3.2, C.violet]].forEach((f, i) => {
-    const y = 1.55 + i * 1.6, w = f[3], x = 0.55 + (6.6 - w) / 2;
+  [["TAM", crore(T.tam, 1), "Patients × annual revenue per customer", 6.0, C.blue], ["SAM", crore(T.sam, 1), "Urban × under neurologist follow-up", 4.6, C.cyan], ["SOM · Yr 3", lakh(T.som, 1), "30 clinics (Mumbai + Pune) + online", 3.2, C.violet]].forEach((f, i) => {
+    const y = 1.55 + i * 1.6, w = f[3], x = 0.45 + (6.0 - w) / 2;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h: 1.35, rectRadius: 0.08, fill: { color: f[4], transparency: 80 }, line: { color: f[4], width: 1.25 }, objectName: "fun" + i });
     txt(s, f[0], { x: x + 0.2, y: y + 0.12, w: 2, h: 0.25, fontSize: 10.5, bold: true, color: f[4], charSpacing: 2 });
     txt(s, f[1], { x: x + 0.2, y: y + 0.4, w: w - 0.4, h: 0.55, fontSize: 28, bold: true, color: C.white });
@@ -247,12 +247,14 @@ function photos(s, ps, tsP) {
   const rows = [["", "ParkinSense (PD households)", "TremoSense", "ParkinSense general wearable (upside)"],
     ["TAM customers", P.customers.toLocaleString("en-IN"), Tt.customers.toLocaleString("en-IN"), (G.customers / 1e6).toFixed(1) + "M / yr"],
     ["₹ / customer / year", inr(P.revPerCustomer), inr(Tt.revPerCustomer), inr(G.revPerCustomer)],
-    ["TAM", crore(P.tam), crore(Tt.tam), crore(G.tam, 0)], ["SAM", crore(P.sam), crore(Tt.sam), crore(G.sam)],
+    ["TAM", crore(P.tam), crore(Tt.tam), "₹" + Math.round(G.tam / 1e7).toLocaleString("en-IN") + " Cr"], ["SAM", crore(P.sam), crore(Tt.sam), crore(G.sam)],
     ["SOM customers / yr", P.somCustomers.toLocaleString("en-IN"), Tt.somCustomers.toLocaleString("en-IN"), G.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(P.som), lakh(Tt.som), lakh(G.som)]];
   s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? (j === 1 ? C.cyan : j === 2 ? C.violet : j === 3 ? C.green : C.white) : j === 0 ? C.muted : C.white, fill: { color: i === 0 ? C.card2 : C.bg } } }))),
     { x: 6.9, y: 1.55, w: 5.9, colW: [1.45, 1.55, 1.3, 1.6], fontFace: B, fontSize: 10, border: { type: "solid", pt: 0.5, color: C.line }, rowH: 0.48, valign: "middle", margin: 0.05, objectName: "mk_table" });
-  txt(s, [{ text: "Upside column: ", options: { bold: true, color: C.green } }, { text: "ParkinSense as a general wearable, from IDC 2024 (35.0M smartwatches, 2.8% advanced). Not in plan totals or the forecast. Estimates: 40% under follow-up, 50% eating-disruptive tremor, 0.25% SOM share, all prices.", options: { color: C.light } }],
-    { x: 6.9, y: 5.05, w: 5.9, h: 1.0, fontSize: 10, objectName: "mk_note" });
+  txt(s, [{ text: "How ₹ per customer is set: ", options: { bold: true, color: C.white } }, { text: `TremoSense ${inr(ts.launchPrice)} ÷ 1.05 GST = ₹9,523 ÷ 3-year life = ${inr(Tt.revPerCustomer)}/yr. ParkinSense ${inr(D.assumptions.P3)} ÷ 1.18 GST ÷ 3 years + 40% × ₹169 plan × 12 = ${inr(P.revPerCustomer)}/yr.`, options: { color: C.light, breakLine: true } },
+    { text: "Customers: ", options: { bold: true, color: C.white } }, { text: `TS = (PD ${P.customers.toLocaleString("en-IN")} + ET ${MK.et.toLocaleString("en-IN")}) × 50% eating-disruptive. SAM = × 31.1% urban × 40% under care. SOM = 30 clinics × (4 TS / 2 PS) per month + online, × 12.`, options: { color: C.light, breakLine: true } },
+    { text: "Upside column: ", options: { bold: true, color: C.green } }, { text: "IDC 2024: 3.5 Cr smartwatches × 2.8% premium; SOM 0.25% of SAM. Not in plan totals.", options: { color: C.light } }],
+    { x: 6.9, y: 4.95, w: 5.9, h: 1.3, fontSize: 9, objectName: "mk_note" });
   src(s, "UNFPA 2023 (149M aged 60+); PD 308.9/lakh aged 60+ (Je et al., via Cureus 2025); ET 89.96/lakh (Chin et al. 2021); Census 2011 (31.1% urban). Workings: model › Market.");
 }
 
