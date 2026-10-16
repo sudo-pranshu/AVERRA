@@ -416,6 +416,11 @@ function ParkinSense() {
             ))}
           </div>
           <p className="t-micro mt-3 text-slate">Wellness product: it does not diagnose Parkinson's. Clinical claims wait for the ICMR results.</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="h-28 w-full" />
+            <Photo src="/images/parkinsense-enclosure.jpg" alt="ParkinSense prototype enclosure" className="h-28 w-full" />
+          </div>
+          <p className="t-micro mt-1 text-slate">The real prototype: on the wrist and its 3D-printed enclosure.</p>
         </div>
       </div>
       <AnimatePresence>
