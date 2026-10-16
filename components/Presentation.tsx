@@ -23,7 +23,7 @@ function useHashIndex(max: number) {
 
 /** Scale factor for the stage; null = phone / portrait layout (natural scrolling). */
 function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
-  const [s, setS] = useState<{ k: number; x: number; y: number; ready?: boolean } | null>({ k: 1, x: 0, y: 0, ready: false });
+  const [s, setS] = useState<{ k: number; x: number; y: number; w: number; h: number; ready?: boolean } | null>({ k: 1, x: 0, y: 0, w: CW, h: CH, ready: false });
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -31,8 +31,14 @@ function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
       const { width: w, height: h } = el.getBoundingClientRect();
       const staged = window.innerWidth >= 860 && window.innerWidth / window.innerHeight >= 1.15;
       if (!staged) return setS(null);
-      const k = Math.min(w / CW, h / CH);
-      setS({ k, x: Math.round((w - CW * k) / 2), y: Math.round((h - CH * k) / 2), ready: true });
+      // Scale so the 1440×810 design fits, then grow the canvas in the spare direction so the slide fills
+      // the whole screen (no letterbox bars). Growth is capped so very wide/tall windows don't stretch layouts.
+      // Height is the design constant (810); width follows the screen so the slide always fills it edge to edge.
+      // Only if the screen is unusually narrow (canvas < 1360 wide) do we fit width instead and let height grow.
+      let k = h / CH;
+      if (w / k < 1360) k = w / 1360;
+      const cw = Math.min(w / k, CW * 1.5), ch = Math.min(h / k, CH * 1.2);
+      setS({ k, w: cw, h: ch, x: Math.round((w - cw * k) / 2), y: Math.round((h - ch * k) / 2), ready: true });
     };
     fit();
     const ro = new ResizeObserver(fit);
@@ -48,6 +54,7 @@ export default function Presentation() {
   const [dir, setDir] = useState(1);
   const [notes, setNotes] = useState(false);
   const [help, setHelp] = useState(false);
+  const [model, setModel] = useState(false);
   const reduce = useReducedMotion();
   const touch = useRef<{ x: number; y: number } | null>(null);
   const area = useRef<HTMLDivElement>(null);
@@ -70,6 +77,7 @@ export default function Presentation() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
+      if (model && e.key !== "Escape") return;
       if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA")) return;
       if (["ArrowRight", "PageDown", " ", "Spacebar"].includes(e.key)) { e.preventDefault(); go(index + 1); }
       else if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(index - 1); }
@@ -79,11 +87,11 @@ export default function Presentation() {
       else if (e.key.toLowerCase() === "f") toggleFullscreen();
       else if (e.key.toLowerCase() === "r") go(0);
       else if (e.key === "?") setHelp((v) => !v);
-      else if (e.key === "Escape") { setHelp(false); setNotes(false); }
+      else if (e.key === "Escape") { setHelp(false); setNotes(false); setModel(false); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [go, index, total, toggleFullscreen]);
+  }, [go, index, total, toggleFullscreen, model]);
 
   const slide = SLIDES[index];
   const scripts = slide.notes.map((n) => K.script[n - 1]);
@@ -116,6 +124,7 @@ export default function Presentation() {
             <IconButton label="Previous slide" onClick={() => go(index - 1)} disabled={index === 0}>‹</IconButton>
             <IconButton label="Next slide" onClick={() => go(index + 1)} disabled={index === total - 1}>›</IconButton>
             <IconButton label={notes ? "Hide presenter notes" : "Show presenter notes"} onClick={() => setNotes((v) => !v)} active={notes}>Notes</IconButton>
+            <IconButton label="Open the financial model (Excel)" onClick={() => setModel(true)} active={model} wide>Financial model</IconButton>
             <IconButton label="Toggle full screen" onClick={toggleFullscreen} wide>Full screen</IconButton>
             <IconButton label="Restart from the first slide" onClick={() => go(0)} wide>Restart</IconButton>
             <IconButton label="Keyboard shortcuts" onClick={() => setHelp((v) => !v)}>?</IconButton>
@@ -126,7 +135,7 @@ export default function Presentation() {
         <div ref={area} className="relative z-10 min-h-0 flex-1">
           <div
             className={staged ? "absolute left-0 top-0 @container" : "absolute inset-0 overflow-y-auto @container"}
-            style={staged ? { width: CW, height: CH, transformOrigin: "0 0", transform: `translate(${scale.x}px, ${scale.y}px) scale(${scale.k})`, visibility: scale.ready ? "visible" : "hidden" } : undefined}
+            style={staged ? { width: scale.w, height: scale.h, transformOrigin: "0 0", transform: `translate(${scale.x}px, ${scale.y}px) scale(${scale.k})`, visibility: scale.ready ? "visible" : "hidden" } : undefined}
           >
             <AnimatePresence mode="wait" custom={dir} initial={false}>
               <motion.section
@@ -167,6 +176,27 @@ export default function Presentation() {
                 {slide.extraNote && scripts.length > 0 && <p className="text-sm text-slate">{slide.extraNote}</p>}
               </div>
             </motion.aside>
+          )}
+        </AnimatePresence>
+
+        {/* financial model (Excel) */}
+        <AnimatePresence>
+          {model && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-50 flex flex-col bg-navy/95 p-4 md:p-6" role="dialog" aria-label="Financial model">
+              <div className="mb-3 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-lg font-semibold text-white">AVERRA financial model</p>
+                  <p className="text-sm text-slate">The live workbook behind every number in this presentation: assumptions, costs, pricing, market, 36-month forecast, valuation and funding.</p>
+                </div>
+                <div className="flex shrink-0 items-center gap-2">
+                  <a href="/AVERRA_Financial_Model.xlsx" download className="rounded-full border border-cyan/60 px-4 py-1.5 text-sm text-cyan hover:bg-cyan/10">Download .xlsx</a>
+                  <button onClick={() => setModel(false)} className="rounded-full bg-white/10 px-4 py-1.5 text-sm text-white hover:bg-white/20" aria-label="Close the financial model">Close</button>
+                </div>
+              </div>
+              <iframe title="AVERRA financial model" className="min-h-0 w-full flex-1 rounded-xl border hairline bg-white"
+                src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent((typeof window !== "undefined" ? window.location.origin : "https://averraproject.vercel.app") + "/AVERRA_Financial_Model.xlsx")}`} />
+              <p className="mt-2 text-xs text-slate">Shown with Microsoft's Office web viewer. If it doesn't load, use Download.</p>
+            </motion.div>
           )}
         </AnimatePresence>
 
