@@ -216,15 +216,16 @@ function WristDemo() {
   });
   const status = mode === "tremor" ? ["Tremor detected", "#C4B5FD"] : mode === "walk" ? ["Walking", CYAN] : ["Resting", MINT];
   return (
-    <div className="panel p-4">
+    <div className="panel flex flex-col p-4">
+      <p className="t-small mb-3 flex items-center gap-2 font-medium text-white"><span className="h-1.5 w-1.5 rounded-full bg-cyan" />Try it</p>
       <div className="flex gap-1.5" role="group" aria-label="Situation">
         {([["rest", "Resting"], ["tremor", "Tremor"], ["walk", "Walking"]] as const).map(([k, l]) => (
           <button key={k} onClick={() => setMode(k)} aria-pressed={mode === k} className={`t-micro flex-1 rounded-full border px-2 py-1 transition-colors ${mode === k ? "border-cyan bg-cyan/20 text-white" : "hairline text-mist hover:text-white"}`}>{l}</button>
         ))}
       </div>
-      <svg viewBox="0 0 260 70" className="mt-3 h-[70px] w-full" aria-label="Animated wrist motion signal">
+      <svg viewBox="0 0 260 70" preserveAspectRatio="none" className="mt-4 h-[120px] w-full rounded-xl bg-navy-3/40" aria-label="Animated wrist motion signal">
         <line x1="0" x2="260" y1="35" y2="35" stroke="#2B3A5C" />
-        <path ref={line} fill="none" stroke={status[1]} strokeWidth="2" strokeLinejoin="round" style={{ transition: "stroke .3s" }} />
+        <path ref={line} fill="none" stroke={status[1]} strokeWidth="2" vectorEffect="non-scaling-stroke" strokeLinejoin="round" style={{ transition: "stroke .3s" }} />
       </svg>
       <p className="t-micro text-slate">Wrist motion, live</p>
       <div className="mt-3 grid grid-cols-2 gap-2">
@@ -233,7 +234,7 @@ function WristDemo() {
         <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Tremor</p><p className="t-small t-num font-semibold text-white">{mode === "tremor" ? "4.9 Hz · score 85" : "none"}</p></div>
         <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Heart rate</p><p className="t-small t-num flex items-center gap-1.5 font-semibold text-white"><svg viewBox="-12 -12 24 24" className="h-4 w-4"><path ref={heart} d="M0,8 C-9,1 -9,-7 -3.5,-7 C-1.5,-7 0,-5 0,-4 C0,-5 1.5,-7 3.5,-7 C9,-7 9,1 0,8Z" fill="#F87171" /></svg>{hr} bpm</p></div>
       </div>
-      <p className="t-micro mt-2 text-slate">Illustration (tremor at half speed). Values mirror the bench dashboard; not a recording.</p>
+      <p className="t-micro mt-auto pt-3 text-slate">Illustration (tremor at half speed), values from the bench dashboard. Not a recording.</p>
     </div>
   );
 }
@@ -364,63 +365,53 @@ function Portfolio() {
 }
 
 /* ------------------------------------------------------------------ 5 ParkinSense */
-const PS_HOW = [["Wear it", "A light wrist band with motion and optical heart sensors."], ["It streams", "Readings go over Bluetooth to a phone or computer, 104 times a second."], ["It makes sense of it", "Software separates normal movement from tremor and shows the results on a live dashboard."]];
-const PS_DOES: [string, string, string][] = [["Steps, distance and active minutes", "Bench-tested; accuracy vs a reference pedometer not yet measured", MINT], ["Heart rate, HRV and blood oxygen (SpO₂)", "Implemented; not yet validated against an ECG or oximeter", AMBER], ["Tremor detection: a tremor score, its frequency and how much of the day it lasts", "Bench-tested on a 5 Hz fixture; not yet validated on people", MINT], ["Knows when you are resting or moving, so tremor is never counted as steps", "Bench-tested (4/4 conditions)", MINT], ["Live dashboard with history and replay", "Implemented; usefulness not yet tested with users", AMBER]];
-const PS_PROGRESS: [string, string, string, string[]][] = [
-  ["Built and bench-tested", MINT, "100%", ["Bluetooth streaming", "Step counting", "Tremor detection", "Rest vs movement", "Low-power sleep (≈7 mA)"]],
-  ["Working, needs validation", CYAN, "70%", ["Heart rate, HRV, SpO₂", "Dashboard"]],
-  ["In progress", AMBER, "40%", ["Mobile app", "Clinical evaluation with ICMR (results pending)"]],
-  ["Next", "#94A3B8", "10%", ["Sleep and recovery", "Battery monitoring", "Cloud sync", "Processing on the band itself"]],
+const PS_STATUS: [string, string, string][] = [
+  ["Steps, distance, active minutes", "Bench-tested", MINT],
+  ["Tremor detection: score, frequency, burden", "Bench-tested", MINT],
+  ["Rest vs movement (tremor never counted as steps)", "Bench-tested", MINT],
+  ["Heart rate, HRV, blood oxygen", "Needs validation", CYAN],
+  ["Live dashboard with history", "Needs user testing", CYAN],
+  ["Mobile app", "In progress", AMBER],
+  ["Clinical evaluation with ICMR", "Results pending", AMBER],
+  ["Sleep, battery monitoring, cloud sync", "Next", "#94A3B8"],
 ];
 function ParkinSense() {
   const [zoom, setZoom] = useState(false);
+  const steps = ["Wear it on the wrist", "Sensors stream over Bluetooth", "Software spots tremor", "Results on a live dashboard"];
   return (
-    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor. Each feature shows whether it is bench-tested or still needs validation.">
-      <div className="grid gap-5 @5xl:grid-cols-[260px_1fr_1fr]">
-        <div className="space-y-3">
-          <WristDemo />
-          <button onClick={() => setZoom(true)} className="group relative block w-full overflow-hidden rounded-xl border hairline text-left" aria-label="Enlarge the ParkinSense dashboard screenshot">
-            <img src="/images/parkinsense-dashboard-app.jpg" alt="ParkinSense dashboard showing tremor detected at 4.88 Hz" className="w-full transition-transform duration-500 group-hover:scale-105" />
-            <span className="t-micro absolute bottom-1 right-1.5 rounded-full bg-navy/80 px-2 py-0.5 text-mist">Live dashboard ⤢</span>
+    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor.">
+      <ol className="mb-5 grid grid-cols-4 gap-2">
+        {steps.map((t, i) => (
+          <motion.li key={t} className="t-small flex items-center gap-2 rounded-full border hairline bg-navy-2/70 px-3 py-1.5 text-mist" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 + i * 0.1 }}>
+            <span className="t-num grid h-5 w-5 shrink-0 place-items-center rounded-full bg-cyan text-[0.7rem] font-semibold text-navy">{i + 1}</span>{t}
+          </motion.li>
+        ))}
+      </ol>
+      <div className="grid items-stretch gap-5 @5xl:grid-cols-3">
+        <div className="panel flex flex-col p-4">
+          <p className="t-small mb-3 flex items-center gap-2 font-medium text-white"><span className="h-1.5 w-1.5 rounded-full bg-cyan" />The real prototype</p>
+          <div className="grid grid-cols-[0.915fr_1.121fr] gap-2">
+            <img src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="aspect-[903/987] w-full rounded-xl border hairline object-cover" />
+            <img src="/images/parkinsense-enclosure.jpg" alt="ParkinSense prototype enclosure" className="aspect-[1000/892] w-full rounded-xl border hairline object-cover" />
+          </div>
+          <button onClick={() => setZoom(true)} className="group relative mt-2 block overflow-hidden rounded-xl border hairline" aria-label="Enlarge the ParkinSense dashboard screenshot">
+            <img src="/images/parkinsense-dashboard-app.jpg" alt="ParkinSense dashboard showing tremor detected at 4.88 Hz" className="aspect-[1456/500] w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]" />
+            <span className="t-micro absolute bottom-1.5 right-1.5 rounded-full bg-navy/85 px-2 py-0.5 text-mist">Live dashboard ⤢</span>
           </button>
-          <p className="t-micro text-slate">The real dashboard: tremor at 4.88 Hz while resting.</p>
+          <p className="t-micro mt-auto pt-3 text-slate">The band on a wrist, its 3D-printed enclosure, and the real dashboard reading tremor at 4.88 Hz.</p>
         </div>
-        <div className="space-y-4">
-          <div>
-            <p className="t-small mb-2 font-medium text-cyan">How it works</p>
-            <ol className="space-y-2">
-              {PS_HOW.map(([k, v], i) => (
-                <motion.li key={k} className="panel flex gap-3 p-3" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.12, ease }}>
-                  <span className="t-num grid h-7 w-7 shrink-0 place-items-center rounded-full bg-cyan text-sm font-semibold text-navy">{i + 1}</span>
-                  <span><span className="t-small block font-medium text-white">{k}</span><span className="t-micro text-mist">{v}</span></span>
-                </motion.li>
-              ))}
-            </ol>
-          </div>
-          <div>
-            <p className="t-small mb-2 font-medium text-cyan">What it does</p>
-            <ul className="space-y-1.5">
-              {PS_DOES.map(([d, st, c], i) => <motion.li key={d} className="flex gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.08 }}><span className={i === 2 ? "text-violet" : "text-cyan"}>{i === 2 ? "★" : "•"}</span><span><span className={`t-small ${i === 2 ? "font-medium text-white" : "text-mist"}`}>{d}</span><span className="t-micro block" style={{ color: c }}>{st}</span></span></motion.li>)}
-            </ul>
-          </div>
-        </div>
-        <div>
-          <p className="t-small mb-2 font-medium text-cyan">How far along it is</p>
-          <div className="space-y-2.5">
-            {PS_PROGRESS.map(([k, c, w, items], i) => (
-              <div key={k} className="panel p-3">
-                <div className="flex items-center justify-between"><p className="t-small font-medium" style={{ color: c }}>{k}</p></div>
-                <div className="mt-1.5 h-1.5 rounded-full bg-navy-3"><motion.div className="h-full rounded-full" style={{ background: c }} initial={{ width: 0 }} animate={{ width: w }} transition={{ delay: 0.4 + i * 0.15, duration: 0.8, ease }} /></div>
-                <p className="t-micro mt-1.5 text-mist">{items.join(" · ")}</p>
-              </div>
+        <WristDemo />
+        <div className="panel flex flex-col p-4">
+          <p className="t-small mb-3 flex items-center gap-2 font-medium text-white"><span className="h-1.5 w-1.5 rounded-full bg-cyan" />What it does, and where it stands</p>
+          <ul className="divide-y divide-white/5">
+            {PS_STATUS.map(([f, st, c], i) => (
+              <motion.li key={f} className="flex items-center justify-between gap-3 py-2" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.06 }}>
+                <span className={`t-small ${i === 1 ? "font-medium text-white" : "text-mist"}`}>{i === 1 && <span className="mr-1 text-violet">★</span>}{f}</span>
+                <Pill color={c}>{st}</Pill>
+              </motion.li>
             ))}
-          </div>
-          <p className="t-micro mt-3 text-slate">Wellness product: it does not diagnose Parkinson's. Clinical claims wait for the ICMR results.</p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="h-28 w-full" />
-            <Photo src="/images/parkinsense-enclosure.jpg" alt="ParkinSense prototype enclosure" className="h-28 w-full" />
-          </div>
-          <p className="t-micro mt-1 text-slate">The real prototype: on the wrist and its 3D-printed enclosure.</p>
+          </ul>
+          <p className="t-micro mt-auto pt-3 text-slate">Bench-tested means verified on a test rig, not yet on people. Wellness product: it does not diagnose Parkinson's; clinical claims wait for the ICMR results.</p>
         </div>
       </div>
       <AnimatePresence>
