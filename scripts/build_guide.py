@@ -94,7 +94,7 @@ All figures are live formulas in the workbook; blue cells are inputs and yellow 
 - People with PD aged 60+: 149M × 308.9 per lakh = {MK['pd60']:,}. People with ET: {MK['et']:,} (single rural study).
 - TremoSense TAM customers = (PD + ET) × 50% eating-disruptive = {T['customers']:,} × {inr(T['revPerCustomer'])}/yr = {crore(T['tam'])}.
 - ParkinSense beachhead (PD households) = {P['customers']:,} × {inr(P['revPerCustomer'])}/yr = {crore(P['tam'])}.
-- ParkinSense as a general wearable (upside, not in plan totals): 35.0M smartwatch buyers/yr (IDC 2024) × {inr(MK['general']['revPerCustomer'])} = {crore(MK['general']['tam'], 0)} TAM; SAM = 2.8% advanced/premium share = {crore(MK['general']['sam'])}; SOM = 0.25% of SAM customers (assumption) = {lakh(MK['general']['som'])}.
+- ParkinSense as a general wearable (upside, not in plan totals): 35.0M smartwatch buyers/yr (IDC 2024) × {inr(MK['general']['revPerCustomer'])} = {crore(MK['general']['tam'], 0)} TAM; SAM = 2.8% advanced/premium share = {crore(MK['general']['sam'])}; SOM = 0.25% of SAM customers (plan case) = {lakh(MK['general']['som'])}; upside cases 0.5% = {crore(MK['general']['somRange'][1]['som'])} and 1% = {crore(MK['general']['somRange'][2]['som'])}. The forecast sells far fewer ParkinSense units, so even the plan case is above it.
 - SAM = TAM customers × 31.1% urban × 40% under follow-up → {crore(MK['totals']['sam'])}. Year-3 SOM from channel capacity → {lakh(MK['totals']['som'])} (TremoSense {T['somCustomers']:,}/yr; ParkinSense {P['somCustomers']:,}/yr).
 
 **Unit economics**

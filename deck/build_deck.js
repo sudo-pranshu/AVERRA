@@ -248,12 +248,12 @@ function photos(s, ps, tsP) {
     ["TAM customers", P.customers.toLocaleString("en-IN"), Tt.customers.toLocaleString("en-IN"), (G.customers / 1e6).toFixed(1) + "M / yr"],
     ["₹ / customer / year", inr(P.revPerCustomer), inr(Tt.revPerCustomer), inr(G.revPerCustomer)],
     ["TAM", crore(P.tam), crore(Tt.tam), "₹" + Math.round(G.tam / 1e7).toLocaleString("en-IN") + " Cr"], ["SAM", crore(P.sam), crore(Tt.sam), crore(G.sam)],
-    ["SOM customers / yr", P.somCustomers.toLocaleString("en-IN"), Tt.somCustomers.toLocaleString("en-IN"), G.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(P.som), lakh(Tt.som), lakh(G.som)]];
+    ["SOM customers / yr", P.somCustomers.toLocaleString("en-IN"), Tt.somCustomers.toLocaleString("en-IN"), G.somRange.map((r) => r.customers.toLocaleString("en-IN")).join(" / ")], ["SOM", lakh(P.som), lakh(Tt.som), G.somRange.map((r) => (r.som >= 1e7 ? crore(r.som) : lakh(r.som))).join(" / ")]];
   s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? (j === 1 ? C.cyan : j === 2 ? C.violet : j === 3 ? C.green : C.white) : j === 0 ? C.muted : C.white, fill: { color: i === 0 ? C.card2 : C.bg } } }))),
     { x: 6.9, y: 1.55, w: 5.9, colW: [1.45, 1.55, 1.3, 1.6], fontFace: B, fontSize: 10, border: { type: "solid", pt: 0.5, color: C.line }, rowH: 0.48, valign: "middle", margin: 0.05, objectName: "mk_table" });
   txt(s, [{ text: "How ₹ per customer is set: ", options: { bold: true, color: C.white } }, { text: `TremoSense ${inr(ts.launchPrice)} ÷ 1.05 GST = ₹9,523 ÷ 3-year life = ${inr(Tt.revPerCustomer)}/yr. ParkinSense ${inr(D.assumptions.P3)} ÷ 1.18 GST ÷ 3 years + 40% × ₹169 plan × 12 = ${inr(P.revPerCustomer)}/yr.`, options: { color: C.light, breakLine: true } },
     { text: "Customers: ", options: { bold: true, color: C.white } }, { text: `TS = (PD ${P.customers.toLocaleString("en-IN")} + ET ${MK.et.toLocaleString("en-IN")}) × 50% eating-disruptive. SAM = × 31.1% urban × 40% under care. SOM = 30 clinics × (4 TS / 2 PS) per month + online, × 12.`, options: { color: C.light, breakLine: true } },
-    { text: "Upside column: ", options: { bold: true, color: C.green } }, { text: "IDC 2024: 3.5 Cr smartwatches × 2.8% premium; SOM 0.25% of SAM. Not in plan totals.", options: { color: C.light } }],
+    { text: "Upside column: ", options: { bold: true, color: C.green } }, { text: "IDC 2024: 3.5 Cr smartwatches × 2.8% premium; SOM 0.25% of SAM (plan), 0.5% and 1% upside. Not in plan totals.", options: { color: C.light } }],
     { x: 6.9, y: 4.95, w: 5.9, h: 1.3, fontSize: 9, objectName: "mk_note" });
   src(s, "UNFPA 2023 (149M aged 60+); PD 308.9/lakh aged 60+ (Je et al., via Cureus 2025); ET 89.96/lakh (Chin et al. 2021); Census 2011 (31.1% urban). Workings: model › Market.");
 }

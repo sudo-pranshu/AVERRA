@@ -115,7 +115,7 @@ def ysum(rows):
 d["forecast"]["costLines"] = [dict(label=l, **ysum(rs)) for l, rs in GROUPS]
 d["forecast"]["revLines"] = [dict(label="TremoSense", units=yr(34), **yr(36)), dict(label="ParkinSense research kits", units=yr(37), **yr(38)),
                              dict(label="ParkinSense devices", units=yr(39), **yr(40)), dict(label="ParkinSense subscriptions", units=None, **yr(42))]
-d["market"]["general"] = {"customers": round(MK["E7"].value), "revPerCustomer": round(MK["E8"].value), "tam": round(MK["E9"].value), "samCustomers": round(MK["E10"].value), "sam": round(MK["E11"].value), "somCustomers": round(MK["E15"].value), "som": round(MK["E16"].value)}
+d["market"]["general"] = {"customers": round(MK["E7"].value), "revPerCustomer": round(MK["E8"].value), "tam": round(MK["E9"].value), "samCustomers": round(MK["E10"].value), "sam": round(MK["E11"].value), "somCustomers": round(MK["E15"].value), "som": round(MK["E16"].value), "somRange": [{"case": MK[f"A{r}"].value, "share": MK[f"B{r}"].value, "customers": round(MK[f"C{r}"].value), "som": round(MK[f"D{r}"].value)} for r in (32, 33, 34)]}
 d["market"]["pd60"] = round(MK["B5"].value); d["market"]["et"] = round(MK["C6"].value)
 d["market"]["totals"] = {"tam": round(MK["B19"].value), "sam": round(MK["B20"].value), "som": round(MK["B21"].value)}
 FS = wb["Funding Scenarios"]

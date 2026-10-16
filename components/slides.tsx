@@ -551,7 +551,8 @@ function Competition() {
 
 /* ------------------------------------------------------------------ 9 market */
 function Market() {
-  const T = MK.totals, A = D.assumptions as Record<string, number>, G = (MK as typeof MK & { general: { customers: number; revPerCustomer: number; tam: number; samCustomers: number; sam: number; somCustomers: number; som: number } }).general;
+  const T = MK.totals, A = D.assumptions as Record<string, number>, G = (MK as typeof MK & { general: { customers: number; revPerCustomer: number; tam: number; samCustomers: number; sam: number; somCustomers: number; som: number; somRange: { share: number; customers: number; som: number }[] } }).general;
+  const R = G.somRange, rv = (x: number) => (x >= 1e7 ? crore(x) : lakh(x));
   const n = (x: number) => Math.round(x).toLocaleString("en-IN");
   const P = MK.parkinsense, Tt = MK.tremosense;
   const pop = A.M1 / A.M2;
@@ -574,7 +575,7 @@ function Market() {
       ["₹ per year", `same as above = ${inr(G.revPerCustomer)}`],
       ["TAM", `${(G.customers / 1e7).toFixed(1)} Cr × ${inr(G.revPerCustomer)} = ₹${n(G.tam / 1e7)} Cr`],
       ["SAM", `× 2.8% premium ("advanced") watches = ${n(G.samCustomers)} = ${crore(G.sam)}`],
-      ["SOM", `0.25% of SAM buyers (assumption) = ${n(G.somCustomers)} × ${inr(G.revPerCustomer)} = ${lakh(G.som)}`]]],
+      ["SOM", `${R.map((r) => `${+(r.share * 100).toFixed(2)}%`).join(" / ")} of SAM buyers = ${R.map((r) => n(r.customers)).join(" / ")} × ${inr(G.revPerCustomer)} = ${R.map((r) => rv(r.som)).join(" / ")} (plan / upside / strong)`]]],
   ];
   return (
     <Frame label="Market opportunity" title="Bottom-up, product by product" aside={
@@ -606,13 +607,13 @@ function Market() {
         <table className="t-small t-num w-full border-collapse">
           <thead><tr className="bg-navy-3/80 text-left"><th className="px-4 py-2 text-white">Result</th><th className="px-3 py-2 text-violet">TremoSense</th><th className="px-3 py-2 text-cyan">ParkinSense (PD households)</th><th className="px-3 py-2 text-white">Company total</th><th className="px-3 py-2 text-mint">ParkinSense general wearable (upside)</th></tr></thead>
           <tbody>
-            {[["TAM", crore(Tt.tam), crore(P.tam), crore(T.tam), `₹${n(G.tam / 1e7)} Cr`], ["SAM", crore(Tt.sam), crore(P.sam), crore(T.sam), crore(G.sam)], ["SOM · Year 3", lakh(Tt.som), lakh(P.som), lakh(T.som), lakh(G.som)], ["SOM customers / year", n(Tt.somCustomers), n(P.somCustomers), "—", n(G.somCustomers)]].map((r) => (
+            {[["TAM", crore(Tt.tam), crore(P.tam), crore(T.tam), `₹${n(G.tam / 1e7)} Cr`], ["SAM", crore(Tt.sam), crore(P.sam), crore(T.sam), crore(G.sam)], ["SOM · Year 3", lakh(Tt.som), lakh(P.som), lakh(T.som), `${lakh(G.som)} plan · ${R.slice(1).map((r) => rv(r.som)).join(" · ")} upside`], ["SOM customers / year", n(Tt.somCustomers), n(P.somCustomers), "—", R.map((r) => n(r.customers)).join(" · ")]].map((r) => (
               <tr key={r[0]} className="border-t hairline"><td className="px-4 py-1.5 text-slate">{r[0]}</td><td className="px-3 py-1.5 text-white">{r[1]}</td><td className="px-3 py-1.5 text-white">{r[2]}</td><td className="px-3 py-1.5 font-semibold text-white">{r[3]}</td><td className="px-3 py-1.5 text-mint" style={{ background: "rgba(52,211,153,.07)" }}>{r[4]}</td></tr>
             ))}
           </tbody>
         </table>
       </motion.div>
-      <Src>Sources: UNFPA India Ageing Report 2023 (14.9 Cr aged 60+, 10.5% of population); PD 308.9 per lakh aged 60+ (Khurana &amp; Gourie-Devi, Cureus 2025); ET 89.96 per lakh (Chin et al., Mov Disord 2021); Census 2011 (31.1% urban); IDC India wearables 2024 (3.5 Cr smartwatches, 2.8% advanced). Estimates: 50% eating-disruptive tremor, 40% under neurologist care, 3-year device life, 40% subscription take-up, clinic and online volumes, 0.25% SOM share.</Src>
+      <Src>Sources: UNFPA India Ageing Report 2023 (14.9 Cr aged 60+, 10.5% of population); PD 308.9 per lakh aged 60+ (Khurana &amp; Gourie-Devi, Cureus 2025); ET 89.96 per lakh (Chin et al., Mov Disord 2021); Census 2011 (31.1% urban); IDC India wearables 2024 (3.5 Cr smartwatches, 2.8% advanced). Estimates: 50% eating-disruptive tremor, 40% under neurologist care, 3-year device life, 40% subscription take-up, clinic and online volumes, 0.25% SOM share (0.5% and 1% shown as upside).</Src>
     </Frame>
   );
 }

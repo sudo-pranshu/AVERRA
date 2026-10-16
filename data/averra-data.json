@@ -362,7 +362,27 @@
    "samCustomers": 980000,
    "sam": 3007714124,
    "somCustomers": 2450,
-   "som": 7519285
+   "som": 7519285,
+   "somRange": [
+    {
+     "case": "Plan case",
+     "share": 0.0025,
+     "customers": 2450,
+     "som": 7519285
+    },
+    {
+     "case": "Upside: marketing works",
+     "share": 0.005,
+     "customers": 4900,
+     "som": 15038571
+    },
+    {
+     "case": "Strong upside",
+     "share": 0.01,
+     "customers": 9800,
+     "som": 30077141
+    }
+   ]
   },
   "pd60": 460261,
   "et": 1276575,

@@ -13,7 +13,7 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M23 (May 2029); Year-3 operating profit ₹18.9 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1761 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1779 words) |
 | TremoSense result | Paper figure | ≈90% bench rejection on the current build (founder-reported) |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
@@ -63,7 +63,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1761 words, about 148 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1779 words, about 149 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -112,7 +112,7 @@ What has the MVP proven? Both products work on the bench. Two people with tremor
 
 **8. Market** (45 s)
 
-Thank you, Pranshu. We sized the market bottom-up. TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year. ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. As a general wearable the upside is far larger: India bought 35 million smartwatches in 2024, a separate TAM of ₹10742 Cr. We show it as upside only; it is not in our plan. Filtering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L.
+Thank you, Pranshu. We sized the market bottom-up. TremoSense: Parkinson's plus essential tremor patients, half with tremor that disrupts eating, about 8.7 lakh people. At the launch price spread over a three-year life, that's ₹275.7 Cr a year. ParkinSense is for everyone, but we only size its first beachhead, households living with Parkinson's: ₹141.3 Cr. As a general wearable the upside is far larger: India bought 35 million smartwatches in 2024, a separate TAM of ₹10742 Cr. Winning just 0.25% to 1% of premium buyers there would mean ₹75.2 L to ₹3.0 Cr a year. We show it as upside only; it is not in our plan. Filtering to urban patients under neurologist care gives a SAM of ₹51.9 Cr. Our year-three SOM, built from 30 clinics plus online, is about ₹109 L.
 
 **9. Business model** (35 s)
 
@@ -146,7 +146,7 @@ All figures are live formulas in the workbook; blue cells are inputs and yellow 
 - People with PD aged 60+: 149M × 308.9 per lakh = 460,261. People with ET: 1,276,575 (single rural study).
 - TremoSense TAM customers = (PD + ET) × 50% eating-disruptive = 868,418 × ₹3,174/yr = ₹275.7 Cr.
 - ParkinSense beachhead (PD households) = 460,261 × ₹3,069/yr = ₹141.3 Cr.
-- ParkinSense as a general wearable (upside, not in plan totals): 35.0M smartwatch buyers/yr (IDC 2024) × ₹3,069 = ₹10742 Cr TAM; SAM = 2.8% advanced/premium share = ₹300.8 Cr; SOM = 0.25% of SAM customers (assumption) = ₹75.2 L.
+- ParkinSense as a general wearable (upside, not in plan totals): 35.0M smartwatch buyers/yr (IDC 2024) × ₹3,069 = ₹10742 Cr TAM; SAM = 2.8% advanced/premium share = ₹300.8 Cr; SOM = 0.25% of SAM customers (plan case) = ₹75.2 L; upside cases 0.5% = ₹1.5 Cr and 1% = ₹3.0 Cr. The forecast sells far fewer ParkinSense units, so even the plan case is above it.
 - SAM = TAM customers × 31.1% urban × 40% under follow-up → ₹51.9 Cr. Year-3 SOM from channel capacity → ₹109.0 L (TremoSense 2,040/yr; ParkinSense 1,440/yr).
 
 **Unit economics**

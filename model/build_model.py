@@ -271,6 +271,11 @@ MK["E3"] = "ParkinSense — general wearable (upside)"; MK["E3"].font = BOLD; MK
 for rr, f, fmt in ((7, "=B25", NUM), (8, "=B8", INR), (9, "=E7*E8", INR), (10, "=E7*B26", NUM), (11, "=E10*E8", INR), (15, "=E10*B27", NUM), (16, "=E15*E8", INR), (17, "=IF(E11=0,0,E16/E11)", PCT)):
     put(MK, f"E{rr}", f, fmt, font=BLACK)
 MK["E18"] = "Not added to company totals or the forecast"
+MK["A30"] = "General-wearable SOM range (Year 3, upside only)"; MK["A30"].font = BOLD
+head(MK, 31, ["Case", "SOM share of SAM buyers", "Customers / year", "SOM (₹/year)"])
+for rr, lab, v in ((32, "Plan case", "=B27"), (33, "Upside: marketing works", 0.005), (34, "Strong upside", 0.01)):
+    MK[f"A{rr}"] = lab; put(MK, f"B{rr}", v, PCT, font=BLACK if str(v).startswith("=") else BLUE)
+    put(MK, f"C{rr}", f"=E10*B{rr}", NUM, font=BLACK); put(MK, f"D{rr}", f"=C{rr}*E8", INR, font=BLACK)
 
 # ============================================================ Forecast (36 months: prove → launch → scale to profitability)
 FC = wb.create_sheet("Forecast")
