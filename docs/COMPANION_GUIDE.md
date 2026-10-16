@@ -13,7 +13,7 @@ AVERRA replaces Kampa Labs everywhere. The pitch now shows a profitable plan, a 
 | TremoSense price | ₹9,999, one cost case | ₹9,999 launch at small-batch cost; ₹8,999 from M19 after verified cost reduction; three cost scenarios |
 | Plan horizon | 18 months, not profitable | 36 months; sustained operating break-even M23 (May 2029); Year-3 operating profit ₹18.9 L |
 | First round | ₹10.51 L at the ₹44.75 L cost floor (19%) | ₹10.51 L for Milestone 1 at ₹75 L proposed pre-money (12.3%) |
-| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1716 words) |
+| Pitch | 15 slides, 10:20 | 14 slides, about 11:55 (1752 words) |
 | TremoSense result | Paper figure | ≈90% bench rejection on the current build (founder-reported) |
 | Closing page | Risks | Competitive advantage vs tremor aids and wearables; risks kept in this guide |
 | New | — | Competitor analysis, repository audit, logo set, Vercel presentation website |
@@ -63,7 +63,7 @@ Both products work on a bench. TremoSense has not been used by anyone with tremo
 
 ## Speaking script and timings
 
-The script runs about 11 min 55 s (1716 words, about 144 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
+The script runs about 11 min 55 s (1752 words, about 147 words a minute including click pauses), inside the 10–12 minute target. The same text sits in each slide's notes and in the website's presenter panel (press N).
 
 | Slide | Topic | Time | Length |
 |---|---|---|---|
@@ -132,11 +132,11 @@ We are both hardware engineers. Pranshu built ParkinSense and co-built TremoSens
 
 **13. Funding ask & valuation** (60 s)
 
-Now the ask, kept separate from the full plan. Year one costs ₹31.6 L and reaching profitability needs ₹48.2 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. The Startup India grant is applied for, not awarded, and the next round is priced on the user-study result.
+Now the ask, kept separate from the full plan. Year one costs ₹31.6 L and reaching profitability needs ₹48.2 L. Today we raise only for milestone one: ₹10,51,171. We propose a pre-money valuation of ₹75 L. That's a working target to negotiate, not an established value. Two methods frame it. Cost to duplicate gives a floor of ₹44.75 L: 34 person-months of engineering plus prototypes. A Berkus-style scorecard gives about ₹60 L, credited mainly for two working prototypes. The premium above that reflects two products and a clinical evaluation already under way. At ₹75 L, post-money is P plus I: ₹85,51,171. The investor owns I over post-money, 12.3%. After a 5 percent ESOP pool, the founders keep 82.7%. Even at the floor, the investor would own 19.0%. After this round, a second tranche of ₹37.7 L has to close by month seven, January 2028, priced on the user-study result. If it is late, we pause hiring, inventory and testing, and the remaining buffer covers about eight months of basic costs. The Startup India grant is applied for, not counted.
 
 **14. Milestones, risk & close** (50 s)
 
-Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. The patent is filed in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 23. Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
+Here's what the money buys. About ₹2.7 L keeps both of us full-time for six months, ₹2.5 L covers prototypes, tools and the patent, and ₹1.6 L builds the study units and runs the user study. We plan to file a provisional patent in month two, study units are built in month three, and in month six the user study decides kill or continue. If we continue, we move through EMC testing and the CDSCO filing to first sales in month twelve, and to break-even in month 23. Why could this fail? Bench results may not turn into easier eating with real food and real hands. If the study shows less than 30 percent reduction, we stop TremoSense and focus on ParkinSense; if it works but people won't pay, we move to clinic rental. AVERRA: engineering better movement intelligence. We're asking for ₹10.5 L at a ₹75 L pre-money, 12.3%, to reach a clear yes-or-no on a product that's profitable on every unit. Thank you.
 
 ## Financial workings
 

@@ -299,7 +299,7 @@ function Portfolio() {
 
 /* ------------------------------------------------------------------ 5 ParkinSense */
 const PS_HOW = [["Wear it", "A light wrist band with motion and optical heart sensors."], ["It streams", "Readings go over Bluetooth to a phone or computer, 104 times a second."], ["It makes sense of it", "Software separates normal movement from tremor and shows the results on a live dashboard."]];
-const PS_DOES = ["Steps, distance and active minutes", "Heart rate, HRV and blood oxygen (SpO₂)", "Tremor detection: a tremor score, its frequency and how much of the day it lasts", "Knows when you are resting or moving, so tremor is never counted as steps", "Live dashboard with history and replay"];
+const PS_DOES: [string, string, string][] = [["Steps, distance and active minutes", "Bench-tested; accuracy vs a reference pedometer not yet measured", MINT], ["Heart rate, HRV and blood oxygen (SpO₂)", "Implemented; not yet validated against an ECG or oximeter", AMBER], ["Tremor detection: a tremor score, its frequency and how much of the day it lasts", "Bench-tested on a 5 Hz fixture; not yet validated on people", MINT], ["Knows when you are resting or moving, so tremor is never counted as steps", "Bench-tested (4/4 conditions)", MINT], ["Live dashboard with history and replay", "Implemented; usefulness not yet tested with users", AMBER]];
 const PS_PROGRESS: [string, string, string, string[]][] = [
   ["Built and bench-tested", MINT, "100%", ["Bluetooth streaming", "Step counting", "Tremor detection", "Rest vs movement", "Low-power sleep (≈7 mA)"]],
   ["Working, needs validation", CYAN, "70%", ["Heart rate, HRV, SpO₂", "Dashboard"]],
@@ -309,7 +309,7 @@ const PS_PROGRESS: [string, string, string, string[]][] = [
 function ParkinSense() {
   const [zoom, setZoom] = useState(false);
   return (
-    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor.">
+    <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor. Each feature shows whether it is bench-tested or still needs validation.">
       <div className="grid gap-5 @5xl:grid-cols-[260px_1fr_1fr]">
         <div className="space-y-3">
           <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="aspect-[4/3] w-full" />
@@ -334,7 +334,7 @@ function ParkinSense() {
           <div>
             <p className="t-small mb-2 font-medium text-cyan">What it does</p>
             <ul className="space-y-1.5">
-              {PS_DOES.map((d, i) => <motion.li key={d} className={`t-small flex gap-2 ${i === 2 ? "font-medium text-white" : "text-mist"}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.08 }}><span className={i === 2 ? "text-violet" : "text-cyan"}>{i === 2 ? "★" : "•"}</span>{d}</motion.li>)}
+              {PS_DOES.map(([d, st, c], i) => <motion.li key={d} className="flex gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.08 }}><span className={i === 2 ? "text-violet" : "text-cyan"}>{i === 2 ? "★" : "•"}</span><span><span className={`t-small ${i === 2 ? "font-medium text-white" : "text-mist"}`}>{d}</span><span className="t-micro block" style={{ color: c }}>{st}</span></span></motion.li>)}
             </ul>
           </div>
         </div>
@@ -480,36 +480,68 @@ function Competition() {
 
 /* ------------------------------------------------------------------ 9 market */
 function Market() {
-  const T = MK.totals;
-  const layers = [["TAM", T.tam, "Patients × annual revenue per customer", BLUE, 100], ["SAM", T.sam, "Urban and under neurologist follow-up", CYAN, 76], ["SOM · Year 3", T.som, "30 clinics in Mumbai and Pune, plus online", VIOLET, 52]] as const;
+  const T = MK.totals, A = D.assumptions as Record<string, number>, G = (MK as typeof MK & { general: { customers: number; revPerCustomer: number; tam: number; samCustomers: number; sam: number; somCustomers: number; som: number } }).general;
+  const n = (x: number) => Math.round(x).toLocaleString("en-IN");
+  const P = MK.parkinsense, Tt = MK.tremosense;
+  const pop = A.M1 / A.M2;
+  const layers = [["TAM", T.tam, BLUE], ["SAM", T.sam, CYAN], ["SOM · Year 3", T.som, VIOLET]] as const;
+  const calc: [string, string, [string, string][]][] = [
+    ["TremoSense", VIOLET, [
+      ["Customers", `PD 60+ = 14.9 Cr × 308.9 per lakh = ${n(MK.pd60)}; ET = ${(pop / 1e7).toFixed(0)} Cr × 89.96 per lakh = ${n(MK.et)}; (PD + ET) × 50% with eating-disruptive tremor = ${n(Tt.customers)}`],
+      ["₹ per year", `${inr(ts.launchPrice)} ÷ 1.05 GST = ₹9,523, spread over a ${A.M8}-year life = ${inr(Tt.revPerCustomer)}`],
+      ["TAM", `${n(Tt.customers)} × ${inr(Tt.revPerCustomer)} = ${crore(Tt.tam)}`],
+      ["SAM", `× 31.1% urban × 40% under neurologist care = ${n(Tt.samCustomers)} people = ${crore(Tt.sam)}`],
+      ["SOM", `30 clinics × 4/month × 12 + 50 online/month × 12 = ${n(Tt.somCustomers)} × ${inr(Tt.revPerCustomer)} = ${lakh(Tt.som)}`]]],
+    ["ParkinSense (PD households)", CYAN, [
+      ["Customers", `Indians aged 60+ with Parkinson's = ${n(P.customers)}`],
+      ["₹ per year", `${inr(D.assumptions.P3 as number)} ÷ 1.18 GST ÷ ${A.M8} years + 40% × ₹169 plan × 12 = ${inr(P.revPerCustomer)}`],
+      ["TAM", `${n(P.customers)} × ${inr(P.revPerCustomer)} = ${crore(P.tam)}`],
+      ["SAM", `× 31.1% urban × 40% under care = ${n(P.samCustomers)} = ${crore(P.sam)}`],
+      ["SOM", `30 clinics × 2/month × 12 + 60 online/month × 12 = ${n(P.somCustomers)} × ${inr(P.revPerCustomer)} = ${lakh(P.som)}`]]],
+    ["ParkinSense as a general wearable (upside)", MINT, [
+      ["Customers", `Smartwatches sold in India in 2024 (IDC) = ${(G.customers / 1e7).toFixed(1)} Cr buyers a year`],
+      ["₹ per year", `same as above = ${inr(G.revPerCustomer)}`],
+      ["TAM", `${(G.customers / 1e7).toFixed(1)} Cr × ${inr(G.revPerCustomer)} = ₹${n(G.tam / 1e7)} Cr`],
+      ["SAM", `× 2.8% premium ("advanced") watches = ${n(G.samCustomers)} = ${crore(G.sam)}`],
+      ["SOM", `0.25% of SAM buyers (assumption) = ${n(G.somCustomers)} × ${inr(G.revPerCustomer)} = ${lakh(G.som)}`]]],
+  ];
   return (
-    <Frame label="Market opportunity" title="Bottom-up, product by product" lead="Customer counts come from sourced prevalence and IDC shipments; prices are hypotheses. The general-wearable column is upside, not in the plan totals.">
-      <div className="grid items-center gap-8 @5xl:grid-cols-[0.85fr_1.15fr]">
-        <div className="flex flex-col items-center gap-3">
-          {layers.map(([k, v, l, c, w], i) => (
-            <motion.div key={k} initial={{ opacity: 0, scaleX: 0.5 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.2 + i * 0.35, duration: 0.7, ease }}
-              className="rounded-2xl border px-6 py-4 text-center backdrop-blur" style={{ width: `${w}%`, borderColor: `${c}AA`, background: `linear-gradient(180deg, ${c}30, ${c}10)`, boxShadow: `0 20px 50px -30px ${c}` }}>
-              <p className="t-small" style={{ color: c }}>{k}</p>
-              <p className="t-h1 t-num"><CountUp to={v} delay={0.2 + i * 0.35} format={(n) => (k.startsWith("SOM") ? lakh(n) : crore(n))} /></p>
-              <p className="t-micro text-mist">{l}</p>
-            </motion.div>
-          ))}
-        </div>
-        <div className="panel p-5">
-          <table className="t-small w-full border-collapse">
-            <thead><tr className="text-left align-bottom"><th className="p-2"></th><th className="p-2 text-cyan">ParkinSense (PD households)</th><th className="p-2 text-violet">TremoSense</th><th className="p-2 text-mint">ParkinSense as a general wearable <span className="t-micro block font-normal text-slate">upside, not in plan totals</span></th></tr></thead>
-            <tbody>
-              {[["TAM customers", MK.parkinsense.customers.toLocaleString("en-IN"), MK.tremosense.customers.toLocaleString("en-IN"), `${(MK.general.customers / 1e6).toFixed(1)}M buyers/yr`],
-                ["₹ per customer per year", inr(MK.parkinsense.revPerCustomer), inr(MK.tremosense.revPerCustomer), inr(MK.general.revPerCustomer)],
-                ["TAM", crore(MK.parkinsense.tam), crore(MK.tremosense.tam), crore(MK.general.tam, 0)], ["SAM", crore(MK.parkinsense.sam), crore(MK.tremosense.sam), crore(MK.general.sam)],
-                ["SOM customers per year", MK.parkinsense.somCustomers.toLocaleString("en-IN"), MK.tremosense.somCustomers.toLocaleString("en-IN"), MK.general.somCustomers.toLocaleString("en-IN")], ["SOM", lakh(MK.parkinsense.som), lakh(MK.tremosense.som), lakh(MK.general.som)]].map((r) => (
-                <tr key={r[0]} className="border-t hairline"><td className="p-2 text-slate">{r[0]}</td><td className="t-num p-2 text-white">{r[1]}</td><td className="t-num p-2 text-white">{r[2]}</td><td className="t-num p-2 text-mint" style={{ background: "rgba(52,211,153,.07)" }}>{r[3]}</td></tr>
+    <Frame label="Market opportunity" title="Bottom-up, product by product" aside={
+      <div className="flex gap-2">
+        {layers.map(([k, v, c], i) => (
+          <motion.div key={k} className="rounded-xl border px-4 py-2 text-center" style={{ borderColor: `${c}AA`, background: `${c}22` }} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.2 }}>
+            <p className="t-micro" style={{ color: c }}>{k} · company</p>
+            <p className="t-h2 t-num"><CountUp to={v} delay={0.2 + i * 0.2} format={(x) => (k.startsWith("SOM") ? lakh(x) : crore(x))} /></p>
+          </motion.div>
+        ))}
+      </div>}>
+      <p className="t-small -mt-2 mb-3 text-mist">Company totals add TremoSense and ParkinSense (PD households). The general-wearable column is upside and is not in the totals or the plan.</p>
+      <div className="grid gap-3 @5xl:grid-cols-3">
+        {calc.map(([name, c, steps], i) => (
+          <motion.div key={name} className="panel p-4" style={{ borderColor: `${c}66` }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.15, ease }}>
+            <p className="t-small font-semibold" style={{ color: c }}>{name}</p>
+            <dl className="mt-2 space-y-1.5">
+              {steps.map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[72px_1fr] gap-2">
+                  <dt className={`t-micro ${["TAM", "SAM", "SOM"].includes(k) ? "font-semibold text-white" : "text-slate"}`}>{k}</dt>
+                  <dd className={`t-num ${["TAM", "SAM", "SOM"].includes(k) ? "t-small text-white" : "t-micro text-mist"}`}>{v}</dd>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </dl>
+          </motion.div>
+        ))}
       </div>
-      <Src>Sources: UNFPA India Ageing Report 2023; Khurana &amp; Gourie-Devi, Cureus 2025; Chin et al., Mov Disord 2021; Census 2011; IDC India wearables 2024 (35.0M smartwatches, 2.8% advanced). Estimates: 40% under follow-up, 50% with eating-disruptive tremor, 0.25% SOM share for the general-wearable column.</Src>
+      <motion.div className="panel mt-3 overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
+        <table className="t-small t-num w-full border-collapse">
+          <thead><tr className="bg-navy-3/80 text-left"><th className="px-4 py-2 text-white">Result</th><th className="px-3 py-2 text-violet">TremoSense</th><th className="px-3 py-2 text-cyan">ParkinSense (PD households)</th><th className="px-3 py-2 text-white">Company total</th><th className="px-3 py-2 text-mint">ParkinSense general wearable (upside)</th></tr></thead>
+          <tbody>
+            {[["TAM", crore(Tt.tam), crore(P.tam), crore(T.tam), `₹${n(G.tam / 1e7)} Cr`], ["SAM", crore(Tt.sam), crore(P.sam), crore(T.sam), crore(G.sam)], ["SOM · Year 3", lakh(Tt.som), lakh(P.som), lakh(T.som), lakh(G.som)], ["SOM customers / year", n(Tt.somCustomers), n(P.somCustomers), "—", n(G.somCustomers)]].map((r) => (
+              <tr key={r[0]} className="border-t hairline"><td className="px-4 py-1.5 text-slate">{r[0]}</td><td className="px-3 py-1.5 text-white">{r[1]}</td><td className="px-3 py-1.5 text-white">{r[2]}</td><td className="px-3 py-1.5 font-semibold text-white">{r[3]}</td><td className="px-3 py-1.5 text-mint" style={{ background: "rgba(52,211,153,.07)" }}>{r[4]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </motion.div>
+      <Src>Sources: UNFPA India Ageing Report 2023 (14.9 Cr aged 60+, 10.5% of population); PD 308.9 per lakh aged 60+ (Khurana &amp; Gourie-Devi, Cureus 2025); ET 89.96 per lakh (Chin et al., Mov Disord 2021); Census 2011 (31.1% urban); IDC India wearables 2024 (3.5 Cr smartwatches, 2.8% advanced). Estimates: 50% eating-disruptive tremor, 40% under neurologist care, 3-year device life, 40% subscription take-up, clinic and online volumes, 0.25% SOM share.</Src>
     </Frame>
   );
 }
@@ -909,7 +941,7 @@ function Funding() {
           {!more ? (
             <motion.ol key={`eq${sel}`} className="space-y-2" initial="hidden" animate="show" exit={{ opacity: 0 }} variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}>
               {eq.map(([a, b, c]) => (
-                <motion.li key={a} variants={{ hidden: { opacity: 0, x: -14 }, show: { opacity: 1, x: 0 } }} className="grid grid-cols-[9rem_1fr] items-baseline gap-4 rounded-xl border hairline bg-navy-2/80 px-4 py-2.5 @3xl:grid-cols-[11rem_12rem_1fr]">
+                <motion.li key={a} variants={{ hidden: { opacity: 0, x: -14 }, show: { opacity: 1, x: 0 } }} className="grid grid-cols-[9rem_1fr] items-baseline gap-4 rounded-xl border hairline bg-navy-2/80 px-4 py-1.5 @3xl:grid-cols-[11rem_12rem_1fr]">
                   <span className="t-small text-slate">{a}</span><span className="t-h2 t-num text-white">{b}</span><span className="t-micro col-span-2 text-slate @3xl:col-span-1">{c}</span>
                 </motion.li>
               ))}
@@ -924,7 +956,7 @@ function Funding() {
           )}
         </AnimatePresence>
         <div className="panel flex items-center gap-6 p-5">
-          <svg viewBox="0 0 180 180" className="h-44 w-44 shrink-0 -rotate-90" aria-label="Cap table after this round">
+          <svg viewBox="0 0 180 180" className="h-36 w-36 shrink-0 -rotate-90" aria-label="Cap table after this round">
             <circle cx="90" cy="90" r={R} fill="none" stroke="#1B2847" strokeWidth="26" />
             {segs.map(([nm, v, c]) => {
               const off = acc; acc += v;
@@ -939,18 +971,21 @@ function Funding() {
           </div>
         </div>
       </div>
-      <div className="mt-5">
-        <p className="t-small mb-2 text-white">Where the {lakh(I)} goes <span className="t-micro text-slate">· Phase 1, M1–M6 · details on the next slide</span></p>
-        <div className="flex h-9 w-full gap-1 overflow-hidden rounded-xl">
-          {D.useOfFunds.filter((u) => u.phase1 > 0).concat([{ category: "Buffer (20%)", phase1: I - D.useOfFunds.reduce((x, u) => x + u.phase1, 0), phase2: 0 }]).map((u, k, arr) => {
-            const pal = [BLUE, CYAN, VIOLET, "#60A5FA", "#64748B", "#94A3B8", "#334155"];
-            return (
-              <motion.div key={u.category} className="t-micro flex items-center overflow-hidden whitespace-nowrap px-2 text-navy" initial={{ width: 0 }} animate={{ width: `${(u.phase1 / I) * 100}%` }} transition={{ delay: 0.5 + k * 0.08, duration: 0.6, ease }} style={{ background: pal[k], color: k >= 4 ? "#fff" : "#0b1222" }} title={`${u.category}: ${lakh(u.phase1)}`}>
-                {u.phase1 / I > 0.07 ? `${u.category.split(" (")[0]} ${lakh(u.phase1)}` : ""}
-              </motion.div>
-            );
-          })}
-        </div>
+      <div className="mt-3 grid gap-2 @3xl:grid-cols-[1fr_auto_1fr_auto_1fr]">
+        {[
+          [`Round 1 · now · ${lakh(I)}`, CYAN, "Funds M1–M6: both founders full-time, 12 study units, the user study, a provisional patent filing and a CDSCO classification opinion.", "Evidence by M6: user-study result against the kill / persevere thresholds, published bench logs, device class."],
+          [`Tranche 2 · must close by M7 (Jan 2028) · ${lakh(H.phase2Requirement)}`, VIOLET, "Priced on the M6 evidence, not on today's target. Funds the pilot batch, EMC and CDSCO filing, first sales at M12 and the clinic network.", `Round 1 + tranche 2 = ${lakh(H.fullRequirement)}, the total needed to reach break-even.`],
+          ["If tranche 2 is late", AMBER, `Pause hiring, inventory and testing; founders defer stipends. The ${lakh(I - H.phase1Costs)} buffer covers about 8 months of basic costs (≈₹0.2 L/month), so cash lasts to about M14.`, "The ₹20 L Startup India grant is applied for and never counted as secured; if awarded, it reduces tranche 2."],
+        ].map(([k, c, a, b], i, arr) => (
+          <div key={k} className="contents">
+            <motion.div className="panel p-3" style={{ borderColor: `${c}88` }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 + i * 0.15 }}>
+              <p className="t-small font-semibold" style={{ color: c as string }}>{k}</p>
+              <p className="t-micro mt-1 text-mist">{a}</p>
+              <p className="t-micro mt-1 text-white">{b}</p>
+            </motion.div>
+            {i < arr.length - 1 && <span className="hidden self-center text-xl text-slate @3xl:block">→</span>}
+          </div>
+        ))}
       </div>
     </Frame>
   );

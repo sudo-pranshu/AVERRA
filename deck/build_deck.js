@@ -408,7 +408,7 @@ function photos(s, ps, tsP) {
     yy += h;
   });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.1, y: 6.1, w: 4.7, h: 0.5, rectRadius: 0.06, fill: { color: C.cyan }, line: { color: C.cyan, width: 0 }, objectName: "!!fundbar" });
-  txt(s, `Milestone-1 round ${lakh(c.equity, 1)} · SISFS ₹20 L applied, NOT secured`, { x: 8.2, y: 6.13, w: 4.5, h: 0.44, fontSize: 11, bold: true, color: C.bg, valign: "middle", objectName: "!!fundbar_t" });
+  txt(s, `Now ${lakh(c.equity, 1)} → tranche 2 ${lakh(H.phase2Requirement, 1)} by M7 · grant not counted`, { x: 8.2, y: 6.13, w: 4.5, h: 0.44, fontSize: 11, bold: true, color: C.bg, valign: "middle", objectName: "!!fundbar_t" });
   src(s, `Scenarios A–D in the model: grant + full raise ${pct(F.A.investor)}; no grant ${pct(F.B.investor)}; staged tranche 2 priced on evidence. Floor = cost-to-duplicate (${V.personMonths} PM × ${lakh(V.rate, 2)} + ${lakh(V.materials, 2)}).`);
 }
 
