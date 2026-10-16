@@ -48,7 +48,7 @@ rows = [
     ("P1", "TremoSense launch price (incl. GST) — RECOMMENDED", 9999, "₹", INR, "Decision", "Chosen from Price Matrix: lowest round price with ≥30% contribution margin at Scenario B cost", 1),
     ("P2", "Lowest viable TremoSense price at verified C cost (NOT used in plan)", 6999, "₹", INR, "Option", "≈42% contribution at C; an affordability option once profitability is secure", 1),
     ("P13", "TremoSense price from M19, once Scenario C cost is verified (incl. GST)", 8999, "₹", INR, "Decision", "Price cut shared with customers after verified cost reduction; still ≥40% contribution at C", 1),
-    ("P3", "ParkinSense wellness wearable price (incl. GST)", 7999, "₹", INR, "Decision", "Hypothesis to test; below Amazfit Bip 6 (₹8,999) and Fitbit Charge 6 (₹12,999); positive contribution after CAC", 1),
+    ("P3", "ParkinSense wellness wearable price (incl. GST)", 7999, "₹", INR, "Decision", "Hypothesis to test; below Amazfit Helio Strap (₹12,000+), Google Fitbit Air (₹13,999), WHOOP One (₹20,890/yr) and Garmin Cirqa (₹25,990); positive contribution after CAC", 1),
     ("P4", "ParkinSense Movement Insights subscription (incl. GST)", 199, "₹/month", INR, "Decision", "Optional subscription; to test", 1),
     ("P5", "ParkinSense research-use-only (RUO) kit (incl. GST)", 74999, "₹/kit", INR, "Decision", "5 wearables + 12-month analytics licence for labs", 0),
     ("P6", "GST — TremoSense (assistive / medical device)", 0.05, "%", PCT, "To verify", "Verify HSN classification with a CA", 1),
@@ -546,13 +546,14 @@ CP = wb.create_sheet("Competitors")
 CP["A1"] = "Competitor price benchmarks — checked 12 Oct 2026. Benchmarks only; they do not drive AVERRA revenue."; CP["A1"].font = TITLE
 head(CP, 3, ["Product", "Segment", "Listed price", "Currency", "₹ equivalent", "Recurring cost", "What it does", "Source", "Checked"], [26, 18, 14, 10, 14, 26, 60, 70, 12])
 comp = [
-    ("WHOOP One (WHOOP 5.0)", "Wellness wearable", 17990, "INR", "Membership is the price: ₹17,990 / 12 months (MRP ₹21,990)", "Screenless strap; recovery, sleep, strain, steps, VO2 max; 14+ day battery", "https://www.whoop.in/pages/whoop-devices"),
-    ("WHOOP Peak", "Wellness wearable", 23990, "INR", "₹23,990 / 12 months (MRP ₹28,990)", "Adds healthspan, health monitor alerts, real-time stress", "https://www.whoop.in/pages/whoop-devices"),
-    ("Amazfit Bip 6", "Fitness smartwatch", 8999, "INR", "None listed", "AMOLED, GPS, heart rate, sleep; accelerometer + gyroscope; up to 14 days", "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india"),
-    ("Fitbit Charge 6", "Fitness band", 12999, "INR", "Optional premium subscription (not priced here)", "Heart rate, SpO2, sleep, GPS; ~7 days (₹13,999 on Amazon)", "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi"),
+    ("WHOOP One (WHOOP 5.0)", "Screenless band", 20890, "INR", "Price includes a 12-month membership (MRP ₹21,990); renews yearly", "Screenless strap; recovery, sleep, strain, HRV; 14+ day battery", "https://www.whoop.in/pages/whoop-devices"),
+    ("Garmin Cirqa", "Screenless band", 25990, "INR", "No subscription needed; Connect+ optional", "HR, HRV, Pulse Ox, sleep, VO2 max, skin temperature, 80+ activities; up to 10 days (launched in India 7 Oct 2026)", "https://www.businesstoday.in/technology/news/story/garmin-cirqa-launched-in-india-at-rs25990-this-screen-free-smart-band-can-track-80-activities-560058-2026-10-07"),
+    ("Amazfit Helio Strap", "Screenless band", 12000, "INR", "No subscription needed", "Continuous HR, sleep and recovery (BioCharge), 27 exercise modes; up to 10 days. Available from sellers at ₹12,000–15,000; official store lists ₹8,999 (MRP ₹17,999) but shows sold out (16 Oct 2026)", "https://in.amazfit.com/products/helio-strap"),
+    ("Google Fitbit Air", "Screenless band", 13999, "INR", "3-month Google Health Premium trial, then optional", "HR, HRV, SpO2, sleep stages, irregular-rhythm alerts; up to 7 days (India from 2 Oct 2026)", "https://www.freepressjournal.in/tech/google-fitbit-air-launched-in-india-at-13999-price-specifications"),
     ("GyroGlove", "Hand stabiliser (one hand)", 5899, "USD", "Or $246/month × 24", "Gyroscopic wrist stabiliser for the whole hand; 4 h continuous use; no clinical study cited on listing", "https://techguide.parkinsons.org.uk/catalogue/gyro-glove"),
-    ("Liftware (stabilising handle)", "Active stabilising utensil", 195, "USD", "Attachments extra", "Sensor + motor cancellation at the utensil; maker cites a study with 70% less shaking. Price is a DATED Nov 2015 figure", "https://www.michaeljfox.org/news/stabilizing-spoon-announces-price-reduction-and-match-program-holidays"),
+    ("Imported active spoon (desertcart.in)", "Active stabilising utensil", 58480, "INR", "None listed", "Motorised stabilising spoon for essential tremor, imported; listing price in India (desertcart.in, checked 16 Oct 2026); similar listings ₹35,980 to ₹1,40,386", "https://www.desertcart.in/"),
     ("Weighted soup spoon (225 g)", "Passive adaptive utensil", 55.98, "USD", "None", "Added mass damps tremor; no electronics. US retail; Indian prices not verified", "https://wellbefore.com/products/weighted-soup-spoon"),
+    ("Steady Spoon (imported, desertcart.in)", "Active stabilising utensil", 35980, "INR", "None listed", "Stabilising spoon handle, imported; lowest active-spoon listing found in India (desertcart.in, checked 16 Oct 2026)", "https://www.desertcart.in/"),
 ]
 for i, (n, seg, p, cur, rec, what, src) in enumerate(comp):
     rr = 4 + i
@@ -562,7 +563,7 @@ for i, (n, seg, p, cur, rec, what, src) in enumerate(comp):
     put(CP, f"E{rr}", f"=C{rr}*{R['F6']}" if cur == "USD" else f"=C{rr}", INR, font=BLACK)
     for j, v in enumerate((rec, what, src, "12 Oct 2026")):
         CP.cell(row=rr, column=6 + j, value=v).font = BLACK
-CP["A12"] = "AVERRA price hypotheses (to be tested with customers)"; CP["A12"].font = BOLD
+CP["A12"] = "AVERRA planned prices (to be tested with customers)"; CP["A12"].font = BOLD
 CP["A13"] = "TremoSense launch"; put(CP, "E13", f"={R['P1']}", INR, font=GREEN)
 CP["A14"] = "ParkinSense wearable"; put(CP, "E14", f"={R['P3']}", INR, font=GREEN)
 CP["A15"] = "TremoSense vs GyroGlove (one glove)"; put(CP, "E15", "=E13/E8", PCT, font=BLACK); CP["F15"] = "Different products: spoon stabiliser vs whole-hand glove — price context only"
@@ -585,9 +586,11 @@ src = [
     ("Apple ResearchKit Movement Disorder API (6 Jun 2018)", "https://www.engadget.com/2018-06-06-apple-watch-monitor-parkinsons-symptoms.html"),
     ("Rune Labs FDA clearance (Jun 2022)", "https://9to5mac.com/2022/06/13/apple-watch-parkinsons/"),
     ("USD/INR 95.71 (12 Oct 2026)", "https://tradersunion.com/currencies/price/usd-inr/"),
-    ("WHOOP India memberships (checked 12 Oct 2026)", "https://www.whoop.in/pages/whoop-devices"),
-    ("Amazfit Bip 6 India price (checked 12 Oct 2026)", "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india"),
-    ("Fitbit Charge 6 India price (checked 12 Oct 2026)", "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi"),
+    ("WHOOP India memberships: One ₹20,890, Peak ₹27,539 (checked 16 Oct 2026)", "https://www.whoop.in/pages/whoop-devices"),
+    ("Garmin Cirqa India launch, ₹25,990 (Business Today, 7 Oct 2026)", "https://www.businesstoday.in/technology/news/story/garmin-cirqa-launched-in-india-at-rs25990-this-screen-free-smart-band-can-track-80-activities-560058-2026-10-07"),
+    ("Amazfit Helio Strap India: official ₹8,999 (MRP ₹17,999), sold out; sellers ₹12,000–15,000 (16 Oct 2026)", "https://in.amazfit.com/products/helio-strap"),
+    ("Google Fitbit Air India launch, ₹13,999 (Free Press Journal)", "https://www.freepressjournal.in/tech/google-fitbit-air-launched-in-india-at-13999-price-specifications"),
+    ("Imported active tremor spoons on desertcart.in: ₹35,980, ₹58,480, ₹1,40,386 (Google Shopping, checked 16 Oct 2026)", "https://www.desertcart.in/"),
     ("GyroGlove listing, Parkinson's UK tech guide (16 Jun 2026)", "https://techguide.parkinsons.org.uk/catalogue/gyro-glove"),
     ("Liftware product range and cited study", "https://www.liftware.com/"),
     ("Weighted soup spoon (WellBefore)", "https://wellbefore.com/products/weighted-soup-spoon"),

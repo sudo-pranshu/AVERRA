@@ -205,51 +205,57 @@
    "columns": [
     "",
     "WHOOP One",
-    "Amazfit Bip 6",
-    "Fitbit Charge 6",
+    "Garmin Cirqa",
+    "Fitbit Air",
+    "Helio Strap",
     "ParkinSense"
    ],
    "rows": [
     [
      "Price (India)",
-     "₹17,990/yr membership",
-     "₹8,999",
-     "₹12,999",
-     "₹7,999 + ₹199/mo (hypothesis)"
+     "₹20,890 incl. 12-mo plan, renews yearly",
+     "₹25,990, no subscription",
+     "₹13,999 + Premium after trial",
+     "₹12,000–₹15,000 (official ₹8,999, sold out)",
+     "₹7,999 + optional ₹199/mo plan"
     ],
     [
-     "Wellness",
-     "Recovery, sleep, strain, VO₂ max",
-     "HR, sleep, GPS",
-     "HR, SpO₂, sleep, GPS",
-     "Steps, HR, HRV, SpO₂ (research-grade); sleep planned"
+     "Tracks",
+     "Recovery, sleep, strain, HRV",
+     "HR, HRV, SpO₂, sleep, VO₂ max, skin temp",
+     "HR, HRV, SpO₂, sleep, rhythm alerts",
+     "HR, sleep, recovery",
+     "Steps, HR, HRV, SpO₂ (research-grade)"
     ],
     [
-     "Movement insight",
-     "Not documented",
-     "Not documented",
-     "Not documented",
-     "Tremor score, burden, motion context (bench-tested)"
+     "Tremor insight",
+     "Not offered",
+     "Not offered",
+     "Not offered",
+     "Not offered",
+     "Tremor score, frequency, burden (bench-tested)"
     ],
     [
      "Battery",
      "14+ days",
-     "Up to 14 days",
-     "≈7 days",
+     "Up to 10 days",
+     "Up to 7 days",
+     "Up to 10 days",
      "≈100 h (estimate)"
     ],
     [
      "Evidence",
-     "Commercial product",
-     "Commercial product",
-     "Commercial product",
+     "Commercial",
+     "Commercial",
+     "Commercial",
+     "Commercial",
      "Bench tests only"
     ]
    ],
    "positioning": [
     [
      "They do well",
-     "Polished hardware, multi-day battery, sleep and recovery, large app ecosystems."
+     "Screenless bands from WHOOP, Garmin, Google and Amazfit: polished hardware, long battery, sleep and recovery, big app ecosystems."
     ],
     [
      "We are building",
@@ -257,7 +263,7 @@
     ],
     [
      "Accessible value",
-     "A price hypothesis of ₹7,999 — below WHOOP, Fitbit Charge 6 and the Amazfit Bip 6 (₹8,999), with no mandatory subscription."
+     "A planned price of ₹7,999: below every screenless band here, from the Helio Strap (₹12,000) to Garmin Cirqa (₹25,990), with no mandatory subscription."
     ],
     [
      "Still to prove",
@@ -269,7 +275,7 @@
    "columns": [
     "",
     "GyroGlove",
-    "Liftware",
+    "Imported active spoon",
     "Weighted spoon",
     "TremoSense"
    ],
@@ -277,14 +283,14 @@
     [
      "Price",
      "US$5,899 per glove (≈₹5.6 L)",
-     "US$195 (2015 price, dated)",
+     "₹35,980 to ₹58,480 (imported)",
      "≈₹5,358 (US retail)",
-     "₹9,999 launch hypothesis"
+     "₹9,999 planned launch price"
     ],
     [
      "What it does",
      "Gyroscopic stabiliser for the whole hand",
-     "Motorised handle cancels tremor at the utensil",
+     "Motorised handle cancels tremor at the spoon",
      "Added mass damps motion",
      "Two-axis servo gimbal cancels tremor at the spoon"
     ],
@@ -298,7 +304,7 @@
     [
      "Evidence",
      "No study cited on listing",
-     "Maker cites study: 70% less shaking",
+     "Commercial, imported",
      "Varies",
      "≈90% bench rejection (current build); 2 informal user trials"
     ]
@@ -306,11 +312,11 @@
    "positioning": [
     [
      "The problem",
-     "Active tremor aids are imported and priced for other markets: one GyroGlove ≈ ₹5.6 L."
+     "Active tremor aids are imported and priced for other markets: active spoons cost ₹35,980 to ₹58,480 in India; one GyroGlove ≈ ₹5.6 L."
     ],
     [
      "Our opportunity",
-     "An Indian-built active spoon at a ₹9,999 hypothesis, serviced locally through clinics."
+     "An Indian-built active spoon at a ₹9,999 planned price, serviced locally through clinics."
     ],
     [
      "What it does today",
@@ -318,11 +324,11 @@
     ],
     [
      "Still to prove",
-     "User benefit in real eating, durability, comfort, and parity with Liftware-class products."
+     "User benefit in real eating, durability, comfort, and parity with imported active spoons."
     ]
    ]
   },
-  "checked": "12 Oct 2026"
+  "checked": "16 Oct 2026"
  },
  "problem": {
   "stats": [
@@ -472,9 +478,9 @@
     "Stabilises the whole hand, not just a utensil."
    ],
    [
-    "Liftware",
-    "About half the price (₹9,999 vs ≈₹18,663 at its 2015 US price). ≈90% bench rejection vs the maker's cited 70% less shaking.",
-    "Different tests, not head-to-head; Liftware has years of real users."
+    "Imported active spoons",
+    "A quarter to a sixth of the price (₹9,999 vs ₹35,980 to ₹58,480 in India), built and serviced locally.",
+    "Proven products with real users; we have bench results and 2 informal trials."
    ],
    [
     "Weighted spoon",
@@ -485,18 +491,18 @@
   "parkinsense": [
    [
     "WHOOP",
-    "Measures tremor (score, burden, frequency). ₹7,999 once vs ₹17,990 every year.",
+    "Measures tremor (score, burden, frequency). ₹7,999 once vs ₹20,890 every year.",
     "Better sleep and recovery coaching, mature app."
    ],
    [
-    "Fitbit Charge 6",
-    "Tremor-aware step counting: tremor is classified as tremor, not counted as steps.",
-    "Polished hardware, GPS, ≈7-day battery."
+    "Garmin Cirqa & Google Fitbit Air",
+    "Tremor detection and tremor-aware step counting, which neither lists, at ₹7,999 vs ₹13,999 (Fitbit Air) and ₹25,990 (Cirqa).",
+    "Proven sensors, VO₂ max and rhythm alerts, 7–10 day battery."
    ],
    [
-    "Amazfit Bip 6",
-    "Movement-disorder insight at a lower price (₹7,999 vs ₹8,999); clinical evaluation with ICMR under way.",
-    "Display, GPS, up to 14-day battery."
+    "Amazfit Helio Strap",
+    "Same screenless format at a lower price (₹7,999 vs ₹12,000), plus tremor insight; clinical evaluation with ICMR under way.",
+    "Mature app and recovery scoring."
    ]
   ],
   "shared": [
@@ -593,7 +599,7 @@
    "title": "Competition",
    "seconds": 50,
    "speaker": "Pranshu",
-   "text": "Competitors, with prices checked this month.\nWHOOP costs ₹17,990 a year, a Fitbit Charge 6 about ₹12,999, and an Amazfit Bip 6 ₹8,999. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.\nFor tremor assistance, one GyroGlove costs 5,899 US dollars, about 5.6 lakh rupees, for one hand. Liftware sold for 195 dollars in 2015, and a weighted spoon is cheap but passive.\nTremoSense is a spoon, not a glove, and we don't claim it matches either product. The opportunity is an Indian-built active aid priced under 2 percent of one GyroGlove, while being honest that it does far less."
+   "text": "Competitors, with prices checked this month.\nOur direct rivals are screenless bands. WHOOP One costs ₹20,890 a year, Garmin's new Cirqa ₹25,990, Google's Fitbit Air ₹13,999 and Amazfit's Helio Strap ₹12,000. They are excellent at sleep, recovery and battery life. None offers tremor detection. That's our space, and we have to prove people value it.\nFor tremor assistance, one GyroGlove costs 5,899 US dollars, about 5.6 lakh rupees, for one hand. Imported active spoons sell in India for 0.4 lakh to 0.6 lakh rupees, and a weighted spoon is cheap but passive.\nTremoSense is an active spoon at about a quarter of the cheapest imported one, built and serviced in India. We don't yet claim it performs as well; that is what the user study tests."
   },
   {
    "slide": 7,
@@ -654,7 +660,7 @@
  ],
  "scriptTotals": {
   "seconds": 715,
-  "words": 1752
+  "words": 1761
  },
  "fmt": null
 }

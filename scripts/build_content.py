@@ -100,37 +100,37 @@ content = {
     ],
     "competitors": {
         "parkinsense": {
-            "columns": ["", "WHOOP One", "Amazfit Bip 6", "Fitbit Charge 6", "ParkinSense"],
+            "columns": ["", "WHOOP One", "Garmin Cirqa", "Fitbit Air", "Helio Strap", "ParkinSense"],
             "rows": [
-                ["Price (India)", f"{inr(comp['WHOOP One (WHOOP 5.0)']['price'])}/yr membership", inr(comp['Amazfit Bip 6']['price']), inr(comp['Fitbit Charge 6']['price']), f"{inr(D['assumptions']['P3'])} + {inr(D['assumptions']['P4'])}/mo (hypothesis)"],
-                ["Wellness", "Recovery, sleep, strain, VO₂ max", "HR, sleep, GPS", "HR, SpO₂, sleep, GPS", "Steps, HR, HRV, SpO₂ (research-grade); sleep planned"],
-                ["Movement insight", "Not documented", "Not documented", "Not documented", "Tremor score, burden, motion context (bench-tested)"],
-                ["Battery", "14+ days", "Up to 14 days", "≈7 days", "≈100 h (estimate)"],
-                ["Evidence", "Commercial product", "Commercial product", "Commercial product", "Bench tests only"],
+                ["Price (India)", f"{inr(comp['WHOOP One (WHOOP 5.0)']['price'])} incl. 12-mo plan, renews yearly", f"{inr(comp['Garmin Cirqa']['price'])}, no subscription", f"{inr(comp['Google Fitbit Air']['price'])} + Premium after trial", f"{inr(comp['Amazfit Helio Strap']['price'])}–₹15,000 (official ₹8,999, sold out)", f"{inr(D['assumptions']['P3'])} + optional {inr(D['assumptions']['P4'])}/mo plan"],
+                ["Tracks", "Recovery, sleep, strain, HRV", "HR, HRV, SpO₂, sleep, VO₂ max, skin temp", "HR, HRV, SpO₂, sleep, rhythm alerts", "HR, sleep, recovery", "Steps, HR, HRV, SpO₂ (research-grade)"],
+                ["Tremor insight", "Not offered", "Not offered", "Not offered", "Not offered", "Tremor score, frequency, burden (bench-tested)"],
+                ["Battery", "14+ days", "Up to 10 days", "Up to 7 days", "Up to 10 days", "≈100 h (estimate)"],
+                ["Evidence", "Commercial", "Commercial", "Commercial", "Commercial", "Bench tests only"],
             ],
             "positioning": [
-                ("They do well", "Polished hardware, multi-day battery, sleep and recovery, large app ecosystems."),
+                ("They do well", "Screenless bands from WHOOP, Garmin, Google and Amazfit: polished hardware, long battery, sleep and recovery, big app ecosystems."),
                 ("We are building", "A general wearable for anyone whose standout feature is tremor detection: score, frequency, burden and motion context."),
-                ("Accessible value", f"A price hypothesis of {inr(D['assumptions']['P3'])} — below WHOOP, Fitbit Charge 6 and the Amazfit Bip 6 ({inr(comp['Amazfit Bip 6']['price'])}), with no mandatory subscription."),
+                ("Accessible value", f"A planned price of {inr(D['assumptions']['P3'])}: below every screenless band here, from the Helio Strap ({inr(comp['Amazfit Helio Strap']['price'])}) to Garmin Cirqa ({inr(comp['Garmin Cirqa']['price'])}), with no mandatory subscription."),
                 ("Still to prove", "Accuracy against reference devices (ICMR evaluation results pending), battery life, sleep features, and that people value movement insight."),
             ],
         },
         "tremosense": {
-            "columns": ["", "GyroGlove", "Liftware", "Weighted spoon", "TremoSense"],
+            "columns": ["", "GyroGlove", "Imported active spoon", "Weighted spoon", "TremoSense"],
             "rows": [
-                ["Price", f"US${comp['GyroGlove']['price']:,} per glove (≈{lakh(comp['GyroGlove']['inr'])})", f"US${comp['Liftware (stabilising handle)']['price']} (2015 price, dated)", f"≈{inr(comp['Weighted soup spoon (225 g)']['inr'])} (US retail)", f"{inr(ts['launchPrice'])} launch hypothesis"],
-                ["What it does", "Gyroscopic stabiliser for the whole hand", "Motorised handle cancels tremor at the utensil", "Added mass damps motion", "Two-axis servo gimbal cancels tremor at the spoon"],
+                ["Price", f"US${comp['GyroGlove']['price']:,} per glove (≈{lakh(comp['GyroGlove']['inr'])})", f"{inr(comp['Steady Spoon (imported, desertcart.in)']['price'])} to {inr(comp['Imported active spoon (desertcart.in)']['price'])} (imported)", f"≈{inr(comp['Weighted soup spoon (225 g)']['inr'])} (US retail)", f"{inr(ts['launchPrice'])} planned launch price"],
+                ["What it does", "Gyroscopic stabiliser for the whole hand", "Motorised handle cancels tremor at the spoon", "Added mass damps motion", "Two-axis servo gimbal cancels tremor at the spoon"],
                 ["Mechanism", "Gyroscope (passive-active)", "Sensors + motors", "Passive", "IMU → EKF → LQR → 2 servos"],
-                ["Evidence", "No study cited on listing", "Maker cites study: 70% less shaking", "Varies", "≈90% bench rejection (current build); 2 informal user trials"],
+                ["Evidence", "No study cited on listing", "Commercial, imported", "Varies", "≈90% bench rejection (current build); 2 informal user trials"],
             ],
             "positioning": [
-                ("The problem", f"Active tremor aids are imported and priced for other markets: one GyroGlove ≈ {lakh(comp['GyroGlove']['inr'])}."),
-                ("Our opportunity", f"An Indian-built active spoon at a {inr(ts['launchPrice'])} hypothesis, serviced locally through clinics."),
+                ("The problem", f"Active tremor aids are imported and priced for other markets: active spoons cost {inr(comp['Steady Spoon (imported, desertcart.in)']['price'])} to {inr(comp['Imported active spoon (desertcart.in)']['price'])} in India; one GyroGlove ≈ {lakh(comp['GyroGlove']['inr'])}."),
+                ("Our opportunity", f"An Indian-built active spoon at a {inr(ts['launchPrice'])} planned price, serviced locally through clinics."),
                 ("What it does today", "≈90% tremor rejection on the bench with the current build; a spoon, not a whole-hand device."),
-                ("Still to prove", "User benefit in real eating, durability, comfort, and parity with Liftware-class products."),
+                ("Still to prove", "User benefit in real eating, durability, comfort, and parity with imported active spoons."),
             ],
         },
-        "checked": "12 Oct 2026",
+        "checked": "16 Oct 2026",
     },
     "problem": {
         "stats": [(f"≈{mk['pd60']/1e5:.1f} lakh", "Indians aged 60+ living with Parkinson's (derived)"),
@@ -168,13 +168,13 @@ content = {
     "advantage": {
         "tremosense": [
             ("GyroGlove", f"≈{pct(ts['launchPrice'] / comp['GyroGlove']['inr'], 1)} of the price ({inr(ts['launchPrice'])} vs ≈{lakh(comp['GyroGlove']['inr'])}), built for the task that matters most: eating.", "Stabilises the whole hand, not just a utensil."),
-            ("Liftware", f"About half the price ({inr(ts['launchPrice'])} vs ≈{inr(comp['Liftware (stabilising handle)']['inr'])} at its 2015 US price). ≈90% bench rejection vs the maker's cited 70% less shaking.", "Different tests, not head-to-head; Liftware has years of real users."),
+            ("Imported active spoons", f"A quarter to a sixth of the price ({inr(ts['launchPrice'])} vs {inr(comp['Steady Spoon (imported, desertcart.in)']['price'])} to {inr(comp['Imported active spoon (desertcart.in)']['price'])} in India), built and serviced locally.", "Proven products with real users; we have bench results and 2 informal trials."),
             ("Weighted spoon", "Actively cancels tremor with a sensor, a controller and two motors, instead of adding mass to a tired hand.", "Cheaper and never needs charging."),
         ],
         "parkinsense": [
             ("WHOOP", f"Measures tremor (score, burden, frequency). {inr(D['assumptions']['P3'])} once vs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} every year.", "Better sleep and recovery coaching, mature app."),
-            ("Fitbit Charge 6", "Tremor-aware step counting: tremor is classified as tremor, not counted as steps.", "Polished hardware, GPS, ≈7-day battery."),
-            ("Amazfit Bip 6", f"Movement-disorder insight at a lower price ({inr(D['assumptions']['P3'])} vs {inr(comp['Amazfit Bip 6']['price'])}); clinical evaluation with ICMR under way.", "Display, GPS, up to 14-day battery."),
+            ("Garmin Cirqa & Google Fitbit Air", f"Tremor detection and tremor-aware step counting, which neither lists, at {inr(D['assumptions']['P3'])} vs {inr(comp['Google Fitbit Air']['price'])} (Fitbit Air) and {inr(comp['Garmin Cirqa']['price'])} (Cirqa).", "Proven sensors, VO₂ max and rhythm alerts, 7–10 day battery."),
+            ("Amazfit Helio Strap", f"Same screenless format at a lower price ({inr(D['assumptions']['P3'])} vs {inr(comp['Amazfit Helio Strap']['price'])}), plus tremor insight; clinical evaluation with ICMR under way.", "Mature app and recovery scoring."),
         ],
         "shared": ["One sensing and signal-processing stack powers both products", "Indian cost base; sold and serviced through local clinics", "No mandatory subscription on either product"],
         "note": "Prices are public list prices checked 12 Oct 2026; performance figures are bench results. No head-to-head user trial has been run yet.",
@@ -210,9 +210,9 @@ S.append(("TremoSense", 55, f"""TremoSense is for people who already have tremor
 On a motorised tremor simulator at four, six and eight hertz, the current build rejects about 90 percent of tremor. It runs a real-time operating system, samples at 208 hertz and uses higher-torque servos. We'll publish the bench logs alongside the code.
 Two people with tremor have tried it so far. That is encouraging, but it is not yet a study."""))
 S.append(("Competition", 50, f"""Competitors, with prices checked this month.
-WHOOP costs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} a year, a Fitbit Charge 6 about {inr(comp['Fitbit Charge 6']['price'])}, and an Amazfit Bip 6 {inr(comp['Amazfit Bip 6']['price'])}. They are excellent at sleep, recovery and battery life. None documents tremor or movement-disorder insight. That's our space, and we have to prove people value it.
-For tremor assistance, one GyroGlove costs {comp['GyroGlove']['price']:,} US dollars, about {sp_lakh(comp['GyroGlove']['inr'])} rupees, for one hand. Liftware sold for 195 dollars in 2015, and a weighted spoon is cheap but passive.
-TremoSense is a spoon, not a glove, and we don't claim it matches either product. The opportunity is an Indian-built active aid priced under 2 percent of one GyroGlove, while being honest that it does far less."""))
+Our direct rivals are screenless bands. WHOOP One costs {inr(comp['WHOOP One (WHOOP 5.0)']['price'])} a year, Garmin's new Cirqa {inr(comp['Garmin Cirqa']['price'])}, Google's Fitbit Air {inr(comp['Google Fitbit Air']['price'])} and Amazfit's Helio Strap {inr(comp['Amazfit Helio Strap']['price'])}. They are excellent at sleep, recovery and battery life. None offers tremor detection. That's our space, and we have to prove people value it.
+For tremor assistance, one GyroGlove costs {comp['GyroGlove']['price']:,} US dollars, about {sp_lakh(comp['GyroGlove']['inr'])} rupees, for one hand. Imported active spoons sell in India for {sp_lakh(comp['Steady Spoon (imported, desertcart.in)']['price'])} to {sp_lakh(comp['Imported active spoon (desertcart.in)']['price'])} rupees, and a weighted spoon is cheap but passive.
+TremoSense is an active spoon at about a quarter of the cheapest imported one, built and serviced in India. We don't yet claim it performs as well; that is what the user study tests."""))
 S.append(("MVP & validation", 60, f"""What has the MVP proven? Both products work on the bench. Two people with tremor have tried TremoSense informally, with no pre-set metric. ParkinSense is now in a clinical evaluation with ICMR, with results pending. Our bench tests had no preregistered metric, and I want to be upfront about that.
 So we've preregistered the next test now. Twelve TremoSense units go to at least ten people with tremor for a self-feeding task. We continue if the median tremor reduction is at least 50 percent and at least 60 percent would pay.
 For ParkinSense, the test is dominant-frequency error within 5 percent of a reference, and zero false steps during tremor. The ICMR results will be added the moment they're available.

@@ -430,7 +430,7 @@ function ParkinSense() {
 
 /* ------------------------------------------------------------------ 6 TremoSense */
 function TremoSense() {
-  const [tab, setTab] = useState<"how" | "audit">("how");
+  const [tab, setTab] = useState<"video" | "how" | "audit">("video");
   return (
     <Frame label="TremoSense" title="Active stabilisation at the spoon" lead={K.tremosense.pitch}>
       <div className="grid items-start gap-6 @5xl:grid-cols-[330px_250px_1fr]">
@@ -444,10 +444,19 @@ function TremoSense() {
           ))}
         </Stagger>
         <div>
-          <Tabs label="TremoSense detail" value={tab} onChange={setTab} options={[{ id: "how", label: "How it works", color: VIOLET }, { id: "audit", label: "Current build vs paper", color: AMBER }]} />
+          <Tabs label="TremoSense detail" value={tab} onChange={setTab} options={[{ id: "video", label: "Real demo", color: VIOLET }, { id: "how", label: "How it works", color: VIOLET }, { id: "audit", label: "Build vs paper", color: AMBER }]} />
           <div className="mt-4">
             <AnimatePresence mode="wait">
-              {tab === "how" ? (
+              {tab === "video" ? (
+                <motion.figure key="video" className="flex items-start gap-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <video src="/videos/tremosense-demo.mp4" poster="/videos/tremosense-demo-poster.jpg" autoPlay muted loop playsInline className="h-[330px] w-auto rounded-2xl border hairline" aria-label="TremoSense bench demo video" />
+                  <figcaption className="t-small text-mist">
+                    <span className="block font-medium text-white">The current build on the bench</span>
+                    <span className="mt-1 block">The servo gimbal counter-rotates the spoon head as the handle moves. Footage from the TremoSense repository (assets/tremosense.gif).</span>
+                    <span className="t-micro mt-3 block text-slate">Bench footage, not a user trial. The ≈90% figure is founder-reported; logs to be published.</span>
+                  </figcaption>
+                </motion.figure>
+              ) : tab === "how" ? (
                 <motion.div key="how" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}><Flow steps={K.tremosense.architecture} color={VIOLET} highlight={[1, 2]} /></motion.div>
               ) : (
                 <motion.table key="audit" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="t-small w-full border-collapse">
@@ -498,12 +507,12 @@ function Competition() {
   const cmp = K.competitors[tab];
   const color = tab === "parkinsense" ? CYAN : VIOLET;
   const priceRows = tab === "parkinsense"
-    ? [...D.competitors.filter((c) => ["WHOOP One (WHOOP 5.0)", "Fitbit Charge 6", "Amazfit Bip 6"].includes(c.name)).map((c) => ({ name: c.name.replace(" (WHOOP 5.0)", " (12-mo)"), inr: c.inr, src: c.source, ours: false })), { name: "ParkinSense (hypothesis)", inr: D.assumptions.P3 as number, src: "", ours: true }]
-    : [...D.competitors.filter((c) => ["GyroGlove", "Liftware (stabilising handle)", "Weighted soup spoon (225 g)"].includes(c.name)).map((c) => ({ name: c.name.replace(" (stabilising handle)", " (2015 price)").replace(" (225 g)", ""), inr: c.inr, src: c.source, ours: false })), { name: "TremoSense (hypothesis)", inr: ts.launchPrice, src: "", ours: true }];
+    ? [...D.competitors.filter((c) => ["WHOOP One (WHOOP 5.0)", "Garmin Cirqa", "Google Fitbit Air", "Amazfit Helio Strap"].includes(c.name)).map((c) => ({ name: c.name.replace(" (WHOOP 5.0)", " (12-mo plan)"), inr: c.inr, src: c.source, ours: false })), { name: "ParkinSense (planned price)", inr: D.assumptions.P3 as number, src: "", ours: true }]
+    : [...D.competitors.filter((c) => ["GyroGlove", "Imported active spoon (desertcart.in)", "Steady Spoon (imported, desertcart.in)", "Weighted soup spoon (225 g)"].includes(c.name)).map((c) => ({ name: c.name.replace(" (desertcart.in)", "").replace(", desertcart.in", "").replace(" (225 g)", ""), inr: c.inr, src: c.source, ours: false })), { name: "TremoSense (planned price)", inr: ts.launchPrice, src: "", ours: true }];
   const max = Math.log10(Math.max(...priceRows.map((r) => r.inr)));
   const min = Math.log10(1000);
   return (
-    <Frame label="Competition" title="Where we can compete, and what we still have to prove" lead={`Prices checked ${K.competitors.checked}. Benchmarks only; they do not drive AVERRA revenue.`}
+    <Frame label="Competition" title="Who we compete with" lead="Latest Indian prices, checked 16 Oct 2026. Benchmarks only; they do not drive AVERRA revenue."
       aside={<Tabs label="competitors" value={tab} onChange={setTab} options={[{ id: "parkinsense", label: "ParkinSense vs wearables", color: CYAN }, { id: "tremosense", label: "TremoSense vs tremor aids", color: VIOLET }]} />}>
       <AnimatePresence mode="wait">
         <motion.div key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid gap-6 @5xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)]">
@@ -521,13 +530,13 @@ function Competition() {
                 </li>
               ))}
             </ul>
-            <p className="t-micro mt-3 text-slate">{tab === "tremosense" ? "Different products: a spoon is not a whole-hand glove. Price context only." : "WHOOP's price is a 12-month membership that includes the strap."}</p>
+            <p className="t-micro mt-3 text-slate">{tab === "tremosense" ? "Active spoons are imported listings in India (desertcart.in). The glove covers the whole hand; the weighted spoon is passive." : "All four are screenless bands, like ParkinSense. WHOOP's price includes a 12-month plan that renews."}</p>
           </div>
           <div className="space-y-4">
             <div className="overflow-hidden rounded-2xl border hairline">
               <table className="t-small w-full border-collapse">
-                <thead><tr>{cmp.columns.map((c, j) => <th key={c + j} className="bg-navy-3/90 p-2.5 text-left font-semibold" style={{ color: j === 4 ? color : "#fff" }}>{c}</th>)}</tr></thead>
-                <tbody>{cmp.rows.map((r, ri) => <motion.tr key={r[0]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + ri * 0.08 }} className="border-t hairline align-top">{r.map((c, j) => <td key={j} className={`p-2.5 ${j === 0 ? "text-slate" : j === 4 ? "text-white" : "text-mist"}`} style={j === 4 ? { background: `${color}17` } : { background: "rgba(19,29,51,.6)" }}>{c}</td>)}</motion.tr>)}</tbody>
+                <thead><tr>{cmp.columns.map((c, j) => <th key={c + j} className="bg-navy-3/90 p-2.5 text-left font-semibold" style={{ color: j === cmp.columns.length - 1 ? color : "#fff" }}>{c}</th>)}</tr></thead>
+                <tbody>{cmp.rows.map((r, ri) => <motion.tr key={r[0]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + ri * 0.08 }} className="border-t hairline align-top">{r.map((c, j) => <td key={j} className={`p-2.5 ${j === 0 ? "text-slate" : j === r.length - 1 ? "text-white" : "text-mist"}`} style={j === r.length - 1 ? { background: `${color}17` } : { background: "rgba(19,29,51,.6)" }}>{c}</td>)}</motion.tr>)}</tbody>
               </table>
             </div>
             <dl className="grid gap-3 @3xl:grid-cols-2">
@@ -797,7 +806,7 @@ function Pricing() {
           </div>
           <div className="panel p-4">
             <p className="t-small font-medium" style={{ color: isTs ? VIOLET : CYAN }}>{isTs ? "Why ₹9,999 now and ₹8,999 later" : "Why ₹7,999"}</p>
-            <p className="t-micro mt-1 text-mist">{isTs ? `At small-batch cost (${inr(sc.B.cogs)}), ₹9,999 is the lowest price with LTV:CAC above 3×. Once tooling and supplier quotes bring cost to ${inr(sc.C.cogs)} (scenario C), ₹8,999 earns more per unit than ₹9,999 does today.` : `Below WHOOP, Fitbit Charge 6 and the Amazfit Bip 6, with no mandatory subscription. At ₹7,999 each device earns ${inr(PD.contribution)}, and the optional ${inr(D.assumptions.P4 as number)}/month plan (40% take-up assumed) lifts LTV to ${inr(PL.ltv)}.`}</p>
+            <p className="t-micro mt-1 text-mist">{isTs ? `At small-batch cost (${inr(sc.B.cogs)}), ₹9,999 is the lowest price with LTV:CAC above 3×. Once tooling and supplier quotes bring cost to ${inr(sc.C.cogs)} (scenario C), ₹8,999 earns more per unit than ₹9,999 does today.` : `Below every screenless band: Amazfit Helio Strap ₹12,000+, Google Fitbit Air ₹13,999, WHOOP One ₹20,890 a year and Garmin Cirqa ₹25,990, with no mandatory subscription. At ₹7,999 each device earns ${inr(PD.contribution)}, and the optional ${inr(D.assumptions.P4 as number)}/month plan (40% take-up assumed) lifts LTV to ${inr(PL.ltv)}.`}</p>
           </div>
           <p className="t-micro text-slate">Click a price to see its breakdown. Sources: XIAO nRF52840 Sense list price (Seeed), MG92B retail price; other costs are estimates awaiting supplier quotes. CAC = planned outreach ÷ planned customers; LTV assumes 40% repurchase at end of life. No customers yet.</p>
         </div>

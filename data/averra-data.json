@@ -1378,46 +1378,46 @@
  "competitors": [
   {
    "name": "WHOOP One (WHOOP 5.0)",
-   "segment": "Wellness wearable",
-   "price": 17990,
+   "segment": "Screenless band",
+   "price": 20890,
    "currency": "INR",
-   "inr": 17990,
-   "recurring": "Membership is the price: ₹17,990 / 12 months (MRP ₹21,990)",
-   "what": "Screenless strap; recovery, sleep, strain, steps, VO2 max; 14+ day battery",
+   "inr": 20890,
+   "recurring": "Price includes a 12-month membership (MRP ₹21,990); renews yearly",
+   "what": "Screenless strap; recovery, sleep, strain, HRV; 14+ day battery",
    "source": "https://www.whoop.in/pages/whoop-devices",
    "checked": "12 Oct 2026"
   },
   {
-   "name": "WHOOP Peak",
-   "segment": "Wellness wearable",
-   "price": 23990,
+   "name": "Garmin Cirqa",
+   "segment": "Screenless band",
+   "price": 25990,
    "currency": "INR",
-   "inr": 23990,
-   "recurring": "₹23,990 / 12 months (MRP ₹28,990)",
-   "what": "Adds healthspan, health monitor alerts, real-time stress",
-   "source": "https://www.whoop.in/pages/whoop-devices",
+   "inr": 25990,
+   "recurring": "No subscription needed; Connect+ optional",
+   "what": "HR, HRV, Pulse Ox, sleep, VO2 max, skin temperature, 80+ activities; up to 10 days (launched in India 7 Oct 2026)",
+   "source": "https://www.businesstoday.in/technology/news/story/garmin-cirqa-launched-in-india-at-rs25990-this-screen-free-smart-band-can-track-80-activities-560058-2026-10-07",
    "checked": "12 Oct 2026"
   },
   {
-   "name": "Amazfit Bip 6",
-   "segment": "Fitness smartwatch",
-   "price": 8999,
+   "name": "Amazfit Helio Strap",
+   "segment": "Screenless band",
+   "price": 12000,
    "currency": "INR",
-   "inr": 8999,
-   "recurring": "None listed",
-   "what": "AMOLED, GPS, heart rate, sleep; accelerometer + gyroscope; up to 14 days",
-   "source": "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india",
+   "inr": 12000,
+   "recurring": "No subscription needed",
+   "what": "Continuous HR, sleep and recovery (BioCharge), 27 exercise modes; up to 10 days. Available from sellers at ₹12,000–15,000; official store lists ₹8,999 (MRP ₹17,999) but shows sold out (16 Oct 2026)",
+   "source": "https://in.amazfit.com/products/helio-strap",
    "checked": "12 Oct 2026"
   },
   {
-   "name": "Fitbit Charge 6",
-   "segment": "Fitness band",
-   "price": 12999,
+   "name": "Google Fitbit Air",
+   "segment": "Screenless band",
+   "price": 13999,
    "currency": "INR",
-   "inr": 12999,
-   "recurring": "Optional premium subscription (not priced here)",
-   "what": "Heart rate, SpO2, sleep, GPS; ~7 days (₹13,999 on Amazon)",
-   "source": "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi",
+   "inr": 13999,
+   "recurring": "3-month Google Health Premium trial, then optional",
+   "what": "HR, HRV, SpO2, sleep stages, irregular-rhythm alerts; up to 7 days (India from 2 Oct 2026)",
+   "source": "https://www.freepressjournal.in/tech/google-fitbit-air-launched-in-india-at-13999-price-specifications",
    "checked": "12 Oct 2026"
   },
   {
@@ -1432,14 +1432,14 @@
    "checked": "12 Oct 2026"
   },
   {
-   "name": "Liftware (stabilising handle)",
+   "name": "Imported active spoon (desertcart.in)",
    "segment": "Active stabilising utensil",
-   "price": 195,
-   "currency": "USD",
-   "inr": 18663,
-   "recurring": "Attachments extra",
-   "what": "Sensor + motor cancellation at the utensil; maker cites a study with 70% less shaking. Price is a DATED Nov 2015 figure",
-   "source": "https://www.michaeljfox.org/news/stabilizing-spoon-announces-price-reduction-and-match-program-holidays",
+   "price": 58480,
+   "currency": "INR",
+   "inr": 58480,
+   "recurring": "None listed",
+   "what": "Motorised stabilising spoon for essential tremor, imported; listing price in India (desertcart.in, checked 16 Oct 2026); similar listings ₹35,980 to ₹1,40,386",
+   "source": "https://www.desertcart.in/",
    "checked": "12 Oct 2026"
   },
   {
@@ -1451,6 +1451,17 @@
    "recurring": "None",
    "what": "Added mass damps tremor; no electronics. US retail; Indian prices not verified",
    "source": "https://wellbefore.com/products/weighted-soup-spoon",
+   "checked": "12 Oct 2026"
+  },
+  {
+   "name": "Steady Spoon (imported, desertcart.in)",
+   "segment": "Active stabilising utensil",
+   "price": 35980,
+   "currency": "INR",
+   "inr": 35980,
+   "recurring": "None listed",
+   "what": "Stabilising spoon handle, imported; lowest active-spoon listing found in India (desertcart.in, checked 16 Oct 2026)",
+   "source": "https://www.desertcart.in/",
    "checked": "12 Oct 2026"
   }
  ],
@@ -1512,16 +1523,24 @@
    "url": "https://tradersunion.com/currencies/price/usd-inr/"
   },
   {
-   "label": "WHOOP India memberships (checked 12 Oct 2026)",
+   "label": "WHOOP India memberships: One ₹20,890, Peak ₹27,539 (checked 16 Oct 2026)",
    "url": "https://www.whoop.in/pages/whoop-devices"
   },
   {
-   "label": "Amazfit Bip 6 India price (checked 12 Oct 2026)",
-   "url": "https://www.91mobiles.com/amazfit-bip-6-smart-watch-price-in-india"
+   "label": "Garmin Cirqa India launch, ₹25,990 (Business Today, 7 Oct 2026)",
+   "url": "https://www.businesstoday.in/technology/news/story/garmin-cirqa-launched-in-india-at-rs25990-this-screen-free-smart-band-can-track-80-activities-560058-2026-10-07"
   },
   {
-   "label": "Fitbit Charge 6 India price (checked 12 Oct 2026)",
-   "url": "https://www.smartprix.com/fitness_bands/fitbit-charge-6-fitness-band-ppd10ccze2vi"
+   "label": "Amazfit Helio Strap India: official ₹8,999 (MRP ₹17,999), sold out; sellers ₹12,000–15,000 (16 Oct 2026)",
+   "url": "https://in.amazfit.com/products/helio-strap"
+  },
+  {
+   "label": "Google Fitbit Air India launch, ₹13,999 (Free Press Journal)",
+   "url": "https://www.freepressjournal.in/tech/google-fitbit-air-launched-in-india-at-13999-price-specifications"
+  },
+  {
+   "label": "Imported active tremor spoons on desertcart.in: ₹35,980, ₹58,480, ₹1,40,386 (Google Shopping, checked 16 Oct 2026)",
+   "url": "https://www.desertcart.in/"
   },
   {
    "label": "GyroGlove listing, Parkinson's UK tech guide (16 Jun 2026)",

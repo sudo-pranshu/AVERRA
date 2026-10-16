@@ -195,7 +195,7 @@ function photos(s, ps, tsP) {
   const mkTable = (cmp, x, w, accent, name) => {
     const head = cmp.columns.map((c, j) => ({ text: c, options: { bold: true, color: j === 4 ? accent : C.white, fill: { color: j === 4 ? (accent === C.cyan ? "0E3A4A" : "2A2350") : C.card2 } } }));
     const body = cmp.rows.map((r) => r.map((c, j) => ({ text: c, options: { color: j === 0 ? C.muted : j === 4 ? C.white : C.light, bold: j === 0 || j === 4, fill: { color: j === 4 ? (accent === C.cyan ? "0B2A36" : "1E1A3A") : C.bg } } })));
-    s.addTable([head, ...body], { x, y: 1.85, w, colW: [0.95, (w - 0.95 - 1.55) / 3, (w - 0.95 - 1.55) / 3, (w - 0.95 - 1.55) / 3, 1.55], fontFace: B, fontSize: 9, border: { type: "solid", pt: 0.5, color: C.line }, valign: "middle", margin: 0.04, rowH: 0.5, objectName: name });
+    s.addTable([head, ...body], { x, y: 1.85, w, colW: [0.9, ...Array(head.length - 2).fill((w - 0.9 - 1.45) / (head.length - 2)), 1.45], fontFace: B, fontSize: head.length > 5 ? 8 : 9, border: { type: "solid", pt: 0.5, color: C.line }, valign: "middle", margin: 0.04, rowH: 0.5, objectName: name });
   };
   photos(s, [0.55, 1.45, 0.3], [6.8, 1.45, 0.25]);
   txt(s, "ParkinSense vs wellness wearables", { x: 0.95, y: 1.47, w: 5, h: 0.3, fontSize: 13, bold: true, color: C.cyan });
@@ -278,7 +278,7 @@ function photos(s, ps, tsP) {
   txt(s, "REVENUE STREAMS · IN LAUNCH ORDER", { x: 6.85, y: 4.2, w: 5.8, h: 0.22, fontSize: 9, bold: true, color: C.violet, charSpacing: 1 });
   const RU = ue.ruoKit;
   [["1", "Research-use kits for labs", `${inr(RU.price)} per kit · from M10 · no medical claim`, C.cyan],
-   ["2", "TremoSense sale or rental", `${inr(ts.launchPrice)} (hypothesis) · rental ${inr(D.assumptions.P11)}/mo · from M12`, C.violet],
+   ["2", "TremoSense sale or rental", `${inr(ts.launchPrice)} planned · rental ${inr(D.assumptions.P11)}/mo · from M12`, C.violet],
    ["3", "ParkinSense device + optional subscription", `${inr(D.assumptions.P3)} + optional ${inr(D.assumptions.P4)}/mo · from M25`, C.blue]].forEach((r, i) => {
     const y = 4.55 + i * 0.62;
     s.addShape(pres.shapes.OVAL, { x: 6.9, y: y + 0.05, w: 0.36, h: 0.36, fill: { color: r[3] }, line: { color: r[3], width: 0 }, objectName: "rev_n" + i });
@@ -286,7 +286,7 @@ function photos(s, ps, tsP) {
     txt(s, [{ text: r[1], options: { bold: true, color: C.white, breakLine: true } }, { text: r[2], options: { color: C.light, fontSize: 10 } }], { x: 7.4, y: y - 0.02, w: 5.3, h: 0.55, fontSize: 12, objectName: "rev_t" + i });
   });
   txt(s, "No reimbursement assumed — out-of-pocket or institutional only.", { x: 0.55, y: 5.4, w: 6.0, h: 0.3, fontSize: 11, color: C.amber, objectName: "reimb" });
-  src(s, "CAC = outreach ÷ customers · LTV = contribution × purchases · payback = CAC ÷ contribution per sale. Prices are hypotheses. Model › Unit Economics.");
+  src(s, "CAC = outreach ÷ customers · LTV = contribution × purchases · payback = CAC ÷ contribution per sale. Prices are planned and will be tested with customers. Model › Unit Economics.");
 }
 
 // ===================================================================== 10 PRICING & UNIT ECONOMICS

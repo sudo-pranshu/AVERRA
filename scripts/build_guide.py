@@ -211,7 +211,7 @@ Prices checked {K['competitors']['checked']}. They are benchmarks only and never
 **TremoSense positioning**
 {pos('tremosense')}
 
-Caveats: the WHOOP price is a 12-month membership that includes the strap. The Liftware price is a dated 2015 figure. Weighted-utensil prices are US retail; Indian prices were not verified. No claim is made that AVERRA products are more accurate or effective than any competitor; that needs comparative testing."""
+Caveats: the WHOOP price includes a 12-month membership that renews. Imported active-spoon prices are desertcart.in listings (checked 16 Oct 2026). Weighted-utensil prices are US retail; Indian prices were not verified. No claim is made that AVERRA products are more accurate or effective than any competitor; that needs comparative testing."""
 
 risk_rows = "\n".join(f"| {r[0]} | {r[1]} | {r[2]} |" for r in K["risks"])
 S["caveats"] = f"""## Technical, regulatory and patent caveats

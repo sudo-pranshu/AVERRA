@@ -80,7 +80,7 @@ d = {
     "useOfFunds": [{"category": wb["Use of Funds"][f"A{r}"].value, "phase1": round(wb["Use of Funds"][f"B{r}"].value), "phase2": round(wb["Use of Funds"][f"C{r}"].value)} for r in range(4, 11)],
     "competitors": [{"name": wb["Competitors"][f"A{r}"].value, "segment": wb["Competitors"][f"B{r}"].value, "price": wb["Competitors"][f"C{r}"].value,
                      "currency": wb["Competitors"][f"D{r}"].value, "inr": round(wb["Competitors"][f"E{r}"].value), "recurring": wb["Competitors"][f"F{r}"].value,
-                     "what": wb["Competitors"][f"G{r}"].value, "source": wb["Competitors"][f"H{r}"].value, "checked": wb["Competitors"][f"I{r}"].value} for r in range(4, 11)],
+                     "what": wb["Competitors"][f"G{r}"].value, "source": wb["Competitors"][f"H{r}"].value, "checked": wb["Competitors"][f"I{r}"].value} for r in range(4, 12)],
     "sources": [{"label": wb["Sources"][f"A{r}"].value, "url": wb["Sources"][f"B{r}"].value} for r in range(3, wb["Sources"].max_row + 1) if wb["Sources"][f"A{r}"].value],
 }
 A = {wb["Assumptions"][f"A{r}"].value: wb["Assumptions"][f"C{r}"].value for r in range(4, wb["Assumptions"].max_row + 1)}
