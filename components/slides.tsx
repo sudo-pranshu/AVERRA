@@ -123,20 +123,29 @@ function SpoonDemo() {
   const [hz, setHz] = useState(6);
   const hand = useRef<SVGGElement>(null);
   const head = useRef<SVGGElement>(null);
+  const traceRaw = useRef<SVGPathElement>(null);
   const trace = useRef<SVGPathElement>(null);
-  const hist = useRef<number[]>([]);
+  const sim = useRef({ k: 0, r: 0, last: 0, raw: Array(150).fill(0) as number[], out: Array(150).fill(0) as number[] });
   const state = useRef({ on, hz });
   state.current = { on, hz };
   useTicker((t) => {
     const { on: s, hz: f } = state.current;
-    const a = 9 * Math.sin(2 * Math.PI * f * t * 0.5) + 2 * Math.sin(2 * Math.PI * 0.3 * t);
-    const k = s ? 0.1 : 1;
-    hand.current?.setAttribute("transform", `rotate(${a.toFixed(2)} 150 250)`);
-    head.current?.setAttribute("transform", `rotate(${(-a * (1 - k)).toFixed(2)} 150 128)`);
-    const h = hist.current;
-    h.push(a * k);
-    if (h.length > 120) h.shift();
-    trace.current?.setAttribute("d", "M" + h.map((v, i) => `${(i * 2.5).toFixed(1)},${(30 - v * 2).toFixed(1)}`).join(" L"));
+    const m = sim.current;
+    const dt = Math.min(0.05, Math.max(0.001, t - m.last)); m.last = t;
+    // handle angle: tremor (shown at half speed) plus a slow voluntary drift
+    const a = 7 * Math.sin(2 * Math.PI * f * t * 0.5) + 1.5 * Math.sin(2 * Math.PI * 0.25 * t);
+    // ease the controller in/out so switching never snaps
+    m.k += ((s ? 0 : 1) - m.k) * Math.min(1, dt * 6);
+    // residual ≈10% of the tremor, low-passed so it reads as a gentle drift, not jitter
+    m.r += (a * 0.1 - m.r) * Math.min(1, dt * 2.5);
+    const bowl = m.k * a + (1 - m.k) * m.r;
+    hand.current?.setAttribute("transform", `rotate(${a.toFixed(2)} 150 168)`);
+    head.current?.setAttribute("transform", `rotate(${(bowl - a).toFixed(2)} 150 168)`);
+    m.raw.push(a); m.out.push(bowl);
+    if (m.raw.length > 150) { m.raw.shift(); m.out.shift(); }
+    const path = (arr: number[]) => "M" + arr.map((v, i) => `${(i * 2).toFixed(1)},${(30 - v * 2.4).toFixed(1)}`).join(" L");
+    traceRaw.current?.setAttribute("d", path(m.raw));
+    trace.current?.setAttribute("d", path(m.out));
   });
   return (
     <div className="panel flex flex-col p-5">
@@ -148,26 +157,81 @@ function SpoonDemo() {
         </button>
       </div>
       <svg viewBox="0 0 300 300" className="mx-auto mt-2 h-[250px] w-full" aria-label="Animated spoon illustration">
-        <circle cx="150" cy="128" r="70" fill={on ? "#8B5CF61A" : "#F871711A"} />
+        <defs>
+          <radialGradient id="sdHalo"><stop offset="0" stopColor={on ? "#8B5CF6" : "#F87171"} stopOpacity="0.28" /><stop offset="1" stopColor={on ? "#8B5CF6" : "#F87171"} stopOpacity="0" /></radialGradient>
+          <linearGradient id="sdSteel" x1="0" x2="1"><stop offset="0" stopColor="#94A3B8" /><stop offset="0.45" stopColor="#F1F5F9" /><stop offset="1" stopColor="#64748B" /></linearGradient>
+          <linearGradient id="sdHandle" x1="0" x2="1"><stop offset="0" stopColor="#1E293B" /><stop offset="0.45" stopColor="#475569" /><stop offset="1" stopColor="#0F172A" /></linearGradient>
+        </defs>
+        <circle cx="150" cy="95" r="80" fill="url(#sdHalo)" style={{ transition: "all .4s" }} />
+        <line x1="70" x2="230" y1="40" y2="40" stroke="#67E8F9" strokeOpacity={on ? 0.35 : 0} strokeDasharray="3 5" style={{ transition: "stroke-opacity .4s" }} />
         <g ref={hand}>
-          <rect x="138" y="160" width="24" height="120" rx="12" fill="#334155" stroke="#64748B" />
-          <rect x="143" y="180" width="14" height="30" rx="4" fill="#8B5CF6" opacity="0.8" />
+          <rect x="136" y="172" width="28" height="112" rx="14" fill="url(#sdHandle)" stroke="#64748B" strokeOpacity="0.6" />
+          <rect x="142" y="196" width="16" height="5" rx="2.5" fill="#8B5CF6" />
+          <circle cx="150" cy="222" r="4" fill="#06B6D4" />
+          <rect x="132" y="156" width="36" height="22" rx="7" fill="#5B21B6" stroke="#A78BFA" strokeOpacity="0.6" />
           <g ref={head}>
-            <rect x="146" y="100" width="8" height="64" rx="4" fill="#CBD5E1" />
-            <ellipse cx="150" cy="86" rx="26" ry="34" fill="#E2E8F0" />
-            <ellipse cx="150" cy="84" rx="18" ry="25" fill="#CBD5E1" />
-            <circle cx="146" cy="80" r="4" fill="#F59E0B" /><circle cx="155" cy="86" r="3.5" fill="#F59E0B" /><circle cx="148" cy="91" r="3" fill="#FBBF24" />
+            <rect x="146" y="96" width="8" height="74" rx="4" fill="url(#sdSteel)" />
+            <ellipse cx="150" cy="78" rx="27" ry="34" fill="#E2E8F0" />
+            <ellipse cx="150" cy="76" rx="19" ry="25" fill="#CBD5E1" />
+            <circle cx="145" cy="72" r="4" fill="#F59E0B" /><circle cx="155" cy="78" r="3.5" fill="#F59E0B" /><circle cx="147" cy="84" r="3" fill="#FBBF24" />
           </g>
+          <circle cx="150" cy="168" r="6" fill="#C4B5FD" />
         </g>
       </svg>
-      <svg viewBox="0 0 300 60" className="h-12 w-full" aria-hidden="true"><line x1="0" x2="300" y1="30" y2="30" stroke="#2B3A5C" /><path ref={trace} fill="none" stroke={on ? "#A78BFA" : "#F87171"} strokeWidth="2" /></svg>
-      <p className="t-micro text-slate">Spoon-head motion</p>
+      <svg viewBox="0 0 300 60" className="h-12 w-full" aria-hidden="true"><line x1="0" x2="300" y1="30" y2="30" stroke="#2B3A5C" /><path ref={traceRaw} fill="none" stroke="#F87171" strokeOpacity="0.35" strokeWidth="1.5" /><path ref={trace} fill="none" stroke={on ? "#A78BFA" : "#F87171"} strokeWidth="2.2" strokeLinejoin="round" /></svg>
+      <p className="t-micro text-slate"><span className="text-coral/70">Handle (tremor)</span> vs <span className="text-violet">spoon head</span></p>
       <div className="mt-3 flex gap-2" role="group" aria-label="Tremor frequency">
         {[4, 6, 8].map((f) => (
           <button key={f} onClick={() => setHz(f)} aria-pressed={hz === f} className={`t-micro flex-1 rounded-full border px-2 py-1 transition-colors ${hz === f ? "border-violet bg-violet/20 text-white" : "hairline text-mist hover:text-white"}`}>{f} Hz</button>
         ))}
       </div>
       <p className="t-micro mt-3 text-slate">Illustration at half speed, scaled to the ≈90% bench result. Not a recording.</p>
+    </div>
+  );
+}
+
+/** Illustration of ParkinSense: pick a situation and watch the wrist signal and what the band reports. */
+function WristDemo() {
+  const [mode, setMode] = useState<"rest" | "tremor" | "walk">("tremor");
+  const line = useRef<SVGPathElement>(null);
+  const heart = useRef<SVGPathElement>(null);
+  const [steps, setSteps] = useState(0);
+  const sim = useRef({ buf: Array(130).fill(0) as number[], last: 0, stepAcc: 0, hb: 0 });
+  const st = useRef(mode);
+  st.current = mode;
+  const hr = mode === "walk" ? 98 : mode === "tremor" ? 76 : 68;
+  useTicker((t) => {
+    const m = sim.current, md = st.current;
+    const dt = Math.min(0.05, Math.max(0.001, t - m.last)); m.last = t;
+    const noise = (Math.sin(t * 37.1) + Math.sin(t * 53.7)) * 0.6;
+    const v = md === "rest" ? noise * 0.8 : md === "tremor" ? 14 * Math.sin(2 * Math.PI * 4.9 * t * 0.5) + noise : 18 * Math.max(0, Math.sin(2 * Math.PI * 0.9 * t)) ** 3 - 4 + noise;
+    m.buf.push(v); if (m.buf.length > 130) m.buf.shift();
+    line.current?.setAttribute("d", "M" + m.buf.map((y, i) => `${(i * 2).toFixed(1)},${(35 - y).toFixed(1)}`).join(" L"));
+    if (md === "walk") { m.stepAcc += dt * 1.8; if (m.stepAcc >= 1) { m.stepAcc -= 1; setSteps((x) => x + 1); } }
+    const bpm = md === "walk" ? 98 : md === "tremor" ? 76 : 68;
+    m.hb = (m.hb + dt * bpm / 60) % 1;
+    heart.current?.setAttribute("transform", `scale(${(1 + 0.18 * Math.exp(-m.hb * 9)).toFixed(3)})`);
+  });
+  const status = mode === "tremor" ? ["Tremor detected", "#C4B5FD"] : mode === "walk" ? ["Walking", CYAN] : ["Resting", MINT];
+  return (
+    <div className="panel p-4">
+      <div className="flex gap-1.5" role="group" aria-label="Situation">
+        {([["rest", "Resting"], ["tremor", "Tremor"], ["walk", "Walking"]] as const).map(([k, l]) => (
+          <button key={k} onClick={() => setMode(k)} aria-pressed={mode === k} className={`t-micro flex-1 rounded-full border px-2 py-1 transition-colors ${mode === k ? "border-cyan bg-cyan/20 text-white" : "hairline text-mist hover:text-white"}`}>{l}</button>
+        ))}
+      </div>
+      <svg viewBox="0 0 260 70" className="mt-3 h-[70px] w-full" aria-label="Animated wrist motion signal">
+        <line x1="0" x2="260" y1="35" y2="35" stroke="#2B3A5C" />
+        <path ref={line} fill="none" stroke={status[1]} strokeWidth="2" strokeLinejoin="round" style={{ transition: "stroke .3s" }} />
+      </svg>
+      <p className="t-micro text-slate">Wrist motion, live</p>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Band reports</p><p className="t-small font-semibold" style={{ color: status[1] }}>{status[0]}</p></div>
+        <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Steps</p><p className="t-small t-num font-semibold text-white">{steps}{mode === "tremor" && <span className="t-micro ml-1 font-normal text-slate">not counted</span>}</p></div>
+        <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Tremor</p><p className="t-small t-num font-semibold text-white">{mode === "tremor" ? "4.9 Hz · score 85" : "none"}</p></div>
+        <div className="rounded-xl border hairline bg-navy-2/80 p-2.5"><p className="t-micro text-slate">Heart rate</p><p className="t-small t-num flex items-center gap-1.5 font-semibold text-white"><svg viewBox="-12 -12 24 24" className="h-4 w-4"><path ref={heart} d="M0,8 C-9,1 -9,-7 -3.5,-7 C-1.5,-7 0,-5 0,-4 C0,-5 1.5,-7 3.5,-7 C9,-7 9,1 0,8Z" fill="#F87171" /></svg>{hr} bpm</p></div>
+      </div>
+      <p className="t-micro mt-2 text-slate">Illustration (tremor at half speed). Values mirror the bench dashboard; not a recording.</p>
     </div>
   );
 }
@@ -312,12 +376,12 @@ function ParkinSense() {
     <Frame label="ParkinSense" title="A wearable for everyone, with tremor detection built in" lead="Like a fitness band for activity and vitals, with one thing others don't do: it detects and measures tremor. Each feature shows whether it is bench-tested or still needs validation.">
       <div className="grid gap-5 @5xl:grid-cols-[260px_1fr_1fr]">
         <div className="space-y-3">
-          <Photo src="/images/parkinsense-wrist.jpg" alt="ParkinSense prototype worn on the wrist" className="aspect-[4/3] w-full" />
+          <WristDemo />
           <button onClick={() => setZoom(true)} className="group relative block w-full overflow-hidden rounded-xl border hairline text-left" aria-label="Enlarge the ParkinSense dashboard screenshot">
             <img src="/images/parkinsense-dashboard-app.jpg" alt="ParkinSense dashboard showing tremor detected at 4.88 Hz" className="w-full transition-transform duration-500 group-hover:scale-105" />
             <span className="t-micro absolute bottom-1 right-1.5 rounded-full bg-navy/80 px-2 py-0.5 text-mist">Live dashboard ⤢</span>
           </button>
-          <p className="t-micro text-slate">The working dashboard: tremor detected at 4.88 Hz while resting.</p>
+          <p className="t-micro text-slate">The real dashboard: tremor at 4.88 Hz while resting.</p>
         </div>
         <div className="space-y-4">
           <div>
