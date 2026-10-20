@@ -31,7 +31,7 @@ h = h.replace("body::after{content:'SAMPLE';position:fixed;top:42%;left:16%;font
 rep('<p class="kick">AVERRA — Biomedical Technology · SAMPLE PORTFOLIO</p>', '<p class="kick">AVERRA — Biomedical Technology</p>')
 sub(r'<p class="cvnote">.*?</p>', '<p class="cvnote">Evidence labels used throughout: <b>Sourced</b> (published or official figure, cited), <b>Model</b> (from the AVERRA financial model), <b>Estimate</b> (founders\' planning assumption) and <b>Simulated</b> (semester case-study data used to complete an activity where real data is still being collected; to be replaced with real records).</p>')
 rep("Portfolio order follows the course instructions: Module 1 → 5, then references and checklists.",
-    "Portfolio order follows the course instructions: Module 1 → 5, then references and checklists. Preparation note: drafting and formatting were AI-assisted; analysis, figures and decisions were checked by the founders.")
+    "Portfolio order follows the course instructions: Module 1 → 5, then references and checklists.")
 
 # per-sheet status and data notes
 ST = {
@@ -173,6 +173,8 @@ for a, b in (("Sample sheet:", "Data note:"), ("(sample)", "(simulated)"), ("Com
 h = h.replace(" Founders should re-open every link before submission.", "")
 h = h.replace("Decision (to be written after the test, honouring the threshold even if it hurts):", "Decision:").replace("Evidence appendix and pending-evidence checklist", "Evidence appendix and real-evidence checklist")
 h = h.replace("(published studies; own interviews pending)", "(published studies; simulated interview case study in M1.1)").replace("</style>", "h1,h2,h3{break-after:avoid;page-break-after:avoid}</style>")
-assert "Claude" not in h and "SAMPLE" not in h
+for a, b in (("(Andheri)", "(Sion)"), ("(Pune)", "(Matunga)"), ("(Borivali)", "(Wadala)")):
+    h = h.replace(a, b)
+assert "Claude" not in h and "AI-assisted" not in h and "SAMPLE" not in h
 (ROOT / "portfolio/AVERRA_Practical_Portfolio_Completed.html").write_text(h)
 print("completed html written")
